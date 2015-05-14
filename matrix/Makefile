@@ -1,4 +1,6 @@
-default: test
+OBJ = example
+
+default: $(OBJ)
 
 clean:
-	rm -f test
+	rm -f $(OBJ)

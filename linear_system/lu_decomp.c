@@ -45,9 +45,9 @@ int main(int argc, char** argv) {
     exit(1);
   }
   printf("Matrix A:\n");
-  print_dmatrix(n, n, a);
+  fprint_dmatrix(stdout, n, n, a);
   printf("Vector B (transposed):\n");
-  print_dvector(n, b);
+  fprint_dvector(stdout, n, b);
 
   /* perform LU decomposition */
   ipiv = alloc_ivector(n);
@@ -57,9 +57,9 @@ int main(int argc, char** argv) {
     exit(1);
   }
   printf("Result of LU decomposition:\n");
-  print_dmatrix(n, n, a);
+  fprint_dmatrix(stdout, n, n, a);
   printf("Pivot for LU decomposition:\n");
-  print_ivector(n, ipiv);
+  fprint_ivector(stdout, n, ipiv);
 
   /* solve equations */
   dgetrs_(&trans, &n, &nrhs, &a[0][0], &n, &ipiv[0], &b[0], &n, &info);
@@ -68,7 +68,7 @@ int main(int argc, char** argv) {
     exit(1);
   }
   printf("Solution X (transposed):\n");
-  print_dvector(n, b);
+  fprint_dvector(stdout, n, b);
   
   free_dmatrix(a);
   free_dvector(b);

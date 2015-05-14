@@ -134,46 +134,46 @@ static inline void free_fmatrix(float **mat) {
 }
 
 /* print out vector of double */
-static inline void print_dvector(int n, double *vec) {
+static inline void fprint_dvector(FILE *fp, int n, double *vec) {
   int i;
-  printf("%d\n", n);
-  for (i = 0; i < n; ++i) printf("%10.5f ", vec[i]);
-  printf("\n");
+  fprintf(fp, "%d\n", n);
+  for (i = 0; i < n; ++i) fprintf(fp, "%10.5f ", vec[i]);
+  fprintf(fp, "\n");
 }
 
 /* print out vector of float */
-static inline void print_fvector(int n, float *vec) {
+static inline void fprint_fvector(FILE *fp, int n, float *vec) {
   int i;
-  printf("%d\n", n);
-  for (i = 0; i < n; ++i) printf("%10.5f ", vec[i]);
-  printf("\n");
+  fprintf(fp, "%d\n", n);
+  for (i = 0; i < n; ++i) fprintf(fp, "%10.5f ", vec[i]);
+  fprintf(fp, "\n");
 }
 
 /* print out vector of int */
-static inline void print_ivector(int n, int *vec) {
+static inline void fprint_ivector(FILE *fp, int n, int *vec) {
   int i;
-  printf("%d\n", n);
-  for (i = 0; i < n; ++i) printf("%d ", vec[i]);
-  printf("\n");
+  fprintf(fp, "%d\n", n);
+  for (i = 0; i < n; ++i) fprintf(fp, "%d ", vec[i]);
+  fprintf(fp, "\n");
 }
 
 /* print out matrix of double */
-static inline void print_dmatrix(int m, int n, double **mat) {
+static inline void fprint_dmatrix(FILE *fp, int m, int n, double **mat) {
   int i, j;
-  printf("%d %d\n", m, n);
+  fprintf(fp, "%d %d\n", m, n);
   for (i = 0; i < m; ++i) {
-    for (j = 0; j < n; ++j) printf("%10.5f ", mat[i][j]);
-    printf("\n");
+    for (j = 0; j < n; ++j) fprintf(fp, "%10.5f ", mat[i][j]);
+    fprintf(fp, "\n");
   }
 }
 
 /* print out matrix of float */
-static inline void print_fmatrix(int m, int n, float **mat) {
+static inline void fprint_fmatrix(FILE *fp, int m, int n, float **mat) {
   int i, j;
-  printf("%d %d\n", m, n);
+  fprintf(fp, "%d %d\n", m, n);
   for (i = 0; i < m; ++i) {
-    for (j = 0; j < n; ++j) printf("%10.5f ", mat[i][j]);
-    printf("\n");
+    for (j = 0; j < n; ++j) fprintf(fp, "%10.5f ", mat[i][j]);
+    fprintf(fp, "\n");
   }
 }
 
