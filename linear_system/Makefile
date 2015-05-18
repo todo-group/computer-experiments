@@ -1,8 +1,8 @@
-OBJ = gauss lu_decomp
+OBJ = matrix_example pointer_vector pointer_matrix gauss lu_decomp
 default: $(OBJ)
 
-CPPFLAGS=-I../matrix
-LDFLAGS=-llapack
+CFLAGS = -O3
+LDFLAGS = -llapack
 
 clean:
 	rm -rf $(OBJ)

@@ -1,2 +1,3 @@
-# ce
-Sample Programs for Computer Experiment
+# computer-experiments
+
+Sample Programs for Lecture "Computer Experiments" at Department of Physics, University of Tokyo
