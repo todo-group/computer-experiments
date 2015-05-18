@@ -8,8 +8,8 @@ int main() {
   double **mat;
   double *v;
 
-  m = 1000;
-  n = 1000;
+  m = 100;
+  n = 100;
 
   /* 乱数(Mersenne Twister)の初期化 */
   init_genrand(12345);
