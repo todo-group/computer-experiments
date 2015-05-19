@@ -20,5 +20,5 @@
 
 ## ラプラス方程式の境界値問題
 
-- laplace-lu.c : LU分解による求解
-- laplace-jacobi.c : ヤコビ法による求解(収束判定なし)
+- laplace_lu.c : LU分解による求解
+- laplace_jacobi.c : ヤコビ法による求解(収束判定なし)
