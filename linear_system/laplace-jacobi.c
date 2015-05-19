@@ -40,9 +40,12 @@ int main(int argc, char** argv) {
   }
   
   printf("# Solution u_ij:\n");
-  for (i = 0; i <= n; ++i)
-    for (j = 0; j <= n; ++j)
+  for (i = 0; i <= n; ++i) {
+    for (j = 0; j <= n; ++j) {
       printf("%10.5f %10.5f %10.5f\n", 1.0 * i / n, 1.0 * j / n, u[i][j]);
+    }
+    printf("\n");
+  }
   
   free_dmatrix(u);
   free_dmatrix(u_new);
