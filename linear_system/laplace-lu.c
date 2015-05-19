@@ -1,3 +1,5 @@
+/* LU分解によるラプラス方程式の求解 */
+
 #include "matrix_util.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -33,32 +35,28 @@ int main(int argc, char** argv) {
   /* A is (n+1)^2 x (n+1)^2 matrix (NOT (n+1) x (n+1)) */
   a = alloc_dmatrix(dim, dim);
   u = alloc_dvector(dim);
+  for (i = 0; i < dim; ++i) u[i] = 0.0;
   /* NOTE: u_ij is given by u[(n+1) * i + j] */
 
   /* set boundary condition */
   for (i = 0; i <= n; ++i) {
     a[(n+1) * i + 0][(n+1) * i + 0] = 1.0;
-    u[(n+1) * i + 0] = 0.0;
     a[(n+1) * i + n][(n+1) * i + n] = 1.0;
-    u[(n+1) * i + n] = 0.0;
   }
   for (j = 0; j <= n; ++j) {
     a[(n+1) * 0 + j][(n+1) * 0 + j] = 1.0;
-    u[(n+1) * 0 + j] = sin(M_PI *  j / n);
     a[(n+1) * n + j][(n+1) * n + j] = 1.0;
-    u[(n+1) * n + j] = 0.0;
+    u[(n+1) * 0 + j] = sin(M_PI *  j / n);
   }
   
   /* set coefficients */
   for (i = 1; i < n; ++i) {
     for (j = 1; j < n; ++j) {
       a[(n+1) * i + j][(n+1) * (i+1) + j] = 1.0 / (h * h);
-      a[(n+1) * i + j][(n+1) * i + j] = -2.0 / (h * h);
       a[(n+1) * i + j][(n+1) * (i-1) + j] = 1.0 / (h * h);
       a[(n+1) * i + j][(n+1) * i + (j+1)] = 1.0 / (h * h);
-      a[(n+1) * i + j][(n+1) * i + j] = -2.0 / (h * h);
       a[(n+1) * i + j][(n+1) * i + (j-1)] = 1.0 / (h * h);
-      u[(n+1) * i + j] = 0.0;
+      a[(n+1) * i + j][(n+1) * i + j] = -4.0 / (h * h);
     }
   }
   
