@@ -80,7 +80,7 @@ int main(int argc, char** argv) {
   printf("# v: %10.5f\n", v);
   printf("# width: %10.5f\n", width);
   printf("# %3d lowest eigenenergies:\n# ", num_states);
-  for (int i = 0; i < num_states; ++i)
+  for (i = 0; i < num_states; ++i)
     printf("%10.5f ", ene[i]);
   printf("\n");
 
