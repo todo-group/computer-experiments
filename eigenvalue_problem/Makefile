@@ -1,4 +1,4 @@
-OBJ = diag double_well
+OBJ = diag power double_well
 default: $(OBJ)
 
 CFLAGS = -O3
