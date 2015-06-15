@@ -1,4 +1,4 @@
-OBJ = svd
+OBJ = svd full_svd
 default: $(OBJ)
 
 CFLAGS = -O3
