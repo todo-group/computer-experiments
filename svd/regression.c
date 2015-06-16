@@ -20,8 +20,8 @@ double f(int i, double x) {
     return 1.0;
   else if (i == 1)
     return x;
-  else if (i == 2)
-    return x * x;
+  /* else if (i == 2) */
+  /*   return x * x; */
   return 0;
 }
 
