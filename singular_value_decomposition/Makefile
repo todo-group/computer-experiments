@@ -1,8 +1,8 @@
-OBJ = svd full_svd
+OBJ = svd full_svd regression
 default: $(OBJ)
 
-CFLAGS = -O3
-LDFLAGS = -llapack
+CFLAGS = -O3 -Wall
+LDFLAGS = -llapack -lm
 
 clean:
 	rm -rf $(OBJ)

@@ -8,6 +8,9 @@ void dgesvd_(char *JOBU, char* JOBVT, int *M, int *N, double* A,
              int* LDA, double* S, double* U, int* LDU, double* VT, int* LDVT ,
              double* WORK, int* LWORK, int* INFO);
 
+int imin(int x, int y) { return (x < y) ? x : y; }
+int imax(int x, int y) { return (x > y) ? x : y; }
+
 int main(int argc, char** argv) {
   char* filename;
   FILE *fp;
@@ -40,14 +43,11 @@ int main(int argc, char** argv) {
   fprint_dmatrix(stdout, m, n, a);
 
   /* allocate matrices and vectors */
-  if (m < n)
-    k = m;
-  else
-    k = n;
+  k = imin(m, n);
   u = alloc_dmatrix(m, m);
   vt = alloc_dmatrix(n, n);
   s = alloc_dvector(k);
-  lwork = 10 * k;
+  lwork = imax(3 * k + imax(m, n), 5 * k);
   work = alloc_dvector(lwork);
   
   /* perform SVD */
