@@ -15,9 +15,11 @@ int main(int argc, char** argv) {
   char* filename;
   FILE *fp;
   int i, j, k;
+
   int m, n, r;
   double **a, **u, **vt;
   double *s;
+
   int lwork;
   double *work;
   int info;
