@@ -1,4 +1,4 @@
-OBJ = random golden_section nelder_mead_1d nelder_mead_2d
+OBJ = random golden_section nelder_mead_1d nelder_mead_2d steepest_decent simulated_annealing
 default: $(OBJ)
 
 CPPFLAGS = -I$(BOOST_ROOT)/include

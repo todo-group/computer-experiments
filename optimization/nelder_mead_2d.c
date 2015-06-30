@@ -1,5 +1,6 @@
-#include <stdio.h>
 #include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 double f(const double *x) {
   double r2 = (x[0]*x[0] + x[1]*x[1]);
@@ -33,15 +34,23 @@ int main(int argc, char** argv) {
     /* 関数値の評価 */
     for (i = 0; i <= n; ++i) y[i] = f(x[i]);
 
-    /* y[0] が最小値、y[n] が最大値となるように並び替える */
-    for (i = 0; i <= n; ++i) {
+    /* y[n] が最大値、y[n-1]が二番目大きな値、y[0] が最小値となるように並び替える */
+    for (i = 0; i < n; ++i) {
+      if (y[i] > y[n]) {
+        for (j = 0; j < n; ++j) swap(&x[i][j], &x[n][j]);
+        swap(&y[i], &y[n]);
+      }
+    }
+    for (i = 1; i < n; ++i) {
       if (y[i] < y[0]) {
         for (j = 0; j < n; ++j) swap(&x[i][j], &x[0][j]);
         swap(&y[i], &y[0]);
       }
-      if (y[i] > y[n]) {
-        for (j = 0; j < n; ++j) swap(&x[i][j], &x[n][j]);
-        swap(&y[i], &y[n]);
+    }
+    for (i = 1; i < n-1; ++i) {
+      if (y[i] > y[n-1]) {
+        for (j = 0; j < n; ++j) swap(&x[i][j], &x[n-1][j]);
+        swap(&y[i], &y[n-1]);
       }
     }
 

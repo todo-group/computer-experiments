@@ -1,5 +1,6 @@
-#include <stdio.h>
 #include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 double f(double x) {
   return (5*x + x*x) + 70*sin(x);
@@ -22,6 +23,7 @@ int main(int argc, char** argv) {
 
   /* 初期値の設定 */
   x[0] = 3.0;
+  /* x[0] = atof(argv[1]); */
   x[1] = x[0] + 0.1;
 
   for (;;) {
