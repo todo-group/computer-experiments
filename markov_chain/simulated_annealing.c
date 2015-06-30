@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
     t = tinit + i * (tfinal - tinit) / n;
     xnew = x + 2*dx*(genrand_real3() - 0.5);
     if (genrand_real3() < exp(-(f(xnew)-f(x))/t)) x = xnew;
-    if (i % 100 == 0)
+    if (i < 1000 || i % 100 == 0)
       printf("%d %f %f %f\n", i, t, x, f(x));
   }
 }
