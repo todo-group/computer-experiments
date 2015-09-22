@@ -1,0 +1,776 @@
+\documentclass[dvipdfmx]{beamer}
+\usepackage{tutorial}
+\usepackage{bm}
+\title{計算機実験 --- 行列の対角化}
+\author{藤堂眞治}
+\date{2015-09-24}
+
+\begin{document}
+
+\lstset{language={C},basicstyle=\ttfamily\scriptsize,showspaces=false,rulecolor=\color[cmyk]{0, 0.29,0.84,0}}
+
+\begin{frame}
+  \titlepage
+  \tableofcontents
+\end{frame}
+
+\section{行列の対角化}
+
+\begin{frame}[t,fragile]{行列による解法}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item シュレディンガー方程式
+    \[
+    -\frac{d^2}{dx^2}\psi(x) = E \psi(x)
+    \]
+  \item 連立差分方程式を行列の形で表す($\psi(x_0)=\psi(x_n)=0$)
+    \[
+    \begin{pmatrix}
+      \frac{2}{h^2} & -\frac{1}{h^2} \\
+      -\frac{1}{h^2} & \frac{2}{h^2} & -\frac{1}{h^2} \\
+      & -\frac{1}{h^2} & \frac{2}{h^2} & -\frac{1}{h^2} \\
+      & & \ddots & \ddots \\
+      & & & -\frac{1}{h^2} & \frac{2}{h^2} \\
+    \end{pmatrix}
+    \begin{pmatrix}
+      \psi(x_1) \\
+      \psi(x_2) \\
+      \psi(x_3) \\
+      \vdots \\
+      \psi(x_{n-1}) \\
+    \end{pmatrix}
+    = E
+    \begin{pmatrix}
+      \psi(x_1) \\
+      \psi(x_2) \\
+      \psi(x_3) \\
+      \vdots \\
+      \psi(x_{n-1}) \\
+    \end{pmatrix}
+    \]
+  \item $(n-1) \times (n-1)$の疎行列の固有値問題
+    \begin{itemize}
+    \item 固有値: 固有エネルギー
+    \item 固有ベクトル: 波動関数
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{固体物理・量子統計物理に現れる行列}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 強束縛近似(tight-binding approx.)のもとでの第二量子化表示
+    \[
+    H = -t \sum_{\langle i,j \rangle \sigma} (c_{i,\sigma}^\dagger c_{j,\sigma} + h.c.) + \text{(相互作用)}
+    \]
+  \item 局所スピン模型(ハイゼンベルグ模型)
+    \[
+    H = \sum_{\langle i,j \rangle} S_i \cdot S_j
+    \]
+  \item 格子点の数を$n$とすると、ハミルトニアンはそれぞれ$4^n \times 4^n$、$2^n \times 2^n$の(疎)行列で表される。
+  \item $n$が大きくなると、行列の次元は指数関数的に増加
+  \item 量子多体系に共通する困難
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{実対称行列(エルミート行列)の性質}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item $N \times N$実対称行列$A$ ($=A^T$)の固有値問題
+    \[
+    A x = \lambda x
+    \]
+  \item $N$個の固有値($\lambda_1,\lambda_2,\cdots,\lambda_N$)は全て実。固有ベクトル($\xi_1,\xi_2,\cdots,\xi_N$)は互いに正規直交するようにとることができる。行列$U$を
+    \[
+    U = \Big( \xi_1 \, \xi_2 \, \cdots \, \xi_N \Big)
+    \]
+    と定義すると、$U$は直交(ユニタリ)行列($U^T U = U^{-1} U = I$)
+  \item $A$の固有分解(固有値分解)
+    \[
+    A = U \Lambda U^T \qquad \Lambda = \text{diag}(\lambda_1,\cdots,\lambda_N)
+    \]
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{行列のべき乗・指数関数}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 行列のべき乗
+    \begin{align*}
+      A^p &= (U \Lambda U^T)(U \Lambda U^T) \cdots (U \Lambda U^T) \\
+      &= U \Lambda^p U^T \qquad \Lambda^p = \text{diag}(\lambda_1^p,\cdots,\lambda_N^p)
+    \end{align*}
+  \item 行列の指数関数
+    \begin{align*}
+      e^{xA} &= \sum_{n=0}^{\infty} \frac{1}{n!}(xA)^n = U \Big[ \sum_{n=0}^{\infty} \frac{1}{n!}(x\Lambda)^n \Big] U^T \\
+      &= U e^{x \Lambda} U^T \qquad e^{x \Lambda} = \text{diag}(e^{x\lambda_1},\cdots,e^{x\lambda_N})
+    \end{align*}
+  \item 逆行列 $A^{-1} = U \Lambda^{-1} U^T$
+  \item 行列式 $|A| = \prod_i \lambda_i$、対角和(トレース) ${\rm tr} A = \sum_i \lambda_i$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{行列の数値対角化}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 一般的に次元が5以上の行列の固有値は、あらかじめ定まる有限回の手続きでは求まらない
+  \item 必ず何らかの反復法(+収束判定)が必要となる
+  \item 密行列向きの方法
+    \begin{itemize}
+    \item Jacobi法
+    \item Givens変換・Householder法(三重対角化) + QR法など
+    \end{itemize}
+  \item 疎行列向きの方法
+    \begin{itemize}
+    \item べき乗法
+    \item Lanczos法(三重対角化) + QR法など
+    \end{itemize}
+  \item 固有ベクトル
+    \begin{itemize}
+    \item 逆反復法
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\section{密行列の対角化}
+
+\begin{frame}[t,fragile]{基本方針}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item やってはいけない方法: 特性方程式
+    \[
+    |\lambda I - A| = 0
+    \]
+    の係数を求めて、代数方程式として解く
+    \begin{itemize}
+    \item 数値的に不安定 (代数方程式の解は係数の誤差に対して敏感)
+    \item 計算コスト大[$\sim O(N!)$]
+    \end{itemize}
+  \item スタンダードな方法: 行列を次々に直交変換して、対角行列(あるいは三重対角行列)に近づけていく
+    \[
+    A \rightarrow U_1^T A U_1 \rightarrow U_2^T (U_1^T A U_1) U_2 \rightarrow U_3^T (U_2^T (U_1^T A U_1) U_2) U_3 \rightarrow \cdots
+    \]
+  \item 固有値は変換された行列の固有値、固有ベクトルは変換後の行列の固有ベクトルに左から$U_1 U_2 U_3 \cdots$を掛けたもの
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{Jacobi法}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 直交行列$U_{pq}$を以下のように選ぶ ($(p,p),(p,q),(q,p),(q,q)$成分を除くと単位行列)
+    \[
+    U_{pq} =
+    \begin{pmatrix}
+      1 \\
+      & \ddots \\
+      & & 1 \\
+      & & & \cos \theta & & & \sin \theta \\
+      & & & & 1 \\
+      & & & & & 1 \\
+      & & & -\sin \theta & & & \cos \theta \\
+      & & & & & & & 1 \\
+      & & & & & & & & \ddots \\
+      & & & & & & & & & 1 \\
+    \end{pmatrix}
+    \]
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{Jacobi法による相似変換}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item $B=U_{pq}^{-1} A U_{pq}$により、$A$の$p$行、$q$行、$p$列、$q$列のみが変更を受ける
+    \begin{align*}
+      b_{pk} &= b_{kp} = a_{pk} \cos \theta - a_{qk} \sin \theta \qquad k \ne p,q \\
+      b_{qk} &= b_{kq} = a_{pk} \sin \theta + a_{qk} \cos \theta \qquad k \ne p,q \\
+      b_{pp} &= \frac{a_{pp}+a_{qq}}{2} + \frac{a_{pp}-a_{qq}}{2} \cos 2 \theta - a_{pq} \sin 2 \theta \\
+      b_{qq} &= \frac{a_{pp}+a_{qq}}{2} - \frac{a_{pp}-a_{qq}}{2} \cos 2 \theta + a_{pq} \sin 2 \theta \\
+      b_{pq} &= b_{qp} = \frac{a_{pp}-a_{qq}}{2} \sin 2 \theta + a_{pq} \cos 2 \theta
+    \end{align*}
+  \item $b_{pq} = b_{qp} = 0$とするには、$\theta$を次のように選べば良い
+    \[
+    \tan 2 \theta = - \frac{2 a_{pq}}{a_{pp}-a_{qq}}
+    \]
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{Jacobi法の収束}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 相似変換により対角和は不変に保たれるので
+    \[
+      {\rm tr} \, A^T A = {\rm tr} \, B^T B \ \ \Rightarrow \ \
+      \sum_{i,j} a_{ij}^2 = \sum_{i,j} b_{ij}^2
+    \]
+  \item 一方、この変換で
+    \[
+    b_{pp}^2 + b_{qq}^2 = b_{pp}^2 + 2 b_{pq}^2 + b_{qq}^2 = a_{pp}^2 + 2 a_{pq}^2 + a_{qq}^2
+    \]
+    すなわち、変換により、対角成分の二乗和は増加する $\Rightarrow$ 非対角成分の二乗和は単調減少
+  \item 全ての非対角成分が十分小さくなるまで繰り返す
+  \item 固有値=対角成分、固有ベクトル$=U_1 U_2 U_3 \cdots$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{3重対角化}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 対角化は有限回の手続きでは行えない
+  \item 3重対角化であれば、$O(N^3)$の有限回の計算で決定論的に行える
+  \item Givens変換: Jacobi変換と同じ相似変換を利用
+    \begin{itemize}
+    \item $U_{32}$で(3,1)と(1,3)を消去 $\Rightarrow$ $U_{42}$で(4,1)と(1,4)を消去 $\Rightarrow$ $U_{52}$で(5,1)と(1,5)を消去 $\Rightarrow$ $U_{62},\cdots,U_{N,2}$ $\Rightarrow$ $U_{43},U_{53},\cdots,U_{N,3}$ $\Rightarrow$ $\cdots$ $\Rightarrow$ $U_{n,n-1}$で($n,n-2$)と($n-2,n$)を消去
+    \item $(4/3)N^3$回の乗算と$(2/3)N^3$回の加減算で3重対角化される
+    \end{itemize}
+  \item Householder変換: $U = I - 2 w w^T / |w|^2$
+    \begin{itemize}
+    \item $(2/3)N^3$回の乗算と加減算で3重対角化される
+    \item Givens変換に比べ少し効率的なので、こちらが広く使われている
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{3重対角行列の対角化}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 二分法、QR分解、分割統治法、MRRRなど様々な方法が知られている
+  \item 固有ベクトル
+    \begin{itemize}
+    \item QR分解では3重対角行列の固有ベクトルも同時に求まる
+    \item あるいは、固有値を求めた後、逆反復法を用いて固有ベクトルを求める
+    \end{itemize}
+  \item 逆反復法
+    \begin{itemize}
+    \item 近似固有値を$\mu$とするとき、行列$(A - \mu I)^{-1}$を考えると、固有ベクトルは$A$と同じ、固有値は$(\lambda-\mu)^{-1}$。
+    \item $\mu$が十分に正確であれば、$(\lambda-\mu)^{-1}$は絶対値最大の固有値。行列$(A - \mu I)^{-1}$を適当な初期ベクトルにかけ続けると$\lambda$に対応する固有ベクトルに収束(c.f. べき乗法)
+    \item 実際には$(A-\mu I) x' = x$という連立方程式を繰り返し解く
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{LAPACKの対角化ルーチン}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 様々な対角化ルーチンが準備されている
+    \begin{itemize}
+    \item 倍精度実対称行列の対角化 {\tt dsyev}
+      \url{http://www.netlib.org/lapack/explore-html/dd/d4c/dsyev_8f.html}
+    \item Fortranによる関数宣言
+\begin{lstlisting}
+subroutine dsyev(character JOBZ, character UPLO,
+  integer N, double precision, dimension(lda, *) A,
+  integer LDA, double precision, dimension(*) W,
+  double precision, dimension(*) WORK,
+  integer LWORK, integer INFO)		
+\end{lstlisting}
+    \end{itemize}
+  \item 他にも{\tt dsyevd}、{\tt dsyevr}、{\tt dsyevx}などがある \\
+    3重対角化までは同じ。3重対角行列の対角化が異なる
+  \item 単精度版の{\tt ssyev}、複素(エルミート行列)版の{\tt zheev}など
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{複素エルミート行列の固有分解}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 固有値は実数
+  \item これまでの方法がそのまま使える (ただし、転置 $\rightarrow$ 複素転置)
+  \item 実対称行列用のサブルーチンを使っての対角化も可能
+    \begin{itemize}
+    \item エルミート行列を実部と虚部に分ける: $A = R + iW$
+    \item エルミート行列の固有値問題 $(R + iW)(u+iv) = \lambda(u+iv)$を$2N \times 2N$の実対称行列の問題に書き換える
+      \[
+      \begin{pmatrix} R & -W \\ W & R \end{pmatrix}
+      \begin{pmatrix} u \\ v \end{pmatrix}
+      = 
+      \lambda \begin{pmatrix} u \\ v \end{pmatrix}
+      \]
+    \item 固有値は同じ固有値が2度づつ現れる
+    \item 対応する複素行列の固有ベクトルは、$u+iv$と$-v+iu$
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\section{疎行列に対する反復法}
+
+\begin{frame}[t,fragile]{反復法}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 疎行列の場合、行列ベクトル積は高速に行える
+  \item Givens変換、Householder変換などを行うと疎行列性が失われる
+  \item 行列ベクトル積のみを用いる反復法が効果的
+    \begin{itemize}
+    \item べき乗法
+    \item Lanczos法
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{べき乗法(Power Method)}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 適当なベクトル$v_1$から出発する
+  \item $v_1$が最大固有ベクトル$\xi_1$と直交していないとすると
+    \[
+    v_1 = c_1 \xi_1 + c_2 \xi_2 + c_3 \xi_3 + \cdots + c_N \xi_N
+    \]
+    と展開できる($c_1 \ne 0$)。この両辺に$A$を次々掛けて行くと
+    \begin{align*}
+      v_2 = A v_1 &= c_1 \lambda_1 \xi_1 + c_2 \lambda_2 \xi_2 + c_3 \lambda_3 \xi_3 + \cdots + c_N \lambda_N \xi_N \\
+      v_3 = A^2 v_1 &= c_1 \lambda_1^2 \xi_1 + c_2 \lambda_2^2 \xi_2 + c_3 \lambda_3^2 \xi_3 + \cdots + c_N \lambda_N^2 \xi_N \\
+      \vdots \\
+      v_{n+1} = A^n v_1 &= c_1 \lambda_1^n \xi_1 + c_2 \lambda_2^n \xi_2 + c_3 \lambda_3^n \xi_3 + \cdots + c_N \lambda_N^n \xi_N \\
+      &= c_1 \lambda_1^n \Big[ \xi_1 + \sum_{k=2}^N \frac{c_k}{c_1} \big( \frac{\lambda_k}{\lambda_1}\big)^n \xi_k \Big] \approx c_1 \lambda_1^n \xi_1 \\
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{べき乗法の収束}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item べき乗法による固有値
+    \[
+    \frac{v_{n+1}^T v_{n+1}}{v_{n+1}^T v_n} = \lambda_1 + O\Big( \big(\frac{\lambda_2}{\lambda_1} \big)^{2n}\Big)
+    \]
+  \item 誤差の収束
+    \[
+    \frac{v_{n+1}^T v_{n+1}}{v_{n+1}^T v_n} \approx \lambda_1 + e^{-2n \ln (\lambda_1/\lambda_2)}
+    \]
+  \item $1 / \ln (\lambda_1/\lambda_2)$ 程度の反復が必要
+  \item $\lambda_1$と$\lambda_2$が近い場合には、反復回数が非常に多くなる
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{第2固有値・第3固有値$\cdots$}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 第1固有ベクトル$\xi_1$の成分を行列から差し引く(減次)
+    \[
+    A_1 = A - \lambda_1 \xi_1 \xi_1^T
+    \]
+    この行列は、固有値 $0,\lambda_2,\lambda_3,\cdots,\lambda_N$を持つ
+  \item 行列$A_1$に対してべき乗法を使うと、固有値$\lambda_2$と固有ベクトル$\xi_2$が得られる
+  \item 第$k$固有値まで求まっている場合
+    \[
+    A_k = A - \sum_{i=1}^k \lambda_i \xi_i \xi_i^T
+    \]
+  \item 実際には数値誤差のため、ベクトルの直交性は厳密ではない
+  \item 大きい方から数個程度を求めるのが限界
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{Rayleigh-Ritzの方法}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item $N \times N$行列$A$について、互いに正規直交するベクトル$v_1,v_2,\cdots,v_M$ ($M < N$)が張る部分空間の中で「最良の」固有ベクトルを求めたい
+  \item $N \times M$行列
+    \[
+    V=(v_1 v_2 \cdots v_M)
+    \]
+    を定義すると、$V^TV=I$が成り立つ(ただし$VV^T \ne I$)
+  \item 部分空間内のベクトルを$w = \sum_i a_i v_i$と表すと、$\frac{w^TAw}{w^Tw}$が極大値を取る(本当の固有ベクトルにできるだけ平行になる)条件は、
+    \[
+    \frac{\partial}{\partial a_i} \frac{w^TAw}{w^Tw} \sim \sum_j H_{ij}a_j - \lambda a_i = 0
+    \]
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{Rayleigh-Ritzの方法}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 行列
+    \[
+    H_{ij} = v_i^T A_{ij} v_j
+    \]
+    に対する固有値問題: $H a = \lambda a$
+  \item $\lambda$: もとの行列の近似固有値(Ritz値)
+  \item $Va$: もとの行列の近似固有ベクトル(Ritzベクトル)
+  \item 最大固有値に対する良い近似固有値が欲しい場合 $\Rightarrow$ $v_1,v_2,\cdots,v_M$を最大固有ベクトルになるべく近い(しかし、互いに直交する)ベクトルに選べば良い
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{Lanczos法}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 初期(ランダム)ベクトル$v_1$に加えて
+    \[
+    Av_1, Av_2, \cdots A^{M-1}v_1
+    \]
+    を正規直交化して$v_1,v_2,\cdots,v_M$を作る(Krylov部分空間)
+  \item 部分空間でのRitz値を固有値の近似値とする
+  \item $A^nv_1$はどんどん最大固有ベクトルに近づいていくので、$M \ll N$でも良い近似固有値が得られると期待される
+  \item Lanczos法 (Arnordi法)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{Lanczos法}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 正規化された初期(ランダム)ベクトル$v_1$から出発する %($v_0=0$とする)
+  \item $v_2,v_3,\cdots$を生成する
+    \begin{align*}
+      v_2 &= (Av_1 - \alpha_1 v_1)/\beta_1 \\
+      v_3 &= (Av_2 - \alpha_2 v_2)/\beta_2 \\
+      \vdots
+    \end{align*}
+    ここで
+    \begin{align*}
+      \alpha_i &= v_i^T A v_i \\
+      \beta_i &= | A v_i - \beta_{i-1} v_{i-1} - \alpha_i v_i |
+    \end{align*}
+    と選ぶ
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{Lanczos法}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item $v_1,v_2,v_3,\cdots,v_{M+1}$は正規直交
+  \item 漸化式を書き換えると
+    \begin{align*}
+      Av_1 &= \alpha_1 v_1 + \beta_1 v_2 \\
+      Av_2 &= \beta_1 v_1 + \alpha_2 v_2 + \beta_2 v_3 \\
+      Av_3 &= \beta_2 v_2 + \alpha_3 v_3 + \beta_3 v_4 \\
+      \vdots \\
+      Av_{M} &= \beta_{M-1} v_{M-1} + \alpha_M v_M + \beta_M v_{M+1}
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{Lanczos法}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 行列で表現すると
+    \begin{align*}
+      \hspace*{-2em}
+      A
+      (v_1v_2\cdots v_M)
+      &=
+      (v_1v_2\cdots v_M v_{M+1})
+      \begin{pmatrix}
+        \alpha_1 & \beta_1\\
+        \beta_1 & \alpha_2 & \beta_2 \\
+        & \beta_2 & \alpha_3 & \beta_3 \\
+        & & \beta_3 & \alpha_4 & \beta_4 \\
+        & & & \ddots & \ddots & \ddots \\
+        & & & & \beta_{M-1} & \alpha_M \\
+        & & & & & \beta_M \\
+      \end{pmatrix}
+    \end{align*}
+    両辺に左から$(v_1v_2\cdots v_M)^T$をかけると
+    \[
+    (v_1v_2\cdots v_M)^T A (v_1v_2\cdots v_M)
+    \]
+    は3重対角行列となることがわかる
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{Lanczos法}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 原理的には、$N$ステップ目で$\beta_N=0$となり、3重対角化が完了する
+  \item 実際には、数値誤差のため$v_1,v_2,v_3\cdots$の直交性が崩れる
+    \begin{itemize}
+      \item $M$を大きくしすぎると、おかしな固有値が出てくる
+      \item 全ての固有値が欲しい場合にはHouseholder法を使う
+    \end{itemize}
+  \item Lanczos法では、大きな固有値に対応する固有ベクトルにできるだけ近いものから部分空間を作っていく
+    \begin{itemize}
+      \item 100万次元以上の行列の場合でも$M=100 \sim 200$程度で最初の数個の固有値は精度良く求まる
+    \end{itemize}
+  \item 必要な操作は、行列とベクトルの積、ベクトルの内積・スケーリング・和のみ
+    \begin{itemize}
+      \item 疎行列の場合、非常に効率が良い
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\section{特異値分解}
+
+\begin{frame}[t,fragile]{べき乗法(Power Method)}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 適当なベクトル$v_1$から出発する
+  \item $v_1$が最大固有ベクトル$\xi_1$と直交していないとすると
+    \[
+    v_1 = c_1 \xi_1 + c_2 \xi_2 + c_3 \xi_3 + \cdots + c_N \xi_N
+    \]
+    と展開できる($c_1 \ne 0$)。この両辺に$A$を次々掛けて行くと
+    \begin{align*}
+      v_2 = A v_1 &= c_1 \lambda_1 \xi_1 + c_2 \lambda_2 \xi_2 + c_3 \lambda_3 \xi_3 + \cdots + c_N \lambda_N \xi_N \\
+      v_3 = A^2 v_1 &= c_1 \lambda_1^2 \xi_1 + c_2 \lambda_2^2 \xi_2 + c_3 \lambda_3^2 \xi_3 + \cdots + c_N \lambda_N^2 \xi_N \\
+      \vdots \\
+      v_{n+1} = A^n v_1 &= c_1 \lambda_1^n \xi_1 + c_2 \lambda_2^n \xi_2 + c_3 \lambda_3^n \xi_3 + \cdots + c_N \lambda_N^n \xi_N \\
+      &= c_1 \lambda_1^n \Big[ \xi_1 + \sum_{k=2}^N \frac{c_k}{c_1} \big( \frac{\lambda_k}{\lambda_1}\big)^n \xi_k \Big] \approx c_1 \lambda_1^n \xi_1 \\
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{行列のべき乗・指数関数}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 行列のべき乗
+    \begin{align*}
+      A^p &= (U \Lambda U^T)(U \Lambda U^T) \cdots (U \Lambda U^T) \\
+      &= U \Lambda^p U^T \qquad \Lambda^p = \text{diag}(\lambda_1^p,\cdots,\lambda_N^p)
+    \end{align*}
+  \item 行列の指数関数
+    \begin{align*}
+      e^{xA} &= \sum_{n=0}^{\infty} \frac{1}{n!}(xA)^n = U \Big[ \sum_{n=0}^{\infty} \frac{1}{n!}(x\Lambda)^n \Big] U^T \\
+      &= U e^{x \Lambda} U^T \qquad e^{x \Lambda} = \text{diag}(e^{x\lambda_1},\cdots,e^{x\lambda_N})
+    \end{align*}
+  \item 逆行列 $A^{-1} = U \Lambda^{-1} U^T$
+  \item 行列式 $|A| = \prod_i \lambda_i$、対角和(トレース) ${\rm tr} A = \sum_i \lambda_i$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{一般の非正方行列の場合}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 特異値分解, SVD: Singular Value Decomposition
+  \item 任意の$m \times n$実行列$A$は
+    \[
+    A = U \Lambda V^T
+    \]
+    の形に(一意に)分解できる
+  \item $U$: $(m \times k)$行列(列ベクトルは互いに正規直交) \\
+    $V$: $(n \times k)$行列(列ベクトルは互いに正規直交) \\
+    $\Lambda$: diag($\lambda_1,\lambda_2,\cdots,\lambda_k$) \ \ ($\lambda_1\ge\lambda_2\ge\cdots\ge\lambda_k>0$) 特異値
+  \item ベクトル表示 (行列をランク1の行列で分解)
+    \[
+    A = \sum_{\ell=1}^k \lambda_\ell u_\ell v_\ell^{T}
+    \]
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{特異値分解の例}
+  \[
+  \begin{split}
+    \begin{pmatrix}
+      1 & 2 & 3 \\
+      6 & 4 & 5 \\
+      8 & 9 & 7 \\
+      10 & 11 & 12
+    \end{pmatrix} =&
+    \begin{pmatrix}
+      -0.14 & -0.62 & -0.05 \\
+      -0.34 & \ \ \,0.37 & \ \ \,0.81 \\
+      -0.55 & \ \ \,0.54 & -0.58 \\
+      -0.75 & -0.44 & \ \ \,0.06      
+    \end{pmatrix} \\
+    &\times
+    \begin{pmatrix}
+      25.35 & 0 & 0 \\
+      0 & 2.15 & 0 \\
+      0 & 0 & 1.71
+    \end{pmatrix}
+    \begin{pmatrix}
+      -0.56 & -0.59 & -0.59 \\
+      \ \ \,0.68 & \ \ \,0.09 & -0.73 \\
+      \ \ \,0.48 & -0.81 & \ \ \,0.35
+    \end{pmatrix}
+  \end{split}
+  \]
+\end{frame}
+
+\begin{frame}[t,fragile]{完全特異値分解 (full SVD)}
+  \[
+  \begin{split}
+    \begin{pmatrix}
+      1 & 2 & 3 \\
+      6 & 4 & 5 \\
+      8 & 9 & 7 \\
+      10 & 11 & 12
+    \end{pmatrix} =&
+    \begin{pmatrix}
+      -0.14 & -0.62 & -0.05 & {\color{red} -0.77} \\
+      -0.34 & \ \ \,0.37 & \ \ \,0.81 & {\color{red} -0.29} \\
+      -0.55 & \ \ \,0.54 & -0.58 & {\color{red} -0.29} \\
+      -0.75 & -0.44 & \ \ \,0.06 & {\color{red} \ \ \,0.48}
+    \end{pmatrix} \\
+    &\times
+    \begin{pmatrix}
+      25.35 & 0 & 0 \\
+      0 & 2.15 & 0 \\
+      0 & 0 & 1.71 \\
+      {\color{red} 0} & {\color{red} 0} & {\color{red} 0}
+    \end{pmatrix}
+    \begin{pmatrix}
+      -0.56 & -0.59 & -0.59 \\
+      \ \ \,0.68 & \ \ \,0.09 & -0.73 \\
+      \ \ \,0.48 & -0.81 & \ \ \,0.35
+    \end{pmatrix}
+  \end{split}
+  \]
+  \begin{itemize}
+    % \setlength{\itemsep}{1em}
+  \item $U$, $V$が直交行列になるように、基底ベクトルを追加
+  \item こちらを「SVD」、もともとの分解を「thin SVD」と呼ぶ場合も多い
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{LAPACKによる特異値分解}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 倍精度実行列の特異値分解 {\tt dgesvd}
+    \url{http://www.netlib.org/lapack/explore-html/d8/d2d/dgesvd_8f.html}
+  \item Fortranによる関数宣言
+\begin{lstlisting}
+subroutine dgesvd(character JOBU, character JOBVT,
+  integer M, integer N,
+  double precision, dimension(lda, *) A,
+  integer LDA, double precision, dimension(*) S,
+  double precision, dimension(ldu, *) U, integer LDU,
+  double precision, dimension(ldvt, *) VT,
+  integer LDVT,
+  double precision, dimension( * ) WORK, integer LWORK,
+  integer INFO )
+\end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{固有値分解との関係}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 半正定値実対称行列の場合
+
+    「固有値分解」と「特異値分解」は等価
+  \item 一般の(非正方)実行列$A$の場合
+    \begin{itemize}
+      \setlength{\itemsep}{1em}
+    \item 完全SVD  $A=U \Lambda V^T$を考えると
+    \item $B=A^T A = V \Lambda U^T U \Lambda V^T = V \Lambda^2 V^T$は実対称行列
+
+      固有値:$\lambda_\ell^2$、固有ベクトル$V$
+    \item $C=A A^T = U \Lambda V^T V \Lambda U^T = U \Lambda^2 U^T$も実対称行列
+
+      固有値:$\lambda_\ell^2$、固有ベクトル$U$
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{特異値分解が役に立つ例}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 連立一次方程式の最小二乗解
+  \item 行列の低ランク近似
+  \item 画像圧縮
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{特異な(特異に近い)連立一次方程式}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item ランク$r$の$m \times n$行列$A$のfull SVDを考える
+    \[
+    A = \begin{pmatrix} U_1 U_2 \end{pmatrix} \begin{pmatrix} \Lambda_1 & 0 \\ 0 & 0 \end{pmatrix} \begin{pmatrix} V_1 V_2 \end{pmatrix}^T = U_1 \Lambda_1 V_1^T
+    \]
+    $U_1$: $m \times r$, $U_2$: $m \times (m-r)$, $\Lambda_1$: $r \times r$, $V_1$: $n \times r$, $V_2$: $n \times (n-r)$
+  \item $r \ne n$のとき、方程式$Ax=b$は無限個の解をもつ、あるいは解なし
+  \item 無限個の解をもつ場合($U_1U_1^Tb=b$)の一般解
+    \[
+    x = V_1 \Lambda_1^{-1} U_1^T b + V_2 z
+    \]
+    $z$は$(n-r)$次元の任意のベクトル
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{一般化逆行列と最小二乗解}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item $V_1$と$V_2$の列ベクトルは全て直交する。一般解のうちノルム$|x|^2$が最小となるのは$z=0$のとき
+    \[
+    x = A^\dagger b \ \ \ \ A^\dagger = V \begin{pmatrix} \Lambda^{-1} & 0 \\ 0 & 0 \end{pmatrix} U^T
+    \]
+  \item $A^\dagger$: Moore-Penroseの一般化逆行列 (1/0を0とおくことに相当)
+  \item $Ax=b$が解を持たない場合にも最良解を与える
+  \item 零に非常に近い特異値がある場合も、それらを零とみなすことで数値的に安定した解がえられる
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{行列の低ランク近似}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item ランク$r$ ($r<k$)の行列のうち、行列$A$を「最も良く近似」する$\tilde{A}$を選ぶ
+  \item 「最も良く近似」= フロベニウスノルム$||A-\tilde{A}||_\mathrm{F}$を最小化
+    \[
+    ||X||_\mathrm{F} \equiv \sum_{ij} x_{ij}^2
+    \]
+  \item 特異値のうち大きなものから$r$個とり、残りを零とした
+    \[
+    \tilde{\Lambda} = \text{diag}(\lambda_1,\cdots,\lambda_r,0,\cdots,0)
+    \]
+    を使い
+    \[
+    \tilde{A} = U \tilde{\Lambda} V^T
+    \]
+    を作れば良い (Eckart-Youngの定理)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{行列の低ランク近似の例}
+  \[
+  \begin{split}
+    &\begin{pmatrix}
+      -0.14 & -0.62 & -0.05 \\
+      -0.34 & \ \ \,0.37 & \ \ \,0.81 \\
+      -0.55 & \ \ \,0.54 & -0.58 \\
+      -0.75 & -0.44 & \ \ \,0.06      
+    \end{pmatrix}
+    \begin{pmatrix}
+      25.35 & 0 & 0 \\
+      0 & 2.15 & 0 \\
+      0 & 0 & 0
+    \end{pmatrix} \\
+    & \times
+    \begin{pmatrix}
+      -0.56 & -0.59 & -0.59 \\
+      \ \ \,0.68 & \ \ \,0.09 & -0.73 \\
+      \ \ \,0.48 & -0.81 & \ \ \,0.35
+    \end{pmatrix}
+    = 
+    \begin{pmatrix}
+      1.04 & 1.93 & 3.03 \\
+      5.33 & 5.12 & 4.52 \\
+      8.47 & 8.21 & 7.34 \\
+      9.95 & 11.1 & 12.0 \\
+    \end{pmatrix}
+  \end{split}
+  \]
+  \begin{itemize}
+    % \setlength{\itemsep}{1em}
+  \item それなりに悪くない近似が得られる
+  \item 誤差(フロベニウスノルム) = 1.71 (無視した特異値の二乗和の平方根)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{Eckart-Youngの定理の証明}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  %\item $A=U \Lambda V^T$のように(完全)SVDされているとする
+  \item $A$を近似する行列$X$ (ランク$\le r$)を考えると
+    \[
+    ||A-X||_\mathrm{F}^2 = \sum_{ij}(a_{ij}-x_{ij})^2 = \text{tr} [(A-X)(A-X)^T]
+    \]
+    を最小化すればよい。$UU^T=VV^T = I_k$より
+    \[
+    \begin{split}
+      ||A-X||_\mathrm{F}^2 &= \text{tr} [UU^T(A-X)VV^T(A-X)^T] \\
+      &= \text{tr} [U^T(A-X)V (U^T(A-X)V)^T] \\
+      &= \text{tr} [(\Lambda-G)(\Lambda-G)^T]  \ \ \ (G \equiv U^TXV)\\
+      &= \sum_i^k (\lambda_i - g_{ii})^2 + \sum_i \sum_{j \ne i} g_{ij}^2
+    \end{split}
+    \]
+    ランク$k$以下で、$||A-X||_\mathrm{F}^2$を最小化するには、$g_{ii}=\lambda_i$ ($i=1 \cdots r$)、それ以外は全て零とすればよい
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{特異値分解による画像圧縮}
+  \noindent%
+  \resizebox{0.63\textwidth}{!}{\includegraphics{image/svd-2.pdf}}%
+  \resizebox{0.35\textwidth}{!}{\includegraphics{image/svd-1.pdf}}
+
+  \hfill{\fontsize{5.5pt}{0pt}\selectfont \url{http://www.na.scitec.kobe-u.ac.jp/~yamamoto/lectures/cse-introduction2009/cse-introduction2009.html}}
+\end{frame}
+
+\end{document}

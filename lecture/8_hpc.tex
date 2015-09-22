@@ -1,0 +1,93 @@
+\documentclass[dvipdfmx]{beamer}
+\usepackage{tutorial}
+\usepackage{bm}
+\title{計算機実験 --- スーパーコンピュータと計算物理}
+\author{藤堂眞治}
+\date{2015-09-22}
+
+\begin{document}
+
+\lstset{language={C},basicstyle=\ttfamily\scriptsize,showspaces=false,rulecolor=\color[cmyk]{0, 0.29,0.84,0}}
+
+\begin{frame}
+  \titlepage
+  \tableofcontents
+\end{frame}
+
+\section{スーパーコンピューターと計算物理}
+
+\begin{frame}[t,fragile]{計算機の進化}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 計算機の性能は指数関数的に伸び続けている
+    \begin{itemize}
+    \item 1年で1.9倍 ⇒ 4年で10倍 ⇒ 過去70年間で100兆倍
+    \item 世界初のスパコンCray-1 (1976年)の演算性能 約160MFlops
+    \item iPhone6 (2014年)の演算性能 約900MFlops
+    \item 2020年代初頭には、1EFlops (エクサフロップス)へ
+    \end{itemize}
+  \item 現代のスーパーコンピュータは全て
+    \begin{itemize}
+      \item 並列コンピュータ (CPU数 1,000〜100,000)
+      \item マルチコア or メニーコア (CPUあたりのコア数 8 〜 1,000)
+      \item 多層にわたる階層構造
+      \item 演算に比べて、データを移動するコストの方が高い
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{Richardson's Forecast Factory (1922)}
+  \resizebox{.8\textwidth}{!}{\includegraphics{image/SchuitenHD3.pdf}}
+\end{frame}
+
+\section{並列計算とは}
+
+\begin{frame}[t,fragile]{並列化とは何か}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 目的: シミュレーションをできる限り「短時間」で終了させる
+    \begin{itemize}
+      \item たとえ総CPU時間が伸びても「ターンアラウンド時間」を短かくしたい
+      \item 一台のパソコンでは100年かかる計算を学位論文に間に合わせたい
+      \item 今の100倍の精度の計算を同じ「実時間」で実行したい
+    \end{itemize}
+  \item 並列化とは
+    \begin{enumerate}
+    \item CPUの行なうべき仕事を複数の小さな仕事に分割
+    \item それらを複数のCPUで同時実行
+    \end{enumerate}
+  \item うまく並列化を行なうために必要なこと
+    \begin{enumerate}
+    \item プログラムのどの部分をどのように並列化すればより効果的かを理解する
+    \item 並列化を実装するにはどのようにプログラムを書けば良いかを理解する
+    \end{enumerate}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{並列計算の原理}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item ノードは、互いに必要な情報を交換しながら、それぞれ異なる処理をしなければならない
+  \item ノード毎に異なる指示(= プログラム)を与えるのは大変 (特にノード数が何万もの場合)
+  \item 一つのプログラムでノード(ランクとも呼ばれる)毎に異なる指示を与えたい
+
+    ⇒ SPMD (Single Program, Multiple Data streams)
+
+    \resizebox{.9\textwidth}{!}{\includegraphics{image/spmd.pdf}}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{アムダール(Amdahl)の法則}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 並列化による全体の性能向上率
+    \[
+    P = \frac{1}{X+(1-X)/n}
+    \]
+    $X$: 並列化されていない部分の実行時間の割合, $n$: ノード数
+  \item $X$を限りなく零にしないと高並列ではすぐに性能が頭打ちに
+  \end{itemize}
+  \vspace*{-0em}\hspace*{1em}\resizebox{0.5\textwidth}{!}{\includegraphics{image/Amdahl_law2.pdf}}
+\end{frame}
+
+\end{document}

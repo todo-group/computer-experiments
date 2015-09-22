@@ -1,0 +1,374 @@
+\documentclass[dvipdfmx]{beamer}
+\usepackage{tutorial}
+\usepackage{bm}
+\title{計算機実験 --- バージョン管理システム}
+\author{藤堂眞治}
+\date{2015-04-15/22}
+
+\begin{document}
+
+\lstset{language={sh},basicstyle=\ttfamily\scriptsize,showspaces=false,rulecolor=\color[cmyk]{0, 0.29,0.84,0}}
+
+\begin{frame}
+  \titlepage
+  \tableofcontents
+\end{frame}
+
+\section{バージョン管理システム}
+
+\begin{frame}[t,fragile]{バージョン管理システムの必要性}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 広く行われている「ファイル管理」
+    \begin{itemize}
+    \item ファイル名・ディレクトリ名による管理
+
+      (日付、人名、バージョン番号など)
+    \item 手書きのログファイルによる記録
+    \end{itemize}
+  \item 問題点
+    \begin{itemize}
+    \item 記録を付け忘れる、記録を間違う、不完全な記録
+    \item 人により命名規則がばらばら
+    \item コンピュータ間でコピーを繰り返すと、どれを修正したか、どれが新しいか分からなくなる
+    \item 同じバージョンを元に、別の人が独立に修正を行ってしまう
+
+      (バージョンの分岐)
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{ありがちなパターン}
+  \vspace*{-1.8em}
+  \begin{center}
+    \resizebox{0.93\textwidth}{!}{\includegraphics{image/vcs-bad.pdf}}
+  \end{center}
+  \vspace*{-2em}
+  {\footnotesize (渡辺2013)}
+\end{frame}
+
+\begin{frame}[t,fragile]{バージョン管理システム(Version Control System)とは?}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item ファイルの履歴をデータベース(リポジトリ)で一括管理するシステム
+    \begin{itemize}
+    \item 全ての修正履歴(差分)を保存
+    \item 更新毎に一意なバージョン番号(リビジョン)を付与
+    \item 任意のバージョン間の比較が可能
+    \item もともとはプログラムのソースコードのためのシステム
+    \item それ以外のファイル(例えば TeX ファイル)管理にも使える
+    \end{itemize}
+  \item チーム・分散環境での作業をサポート
+    \begin{itemize}
+    \item ネットワーク経由でファイルを check out/check in
+    \item 複数箇所から同時に更新した場合に衝突を回避するしくみ
+    \item ブランチ・マージ・タグの管理
+    \item 一人で使っても複数人で使っても超便利
+    \item 超優秀な(かつ超まじめな)秘書のようなもの (しかもタダ)
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{バージョン・ブランチ・マージ}
+  \begin{center}\resizebox{!}{0.8\textheight}{\includegraphics{image/revision.pdf}}\end{center}
+\end{frame}
+
+\begin{frame}[t,fragile]{バージョン管理を使うと}
+  \vspace*{-1.8em}
+  \begin{center}
+    \resizebox{1.0\textwidth}{!}{\includegraphics{image/vcs-good.pdf}}
+  \end{center}
+  \vspace*{-2em}
+  {\footnotesize (渡辺2013)}
+\end{frame}
+
+\begin{frame}[t,fragile]{diff と patch}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item {\tt diff}: 2つのテキストファイルの差分を出力するコマンド
+    \begin{itemize}
+    \item ファイル全体を保存するよりコンパクト
+    \item 変更点を確認しやすい
+      
+      {\tt \$ \underline{diff -u file1.txt file2.txt > file.diff}}
+    \end{itemize}
+  \item {\tt patch}: {\tt diff}コマンドが生成した差分をファイルに適用するユーティリティー
+    \begin{itemize}
+    \item もとのファイルと差分から変更後のファイルを生成できる
+
+      {\tt \$ \underline{patch < file.diff}}
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]
+  \frametitle{実習: diff \& patch (1)}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 単一ファイルの例
+\begin{lstlisting}
+$ cp /home/public/ce2015/ex2/prologue.txt prologue.txt
+$ cp prologue.txt prologue-orig.txt
+$ vi prologue.txt # prologue.txtを編集
+
+$ diff -u prologue-orig.txt prologue.txt > prologue.diff
+$ less prologue.diff # prologue.diffの中身を見てみる
+
+$ cp /home/public/ce2015/ex2/prologue.txt prologue.txt
+$ patch < prologue.diff
+$ less prologue.txt # prologue.txtの中身を確認
+\end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]
+  \frametitle{実習: diff \& patch (2)}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item ディレクトリ全体を扱う例
+\begin{lstlisting}
+$ cp -r /home/public/ce2015/ex2 shake
+$ cp -r shake shake.orig
+# shakeの中のファイルを編集(ファイルの削除や追加も可)
+
+$ diff -urN shake.orig shake > shake.diff
+$ less shake.diff # shake.diffの中身を見てみる
+
+$ rm -rf shake
+$ cp -r /home/public/ce2015/ex2 shake
+$ patch -p0 < shake.diff
+# shakeの中身を確認
+\end{lstlisting}
+  \item diff と patch で差分の管理は可能になるが, 履歴は別に管理してお
+    かなければならない
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{主なバージョン管理システム}
+  \begin{itemize}
+  \item BitKeeper - かつて Linux のカーネルのソース管理に使われていた
+  \item CVS (Concurrent Versions System) - ネットワークでの利用を考慮とした初めてのバージョン管理システム. 以前はよく使われていた
+  \item Git - 現在 Linux の開発に使われている. 分散型リポジトリ
+  \item Mercurial - Git のライバル. 分散型リポジトリ
+  \item SCCS (Source Code Control System) - 70年代にベル研で開発された世界初のバージョン管理システム. 現在は使われない
+  \item {\color{red}Subversion} - CVSの改良版として開発された. 現在最もポピュラー? Mac OS X や多くの Linux には最初からインストールされている
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{Subversionに関する資料}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item CVS/Subversionを使ったバージョン管理（前編：バージョン管理の基礎)
+    \begin{itemize}
+    \item \url{http://sourceforge.jp/magazine/08/09/09/1038233}
+    \end{itemize}
+  \item CVS/Subversionを使ったバージョン管理（後編：SVNを使ったバージョン管理）
+    \begin{itemize}
+      \item \url{http://sourceforge.jp/magazine/08/09/24/113215}
+    \end{itemize}
+  \item Subversion によるバージョン管理
+    \begin{itemize}
+      \item \url{http://svnbook.red-bean.com/index.ja.html}
+    \end{itemize}
+  \item 「Subversion によるバージョン管理」の読み方
+    \begin{itemize}
+      \item \url{http://exa.phys.s.u-tokyo.ac.jp/ja/members/wistaria/log/subversion-intro}
+    \end{itemize}
+  \item Gitを使いたい場合には、、、
+    \begin{itemize}
+      \item \href{http://www.cms-initiative.jp/ja/research-support/develop-support/how-to-publish/develop-apps/dt0l33/manage-version}{CMSIハンズオン - バージョン管理システム}
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{Subversionリポジトリ}
+  \begin{columns}[T]
+    \begin{column}{.7\textwidth}
+      \begin{itemize}
+        \setlength{\itemsep}{1em}
+      \item ソースコードの全ての履歴を保存する「データベース」
+      \item リポジトリからソースコードのチェックアウト
+      \item リポジトリの実体は、ディスク上のディレクトリ
+      \item リポジトリへのアクセス方法
+        \begin{itemize}
+        \item ssh によるアクセス: {\tt svn+ssh://ユーザ名@ホスト名/リポジトリ名}
+        \item ネットワーク越しにアクセス可能
+        \end{itemize}
+      \end{itemize}
+    \end{column}
+    \begin{column}{.25\textwidth}
+      \includegraphics[width=\textwidth]{image/ch02dia1.pdf}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}[t,fragile]{URI (Uniform Resource Indicator)}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item URI: (ネット上の)場所や名前を表す書式
+    \begin{itemize}
+    \item 例: URL (Uniform Resource Locator)
+
+      {\footnotesize \url{https://wistaria@itc-lms.ecc.u-tokyo.ac.jp/lms/course/view.php?id=74564}}
+    \item {\color{red}\tt https:} スキーム(scheme): プロトコル・アクセス方法を指定
+    \item {\color{red}\tt wistaria@} ユーザ情報: ユーザ名(やパスワード)を指定
+    \item {\color{red}\tt itc-lms.ecc.u-tokyo.ac.jp} ホスト名・サーバ名
+    \item ``{\color{red}\tt //}''\ からホスト名までをオーソリティ(authority)と呼ぶ
+    \item {\color{red}\tt /lms/course/view.php} パス名
+    \item {\color{red}\tt ?iid=74564} クエリ(query): サーバへの指示や命令
+  \end{itemize}
+  \item SubversionのリポジトリのURIの例
+
+    {\scriptsize \tt {\color{red} svn+ssh:}//{\color{blue} ce05151598@}cmp.phys.s.u-tokyo.ac.jp/home/ce05151598/svnroot}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{実習: Subversion (1)}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item リポジトリの作成 (photonにログインして作業)
+
+    {\tt \$ \underline{svnadmin create \$HOME/svnroot}}
+  \item リポジトリ内にフォルダを作成(iMacにもどって作業)
+
+    {\tt \$~\underline{svn mkdir -m 'New folder' svn+ssh://.../svnroot/prog}}
+  \item リポジトリの中をのぞいてみる
+
+    {\tt \$ \underline{svn ls svn+ssh://.../svnroot}}
+
+  \item リポジトリからのチェックアウト
+
+    {\tt \$ cd \$HOME}
+    
+    {\tt \$ \underline{svn co svn+ssh://.../svnroot/prog}}
+
+    ローカルに{\tt prog}ディレクトリが作成される(まだ中身は空)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{実習: Subversion (2)}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item ファイルの作成
+
+    {\tt \$ \underline{cd prog}}
+    
+    {\tt \$ \underline{emacs main.c}}
+  \item ファイルをsubverionの管理下に置く
+
+    {\tt \$ \underline{svn add main.c}}
+  \item 状態の確認
+
+    {\tt \$ \underline{svn stat}}
+  \item ファイルのコミット(サーバへの送信)
+
+    {\tt \$ \underline{svn ci -m 'First version'}}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{実習: Subversion (3)}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item もう一つ別のディレクトリにチェックアウトしてみる
+
+    {\tt \$ \underline{cd \$HOME}}
+    
+    {\tt \$ \underline{svn co svn+ssh://.../svnroot/prog other}}
+
+    {\tt \$ \underline{cd other}}
+    
+  \item {\tt other}の下のファイルを修正、状態確認、コミット
+
+    {\tt \$ \underline{emacs main.c}}
+
+    {\tt \$ \underline{svn stat}}
+
+    {\tt \$ \underline{svn ci -m 'Fixed a bug'}}
+  \item {\tt \$HOME/prog}の下のファイルはそのまま
+  \item 最新の状態にアップデート
+
+    {\tt \$ \underline{cd \$HOME/prog}}
+
+    {\tt \$ \underline{svn udpate}}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{実習: Subversion (4)}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item コミットしようとしたファイルがすでに他の人(or 他の場所)から更新されていたら
+    \begin{itemize}
+      \item {\color{red} コミットは失敗する}
+    \end{itemize}
+  \item 対処法
+    \begin{itemize}
+      \item まずは{\tt svn update}
+      \item ファイル内の別の場所が更新されている場合: マージが成功するので、その後{\tt svn ci}
+      \item ファイル内の同じ場所が更新されている場合: 衝突(コンフリクト)!
+
+        ディレクトリ内に {\tt main.c.rXXX}, {\tt main.c.rYYY}, {\tt main.c.mine} ができる
+
+        3つのファイルを参照しながら{\tt main.c}を編集し, {\tt svn resolved main.c}を実行した後、コミット
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{実習: Subversion (5)}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item その他のコマンド
+    \begin{itemize}
+      \item svn mkdir dir
+      \item svn move file1 file2
+      \item svn copy file1 file2
+      \item svn delete file
+    \end{itemize}
+  \item 変更履歴などを見る
+    \begin{itemize}
+      \item svn diff -r XXX {\ \# リビジョンXXXと現在の作業ファイル}
+      \item svn diff -r XXX:YYY {\ \# 二つのリビジョン間}
+      \item svn diff -c XXX {\ \# リビジョンXXX-1とXXX}
+      \item svn log file
+      \item svn annotate file {\ \# それぞれの行を誰がいつ変更したか}
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{注意事項}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 大きなバイナリファイル(pdf, exe, doc, tar.gz, zipなど)はなるべくsubversionで管理しない
+    \begin{itemize}
+      \item バイナリファイルはうまく差分が扱えない (マージできない)
+    \end{itemize}
+  \item チェックアウトしたディレクトリ「以外」でのファイルの編集は危い
+    \begin{itemize}
+      \item チェックアウト ⇒ ファイルをコピー ⇒ コピーしたファイルを変更 ⇒ チェックアウトしたディレクトリで svn update ⇒ 変更したファイルをチェックアウトしたディレクトリに戻す ⇒ svn commit ⇒ {\color{red}他の人の変更点を取り消してしまう!}
+    \end{itemize}
+  \item チェックアウトしたディレクトリには、管理用ディレクトリ'.svn'ができている
+    \begin{itemize}
+      \item チェックアウトしたオリジナルバージョンが保存されている
+    \end{itemize}
+  \item svn stat, svn diff はネットワークにつながってなくても使用可
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{バージョン管理システムの欠点(面倒な点)}
+  \begin{itemize}
+  \item 修正前に最新の状態にアップデートしなければならない \\
+   ⇒ 慣れると習慣になります
+  \item 全ての修正を「コミット」しなければならない \\
+    ⇒ 慣れると習慣になります
+  \item 衝突(コンフリクト)が発生した時に対処しなければならない \\
+    ⇒ 衝突に気づかずに修正してしまうほうが怖いです
+  \item サーバのセットアップが面倒くさい \\
+    ⇒ まずはホスティングサービス(github, sourceforge, bitbucket)を試してみましょう \\
+    ⇒ まわりにいるプロ(?)に相談しましょう \\[.5em]
+  \item バージョン管理システムを使うと作業効率が倍以上になる \\
+    ⇒ {\color{red} 使わないと人生を半分損する}
+  \end{itemize}
+\end{frame}
+
+\end{document}

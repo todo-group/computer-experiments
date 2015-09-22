@@ -1,0 +1,54 @@
+% しおりの文字化けを防ぐ
+\AtBeginDvi{\special{pdf:tounicode EUC-UCS2}}
+
+% navigation が正しく動くようにする
+% https://gist.github.com/zr-tex8r/4980892
+\usepackage{bxdpx-beamer}
+
+% 和文メトリックの調整（代わりに otf を読み込んでも良い）
+%\usepackage{minijs}
+\usepackage{otf}
+
+% 和文既定をゴシックに変更
+\renewcommand{\kanjifamilydefault}{\gtdefault}
+
+\mode<presentation>
+{
+  \usetheme{Antibes}
+  \usecolortheme{rose}
+  \setbeamercovered{transparent}
+}
+
+\usepackage[english]{babel}
+
+% ディレクトリ構造の描画に使用
+%\usepackage{dirtree}
+
+% CMSI ロゴ
+%\pgfdeclareimage[height=0.5cm]{university-logo}{cmsi}
+%\logo{\pgfuseimage{university-logo}\hspace*{2em}}
+
+% ソースコード表示用
+\usepackage{listings,jlisting}
+\input{python_listing.tex}
+% 実行コマンド記述用のスタイル(bashシェル用で、生成されたPDFからコピー＆ペーストできるように空白を保つ)
+\lstdefinestyle{shstyle}{
+    language=bash,
+    basicstyle=\ttfamily\tiny,
+    frame=single,
+    keepspaces=true,
+    rulecolor=\color[cmyk]{0, 0.29,0.84,0}
+}
+
+% 箇条書きの２階層目のマーカを三角にする
+\setbeamertemplate{itemize subitem}[triangle]
+
+% ページ番号の挿入
+\setbeamertemplate{footline}[frame number]
+
+% スライド下部にある不要な画像を消す
+%\setbeamertemplate{navigation symbols}{}
+
+% hyperref setting
+\definecolor{links}{HTML}{2A1B81}
+\hypersetup{colorlinks,linkcolor=,urlcolor=links}

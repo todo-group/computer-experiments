@@ -1,3 +1,4 @@
 # computer-experiments
 
-Sample Programs for Lecture "Computer Experiments" at Department of Physics, University of Tokyo
+* lecture: includes slides for lecture "Computer Experiments"
+* exercise: includes sample programs for exercise "Computer Experiments"

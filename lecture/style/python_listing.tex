@@ -1,0 +1,37 @@
+\definecolor{celeste}{RGB}{139,175,219}
+\definecolor{chromegreen}{RGB}{0,149,104}
+\definecolor{chromeorange}{RGB}{233,113,22}
+\definecolor{scarlet}{RGB}{225,42,38}
+
+\lstdefinelanguage{Python2}%
+  {%
+   keywords={},%
+   keywords=[2]{and,as,assert,break,class,continue,def,del,elif,else,except,%
+      exec,finally,for,from,global,if,import,in,is,lambda,not,or,%
+      pass,print,raise,return,try,while,with,yield},%
+   keywords=[3]{split,join,pop,sort,values,items,enumerate,range,keys},%
+   keywords=[4]{witeInputFiles,runApplication,getResultFiles,loadMeasurements,collectXY,plot,convertToText,makeGnuplotPlot,makeGracePlot,dict_intersect},%
+   otherkeywords={>>>,...},%
+   sensitive=true,%
+   morecomment=[l]\#,%
+   morestring=[b]',%
+   morestring=[b]",%
+   morecomment=[s]{'''}{'''},% used for documentation text
+   morecomment=[s]{"""}{"""}% added by Philipp Matthias Hahn
+}%
+%
+\lstset{language=Python2,%
+  basicstyle={\ttfamily\footnotesize},%
+  keywordstyle={\color{celeste}},%
+  keywordstyle=[2]{\color{chromegreen}},%
+  keywordstyle=[3]{\color{chromeorange}},%
+  keywordstyle=[4]{\color{scarlet}},%
+  commentstyle={\color{blue}},%
+  showspaces=true,%
+  tabsize=2,%
+  breaklines=true,%
+  backgroundcolor=\color[cmyk]{ 0.01, 0, .15, 0} ,
+  frame=single%,
+  % rulecolor=\color[cmyk]{0, 0.29,0.84,0},
+  %number={left}%
+  }%
