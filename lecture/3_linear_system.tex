@@ -1,9 +1,6 @@
 \documentclass[dvipdfmx]{beamer}
 \usepackage{tutorial}
-\usepackage{bm}
 \title{計算機実験 --- 連立一次方程式の解法}
-\author{藤堂眞治}
-\date{2015-09-24}
 
 \begin{document}
 
@@ -14,7 +11,7 @@
   \tableofcontents
 \end{frame}
 
-\section{連立一次方程式の直接解法}
+\section{物理に現れる連立一次方程式}
 
 \begin{frame}[t,fragile]{連立一次方程式の現れる例}
   \begin{itemize}
@@ -63,6 +60,8 @@
     $(n+1)^2-4$個の未知数に対して、ポアソン方程式の差分近似とあわせて、合計$(n-1)^2+4(n-1)=(n+1)^2-4$個の連立一次方程式
   \end{itemize}
 \end{frame}
+
+\section{連立一次方程式の直接解法}
 
 \begin{frame}[t,fragile]{逆行列の「間違った」求め方}
   \begin{itemize}
@@ -309,6 +308,41 @@ for (k = n-1; k >= 0; --k) {
     \end{align*}
     \item 反復法は常に収束するとは限らない
     \item 行列$A$が対角優位、あるいは正定値対称行列の場合には収束が保証される
+  \end{itemize}
+\end{frame}
+
+\section{実習その3}
+
+\begin{frame}[t,fragile]{EX3-1: サンプルプログラムの実行}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item[3-1-1] ガウスの消去法のサンプルプログラム(\href{https://github.com/todo-group/computer-experiments/exercise/linear_system/gauss.c}{exercise/linear\_system/gauss.c})をコンパイル・実行せよ。実行時にコマンドライン引数に行列の内容が書かれたファイル名({\tt input1.dat})を指定する必要があることに注意
+\begin{lstlisting}
+$ cc gauss.c -o gauss
+$ ./gauss input1.dat
+\end{lstlisting}
+  \item[3-1-2] LU分解のサンプルプログラム(\href{https://github.com/todo-group/computer-experiments/exercise/linear_system/lu_decomp.c}{exercise/linear\_system/lu\_decomp.c})をコンパイル・実行せよ。コンパイル時にLAPACKをリンク({\tt -llapack})する必要があることに注意(ハンドブック3.1.6節)
+\begin{lstlisting}
+$ cc lu_decomp.c -o lu_decomp -llapack
+$ ./lu_decomp input1.dat
+\end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{EX3-2: ピボット選択、境界条件}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item[3-2-1] \href{https://github.com/todo-group/computer-experiments/exercise/linear_system/gauss.c}{exercise/linear\_system/gauss.c}では、ピボット選択を行っていないため、入力が{\tt input2.dat}の場合には正しい解が得られない。ピボット選択を行うよう{\tt gauss.c}を修正せよ
+  \item[3-2-2] \href{https://github.com/todo-group/computer-experiments/exercise/linear_system/laplace_lu.c}{exercise/linear\_system/laplace\_lu.c}では、ディリクレ型の境界条件[$u(0,y) = \sin(\pi y)$, $u(x,0)=u(x,1)=u(1,y)=0$]のもとでのラプラス方程式の解をLU分解により求めている。境界条件を変えてみて解がどのように変化するか、Gnuplotを用いてプロットして確認せよ(Gnuplotの{\tt splot}コマンドを使う)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{EX3-3: ヤコビ法、ガウス・ザイデル法、SOR法}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item[3-3-1] \href{https://github.com/todo-group/computer-experiments/exercise/linear_system/laplace_jacobi.c}{exercise/linear\_system/laplace\_jacobi.c}は、作りかけのヤコビ法のプログラムである。収束判定のコードを追加し、プログラムを完成せよ。計算結果や計算速度を{\tt laplace\_lu.c}と比較せよ
+  \item[3-3-2] ヤコビ法のプログラム({\tt lapalace\_jacobi.c})を元に、ガウス・ザイデル法、SOR法のプログラムを作成せよ。収束までの回数を比較せよ。
+特にSOR法の場合、パラメータ$\omega$の選び方により、どのように収束回数が変化するか観察し、最適な$\omega$の値について考察せよ
   \end{itemize}
 \end{frame}
 
