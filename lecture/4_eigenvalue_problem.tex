@@ -1,9 +1,6 @@
 \documentclass[dvipdfmx]{beamer}
 \usepackage{tutorial}
-\usepackage{bm}
 \title{計算機実験 --- 行列の対角化}
-\author{藤堂眞治}
-\date{2015-09-24}
 
 \begin{document}
 
@@ -16,9 +13,9 @@
 
 \section{行列の対角化}
 
-\begin{frame}[t,fragile]{行列による解法}
+\begin{frame}[t,fragile]{シュレディンガー方程式の行列表示}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
+    %\setlength{\itemsep}{1em}
   \item シュレディンガー方程式
     \[
     -\frac{d^2}{dx^2}\psi(x) = E \psi(x)
@@ -58,7 +55,7 @@
 
 \begin{frame}[t,fragile]{固体物理・量子統計物理に現れる行列}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
+    %\setlength{\itemsep}{1em}
   \item 強束縛近似(tight-binding approx.)のもとでの第二量子化表示
     \[
     H = -t \sum_{\langle i,j \rangle \sigma} (c_{i,\sigma}^\dagger c_{j,\sigma} + h.c.) + \text{(相互作用)}
@@ -75,7 +72,7 @@
 
 \begin{frame}[t,fragile]{実対称行列(エルミート行列)の性質}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
+    %\setlength{\itemsep}{1em}
   \item $N \times N$実対称行列$A$ ($=A^T$)の固有値問題
     \[
     A x = \lambda x
@@ -94,7 +91,7 @@
 
 \begin{frame}[t,fragile]{行列のべき乗・指数関数}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
+    %\setlength{\itemsep}{1em}
   \item 行列のべき乗
     \begin{align*}
       A^p &= (U \Lambda U^T)(U \Lambda U^T) \cdots (U \Lambda U^T) \\
@@ -112,7 +109,7 @@
 
 \begin{frame}[t,fragile]{行列の数値対角化}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
+    %\setlength{\itemsep}{1em}
   \item 一般的に次元が5以上の行列の固有値は、あらかじめ定まる有限回の手続きでは求まらない
   \item 必ず何らかの反復法(+収束判定)が必要となる
   \item 密行列向きの方法
@@ -136,7 +133,7 @@
 
 \begin{frame}[t,fragile]{基本方針}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
+    %\setlength{\itemsep}{1em}
   \item やってはいけない方法: 特性方程式
     \[
     |\lambda I - A| = 0
@@ -214,7 +211,7 @@
 
 \begin{frame}[t,fragile]{3重対角化}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
+    %\setlength{\itemsep}{1em}
   \item 対角化は有限回の手続きでは行えない
   \item 3重対角化であれば、$O(N^3)$の有限回の計算で決定論的に行える
   \item Givens変換: Jacobi変換と同じ相似変換を利用
@@ -232,7 +229,7 @@
 
 \begin{frame}[t,fragile]{3重対角行列の対角化}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
+    %\setlength{\itemsep}{1em}
   \item 二分法、QR分解、分割統治法、MRRRなど様々な方法が知られている
   \item 固有ベクトル
     \begin{itemize}
@@ -250,7 +247,7 @@
 
 \begin{frame}[t,fragile]{LAPACKの対角化ルーチン}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
+    %\setlength{\itemsep}{1em}
   \item 様々な対角化ルーチンが準備されている
     \begin{itemize}
     \item 倍精度実対称行列の対角化 {\tt dsyev}
@@ -272,7 +269,7 @@ subroutine dsyev(character JOBZ, character UPLO,
 
 \begin{frame}[t,fragile]{複素エルミート行列の固有分解}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
+    %\setlength{\itemsep}{1em}
   \item 固有値は実数
   \item これまでの方法がそのまま使える (ただし、転置 $\rightarrow$ 複素転置)
   \item 実対称行列用のサブルーチンを使っての対角化も可能
@@ -308,7 +305,7 @@ subroutine dsyev(character JOBZ, character UPLO,
 
 \begin{frame}[t,fragile]{べき乗法(Power Method)}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
+    %\setlength{\itemsep}{1em}
   \item 適当なベクトル$v_1$から出発する
   \item $v_1$が最大固有ベクトル$\xi_1$と直交していないとすると
     \[
@@ -405,7 +402,7 @@ subroutine dsyev(character JOBZ, character UPLO,
 
 \begin{frame}[t,fragile]{Lanczos法}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
+    %\setlength{\itemsep}{1em}
   \item 正規化された初期(ランダム)ベクトル$v_1$から出発する %($v_0=0$とする)
   \item $v_2,v_3,\cdots$を生成する
     \begin{align*}
@@ -467,7 +464,7 @@ subroutine dsyev(character JOBZ, character UPLO,
 
 \begin{frame}[t,fragile]{Lanczos法}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
+    %\setlength{\itemsep}{1em}
   \item 原理的には、$N$ステップ目で$\beta_N=0$となり、3重対角化が完了する
   \item 実際には、数値誤差のため$v_1,v_2,v_3\cdots$の直交性が崩れる
     \begin{itemize}
@@ -487,47 +484,10 @@ subroutine dsyev(character JOBZ, character UPLO,
 
 \section{特異値分解}
 
-\begin{frame}[t,fragile]{べき乗法(Power Method)}
-  \begin{itemize}
-    \setlength{\itemsep}{1em}
-  \item 適当なベクトル$v_1$から出発する
-  \item $v_1$が最大固有ベクトル$\xi_1$と直交していないとすると
-    \[
-    v_1 = c_1 \xi_1 + c_2 \xi_2 + c_3 \xi_3 + \cdots + c_N \xi_N
-    \]
-    と展開できる($c_1 \ne 0$)。この両辺に$A$を次々掛けて行くと
-    \begin{align*}
-      v_2 = A v_1 &= c_1 \lambda_1 \xi_1 + c_2 \lambda_2 \xi_2 + c_3 \lambda_3 \xi_3 + \cdots + c_N \lambda_N \xi_N \\
-      v_3 = A^2 v_1 &= c_1 \lambda_1^2 \xi_1 + c_2 \lambda_2^2 \xi_2 + c_3 \lambda_3^2 \xi_3 + \cdots + c_N \lambda_N^2 \xi_N \\
-      \vdots \\
-      v_{n+1} = A^n v_1 &= c_1 \lambda_1^n \xi_1 + c_2 \lambda_2^n \xi_2 + c_3 \lambda_3^n \xi_3 + \cdots + c_N \lambda_N^n \xi_N \\
-      &= c_1 \lambda_1^n \Big[ \xi_1 + \sum_{k=2}^N \frac{c_k}{c_1} \big( \frac{\lambda_k}{\lambda_1}\big)^n \xi_k \Big] \approx c_1 \lambda_1^n \xi_1 \\
-    \end{align*}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[t,fragile]{行列のべき乗・指数関数}
-  \begin{itemize}
-    \setlength{\itemsep}{1em}
-  \item 行列のべき乗
-    \begin{align*}
-      A^p &= (U \Lambda U^T)(U \Lambda U^T) \cdots (U \Lambda U^T) \\
-      &= U \Lambda^p U^T \qquad \Lambda^p = \text{diag}(\lambda_1^p,\cdots,\lambda_N^p)
-    \end{align*}
-  \item 行列の指数関数
-    \begin{align*}
-      e^{xA} &= \sum_{n=0}^{\infty} \frac{1}{n!}(xA)^n = U \Big[ \sum_{n=0}^{\infty} \frac{1}{n!}(x\Lambda)^n \Big] U^T \\
-      &= U e^{x \Lambda} U^T \qquad e^{x \Lambda} = \text{diag}(e^{x\lambda_1},\cdots,e^{x\lambda_N})
-    \end{align*}
-  \item 逆行列 $A^{-1} = U \Lambda^{-1} U^T$
-  \item 行列式 $|A| = \prod_i \lambda_i$、対角和(トレース) ${\rm tr} A = \sum_i \lambda_i$
-  \end{itemize}
-\end{frame}
-
 \begin{frame}[t,fragile]{一般の非正方行列の場合}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
-  \item 特異値分解, SVD: Singular Value Decomposition
+    %\setlength{\itemsep}{1em}
+  \item 特異値分解(SVD: Singular Value Decomposition)
   \item 任意の$m \times n$実行列$A$は
     \[
     A = U \Lambda V^T
@@ -660,7 +620,7 @@ subroutine dgesvd(character JOBU, character JOBVT,
 
 \begin{frame}[t,fragile]{特異な(特異に近い)連立一次方程式}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
+    %\setlength{\itemsep}{1em}
   \item ランク$r$の$m \times n$行列$A$のfull SVDを考える
     \[
     A = \begin{pmatrix} U_1 U_2 \end{pmatrix} \begin{pmatrix} \Lambda_1 & 0 \\ 0 & 0 \end{pmatrix} \begin{pmatrix} V_1 V_2 \end{pmatrix}^T = U_1 \Lambda_1 V_1^T
@@ -690,7 +650,7 @@ subroutine dgesvd(character JOBU, character JOBVT,
 
 \begin{frame}[t,fragile]{行列の低ランク近似}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
+    %\setlength{\itemsep}{1em}
   \item ランク$r$ ($r<k$)の行列のうち、行列$A$を「最も良く近似」する$\tilde{A}$を選ぶ
   \item 「最も良く近似」= フロベニウスノルム$||A-\tilde{A}||_\mathrm{F}$を最小化
     \[
@@ -771,6 +731,73 @@ subroutine dgesvd(character JOBU, character JOBVT,
   \resizebox{0.35\textwidth}{!}{\includegraphics{image/svd-1.pdf}}
 
   \hfill{\fontsize{5.5pt}{0pt}\selectfont \url{http://www.na.scitec.kobe-u.ac.jp/~yamamoto/lectures/cse-introduction2009/cse-introduction2009.html}}
+\end{frame}
+
+\section{実習その4}
+
+\begin{frame}[t,fragile]{EX4-1: ハウスホルダー法とべき乗法}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item[4-1-1] ハウスホルダー法による対角化のサンプルプログラム(\href{https://github.com/todo-group/computer-experiments/exercise/eigenvalue_problem/diag.c}{exercise/eigenvalue\_problem/diag.c})をコンパイル・実行せよ
+\begin{lstlisting}
+$ cc diag.c -o diag
+$ ./diag input1.dat
+\end{lstlisting}
+\item[4-1-2] \href{https://github.com/todo-group/computer-experiments/exercise/eigenvalue_problem/diag.c}{exercise/eigenvalue\_problem/diag.c}により得られた固有ベクトルが互いに正規直交していることを確認するコードを作成し実行せよ(それぞれの固有ベクトルを行とする行列とその転置行列をかけて、単位行列になることを確認すればよい)
+  \item[4-1-3] \href{https://github.com/todo-group/computer-experiments/exercise/eigenvalue_problem/power.c}{exercise/eigenvalue\_problem/power.c}は、べき乗法により最大固有ベクトルを計算するプログラムである(ただし、プログラムは未完成)。62行目に固有値を計算するコードを追加せよ。結果がEX4-1-1の最大固有値と一致するかどうか確認せよ
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{EX4-2: 特異値分解}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item[4-2-1] 特異値分解のサンプルプログラム(\href{https://github.com/todo-group/computer-experiments/exercise/svd/svd.c}{exercise/svd/svd.c})をコンパイル・実行せよ。入力{\tt matrix1.dat}を用いて、結果を確認せよ
+\begin{lstlisting}
+$ cc svd.c -o svd -llapack -lm
+$ ./svd matrix1.dat
+\end{lstlisting}
+  \item[4-2-2] 完全特異値分解を行うサンプルプログラム(\href{https://github.com/todo-group/computer-experiments/exercise/svd/full_svd.c}{exercise/svd/full\_svd.c})をコンパイル・実行せよ。{\tt svd.c}との違いを{\tt diff}コマンドを使って調べよ。
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{EX4-3: 二重井戸ポテンシャル中の粒子}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item[4-3-1] \href{https://github.com/todo-group/computer-experiments/exercise/eigenvalue_problem/double_well.c}{exercise/eigenvalue\_problem/double\_well.c}は、対角化により、有限の障壁で隔てられた二重井戸ポテンシャル中の粒子
+    \begin{equation*}
+      V(x) = \begin{cases}
+        \infty & x < 0, \ x > 1 \\
+        0 & 0 < x < \frac{1}{2} - w, \ \frac{1}{2}+w < x < 1 \\
+        v & \frac{1}{2} - w < x < \frac{1}{2}+w
+      \end{cases}
+    \end{equation*}
+    の固有値と固有ベクトルを計算するプログラムである。コマンドライン引数として、刻み数{\tt n}、障壁の高さ{\tt v}、障壁の幅{\tt width}を指定する。障壁の幅や高さを変えた時に固有値や固有ベクトルがどのように変化するか調べ、図示せよ。また、その物理的意味を考察せよ。(ヒント: 障壁が無限に高い極限からの摂動を考えてみよ)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{EX4-4: Lanczos法}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item[4-4-1] Lanczos法により固有値を計算するプログラムを作成せよ。Ritz値が、繰り返しに従ってどのように振る舞うか図示してみよ
+  \item[4-4-2] EX4-2-1の行列は疎行列(三重対角行列)である。その性質を利用して、行列ベクトル積を効率的に計算するコードを作成し、べき乗法あるいはLanczos法に組み込み、その速度を計測せよ
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{EX4-5: 行列の低ランク近似}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item[4-5-1] \href{https://github.com/todo-group/computer-experiments/exercise/svd/svd.c}{exercise/svd/svd.c}の最後では行列のランク$[{\rm min}(m,n)-1]$近似を計算している。コマンドライン引数で近似のランク数を指定できるように、また近似の誤差(フロベニウスノルム)を計算・出力するようプログラムを修正せよ。{\tt matrix2.dat}、{\tt matrix3.dat}について、近似度合いを変えながら、その出力を観察せよ
+  \item[4-5-2] \href{https://github.com/todo-group/computer-experiments/exercise/svd/svd.c}{exercise/svd/svd.c}中のLAPACKの特異値分解{\tt dgesvd}の呼び出し(54行目)では、行列の次元({\tt m}と{\tt n})、左特異ベクトル({\tt u})と右特異ベクトル({\tt vt})の順番が、もともとの{\tt dgesvd}の\href{http://www.netlib.org/lapack/explore-html/d8/d2d/dgesvd_8f.html}{ドキュメント}とは逆になっている。このプログラムが正しく動作するのはなぜか?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{EX4-6: 応用課題}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item[4-6-1] \href{https://github.com/todo-group/computer-experiments/exercise/eigenvalue_problem/double_well.c}{exercise/eigenvalue\_problem/double\_well.c}では全ての変数が無次元化されている。粒子の質量、井戸の幅、障壁の幅、高さとして、(次元をもつ)物理的に妥当な値を仮定せよ。それらを無次元化すると、{\tt v}、{\tt width}の値はいくらになるか? また、それらの値から{\tt double\_well.c}により計算された固有値を、次元をもつ実際の値に換算してみよ
+  \item[4-6-2] 入力{\tt input1.txt}はFrank行列と呼ばれる行列で、全ての固有値を解析的に求めることができる。一般の次元のFrank行列の固有値がどのように求められるか調べよ。Frank行列のように固有値が解析的に計算できる密行列には他にどのようなものがあるか?
+  \item[4-6-3] 画像ファイルを行列形式に変換し、SVDで圧縮してみよ。どの程度まで圧縮可能か?
+  \end{itemize}
 \end{frame}
 
 \end{document}
