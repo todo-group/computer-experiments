@@ -743,7 +743,7 @@ subroutine dgesvd(character JOBU, character JOBVT,
 $ cc diag.c -o diag
 $ ./diag input1.dat
 \end{lstlisting}
-\item[4-1-2] \href{https://github.com/todo-group/computer-experiments/exercise/eigenvalue_problem/diag.c}{exercise/eigenvalue\_problem/diag.c}により得られた固有ベクトルが互いに正規直交していることを確認するコードを作成し実行せよ(それぞれの固有ベクトルを行とする行列とその転置行列をかけて、単位行列になることを確認すればよい)
+\item[4-1-2] {\tt diag.c}により得られた固有ベクトルが互いに正規直交していることを確認するコードを作成し実行せよ(それぞれの固有ベクトルを行とする行列とその転置行列をかけて、単位行列になることを確認すればよい)
   \item[4-1-3] \href{https://github.com/todo-group/computer-experiments/exercise/eigenvalue_problem/power.c}{exercise/eigenvalue\_problem/power.c}は、べき乗法により最大固有ベクトルを計算するプログラムである(ただし、プログラムは未完成)。62行目に固有値を計算するコードを追加せよ。結果がEX4-1-1の最大固有値と一致するかどうか確認せよ
   \end{itemize}
 \end{frame}
@@ -751,12 +751,12 @@ $ ./diag input1.dat
 \begin{frame}[t,fragile]{EX4-2: 特異値分解}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
-  \item[4-2-1] 特異値分解のサンプルプログラム(\href{https://github.com/todo-group/computer-experiments/exercise/svd/svd.c}{exercise/svd/svd.c})をコンパイル・実行せよ。入力{\tt matrix1.dat}を用いて、結果を確認せよ
+  \item[4-2-1] 特異値分解のサンプルプログラム(\href{https://github.com/todo-group/computer-experiments/exercise/eivenvalue_problem/svd.c}{exercise/eigenvalue\_problem/svd.c})をコンパイル・実行せよ。入力{\tt matrix1.dat}を用いて、結果を確認せよ
 \begin{lstlisting}
 $ cc svd.c -o svd -llapack -lm
 $ ./svd matrix1.dat
 \end{lstlisting}
-  \item[4-2-2] 完全特異値分解を行うサンプルプログラム(\href{https://github.com/todo-group/computer-experiments/exercise/svd/full_svd.c}{exercise/svd/full\_svd.c})をコンパイル・実行せよ。{\tt svd.c}との違いを{\tt diff}コマンドを使って調べよ。
+  \item[4-2-2] 完全特異値分解を行うサンプルプログラム(\href{https://github.com/todo-group/computer-experiments/exercise/eivenvalue_problem/full_svd.c}{exercise/eivenvalue\_problem/full\_svd.c})をコンパイル・実行せよ。{\tt svd.c}との違いを{\tt diff}コマンドを使って調べよ。
   \end{itemize}
 \end{frame}
 
@@ -786,15 +786,15 @@ $ ./svd matrix1.dat
 \begin{frame}[t,fragile]{EX4-5: 行列の低ランク近似}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
-  \item[4-5-1] \href{https://github.com/todo-group/computer-experiments/exercise/svd/svd.c}{exercise/svd/svd.c}の最後では行列のランク$[{\rm min}(m,n)-1]$近似を計算している。コマンドライン引数で近似のランク数を指定できるように、また近似の誤差(フロベニウスノルム)を計算・出力するようプログラムを修正せよ。{\tt matrix2.dat}、{\tt matrix3.dat}について、近似度合いを変えながら、その出力を観察せよ
-  \item[4-5-2] \href{https://github.com/todo-group/computer-experiments/exercise/svd/svd.c}{exercise/svd/svd.c}中のLAPACKの特異値分解{\tt dgesvd}の呼び出し(54行目)では、行列の次元({\tt m}と{\tt n})、左特異ベクトル({\tt u})と右特異ベクトル({\tt vt})の順番が、もともとの{\tt dgesvd}の\href{http://www.netlib.org/lapack/explore-html/d8/d2d/dgesvd_8f.html}{ドキュメント}とは逆になっている。このプログラムが正しく動作するのはなぜか?
+  \item[4-5-1] {\tt svd.c}の最後では行列のランク$[{\rm min}(m,n)-1]$近似を計算している。コマンドライン引数で近似のランク数を指定できるように、また近似の誤差(フロベニウスノルム)を計算・出力するようプログラムを修正せよ。{\tt matrix2.dat}、{\tt matrix3.dat}について、近似度合いを変えながら、その出力を観察せよ
+  \item[4-5-2] {\tt svd.c}中のLAPACKの特異値分解{\tt dgesvd}の呼び出し(54行目)では、行列の次元({\tt m}と{\tt n})、左特異ベクトル({\tt u})と右特異ベクトル({\tt vt})の順番が、もともとの{\tt dgesvd}の\href{http://www.netlib.org/lapack/explore-html/d8/d2d/dgesvd_8f.html}{ドキュメント}とは逆になっている。このプログラムが正しく動作するのはなぜか?
   \end{itemize}
 \end{frame}
 
 \begin{frame}[t,fragile]{EX4-6: 応用課題}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
-  \item[4-6-1] \href{https://github.com/todo-group/computer-experiments/exercise/eigenvalue_problem/double_well.c}{exercise/eigenvalue\_problem/double\_well.c}では全ての変数が無次元化されている。粒子の質量、井戸の幅、障壁の幅、高さとして、(次元をもつ)物理的に妥当な値を仮定せよ。それらを無次元化すると、{\tt v}、{\tt width}の値はいくらになるか? また、それらの値から{\tt double\_well.c}により計算された固有値を、次元をもつ実際の値に換算してみよ
+  \item[4-6-1] {\tt double\_well.c}では全ての変数が無次元化されている。粒子の質量、井戸の幅、障壁の幅、高さとして、(次元をもつ)物理的に妥当な値を仮定せよ。それらを無次元化すると、{\tt v}、{\tt width}の値はいくらになるか? また、それらの値から{\tt double\_well.c}により計算された固有値を、次元をもつ実際の値に換算してみよ
   \item[4-6-2] 入力{\tt input1.txt}はFrank行列と呼ばれる行列で、全ての固有値を解析的に求めることができる。一般の次元のFrank行列の固有値がどのように求められるか調べよ。Frank行列のように固有値が解析的に計算できる密行列には他にどのようなものがあるか?
   \item[4-6-3] 画像ファイルを行列形式に変換し、SVDで圧縮してみよ。どの程度まで圧縮可能か?
   \end{itemize}

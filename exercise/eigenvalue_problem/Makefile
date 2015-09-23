@@ -1,4 +1,4 @@
-OBJ = diag power double_well
+OBJ = diag power svd full_svd double_well
 default: $(OBJ)
 
 CFLAGS = -O3

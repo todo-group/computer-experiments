@@ -6,8 +6,8 @@ default: $(PDF)
 
 .tex.dvi:
 	TEXINPUTS=.:./style//: platex -shell-escape $<
-	#TEXINPUTS=.:./style//: platex $<
-	#TEXINPUTS=.:./style//: platex $<
+	TEXINPUTS=.:./style//: platex $<
+	TEXINPUTS=.:./style//: platex $<
 .dvi.pdf:
 	TEXINPUTS=.:./style//: dvipdfmx $<
 

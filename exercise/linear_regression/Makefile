@@ -1,4 +1,4 @@
-OBJ = svd full_svd regression regression_lu
+OBJ = regression regression_lu
 default: $(OBJ)
 
 CFLAGS = -O3

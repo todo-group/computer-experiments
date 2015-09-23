@@ -332,7 +332,7 @@ $ ./lu_decomp input1.dat
 \begin{frame}[t,fragile]{EX3-2: ピボット選択、境界条件}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
-  \item[3-2-1] \href{https://github.com/todo-group/computer-experiments/exercise/linear_system/gauss.c}{exercise/linear\_system/gauss.c}では、ピボット選択を行っていないため、入力が{\tt input2.dat}の場合には正しい解が得られない。ピボット選択を行うよう{\tt gauss.c}を修正せよ
+  \item[3-2-1] {\tt gauss.c}では、ピボット選択を行っていないため、入力が{\tt input2.dat}の場合には正しい解が得られない。ピボット選択を行うよう{\tt gauss.c}を修正せよ
   \item[3-2-2] \href{https://github.com/todo-group/computer-experiments/exercise/linear_system/laplace_lu.c}{exercise/linear\_system/laplace\_lu.c}では、ディリクレ型の境界条件[$u(0,y) = \sin(\pi y)$, $u(x,0)=u(x,1)=u(1,y)=0$]のもとでのラプラス方程式の解をLU分解により求めている。境界条件を変えてみて解がどのように変化するか、Gnuplotを用いてプロットして確認せよ(Gnuplotの{\tt splot}コマンドを使う)
   \end{itemize}
 \end{frame}
