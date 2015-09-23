@@ -1,0 +1,10 @@
+*/*.aux
+*/*.dvi
+*/*.log
+*/*.nav
+*/*.out
+*/*.snm
+*/*.toc
+*/*.vrb
+lecture/*.pdf
+handbook/main.pdf
