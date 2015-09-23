@@ -1,9 +1,9 @@
-OBJ = random golden_section nelder_mead_1d nelder_mead_2d steepest_decent simulated_annealing
+OBJ = golden_section nelder_mead_1d nelder_mead_2d steepest_decent simulated_annealing
 default: $(OBJ)
 
-CPPFLAGS = -I$(BOOST_ROOT)/include
+CPPFLAGS = -I.
 CFLAGS = -O3
 LDFLAGS = -llapack -lm
 
 clean:
-	rm -rf $(OBJ)
+	rm -rf *.o $(OBJ)
