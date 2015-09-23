@@ -1,10 +1,10 @@
 \documentclass[dvipdfmx]{beamer}
 \usepackage{tutorial}
 \title{計算機実験 --- 数値計算の基礎}
-\author{藤堂眞治}
-\date{2015-09-24}
 
 \begin{document}
+
+\lstset{language={C},basicstyle=\ttfamily\scriptsize,showspaces=false,rulecolor=\color[cmyk]{0, 0.29,0.84,0}}
 
 \begin{frame}
   \titlepage
@@ -17,80 +17,78 @@
   \begin{itemize}
     %\setlength{\itemsep}{1em}
   \item 理論・実験を問わず、学部〜大学院〜で必要となる現代的かつ普遍的な計算機の素養を身につける
-    \begin{itemize}
-    \item UNIX環境に慣れる(シェル、ファイル操作、エディタ)
-    \item ネットワークの活用 (リモートログイン、バージョン管理、共同作業)
-    \item プログラムの作成(C言語、コンパイラ、プログラム実行)
-    \item 基本的な数値計算アルゴリズム・数値計算の常識を学ぶ
-    \item 科学技術文書作成に慣れる(\LaTeX, グラフ作成)
-    \item Mathematica, Pythonなどのツールの利用
-    \end{itemize}
-  \item ツールとしてないものは自分で作る (物理の伝統)
-  \item すでにあるものは積極的に再利用する (車輪の再発明をしない)
-  \item 数値計算においても再現性は重要
+  \item UNIX環境に慣れる(シェル、ファイル操作、エディタ)
+  \item ネットワークの活用 (リモートログイン、バージョン管理、共同作業)
+  \item プログラムの作成(C言語、コンパイラ、プログラム実行)
+  \item 基本的な数値計算アルゴリズム・数値計算の常識を学ぶ
+  \item 科学技術文書作成に慣れる(\LaTeX, グラフ作成)
+  \item Mathematica, Pythonなどのツールの利用
   \end{itemize}
 \end{frame}
 
-\begin{frame}[t]{講義内容}
+\begin{frame}[t]{身に付けて欲しいこと}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item ツールとしてないものは自分で作る (物理の伝統)
+  \item すでにあるものは積極的に再利用する (車輪の再発明をしない)
+  \item 数学公式と数値計算アルゴリズムは別物
+  \item 刻み幅・近似度合いを変えて何度か計算を行う
+  \item グラフ化して目で見てみる
+  \item 計算量(コスト)のスケーリング(次数)に気をつける
+  \item 記録に残す・再現性を確保する
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t]{講義・実習内容}
   \begin{enumerate}
-    \setlength{\itemsep}{1em}
-  \item UNIXの操作、ネットワーク
-  \item プログラミング: C言語、数値計算ライブラリの利用
-  \item ツール: エディタ、コンパイラ、\LaTeX、Gnuplot、バージョン管理システム、Mathematica、Python
-  \item 数値計算アルゴリズム: 数値微分、ニュートン法、数値積分、常微分方程式、連立一次方程式、対角化、特異値分解、最小二乗法、最適化手法、モンテカルロ法
-  \item その他の話題: スーパーコンピュータ、並列化、シミュレーションパッケージの利用
+    % \setlength{\itemsep}{1em}
+  \item 数値計算の基礎
+  \item 常微分方程式の解法
+  \item 連立一次方程式の解法
+  \item 行列の対角化
+  \item 線形回帰・カーネル法
+  \item モンテカルロ法
+  \item 最適化問題
+  \item スーパーコンピュータと計算物理
+  \item バージョン管理システム
   \end{enumerate}
 \end{frame}
 
-\begin{frame}[t]{講義資料}
+\begin{frame}[t]{講義資料・実習教材}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
-  \item 「計算機実験」ハンドブック (配布済)
+    %\setlength{\itemsep}{1em}
+  \item 全ての資料・教材は、GitHubからダウンロード可 \\
+    {\footnotesize \url{https://github.com/todo-group/computer-experiments/releases}}
+  \item 資料の \LaTeX ソースコードもGitHubで公開 \\
+    {\footnotesize \url{https://github.com/todo-group/computer-experiments}}
+  \item 「計算機実験」ハンドブック (handbook.pdf)
     \begin{itemize}
     \item UNIX入門
     \item C言語入門
     \item \LaTeX 入門
+    \item バージョン管理システム
     \end{itemize}
-  \item 講義資料、実習資料、追加資料、参考書
+  \item 講義資料 (lecture.zip)
     \begin{itemize}
-    \item ITC-LMSで配布・提示 \url{https://itc-lms.ecc.u-tokyo.ac.jp/lms/course/view.php?id=74564}
+    \item 講義スライド 
+    \end{itemize}
+  \item 実習教材 (exercise.zip)
+    \begin{itemize}
+    \item 実習用ソースコード
     \end{itemize}
   \end{itemize}
-\end{frame}
-
-\begin{frame}[t,fragile]{実習を始めるために最低限必要な知識}
-  \begin{itemize}
-    \setlength{\itemsep}{1em}
-  \item ハンドブック 2章 UNIX入門
-    \begin{itemize}
-    \item 2.1 UNIXのコマンド (2.1.1)
-    \item 2.2 リモートログインとファイル転送
-    \item 2.3 Emacsを使う (2.3.2) (viを使ってもよい)
-    \item 2.4 Gnuplotを使う
-    \end{itemize}
-  \item ハンドブック 3章 C言語入門
-    \begin{itemize}
-    \item 3.1 C言語の基礎知識 (3.1.1, 3.1.2, 3.1.3)
-    \item 3.2 制御文 (3.2.1, 3.2.2)
-    \item 3.6 関数 (3.6.2)
-    \end{itemize}
-  \item ハンドブック 4章 \LaTeX 入門
-    \begin{itemize}
-    \item 4.1 \LaTeX の実行
-    \end{itemize}
-  \end{itemize}    
 \end{frame}
 
 \begin{frame}[t]{質問がある場合には、、、}
   \begin{enumerate}
     %\setlength{\itemsep}{1em}
-  \item ITC-LMS の掲示板を見る
+  %\item ITC-LMS の掲示板を見る
   \item ハンドブック、講義資料を確認
+  \item まわりの人に質問してみる
   \item ネットで検索
-  \item ワークグループのメンバーに相談する
-  \item 計算機実験担当者(藤堂、諏訪、鈴木、足立、安藤) \href{mailto:computer@exa.phys.s.u-tokyo.ac.jp}{computer@exa.phys.s.u-tokyo.ac.jp} に相談
+  \item 計算機実験担当者(\href{mailto:computer@exa.phys.s.u-tokyo.ac.jp}{computer@exa.phys.s.u-tokyo.ac.jp}) に相談
   \end{enumerate}
-  質問するときに注意すべきこと
+  メールで質問するときに注意すべきこと
   \begin{itemize}
   \item (メールの)標題をきちんとつける、きちんと名乗る
   \item 実行環境を明示する
@@ -296,7 +294,7 @@
   \resizebox{.3\textwidth}{!}{\includegraphics{image/DKA.pdf}}
 \end{frame}
 
-\section{C言語における行列の取り扱い}
+\section{C言語における行列・LAPACKの利用}
 
 \begin{frame}[t,fragile]{一次元配列}
   \begin{itemize}
@@ -395,7 +393,7 @@ free(a);
   \begin{itemize}
     \setlength{\itemsep}{1em}
   \item 二次元配列の確保({\tt alloc\_dmatrix})、開放({\tt free\_dmatrix})、出力({\tt print\_dmatrix})、読み込み({\tt read\_dmatrix})を行うためのユーティリティ関数を準備
-  \item 実習用ワークステーションの{\tt /home/public/ce2015/ex3/matrix\_util.h}に置いてある
+  \item ソースコード: \href{https://github.com/todo-group/computer-experiments/blob/master/linear_system/matrix_util.h}{exercise/linear\_system/matrix\_util.h}
   \item 使用例
 \begin{lstlisting}
 #include "matrix_util.h"
@@ -408,11 +406,9 @@ free_dmatrix(mat);
   \end{itemize}
 \end{frame}
 
-\section{LAPACKライブラリ}
-
 \begin{frame}[t,fragile]{LAPACK (Linear Algebra PACKage)}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
+    %\setlength{\itemsep}{1em}
   \item 線形計算のための高品質な数値計算ライブラリ
     \begin{itemize}
     \item \url{http://www.netlib.org/lapack}
@@ -458,7 +454,7 @@ N = 10;
 LDA = 10;
 dgetrf_(&M, &N, &A[0][0], &LDA, &IPIV[0], &INFO);
 \end{lstlisting}
-完全なソースコードは、実習用ワークステーションの{\tt /home/public/ce2015/ex3/lu\_decomp.c}に置いてある
+完全なソースコード: \href{https://github.com/todo-group/computer-experiments/blob/master/linear_system/lu_decomp.c}{exercise/linear\_system/lu\_decomp.c}
   \end{itemize}
 \end{frame}
 
@@ -473,6 +469,59 @@ dgetrf_(&M, &N, &A[0][0], &LDA, &IPIV[0], &INFO);
   \item Cで作成した行列をFortranに渡すと転置されてしまう
   \item コンパイル時には{\tt -llapack}オプションを指定し、LAPACKライブラリをリンクする(ハンドブック3.1.6節)
   \end{itemize}
+\end{frame}
+
+\section{実習その1}
+
+\begin{frame}[t,fragile]{EX1-1: 実習環境の準備}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item[1-1-1] ECCS端末(iMac)を利用する場合
+    \begin{itemize}
+    \item ログイン
+    \item 「ターミナル」を開く
+    \end{itemize}
+  \item[1-1-2] MateriApps LIVE!を利用する場合
+    \begin{itemize}
+    \item MateriApps LIVE! のインストール・設定(\href{https://github.com/cmsi/MateriAppsLive/wiki/MateriAppsLive-ltx}{README.html}、\href{http://www.slideshare.net/cms_initiative/materiapps-live-52477264}{malive.pdf})
+    \item スタートメニュー⇒「Accessories」⇒「LXTerminal」
+    \end{itemize}
+  \item[1-1-3] ハンドブック 2章 UNIX入門
+    \begin{itemize}
+    \item 2.1 UNIXのコマンド (2.1.1)
+    \item 2.2 リモートログインとファイル転送
+    \item 2.3 Emacsを使う (2.3.2) (viを使ってもよい)
+    \item 2.4 Gnuplotを使う
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{EX1-2: C言語・\LaTeX の練習}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item[1-2-1] \href{https://github.com/todo-group/computer-experiments/exercise/hello/hello.c}{exercise/hello/hello.c}をCコンパイラでコンパイルし、実行
+  \item[1-2-2] ハンドブック 3章 C言語入門
+    \begin{itemize}
+    \item 3.1 C言語の基礎知識 (3.1.1, 3.1.2, 3.1.3)
+    \item 3.2 制御文 (3.2.1, 3.2.2)
+    \item 3.6 関数 (3.6.2)
+    \end{itemize}
+  \item[1-2-3] \href{https://github.com/todo-group/computer-experiments/exercise/hello/hello.tex}{exercise/hello/hello.tex}を{\tt platex}コマンドと{\tt dvipdfmx}コマンドを使ってPDFファイルに変換
+  \item[1-2-4] ハンドブック 4章 \LaTeX 入門
+    \begin{itemize}
+    \item 4.1 \LaTeX の実行
+    \end{itemize}
+  \item[1-2-5] Gnuplotを使い、$\sin$関数をプロットし、PostScript形式でファイル(*.eps)に出力(ハンドブック2.4節)。作成した図のファイルを \LaTeX に張り込み、PDFファイルを作成(ハンドブック4.8節)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{EX1-3: フィボナッチ数列・数値微分・ニュートン法}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item[1-3-1] フィボナッチ数列($a_{n+2}=a_{n+1}+a_n$ ($n \ge 0$), $a_0=0$, $a_1=1$)を計算するプログラムを作成し、$a_{20}$, $a_{30}$, $a_{40}$, $a_{50}$, $a_{60}$を求めよ。桁あふれに注意すること。結果は、\LaTeX の{\tt tabular}環境を使って表にまとめよ。
+  \item[1-3-2] $f(x)=\sin x$について、$x=0.3\pi$における$f'(x)$の値を数値微分により計算するプログラムを作成せよ。数値微分の刻みを$h=1,1/2,1/4,1/8,\cdots$と減少させていった時、誤差がどのように振る舞うか図示せよ。
+  \item[1-3-3] $\sqrt[3]{x}$を求めるNewtonの反復式を書け。これを用いて、$\sqrt[3]{10}$を求めるプログラムを作成せよ。反復にしたがって、値がどのように真値に近づいていくか図示せよ。
+  \end{itemize}    
 \end{frame}
 
 \end{document}
