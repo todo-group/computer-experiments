@@ -1,9 +1,6 @@
 \documentclass[dvipdfmx]{beamer}
 \usepackage{tutorial}
-\usepackage{bm}
-\title{計算機実験 --- スーパーコンピュータと計算物理}
-\author{藤堂眞治}
-\date{2015-09-22}
+\title{計算機実験 --- \\ スーパーコンピュータと計算物理}
 
 \begin{document}
 
@@ -88,6 +85,20 @@
   \item $X$を限りなく零にしないと高並列ではすぐに性能が頭打ちに
   \end{itemize}
   \vspace*{-0em}\hspace*{1em}\resizebox{0.5\textwidth}{!}{\includegraphics{image/Amdahl_law2.pdf}}
+\end{frame}
+
+\section{実習その8}
+
+\begin{frame}[t,fragile]{EX8-1: 並列プログラムのコンパイルと実行}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item[8-1-1] \href{https://github.com/todo-group/computer-experiments/exercise/hpc/pi_mpi.c}{exercise/hpc/pi\_mpi.c}は、長方形近似により$\pi$の計算を行う並列プログラムである。コンパイルして実行せよ
+\begin{lstlisting}
+$ mpicc pi_mpi.c -o pi_mpi -lm
+$ mpirun -np 4 ./pi_mpi
+\end{lstlisting}
+  \item[8-1-2] {\tt pi\_mpi.c}のソースコードを解析せよ。{\tt nsteps}や並列数(上の例では4)を変えて、実行時間を測定せよ
+  \end{itemize}
 \end{frame}
 
 \end{document}

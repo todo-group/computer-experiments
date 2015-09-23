@@ -1,9 +1,6 @@
 \documentclass[dvipdfmx]{beamer}
 \usepackage{tutorial}
-\usepackage{bm}
 \title{計算機実験 --- バージョン管理システム}
-\author{藤堂眞治}
-\date{2015-04-15/22}
 
 \begin{document}
 
@@ -14,7 +11,7 @@
   \tableofcontents
 \end{frame}
 
-\section{バージョン管理システム}
+\section{バージョン管理システムとは?}
 
 \begin{frame}[t,fragile]{バージョン管理システムの必要性}
   \begin{itemize}
@@ -82,6 +79,8 @@
   {\footnotesize (渡辺2013)}
 \end{frame}
 
+\section{diff と patch}
+
 \begin{frame}[t,fragile]{diff と patch}
   \begin{itemize}
     \setlength{\itemsep}{1em}
@@ -107,14 +106,13 @@
     %\setlength{\itemsep}{1em}
   \item 単一ファイルの例
 \begin{lstlisting}
-$ cp /home/public/ce2015/ex2/prologue.txt prologue.txt
 $ cp prologue.txt prologue-orig.txt
 $ vi prologue.txt # prologue.txtを編集
 
 $ diff -u prologue-orig.txt prologue.txt > prologue.diff
 $ less prologue.diff # prologue.diffの中身を見てみる
 
-$ cp /home/public/ce2015/ex2/prologue.txt prologue.txt
+$ mv prologue-orig.txt prologue.txt
 $ patch < prologue.diff
 $ less prologue.txt # prologue.txtの中身を確認
 \end{lstlisting}
@@ -127,22 +125,23 @@ $ less prologue.txt # prologue.txtの中身を確認
     %\setlength{\itemsep}{1em}
   \item ディレクトリ全体を扱う例
 \begin{lstlisting}
-$ cp -r /home/public/ce2015/ex2 shake
-$ cp -r shake shake.orig
-# shakeの中のファイルを編集(ファイルの削除や追加も可)
+$ cp -r vcs vcs.orig
+# vcsの中のファイルを編集(ファイルの削除や追加も可)
 
-$ diff -urN shake.orig shake > shake.diff
-$ less shake.diff # shake.diffの中身を見てみる
+$ diff -urN vcs.orig vcs > vcs.diff
+$ less vcs.diff # vcs.diffの中身を見てみる
 
-$ rm -rf shake
-$ cp -r /home/public/ce2015/ex2 shake
-$ patch -p0 < shake.diff
-# shakeの中身を確認
+$ rm -rf vcs
+$ mv vcs.orig vcs
+$ patch -p0 < vcs.diff
+# vcsの中身を確認
 \end{lstlisting}
   \item diff と patch で差分の管理は可能になるが, 履歴は別に管理してお
     かなければならない
   \end{itemize}
 \end{frame}
+
+\section{Subversion入門}
 
 \begin{frame}
   \frametitle{主なバージョン管理システム}
@@ -224,9 +223,48 @@ $ patch -p0 < shake.diff
   \end{itemize}
 \end{frame}
 
+\begin{frame}[t,fragile]{注意事項}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 大きなバイナリファイル(pdf, exe, doc, tar.gz, zipなど)はなるべくsubversionで管理しない
+    \begin{itemize}
+      \item バイナリファイルはうまく差分が扱えない (マージできない)
+    \end{itemize}
+  \item チェックアウトしたディレクトリ「以外」でのファイルの編集は危い
+    \begin{itemize}
+      \item チェックアウト ⇒ ファイルをコピー ⇒ コピーしたファイルを変更 ⇒ チェックアウトしたディレクトリで svn update ⇒ 変更したファイルをチェックアウトしたディレクトリに戻す ⇒ svn commit ⇒ {\color{red}他の人の変更点を取り消してしまう!}
+    \end{itemize}
+  \item チェックアウトしたディレクトリには、管理用ディレクトリ'.svn'ができている
+    \begin{itemize}
+      \item チェックアウトしたオリジナルバージョンが保存されている
+    \end{itemize}
+  \item svn stat, svn diff はネットワークにつながってなくても使用可
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{バージョン管理システムの欠点(面倒な点)}
+  \begin{itemize}
+  \item 修正前に最新の状態にアップデートしなければならない \\
+   ⇒ 慣れると習慣になります
+  \item 全ての修正を「コミット」しなければならない \\
+    ⇒ 慣れると習慣になります
+  \item 衝突(コンフリクト)が発生した時に対処しなければならない \\
+    ⇒ 衝突に気づかずに修正してしまうほうが怖いです
+  \item サーバのセットアップが面倒くさい \\
+    ⇒ まずはホスティングサービス(github, sourceforge, bitbucket)を試してみましょう \\
+    ⇒ まわりにいるプロ(?)に相談しましょう \\[.5em]
+  \item バージョン管理システムを使うと作業効率が倍以上になる \\
+    ⇒ {\color{red} 使わないと人生を半分損する}
+  \end{itemize}
+\end{frame}
+
+\section{実習 Subversion}
+
 \begin{frame}[t,fragile]{実習: Subversion (1)}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
+  \item 「ハンドブック 付録A バージョン管理システム」を読みながら以下の実習を行う
   \item リポジトリの作成 (photonにログインして作業)
 
     {\tt \$ \underline{svnadmin create \$HOME/svnroot}}
@@ -332,42 +370,6 @@ $ patch -p0 < shake.diff
       \item svn log file
       \item svn annotate file {\ \# それぞれの行を誰がいつ変更したか}
     \end{itemize}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[t,fragile]{注意事項}
-  \begin{itemize}
-    %\setlength{\itemsep}{1em}
-  \item 大きなバイナリファイル(pdf, exe, doc, tar.gz, zipなど)はなるべくsubversionで管理しない
-    \begin{itemize}
-      \item バイナリファイルはうまく差分が扱えない (マージできない)
-    \end{itemize}
-  \item チェックアウトしたディレクトリ「以外」でのファイルの編集は危い
-    \begin{itemize}
-      \item チェックアウト ⇒ ファイルをコピー ⇒ コピーしたファイルを変更 ⇒ チェックアウトしたディレクトリで svn update ⇒ 変更したファイルをチェックアウトしたディレクトリに戻す ⇒ svn commit ⇒ {\color{red}他の人の変更点を取り消してしまう!}
-    \end{itemize}
-  \item チェックアウトしたディレクトリには、管理用ディレクトリ'.svn'ができている
-    \begin{itemize}
-      \item チェックアウトしたオリジナルバージョンが保存されている
-    \end{itemize}
-  \item svn stat, svn diff はネットワークにつながってなくても使用可
-  \end{itemize}
-\end{frame}
-
-\begin{frame}
-  \frametitle{バージョン管理システムの欠点(面倒な点)}
-  \begin{itemize}
-  \item 修正前に最新の状態にアップデートしなければならない \\
-   ⇒ 慣れると習慣になります
-  \item 全ての修正を「コミット」しなければならない \\
-    ⇒ 慣れると習慣になります
-  \item 衝突(コンフリクト)が発生した時に対処しなければならない \\
-    ⇒ 衝突に気づかずに修正してしまうほうが怖いです
-  \item サーバのセットアップが面倒くさい \\
-    ⇒ まずはホスティングサービス(github, sourceforge, bitbucket)を試してみましょう \\
-    ⇒ まわりにいるプロ(?)に相談しましょう \\[.5em]
-  \item バージョン管理システムを使うと作業効率が倍以上になる \\
-    ⇒ {\color{red} 使わないと人生を半分損する}
   \end{itemize}
 \end{frame}
 
