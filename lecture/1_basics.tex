@@ -393,7 +393,7 @@ free(a);
   \begin{itemize}
     \setlength{\itemsep}{1em}
   \item 二次元配列の確保({\tt alloc\_dmatrix})、開放({\tt free\_dmatrix})、出力({\tt print\_dmatrix})、読み込み({\tt read\_dmatrix})を行うためのユーティリティ関数を準備
-  \item ソースコード: \href{https://github.com/todo-group/computer-experiments/blob/master/linear_system/matrix_util.h}{exercise/linear\_system/matrix\_util.h}
+  \item ソースコード: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/linear_system/matrix_util.h}{exercise/linear\_system/matrix\_util.h}
   \item 使用例
 \begin{lstlisting}
 #include "matrix_util.h"
@@ -454,7 +454,7 @@ N = 10;
 LDA = 10;
 dgetrf_(&M, &N, &A[0][0], &LDA, &IPIV[0], &INFO);
 \end{lstlisting}
-完全なソースコード: \href{https://github.com/todo-group/computer-experiments/blob/master/linear_system/lu_decomp.c}{exercise/linear\_system/lu\_decomp.c}
+完全なソースコード: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/linear_system/lu_decomp.c}{exercise/linear\_system/lu\_decomp.c}
   \end{itemize}
 \end{frame}
 
@@ -499,14 +499,14 @@ dgetrf_(&M, &N, &A[0][0], &LDA, &IPIV[0], &INFO);
 \begin{frame}[t,fragile]{EX1-2: C言語と\LaTeX の練習}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
-  \item[1-2-1] \href{https://github.com/todo-group/computer-experiments/exercise/hello/hello.c}{exercise/hello/hello.c}をCコンパイラでコンパイルし、実行
+  \item[1-2-1] \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/basics/hello.c}{exercise/basics/hello.c}をCコンパイラでコンパイルし、実行
   \item[1-2-2] ハンドブック 3章 C言語入門
     \begin{itemize}
     \item 3.1 C言語の基礎知識 (3.1.1, 3.1.2, 3.1.3)
     \item 3.2 制御文 (3.2.1, 3.2.2)
     \item 3.6 関数 (3.6.2)
     \end{itemize}
-  \item[1-2-3] \href{https://github.com/todo-group/computer-experiments/exercise/hello/hello.tex}{exercise/hello/hello.tex}を{\tt platex}コマンドと{\tt dvipdfmx}コマンドを使ってPDFファイルに変換
+  \item[1-2-3] \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/basics/hello.tex}{exercise/basics/hello.tex}を{\tt platex}コマンドと{\tt dvipdfmx}コマンドを使ってPDFファイルに変換
   \item[1-2-4] ハンドブック 4章 \LaTeX 入門
     \begin{itemize}
     \item 4.1 \LaTeX の実行
@@ -536,7 +536,7 @@ dgetrf_(&M, &N, &A[0][0], &LDA, &IPIV[0], &INFO);
   \begin{itemize}
     \setlength{\itemsep}{1em}
   \item[1-5-1] \verb+double m[10][10];+ で宣言されたCの二次元配列について、\verb^*(m+2)[3]^ と \verb^(*(m+2))[3]^ はそれぞれどの要素の値を返すか? なぜこの2つは異なる要素の値を返すのか?
-  \item[1-5-2] C言語におけるポインタの振る舞いをテストするプログラム(\href{https://github.com/todo-group/computer-experiments/exercise/linear_system/pointer.c}{exercise/linear\_system/pointer.c})のソースコードを見て、どのような出力が生成されるか予想せよ。実際にコンパイル・実行して予想を確かめてみよ
+  \item[1-5-2] C言語におけるポインタの振る舞いをテストするプログラム(\href{https://github.com/todo-group/computer-experiments/blob/master/exercise/linear_system/pointer.c}{exercise/linear\_system/pointer.c})のソースコードを見て、どのような出力が生成されるか予想せよ。実際にコンパイル・実行して予想を確かめてみよ
   \end{itemize}
 \end{frame}
 

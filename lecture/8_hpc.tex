@@ -92,7 +92,7 @@
 \begin{frame}[t,fragile]{EX8-1: 並列プログラムのコンパイルと実行}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
-  \item[8-1-1] \href{https://github.com/todo-group/computer-experiments/exercise/hpc/pi_mpi.c}{exercise/hpc/pi\_mpi.c}は、長方形近似により$\pi$の計算を行う並列プログラムである。コンパイルして実行せよ
+  \item[8-1-1] \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/hpc/pi_mpi.c}{exercise/hpc/pi\_mpi.c}は、長方形近似により$\pi$の計算を行う並列プログラムである。コンパイルして実行せよ
 \begin{lstlisting}
 $ mpicc pi_mpi.c -o pi_mpi -lm
 $ mpirun -np 4 ./pi_mpi

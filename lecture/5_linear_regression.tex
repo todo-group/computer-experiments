@@ -239,7 +239,7 @@ k(x) = \begin{pmatrix} k(x_1,x) \\ k(x_2,x) \\ \vdots \\ k(x_N,x) \end{pmatrix}
 \begin{frame}[t,fragile]{EX5-1: 最小二乗フィッティング}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
-  \item[5-1-1] \href{https://github.com/todo-group/computer-experiments/exercise/linear_regression/regression.c}{exercise/linear\_regression/regression.c}は数値データを読み込み、一次式で最小二乗フィッテイングを行うプログラムである。実行すると最終行に一次式の係数が出力される。
+  \item[5-1-1] \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/linear_regression/regression.c}{exercise/linear\_regression/regression.c}は数値データを読み込み、一次式で最小二乗フィッテイングを行うプログラムである。実行すると最終行に一次式の係数が出力される。
 \begin{lstlisting}
 $ ./regression measurement1.dat
 \end{lstlisting}
@@ -257,7 +257,7 @@ $ ./regression measurement1.dat
 \begin{frame}[t,fragile]{EX5-3: 応用課題}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
-  \item[5-3-1] \href{https://github.com/todo-group/computer-experiments/exercise/linear_regression/regression_lu.c}{\tt exercise/linear\_regression/regression\_lu.c}はLU分解により最小二乗法の解を求めるプログラムである。{\tt regression.c}と同じ結果が出力されることを確認せよ。基底関数の中に互いに線形独立でないものがある場合には、{\tt regression\_lu.c}はエラーとなることを確認し、その理由について考察せよ。一方で、{\tt regression.c}は動作するが、どのような解を与えるか?
+  \item[5-3-1] \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/linear_regression/regression_lu.c}{\tt exercise/linear\_regression/regression\_lu.c}はLU分解により最小二乗法の解を求めるプログラムである。{\tt regression.c}と同じ結果が出力されることを確認せよ。基底関数の中に互いに線形独立でないものがある場合には、{\tt regression\_lu.c}はエラーとなることを確認し、その理由について考察せよ。一方で、{\tt regression.c}は動作するが、どのような解を与えるか?
   \item[5-3-2] {\tt regression.c}、{\tt regression\_lu.c}では、測定量の誤差の値は使っていない。残差を誤差で重み付けするようにプログラムを改良せよ。また、フィッティング結果(係数)の誤差はどのようにすれば見積もることができるか?
   \item [5-3-3] 物理学実験で得られたデータをフィッティングしてみよう。フィッティング関数が係数に関して非線形である場合は、どのように解を求めればよいか?
   \end{itemize}

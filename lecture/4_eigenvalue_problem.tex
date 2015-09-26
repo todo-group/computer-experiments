@@ -738,32 +738,32 @@ subroutine dgesvd(character JOBU, character JOBVT,
 \begin{frame}[t,fragile]{EX4-1: ハウスホルダー法とべき乗法}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
-  \item[4-1-1] ハウスホルダー法による対角化のサンプルプログラム(\href{https://github.com/todo-group/computer-experiments/exercise/eigenvalue_problem/diag.c}{exercise/eigenvalue\_problem/diag.c})をコンパイル・実行せよ
+  \item[4-1-1] ハウスホルダー法による対角化のサンプルプログラム(\href{https://github.com/todo-group/computer-experiments/blob/master/exercise/eigenvalue_problem/diag.c}{exercise/eigenvalue\_problem/diag.c})をコンパイル・実行せよ
 \begin{lstlisting}
 $ cc diag.c -o diag
 $ ./diag input1.dat
 \end{lstlisting}
 \item[4-1-2] {\tt diag.c}により得られた固有ベクトルが互いに正規直交していることを確認するコードを作成し実行せよ(それぞれの固有ベクトルを行とする行列とその転置行列をかけて、単位行列になることを確認すればよい)
-  \item[4-1-3] \href{https://github.com/todo-group/computer-experiments/exercise/eigenvalue_problem/power.c}{exercise/eigenvalue\_problem/power.c}は、べき乗法により最大固有ベクトルを計算するプログラムである(ただし、プログラムは未完成)。62行目に固有値を計算するコードを追加せよ。結果がEX4-1-1の最大固有値と一致するかどうか確認せよ
+  \item[4-1-3] \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/eigenvalue_problem/power.c}{exercise/eigenvalue\_problem/power.c}は、べき乗法により最大固有ベクトルを計算するプログラムである(ただし、プログラムは未完成)。62行目に固有値を計算するコードを追加せよ。結果がEX4-1-1の最大固有値と一致するかどうか確認せよ
   \end{itemize}
 \end{frame}
 
 \begin{frame}[t,fragile]{EX4-2: 特異値分解}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
-  \item[4-2-1] 特異値分解のサンプルプログラム(\href{https://github.com/todo-group/computer-experiments/exercise/eivenvalue_problem/svd.c}{exercise/eigenvalue\_problem/svd.c})をコンパイル・実行せよ。入力{\tt matrix1.dat}を用いて、結果を確認せよ
+  \item[4-2-1] 特異値分解のサンプルプログラム(\href{https://github.com/todo-group/computer-experiments/blob/master/exercise/eivenvalue_problem/svd.c}{exercise/eigenvalue\_problem/svd.c})をコンパイル・実行せよ。入力{\tt matrix1.dat}を用いて、結果を確認せよ
 \begin{lstlisting}
 $ cc svd.c -o svd -llapack -lm
 $ ./svd matrix1.dat
 \end{lstlisting}
-  \item[4-2-2] 完全特異値分解を行うサンプルプログラム(\href{https://github.com/todo-group/computer-experiments/exercise/eivenvalue_problem/full_svd.c}{exercise/eivenvalue\_problem/full\_svd.c})をコンパイル・実行せよ。{\tt svd.c}との違いを{\tt diff}コマンドを使って調べよ。
+  \item[4-2-2] 完全特異値分解を行うサンプルプログラム(\href{https://github.com/todo-group/computer-experiments/blob/master/exercise/eivenvalue_problem/full_svd.c}{exercise/eivenvalue\_problem/full\_svd.c})をコンパイル・実行せよ。{\tt svd.c}との違いを{\tt diff}コマンドを使って調べよ。
   \end{itemize}
 \end{frame}
 
 \begin{frame}[t,fragile]{EX4-3: 二重井戸ポテンシャル中の粒子}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
-  \item[4-3-1] \href{https://github.com/todo-group/computer-experiments/exercise/eigenvalue_problem/double_well.c}{exercise/eigenvalue\_problem/double\_well.c}は、対角化により、有限の障壁で隔てられた二重井戸ポテンシャル中の粒子
+  \item[4-3-1] \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/eigenvalue_problem/double_well.c}{exercise/eigenvalue\_problem/double\_well.c}は、対角化により、有限の障壁で隔てられた二重井戸ポテンシャル中の粒子
     \begin{equation*}
       V(x) = \begin{cases}
         \infty & x < 0, \ x > 1 \\

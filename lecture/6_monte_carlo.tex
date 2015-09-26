@@ -436,7 +436,7 @@
   \item 採択確率(acceptance probability)は、$\frac{e^{-\beta V(x')}}{e^{-\beta V(x)}+e^{-\beta V(x')}}$でもよい
   \item コード例:
 
-    {\tiny \url{https://github.com/todo-group/computer-experiments/exercise/monte_carlo/harmonic.c}}
+    {\tiny \url{https://github.com/todo-group/computer-experiments/blob/master/exercise/monte_carlo/harmonic.c}}
   \end{itemize}
 \end{frame}
 
@@ -502,7 +502,7 @@
 \begin{frame}[t,fragile]{EX6-1: 乱数の生成}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
-  \item[6-1-1] \href{https://github.com/todo-group/computer-experiments/exercise/monte_carlo/random.c}{exercise/monte\_carlo/random.c}は、Mersenne-Twister乱数発生器(\href{https://github.com/todo-group/computer-experiments/exercise/monte_carlo/mersenne_twister.c}{exercise/monte\_carlo/mersenne\_twister.h})により、$(0,1)$の範囲で一様分布する実数乱数を生成するプログラムである。コマンドライン引数により乱数の種(seed)を指定できるようにプログラムを修正せよ。種を変えて何度か乱数を生成し、その時系列を比較してみよ
+  \item[6-1-1] \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/monte_carlo/random.c}{exercise/monte\_carlo/random.c}は、Mersenne-Twister乱数発生器(\href{https://github.com/todo-group/computer-experiments/blob/master/exercise/monte_carlo/mersenne_twister.c}{exercise/monte\_carlo/mersenne\_twister.h})により、$(0,1)$の範囲で一様分布する実数乱数を生成するプログラムである。コマンドライン引数により乱数の種(seed)を指定できるようにプログラムを修正せよ。種を変えて何度か乱数を生成し、その時系列を比較してみよ
   \item[6-1-2] $X$を$(0,1)$で一様分布する(実数)確率変数とする。このとき$X^2$, $1/(X+1)$, $\log X$のそれぞれの期待値を(解析的に)求めよ。また、実際に乱数を生成させて期待値を計算し、解析的な結果と比較せよ
   \end{itemize}
 \end{frame}
