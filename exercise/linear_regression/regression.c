@@ -25,9 +25,6 @@ double f(int i, double x) {
   return 0;
 }
 
-int imin(int x, int y) { return (x < y) ? x : y; }
-int imax(int x, int y) { return (x > y) ? x : y; }
-
 void read_data(FILE *fp, int *n, double *x, double *y, double *yerror) {
   *n = 0;
   double xin, yin, rin;
