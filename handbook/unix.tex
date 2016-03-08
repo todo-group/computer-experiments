@@ -521,7 +521,7 @@ emacs.doc   temp.out$\ast$
 \begin{commandline2}
 \prompt \underline{slogin -X remote.phys.s.u-tokyo.ac.jp}
 \end{commandline2} \noindent
-と入力する\footnote{{\tt -X}オプションはリモートマシン上で実行するEmacsなどのウィンドウを手元のマシンの画面で開くためのもの(X11 forwarding)である。}。現在ログインしているマシン(ログイン元)と接続しようとしているマシン(ログイン先)のアカウント名が異なるときは、
+と入力する\footnote{{\tt -X}オプションはリモートマシン上で実行するEmacs、gnuplot、evinceなどのウィンドウを手元のマシンの画面で開くためのもの(X11 forwarding)である。}。現在ログインしているマシン(ログイン元)と接続しようとしているマシン(ログイン先)のアカウント名が異なるときは、
 \begin{commandline2}
 \prompt \underline{ssh -X remote.phys.s.u-tokyo.ac.jp -l {\it username}}
 \end{commandline2} \noindent
@@ -588,12 +588,7 @@ Emacsのチュートリアル自体も、
 %本当は {\bf help-with-tutorial-for-mule}というコマンドなのですが、
 %いちいちこの長いコマンドを打たなくて済むように、
 \ctrl{h} \ovalbox{T} に割り当てられている。\ctrl{h} \ovalbox{T} を押すときは、まず\ctrl{h}を押してコントロールキーを離してから T を押す。ここで T は大文字なので \ovalbox{Shift} キーと同時に押すことを忘れないこと。また、本来のコマンド名 \esc{x} {\tt help-with-tutorial} と打ってももちろんかまわない。以下、キーバインドの後にカッコ中に太字で書いてあるのがコマンドで、すべてのコマンドは \esc{x} \underline{コマンド名} と打つことでも、実行が可能である。
-
-チュートリあるを開始すると、画面の下で {\tt Language:} と聞いて来るので、
-\begin{commandline2}
-Language: \underline{Japanese}
-\end{commandline2} \noindent
-と入力する。このチュートリアルは基本的な事柄を網羅しているので、載っているキー定義を覚えてしまえば相当 Emacs が使いやすくなるはずである。
+このチュートリアルは基本的な事柄を網羅しているので、載っているキー定義を覚えてしまえば相当 Emacs が使いやすくなるはずである。
 
 Emacs を使っていて何か困ったと思ったときは、まず \ctrl{g} ({\bf keyboard-quit})
 を押してみよう。それでもだめなら \ctrl{x} \ctrl{c} ({\bf save-buffers-kill-emacs})で Emacs から抜け出ればよい。
