@@ -1,4 +1,6 @@
-PDF = 1_basics.pdf 2_ode.pdf 3_linear_system.pdf 4_eigenvalue_problem.pdf 5_linear_regression.pdf 6_monte_carlo.pdf 7_optimization.pdf 8_hpc.pdf 9_vcs.pdf
+PDF = lecture-1.pdf
+
+# PDF = 1_basics.pdf 2_ode.pdf 3_linear_system.pdf 4_eigenvalue_problem.pdf 5_linear_regression.pdf 6_monte_carlo.pdf 7_optimization.pdf 8_hpc.pdf 9_vcs.pdf
 
 .SUFFIXES: .pdf .dvi .tex
 

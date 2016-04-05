@@ -2,7 +2,7 @@
 
 \usepackage{amsmath}
 \usepackage{graphics}
-\usepackage{url}
+\usepackage{hyperref}
 
 \setlength{\oddsidemargin}{-0.7cm}
 \setlength{\topmargin}{-1.5cm}
@@ -19,12 +19,19 @@
 \noindent
 \begin{itemize}
 \item 講義のページ: \verb+http://exa.phys.s.u-tokyo.ac.jp/ja/lectures/2016S-computer+
+\item Mac, Windows上で動作する仮想UNIX環境 MateriApps LIVE! のUSBメモリを配布する。
+  \begin{itemize}
+  \item USBメモリ貸出簿に名前を記入すること。(初回の出席の代わりとする)
+  \item インストール方法はUSBメモリ内の\href{https://github.com/cmsi/MateriAppsLive/wiki/MateriAppsLive-ltx}{README.html}、\href{https://github.com/cmsi/MateriAppsLive-setup/blob/master/ova/setup.pdf}{setup.pdf}を参照のこと
+  \item USBメモリは4月末を目処に返却すること
+  \end{itemize}
+
 \item 準備練習
   \begin{enumerate}
-  \item ECCS端末(iMac)へログイン
+  \item ECCS端末(iMac)へログイン。ターミナルを開く
   \item iMac上でSSHの公開鍵と秘密鍵のペアを作成する
     \begin{quote} \tt
-      \$ \underline{ssh-keygen} \\
+      \$ \underline{ssh-keygen -t rsa} \\
       Generating public/private rsa key pair.\\
       Enter file in which to save the key (/xxx/.ssh/id\_rsa): \underline{(returnを入力)}\\
       Enter passphrase (empty for no passphrase): \underline{(パスフレーズを入力)}\\
@@ -34,10 +41,10 @@
     
     {\bf ここで入力する「パスフレーズ」は、ECCSの「パスワード」とは別のものであることに注意すること。「パスフレーズ」は作成した公開鍵を取り出すために自分で決める文字列であり、「パスワード」とは異なるものを選ぶべきである。}
 
-    「パスフレーズ」は忘れずに覚えておくこと。
+    {\bf また、「パスフレーズ」は忘れずに覚えておくこと。}
   \item 2.で作成した「公開鍵」を computer@exa.phys.s.u-tokyo.ac.jp あてにメールに添付して送付せよ。({\bf 間違って「秘密鍵」を送らないこと。}) メールはECCSのアカウントから送ること。その際、タイトル(サブジェクト)は「計算機実験 SSH公開鍵」、また本文中に学籍番号と氏名を明記すること。締切は「{\bf 4/8(金)17:00}」とする。
   \item エディタを使って、ハンドブック例3.1.1のファイルを作成する。Cコンパイラでコンパイルし、実行(ハンドブック3.1.1節)。
-  \item ハンドブック3.1.1〜3.1.3節, 3.2.1〜3.2.2節の例題を試す
+  \item ハンドブック3.1.1〜3.1.3節, 3.2.1〜3.2.2節の例題を試す。
   \end{enumerate}
 \item 基本課題
   \begin{enumerate}
