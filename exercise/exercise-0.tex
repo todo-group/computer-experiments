@@ -1,0 +1,53 @@
+\documentclass[11pt]{jarticle}
+
+\usepackage{amsmath}
+\usepackage{graphics}
+\usepackage{url}
+
+\setlength{\oddsidemargin}{-0.7cm}
+\setlength{\topmargin}{-1.5cm}
+\setlength{\textwidth}{16.5cm}
+\setlength{\textheight}{26cm}
+\pagestyle{empty}
+
+\begin{document}
+
+\noindent
+{\bf\large 「計算機実験」実習課題(EX0)}
+\\[-0.5em]
+
+\noindent
+\begin{itemize}
+\item 講義のページ: \verb+http://exa.phys.s.u-tokyo.ac.jp/ja/lectures/2016S-computer+
+\item 準備練習
+  \begin{enumerate}
+  \item ECCS端末(iMac)へログイン
+  \item iMac上でSSHの公開鍵と秘密鍵のペアを作成する
+    \begin{quote} \tt
+      \$ \underline{ssh-keygen} \\
+      Generating public/private rsa key pair.\\
+      Enter file in which to save the key (/xxx/.ssh/id\_rsa): \underline{(returnを入力)}\\
+      Enter passphrase (empty for no passphrase): \underline{(パスフレーズを入力)}\\
+      Enter same passphrase again: \underline{(パスフレーズを再度入力)}
+    \end{quote}
+    秘密鍵が \tt{\$HOME/.ssh/id\_rsa} に、公開鍵が \tt{\$HOME/.ssh/id\_rsa.pub} に作成される。
+    
+    {\bf ここで入力する「パスフレーズ」は、ECCSの「パスワード」とは別のものであることに注意すること。「パスフレーズ」は作成した公開鍵を取り出すために自分で決める文字列であり、「パスワード」とは異なるものを選ぶべきである。}
+
+    「パスフレーズ」は忘れずに覚えておくこと。
+  \item 2.で作成した「公開鍵」を computer@exa.phys.s.u-tokyo.ac.jp あてにメールに添付して送付せよ。({\bf 間違って「秘密鍵」を送らないこと。}) メールはECCSのアカウントから送ること。その際、タイトル(サブジェクト)は「計算機実験 SSH公開鍵」、また本文中に学籍番号と氏名を明記すること。締切は「{\bf 4/8(金)17:00}」とする。
+  \item エディタを使って、ハンドブック例3.1.1のファイルを作成する。Cコンパイラでコンパイルし、実行(ハンドブック3.1.1節)。
+  \item ハンドブック3.1.1〜3.1.3節, 3.2.1〜3.2.2節の例題を試す
+  \end{enumerate}
+\item 基本課題
+  \begin{enumerate}
+  \item フィボナッチ数列($a_{n+2}=a_{n+1}+a_n$ ($n \ge 0$), $a_0=0$, $a_1=1$)を計算するプログラムを作成し、$a_{20}$, $a_{30}$, $a_{40}$, $a_{50}$, $a_{60}$を求めよ。桁あふれに注意すること。結果は、\LaTeX の{\tt tabular}環境を使って表にまとめよ。
+  \item エディタを使って、ハンドブック例4.1.1のファイルを作成する。{\tt platex}コマンドと{\tt dvipdfmx}コマンドを用いてPDFファイルを作成(ハンドブック4.1節)。
+  \end{enumerate}
+\item 追加課題 (自宅で)
+  \begin{enumerate}
+  \item 配布した MateriApps LIVE! USB メモリの中の {\tt setup.pdf} にしたがい、自分の PC に VirtualBox と MateriApps LIVE! をインストールせよ。MateriApps LIVE! の中で準備練習4〜5、基本課題1〜2を行え。
+  \end{enumerate}
+\end{itemize}
+
+\end{document}
