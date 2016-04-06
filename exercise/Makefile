@@ -1,4 +1,4 @@
-PDF: exercise-0.pdf
+PDF = exercise-0.pdf
 
 .SUFFIXES: .pdf .dvi .tex
 
