@@ -1,0 +1,34 @@
+\section{ニュートン法}
+
+\begin{frame}[t,fragile]{ニュートン法}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 反復法により方程式$f(x)=0$の解を求める
+  \item 真の解を$x_0$、適当な解の候補を$x'=x_0+\epsilon$とすると
+    \[
+    0 = f(x_0) = f(x_0+\epsilon-\epsilon) = f(x') - \epsilon f'(x') + O(\epsilon^2)
+    \]
+  \item 次の解の候補 (反復法、逐次近似法)
+    \[
+    x'' = x'-\epsilon \approx x' - \frac{f(x')}{f'(x')}
+    \]
+  \item 複素変数の複素関数や多変数の場合にも自然に拡張可
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{ニュートン法の収束}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item $x'$が$x_0$に十分近い時
+    \begin{align*}
+      f(x') &\approx (x'-x_0) f'(x_0) + \frac{(x' - x_0)^2}{2} f''(x_0) \\
+      f'(x') &\approx f'(x_0) + (x' - x_0) f''(x_0)
+    \end{align*}
+  \item ニュートン法で一回反復すると
+    \begin{align*}
+      x'' =  x' - \frac{f(x')}{f'(x')} &\approx x' - (x'-x_0)(1-\frac{(x'-x_0)}{2}\frac{f''}{f'}) \\
+      (x''-x_0) &\approx \frac{f''}{f'} (x' - x_0)^2
+    \end{align*}
+    \item 一回の反復で誤差が2乗で減る(正しい桁数が倍に増える) ⇒ 二次収束
+  \end{itemize}
+\end{frame}

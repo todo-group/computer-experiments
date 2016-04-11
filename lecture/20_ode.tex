@@ -1,0 +1,206 @@
+\section{常微分方程式の初期値問題}
+
+\begin{frame}[t,fragile]{準備: 微分方程式の書き換え}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 2階の常微分方程式の一般形
+    \[
+    \frac{d^2y}{dx^2} + p(x)\frac{dy}{dx} + q(x)y = r(x)
+    \]
+  \item $y_1 \equiv y$, $y_2 \equiv \frac{dy}{dx}$とおくと
+    \[
+    \left\{
+    \begin{array}{ccl}
+      \frac{dy_1}{dx} & = & y_2 \\
+      \frac{dy_2}{dx} & = & r(x) - p(x) y_2 - q(x) y_1
+    \end{array}
+    \right.
+    \]
+  \item さらに$\bm{y}\equiv(y_1, y_2)$, $\bm{f}(x, \bm{y})\equiv \left(y_2, r(x)-p(x)y_2 - q(x)y_1\right)$
+    \[
+    \frac{d\bm{y}}{dx} = \bm{f}(x, \bm{y})
+    \]
+  \item $n$階常微分方程式 $\Rightarrow$ $n$次元の1階常微分方程式
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{初期値問題と境界値問題}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 初期値問題
+    \begin{itemize}
+    \item 微分方程式において、ある1点に関する全ての境界条件(初期値)が与えられているもの
+    \item 質点の運動など(時系列の問題)
+  \end{itemize}
+  \item 境界値問題
+    \begin{itemize}
+    \item 複数の点に関する境界条件が与えられているもの
+    \item 物体のゆがみの計算や静電場の計算など(空間的に解く問題)
+  \end{itemize}
+  \item 初期値問題は初期値から逐次的に解くことが可能
+  \item 境界値問題は初期値問題に比べて計算法が複雑
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{初期値問題の解法 (Euler法)}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 微分を差分で近似する(前進差分)
+    \[
+    \frac{dy}{dt} \approx \frac{y(t+\Delta t) - y(t)}{\Delta t} = f(t, y)
+    \]
+  \item $t=0$における$y(t)$の初期値を$y_0$、$h$を微少量、$t_n \equiv nh$、$y_n$を$y(t_n)$の近似値とおくと、
+    \[
+    y_{n+1}-y_n = h f( t_n, y_n)
+    \]
+  \item Euler法
+    \begin{itemize}
+    \item $y_0$からはじめて、$y_1,y_2,\cdots$を順次求めていく
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{Euler法の精度}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 微分方程式の両辺を$t_n$から$t_{n+1}$まで積分(積分方程式)
+    \[
+    y(t_{n+1}) - y(t_n) = \int^{t_{n+1}}_{t_n} \!\! f(t, y(t)) dt = h \int^1_0 \! f(t_n+h\tau, y(t_n+h\tau)) d\tau
+    \]
+  \item Euler法は、被積分関数を定数で近似することに対応
+    \[
+    f(t_n+h\tau, y(t_n+h\tau)) = f(t_n, y(t_n)) + O(h)
+    \]
+  \item $t=0$からある$t_f$まで積分すると、反復回数$N = t_f / h$
+  \item $t=t_f$における誤差 $\sim N \times h \times O(h) = O(h)$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{Euler法の改良}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 積分方程式の被積分関数をもう1次高次まで展開
+    \[
+    f(t_n+h\tau, y(t_n+h\tau)) = f(t_n, y(t_n)) +
+    \tau h
+    \left\{
+    \frac{\partial f}{\partial t}
+    + f \frac{\partial f}{\partial y}
+    \right\}_{t=t_n, y=y_n}
+    \!\!\!\!\!\!\!\!\!\!\!\! + O(h^2)
+    \]
+  \item 積分を実行すると
+    \[
+    y(t_{n+1}) = y(t_n) + h f(t_n, y_n) + \frac{1}{2}h^2
+    \left\{
+    \frac{\partial f}{\partial t}
+    + f \frac{\partial f}{\partial y}
+    \right\}_{t=t_n, y=y_n}
+    \!\!\!\!\!\!\!\!\!\!\!\! + O(h^3)
+    \]
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{中点法(2次Runge-Kutta法)}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 2次公式
+    \[
+    \begin{array}{rcl}
+      k_1 & = & h f(t_n, y_n) \\
+      k_2 & = & h f(t_n + \frac{1}{2}h, y_n + \frac{1}{2}k_1) \\
+      y_{n+1} & = & y_n + k_2
+    \end{array}
+    \]
+  \item このとき
+    \[
+    k_2 = h 
+    \left\{
+    f(t_n, y_n)
+    + \frac{1}{2}h \frac{\partial f}{\partial t}
+    + \frac{1}{2}k_1 \frac{\partial f}{\partial y}
+    + O(h^2)
+    \right\}
+    \]
+  \item したがって
+    \[
+    y_{n+1} = y_n + h f(t_n, y_n) + \frac{1}{2}h^2
+    \left\{
+    \frac{\partial f}{\partial t}
+    + f \frac{\partial f}{\partial y}
+    \right\}_{t=t_n, y=y_n}
+    \!\!\!\!\!\!\!\!\!\!\!\!+ O(h^3)
+    \]
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{高次のRunge-Kutta法}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 3次Runge-Kutta法
+    \[
+    \begin{array}{rcl}
+      k_1 & = & h f(t_n, y_n) \\
+      k_2 & = & h f(t_n + \frac{2}{3}h, y_n + \frac{2}{3}k_1) \\
+      k_3 & = & h f(t_n + \frac{2}{3}h, y_n + \frac{2}{3}k_2) \\
+      y_{n+1} & = & y_n + \frac{1}{4}k_1 + \frac{3}{8}k_2
+      + \frac{3}{8}k_3
+    \end{array}
+    \]
+  \item 4次Runge-Kutta法
+    \[
+    \begin{array}{rcl}
+      k_1 & = & h f(t_n, y_n) \\
+      k_2 & = & h f(t_n + \frac{1}{2}h, y_n + \frac{1}{2}k_1) \\
+      k_3 & = & h f(t_n + \frac{1}{2}h, y_n + \frac{1}{2}k_2) \\
+      k_4 & = & h f(t_n + h, y_n + k_3) \\
+      y_{n+1} & = & y_n + \frac{1}{6}k_1 + \frac{1}{3}k_2
+      + \frac{1}{3}k_3 + \frac{1}{6}k_4
+    \end{array}
+    \]
+  \item 4次までは次数と$f$の計算回数が等しい
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{計算コストと精度}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 実際の計算では$f(t,y)$の計算にほとんどのコストがかかる
+  \item 計算回数と計算精度の関係
+    \begin{center}
+      \begin{tabular}[h]{c|cccc}
+        & 1次(Euler法) & 2次(中点法) & 3次 & 4次 \\
+        \hline
+        計算精度 & $O(h)$ & $O(h^2)$ & $O(h^3)$ & $O(h^4)$ \\
+        計算回数 & $N$ & $2N$ & $3N$ & $4N$
+      \end{tabular}
+    \end{center}
+  \item 高次のRunge-Kuttaを使う方が効率的
+  \item どれくらい小さな$h$が必要となるか、前もっては分からない
+  \item 刻み幅を変えて($h,h/2,h/4,\dots$)計算してみることが大事
+    \begin{itemize}
+    \item 誤差の評価
+    \item 公式の間違いの発見
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{陽解法と陰解法}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 陽解法: 右辺が既知の変数のみで書かれる(例: Euler法)
+    \begin{itemize}
+    \item プログラムがシンプル
+    \end{itemize}
+  \item 陰解法: 右辺にも未知変数が含まれる
+    \begin{itemize}
+    \item 例: 逆Euler法
+      \begin{align*}
+        y(t) &= y(t+h-h) = y(t+h) - h f(t+h,y(t+h)) + O(h^2) \\
+        y_{n+1} &= y_n + h f(t+h,{\color{red}y_{n+1}})
+      \end{align*}
+    \item 数値的により安定な場合が多い
+    \item Newton法などを使って、非線形方程式を解く必要がある
+    \end{itemize}
+  \end{itemize}
+\end{frame}

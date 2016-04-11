@@ -1,4 +1,4 @@
-PDF = lecture-1.pdf
+PDF = lecture-1.pdf lecture-2.pdf appendix.pdf
 
 # PDF = 1_basics.pdf 2_ode.pdf 3_linear_system.pdf 4_eigenvalue_problem.pdf 5_linear_regression.pdf 6_monte_carlo.pdf 7_optimization.pdf 8_hpc.pdf 9_vcs.pdf
 
@@ -6,12 +6,16 @@ PDF = lecture-1.pdf
 
 default: $(PDF)
 
+lecture-1.pdf: 00_about.tex 01_ssh.tex 10_error.tex 11_newton.tex
+lecture-2.pdf: 20_ode.tex 21_symplectic.tex 90_vcs.tex 91_subversion.tex
+appendix.pdf: 12_algebraic.tex 22_numerov.tex 09_exercise.tex 19_exercise.tex 29_exercise.tex
+
 .tex.dvi:
 	TEXINPUTS=.:./style//: platex -shell-escape $<
 	TEXINPUTS=.:./style//: platex $<
 	TEXINPUTS=.:./style//: platex $<
 .dvi.pdf:
-	TEXINPUTS=.:./style//: dvipdfmx $<
+	TEXINPUTS=.:./style//: dvipdfmx -I 24 $<
 
 clean:
 	rm -f *.aux *.dvi *.log *.nav *.out *.snm *.toc *.vrb

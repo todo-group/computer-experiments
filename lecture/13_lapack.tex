@@ -1,0 +1,176 @@
+\section{C言語における行列・LAPACKの利用}
+
+\begin{frame}[t,fragile]{一次元配列}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item (静的)一次元配列 (ハンドブック3.3.1節)
+\begin{lstlisting}
+double v[10];
+v[0] = 1.0;
+v[1] = 2.0;
+...
+\end{lstlisting}
+    要素数はコンパイル時にすでに決まっている定数でなければならない
+  \item (動的)一次元配列 (ハンドブック3.11節)
+\begin{lstlisting}
+double *v; /* ポインタ */
+v = (double*)malloc((size_t)(10 * sizeof(double));
+...
+free(v); /* 確保した領域を開放 */
+\end{lstlisting}
+実行時に要素数を指定可能
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{ポインタと一次元配列}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 一次元配列を表す変数は、(実は)最初の要素を指すポインタ  (ハンドブック3.5.3節)
+    \begin{itemize}
+    \item \verb+v+ と \verb+&v[0]+ は等価
+    \item \verb^(v+2)^ と \verb^&v[2]^ は等価
+    \item \verb+*v+ と \verb+v[0]+ は等価
+    \item \verb^*(v+2)^ と \verb^v[2]^ は等価
+    \item \verb^(v+2)[3]^ は?
+    \end{itemize}
+  \item C言語では配列の添字は0から始まることに注意
+  \item \verb^double v[10];^ と宣言した場合、\verb^v[0]^ 〜 \verb^v[9]^ の10個の要素を持つ配列が作られる。\verb^v[10]^ は存在しない。値を代入したり参照しようとするとエラーとなる
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{二次元配列}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item C言語では、二次元配列は一次元配列の先頭をさす(ポインタ)の配列として表される(と理解しておけば良い)
+  \item \verb+m[i]+は、要素\verb+m[i][0]+を指すポインタ
+    \begin{itemize}
+    \item \verb+m+ と \verb+&m[0]+ は等価 (\verb+&m[0][0]+ ではない)
+    \item \verb+m[0]+ と \verb+&m[0][0]+ は等価
+    \item \verb+m[2]+ と \verb+&m[2][0]+ は等価
+    \item \verb^(m+2)^ と \verb^&m[2]^ は等価
+    \item \verb^(*(m+2))[3]^ と \verb^*(*(m+2)+3)^ と \verb^m[2][3]^ は等価
+    \item \verb^*(m+2)[3]^ と \verb^*((m+2)[3])^ と \verb^*(m[5])^ と\verb^m[5][0]^ は等価
+    \item \verb^[]^は\verb^*^よりも強い
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{動的二次元配列の確保}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 各行を表す配列とそれぞれの先頭アドレスを保持する配列の二種類が必要
+\begin{lstlisting}
+double **a;
+m = 10;  
+n = 10;  
+a = (double**)malloc((size_t)(m * sizeof(double*));
+for (int i = 0; i < m; ++i)
+  a[i] = (double*)malloc((size_t)(n * sizeof(double));
+\end{lstlisting}
+\item 各行を保持する配列が、メモリ上で連続に確保される保証はない
+\item LAPACKを使うときに問題となる
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{動的二次元配列の確保}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 二次元配列の要素を格納する長い配列を用意する
+\begin{lstlisting}
+double **a;
+m = 10;  
+n = 10;  
+a = (double**)malloc((size_t)(m * sizeof(double*));
+a[0] = (double*)malloc((size_t)(m*n * sizeof(double));
+for (int i = 1; i < m; ++i)
+  a[i] = a[i-1] + n;
+\end{lstlisting}
+  \item 開放は逆の順序で行う
+\begin{lstlisting}
+free(a[0]);
+free(a);
+\end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{動的二次元配列の確保}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 二次元配列の確保({\tt alloc\_dmatrix})、開放({\tt free\_dmatrix})、出力({\tt print\_dmatrix})、読み込み({\tt read\_dmatrix})を行うためのユーティリティ関数を準備
+  \item ソースコード: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/linear_system/matrix_util.h}{exercise/linear\_system/matrix\_util.h}
+  \item 使用例
+\begin{lstlisting}
+#include "matrix_util.h"
+...
+double **mat;
+mat = alloc_dmatrix(m, n);
+...
+free_dmatrix(mat);
+\end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{LAPACK (Linear Algebra PACKage)}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 線形計算のための高品質な数値計算ライブラリ
+    \begin{itemize}
+    \item \url{http://www.netlib.org/lapack}
+    \item 線形方程式、固有値問題、特異値問題、線形最小二乗問題など
+    \item (FFT 高速フーリエ変換は入っていない)
+    \item LAPACK自体はFortranで書かれている
+    \end{itemize}
+  \item ほぼ全てのPC、ワークステーション、スーパーコンピュータで利用可 (インストール済)
+  \item Netlibでソースが公開されているリファレンス実装は遅いが、それぞれのベンダー(Intel、Fujitsu、etc)による最適化されたLAPACKが用意されている場合が多い(MKL、SSL2、etc)
+  \item LAPACKを使うことにより、高速で信頼性が高く、ポータブルなコードを書くことが可能になる
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{LAPACKによる連立一次方程式の求解}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item LU分解を行うサブルーチン {\tt dgetrf} \\
+    \url{http://www.netlib.org/lapack/explore-html/d3/d6a/dgetrf_8f.html}
+  \item Fortranによる関数宣言
+\begin{lstlisting}
+subroutine dgetrf(integer M, integer N,
+         double precision, dimension(lda, *) A,
+         integer LDA, integer, dimension(*) IPIV,
+         integer INFO)
+\end{lstlisting}
+\item {\tt A}: 左辺の行列、{\tt N,M}: 次元、{\tt IPIV}: 選択されたピボット行のリスト、{\tt lda}: {\tt M}と同じで良い
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{LAPACKによる連立一次方程式の求解}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item C言語から呼び出すための関数宣言を作成 (ハンドブック3.6.4節)
+\begin{lstlisting}
+void dgetrf_(int *M, int *N, double *A,
+             int *LDA, int*IPIV, int *INFO);
+\end{lstlisting}
+関数名は全て小文字。関数名の最後に {\tt \_} (下線)を付ける
+\item LU分解の例
+\begin{lstlisting}
+M = 10;
+N = 10;
+LDA = 10;
+dgetrf_(&M, &N, &A[0][0], &LDA, &IPIV[0], &INFO);
+\end{lstlisting}
+完全なソースコード: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/linear_system/lu_decomp.c}{exercise/linear\_system/lu\_decomp.c}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{CからFortranのライブラリを呼び出す際の注意事項}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item スカラーも配列も全てポインタ渡しとする
+  \item C言語は添字が0から始まる。Fortranは1から始まる
+  \item CとFortranで、二次元配列のメモリ上での並びが違う \\
+    Cはrow-major: {\tt a[0][0], a[0][1], a[0][2], $\cdots$} \\
+    Fortranはcolumn-major: {\tt a(1,1), a(2,1), a(3,1), $\cdots$} \\
+  \item Cで作成した行列をFortranに渡すと転置されてしまう
+  \item コンパイル時には{\tt -llapack}オプションを指定し、LAPACKライブラリをリンクする(ハンドブック3.1.6節)
+  \end{itemize}
+\end{frame}

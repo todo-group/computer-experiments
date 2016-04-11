@@ -1,0 +1,38 @@
+\section{SSH (Secure Shell)}
+
+\begin{frame}[t,fragile]{SSHによるリモートログイン}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item UNIX (Macも含む)では、SSH (Secure Shell)を使うことで、別のコンピュータに遠隔ログインして作業することができる
+
+    例)
+    
+    {\tt \$ \underline{ssh -X remote.phys.s.u-tokyo.ac.jp -l {\it username}}}
+  \item 二種類の認証方式
+    \begin{itemize}
+    \item パスワード認証: ハンドブック2.2節ではこちらを説明
+    \item 公開鍵認証方式: よりセキュリティーの高い方法
+
+      近年はこちらが主流 (photon や ECCS SSHサーバも公開鍵認証)
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{SSHの公開鍵認証}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item あらかじめクライアント(接続元)側で、「秘密鍵」と「公開鍵」のペアを生成し、「公開鍵」をサーバ(接続先)に置いておく
+    \begin{itemize}
+    \item 生成には {\tt ssh-keygen} コマンドを使う(準備練習EX0-2)
+    \item クライアント側に「秘密鍵」、サーバ側に「公開鍵」の両者が揃ってはじめて、クライアントからサーバにリモートログインできる
+    \item たとえ「公開鍵」が盗まれてしまっても、それだけではリモートログインできないので安心
+    \item 「秘密鍵」は絶対に人に見られてはならない
+    \end{itemize}
+  \item 鍵の場所
+    \begin{itemize}
+    \item 秘密鍵: {\tt \$HOME/.ssh/id\_rsa} に生成される
+    \item 公開鍵: {\tt \$HOME/.ssh/id\_rsa.pub} に生成される $\Rightarrow$
+      サーバの {\tt \$HOME/.ssh/authorized\_keys} にコピーする
+    \end{itemize}
+  \end{itemize}
+\end{frame}

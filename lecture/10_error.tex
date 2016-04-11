@@ -1,0 +1,81 @@
+\section{数値誤差}
+
+\begin{frame}[t,fragile]{数値誤差の原因}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 丸め誤差: 無理数や10進数を有限のビットの2進数で表現することによる誤差
+    (例: 0.1 が 0.0999999999998 になる)
+  \item 打ち切り誤差: テイラー展開による近似を有限項で打ち切ることによる誤差
+    (例: 数値微分)
+  \item 桁落ち: 非常に近い数の引き算により生じる
+  \item 情報落ち: 非常に大きな数に小さな数を足し込む場合に生じる
+    (例: 数値積分や常微分方程式の初期値問題で刻み幅を小さくしすぎると生じる)
+  \item オーバーフロー(桁あふれ): 表現できる値を超えてしまう
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{桁落ち}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 2次方程式 $ax^2+bx+c=0$の解の公式
+    \[
+    x_{\pm} = \frac{-b \pm \sqrt{b^2-4ac}}{2a}
+    \]
+    $b^2 \gg |ac|$の時、桁落ちが生じる
+  \item 例) $2.718282x^2 - 684.4566x+0.3161592=0$ の解を7桁の精度で計算してみる(伊理・藤野1985)
+    \begin{align*}
+      \sqrt{D} &= \sqrt{(684.4566)^2 - 4 \times 2.718282 \times 0.3161592} = 684.4541 \\
+      x_+ &= \frac{684.4566+684.4541}{2 \times 2.718282} = \frac{1368.911}{5.436564} = 251.7970 \\
+      x_- &= \frac{684.4566-684.4541}{2 \times 2.718282} = \frac{0.0025}{5.436564} = 0.00045\underline{98493}
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{桁落ちを防ぐ方法}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item $b$の符号に応じて、一方を求める(この例では$x_+$)
+  \item 他方は解と係数の関係を使って求める
+    \[
+    x_- = \frac{c/a}{x_+} = \frac{0.3161592 / 2.718282}{251.7970} = 0.000461913\underline{8}
+    \]
+  \item 回避できない例: 重解に近い場合 $2.718282x^2 - 1.854089x + 0.3161592=0$
+    \begin{align*}
+      \sqrt{D} &= \sqrt{(1.854089)^2 - 4 \times 2.718282 \times 0.3161592} \\ &= 0.002\underline{64575} \\
+      x_\pm &= 1.854089 \pm 0.002\underline{64575} = 1.856\underline{737}, 1.851\underline{445}
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{数値微分}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 関数のテイラー展開
+    \[
+    f(x+h) = f(x) + h f'(x) + h^2 f''(x)/2 + h^3 f'''(x)/6 + \cdots
+    \]
+  \item 数値微分の最低次近似
+    \[
+    f_1(x,h) \equiv \frac{f(x+h)-f(x)}{h} = f'(x) + h f''(x)/2 + O(h^2)
+    \]
+  \item より高次の近似
+    \[
+    f_2(x,h) \equiv \frac{f(x+h)-f(x-h)}{2h} = f'(x) + h^2 f'''(x)/6 + O(h^3)
+    \]
+  \item 刻み$h$を小さくすると打ち切り誤差は減少するが、小さすぎると今度は桁落ちが大きくなる
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{刻み幅を変えた計算}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 刻み幅を変えて何度か計算を行い、収束の様子をみる
+  \item グラフ化して目で見てみる
+  \item 理論式と比較
+    \begin{itemize}
+    \item 計算式の正しさの確認
+    \item 近似の改良 (収束の加速・補外)
+    \end{itemize}
+  \item 桁落ち・情報落ちの影響の有無
+  \end{itemize}
+\end{frame}
