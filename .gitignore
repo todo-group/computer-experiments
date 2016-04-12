@@ -1,3 +1,4 @@
+.DS_Store
 */*.aux
 */*.dvi
 */*.log
@@ -6,5 +7,6 @@
 */*.snm
 */*.toc
 */*.vrb
+exercise/*.pdf
 lecture/*.pdf
 handbook/main.pdf
