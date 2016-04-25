@@ -1,0 +1,49 @@
+\section{物理に現れる連立一次方程式}
+
+\begin{frame}[t,fragile]{連立一次方程式の現れる例}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 微分方程式の初期値問題の陰解法
+  \item 非線形連立方程式に対するニュートン法
+    \[ {\bf x}' = {\bf x} - \Big( \frac{\partial {\bf f}({\bf x})}{\partial {\bf x}} \Big)^{-1} {\bf f}({\bf x}) \]
+  \item 偏微分方程式の境界値問題の差分法による求解
+  \item ベクトルに逆行列を掛ける代わりに連立一次方程式を解く場合が多い
+    \[ {\bf x} = A^{-1} {\bf b} \ \ \Rightarrow \ \ A {\bf x} = {\bf b} \]
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{ポアソン方程式の境界値問題}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 二次元ポアソン方程式
+    \[ \frac{\partial^2 u(x,y)}{\partial x^2} + \frac{\partial^2 u(x,y)}{\partial y^2} = f(x,y) \qquad 0 \le x \le 1, \ 0 \le y \le 1\]
+  \item ディリクレ型境界条件: $u(x,y) = g(x,y)$ on $\partial \Omega$
+  \item 有限差分法により離散化
+    \begin{itemize}
+    \item $x$方向、$y$方向をそれぞれ$n$等分: $(x_i,y_j) = (i/n, j/n)$
+    \item $(n+1)^2$個の格子点の上で$u(x_i,y_j)=u_{ij}$が定義される
+    \item そのうち$4n$個の値は境界条件で定まる
+    \item ポアソン方程式を中心差分で近似 ($h=1/n$)
+      \[
+      \frac{u_{i+1,j}-2u_{ij}+u_{i-1,j}}{h^2} + \frac{u_{i,j+1}-2u_{ij}+u_{i,j-1}}{h^2} = f_{ij}
+      \]
+      残り$(n-1)^2$個の未知数に対する連立一次方程式
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{ポアソン方程式の境界値問題}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item ノイマン型境界条件の場合
+    \begin{itemize}
+    \item 境界上で$u(x,y)$の微分が定義される。
+    \item 例) $\partial u(0,y) / \partial x = h(0,y)$
+    \end{itemize}
+  \item 境界条件を差分近似で表す
+    \[
+    \frac{u_{1j} - u_{0j}}{h} = h_{0j} \qquad j=1 \cdots (n-1)
+    \]
+    $(n+1)^2-4$個の未知数に対して、ポアソン方程式の差分近似とあわせて、合計$(n-1)^2+4(n-1)=(n+1)^2-4$個の連立一次方程式
+  \end{itemize}
+\end{frame}

@@ -1,0 +1,50 @@
+\section{反復法}
+
+\begin{frame}[t,fragile]{直接法と反復法}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 直接法: 連立方程式を有限回数($\sim n^3$)の手間で直接解く
+  \item 反復法: $A{\bf x}={\bf b}$を、等価な${\bf x} = \phi({\bf x}) = M{\bf x} + {\bf c}$の形に変形し、適当な初期値${\bf x}_0$から出発して、${\bf x}^{(k+1)} = \phi({\bf x}^{(k)})$を繰り返して解を求める
+    \begin{itemize}
+    \item 欠点: 有限回数では終わらない (あらかじめ定めた収束条件が満たされるまで反復)
+    \item 利点: 行列ベクトル積$M{\bf x}$が計算できさえすればよい。特に$M$が疎行列の場合には、$M{\bf x}$は非常に高速に計算できる可能性がある。メモリの点でも有利
+    \item 利点: 直接法に比べて、プログラムも比較的単純になる場合が多い
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{反復法}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 行列$A$を対角行列$D$、左下三角行列$E$、右上三角行列$F$の和に分解
+    \[
+    A{\bf x} = (D + E + F){\bf x} = {\bf b}
+    \]
+  \item ヤコビ法: 対角成分以外を右辺に移す
+    \[
+      {\bf x}^{(k+1)} = D^{-1} ({\bf b} - (E+F) {\bf x}^{(k)}) = -D^{-1}(E+F){\bf x}^{(k)} + D^{-1} {\bf b}
+      \]
+    \item ガウスザイデル法: ヤコビ法で右辺の${\bf x}$の値として、各段階ですでに得られている最新のものを使う
+    \begin{align*}
+      {\bf x}^{(k+1)} &= D^{-1} ({\bf b} - E{\bf x}^{(k+1)} - F{\bf x}^{(k)}) \\
+      {\bf x}^{(k+1)} &= -(D+E)^{-1} F{\bf x}^{(k)} + (D+E)^{-1}{\bf b}
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{反復法}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item SOR (Successive Over-Relaxation)法: ガウスザイデル法における修正量に1より大きな値($\omega$)を掛け、補正を加速
+    \begin{align*}
+      {\bf \xi}^{(k+1)} &= D^{-1} ({\bf b} - E{\bf x}^{(k+1)} - F{\bf x}^{(k)}) \\
+      {\bf x}^{(k+1)} &= {\bf x}^{(k)} + \omega({\bf \xi}^{(k+1)} - {\bf x}^{(k)})
+    \end{align*}
+    ${\bf \xi}^{(k+1)}$を消去すると
+    \begin{align*}
+      {\bf x}^{(k+1)} = &(I+\omega D^{-1}E)^{-1} \{(1-\omega)I - \omega D^{-1} F\}{\bf x}^{(k)} \\ &+ \omega(D+\omega E)^{-1}{\bf b}
+    \end{align*}
+    \item 反復法は常に収束するとは限らない
+    \item 行列$A$が対角優位、あるいは正定値対称行列の場合には収束が保証される
+  \end{itemize}
+\end{frame}
