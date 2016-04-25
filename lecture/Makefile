@@ -1,4 +1,4 @@
-PDF = lecture-1.pdf lecture-2.pdf appendix.pdf \
+PDF = lecture-1.pdf lecture-2.pdf lecture-3.pdf appendix.pdf \
 	0_about.pdf 1_basics.pdf 2_ode.pdf 3_linear_system.pdf
 
 # PDF = 4_eigenvalue_problem.pdf 5_linear_regression.pdf 6_monte_carlo.pdf 7_optimization.pdf 8_hpc.pdf 9_vcs.pdf
@@ -9,6 +9,7 @@ default: $(PDF)
 
 lecture-1.pdf: 00_about.tex 01_ssh.tex 10_error.tex 11_newton.tex
 lecture-2.pdf: 20_ode.tex 21_symplectic.tex 90_vcs.tex 91_subversion.tex
+lecture-3.pdf: 30_intro.tex 31_direct.tex 32_iterative.tex 13_lapack.tex
 appendix.pdf: 12_algebraic.tex 22_numerov.tex 09_exercise.tex 19_exercise.tex 29_exercise.tex 39_exercise.tex
 
 0_about.pdf: 00_about.tex 01_ssh.tex 09_exercise.tex

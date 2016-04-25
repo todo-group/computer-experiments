@@ -1,0 +1,56 @@
+\documentclass[11pt]{jarticle}
+
+\usepackage{amsmath}
+\usepackage{graphics}
+\usepackage{hyperref}
+
+\setlength{\oddsidemargin}{-0.7cm}
+\setlength{\topmargin}{-1.5cm}
+\setlength{\textwidth}{16.5cm}
+\setlength{\textheight}{26cm}
+\pagestyle{empty}
+
+\begin{document}
+
+\noindent
+{\bf\large 「計算機実験」実習課題(EX2)}
+\\[-0.5em]
+
+\noindent
+\begin{itemize}
+\item 講義のページ: \verb+http://exa.phys.s.u-tokyo.ac.jp/ja/lectures/2016S-computer+
+
+\item 準備練習
+  \begin{enumerate}
+  \item ハンドブックの「A.5 Subversion実習」にしたがい、Subversionの基本操作を取得せよ。(以下の準備練習、基本課題、レポートなど、今後は全てのソースコード(C言語、\LaTeX)をSubversionで管理すること。)
+  \end{enumerate}
+
+\item 基本課題
+  \begin{enumerate}
+  \item 空気による摩擦のあるバネの問題を考える。壁にバネが繋がれ、バネの先には質量$m$の物体が繋がっている。床との摩擦は考えないものとする。バネの伸びる方向に$x$座標を取り、自然長の位置を原点とすると、物体の運動方程式は以下のように与えられる。
+\[
+ m\frac{\mathrm{d} ^2x}{\mathrm{d} t^2} = -kx - \kappa \frac{\mathrm{d} x}{\mathrm{d} t} 
+\]
+ここで、$k$はバネ定数、$\kappa$は摩擦の比例定数とする。Euler法を使い$x(t)$を30 [sec]まで計算せよ。その際、刻み幅$h$の大きさを変化させ、解の変わる様子を確認せよ。ただし、$k$ = 2 [N/m], $\kappa$ = 0.2 [kg/sec]、$m$ = 1 [kg]、初期条件は$x(0)$ = 10 [m]、$x'(0)$ = 0 [m/sec] とする。
+\item 中点法、3次のRunge-Kutta法、4次のRunge-Kutta法を用いて同様の計算を行い、精度の向上の様子を調べよ。
+  \end{enumerate}
+  
+\item 応用課題
+  \begin{enumerate}
+  \item 空気抵抗も床との摩擦も無い場合についてシミュレーションを行い、全エネルギー(運動エネルギーとポテンシャルエネルギーの和)の時間変化の様子を観察せよ。なぜ、全エネルギーが保存しないのか? 一方で、ある一定の誤差の範囲内で全エネルギーを保存する手法として、Symplectic法が知られている。この方法について調べ、実際にプログラムを作成し、シミュレーション結果について考察せよ。
+  \item 方程式によっては、刻み幅を小さくしても、なかなか精度が上がらないものがある．一つの例として、``硬い方程式''知られている。``硬い方程式''とは何か、これを精度良く解くためにはどうすれば良いか調べよ。また、具体的な問題について計算を行ってみよ。
+  \end{enumerate}  
+\end{itemize}
+
+\noindent
+{\bf\large レポートNo.1}
+%\\[-0.5em]
+\noindent
+\begin{itemize}
+\item 実習EX0の基本課題1、実習EX1の基本課題1〜2、実習EX2の基本課題1〜2についてレポートをまとめ提出せよ。
+\item 提出方法: \\
+  準備練習1で作成した、実習ワークステーション上のSubversionリポジトリに適当な名前のディレクトリを作成し、計算に用いたソースコード({\tt *.c}、{\tt *.h})、計算出力結果、レポートの \LaTeX ソース({\tt *.tex})、図のEPSファイル({\tt *.eps})など、レポートの作成に必要なファイル一式と最終的なレポート({\tt *.pdf})をチェックインせよ。チェックイン後、作業ディレクトリ内で {\tt svn update} コマンド、 {\tt svn info} コマンドを実行し、その出力結果を『「計算機実験」レポートNo.1提出票』({\tt report-1.txt})に貼り付け、ITC-LMSにアップロードすること。
+\item 提出締切: 実習(EX2)日の二週間後の23:59とする。
+\end{itemize}
+
+\end{document}

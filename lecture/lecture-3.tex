@@ -1,0 +1,43 @@
+\documentclass[dvipdfmx]{beamer}
+\usepackage{tutorial}
+
+\title{計算機実験(L3) --- 連立方程式の解法}
+\date{2016/04/27}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+  \tableofcontents
+\end{frame}
+
+\input{30_intro.tex}
+\input{31_direct.tex}
+\input{32_iterative.tex}
+\input{13_lapack.tex}
+
+\section{}
+\begin{frame}[t,fragile]{実習・講義予定}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 実習 EX2
+    \begin{itemize}
+    \item バージョン管理システム
+    \item 摩擦のあるバネの問題、解の精度
+    \end{itemize}
+  \item 実習 EX3
+    \begin{itemize}
+    \item ガウスの消去法、ピボット選択
+    \item LAPACKの利用
+    \item 速度の測定
+    \end{itemize}
+  \item 講義 L4
+    \begin{itemize}
+    \item 固有値問題
+    \item 密行列の対角化
+    \item 疎行列に対する反復法
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\end{document}
