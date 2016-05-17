@@ -1,4 +1,4 @@
-PDF = exercise-0.pdf exercise-1.pdf exercise-2.pdf
+PDF = exercise-0.pdf exercise-1.pdf exercise-2.pdf exercise-3.pdf
 
 .SUFFIXES: .pdf .dvi .tex
 

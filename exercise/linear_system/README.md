@@ -17,8 +17,3 @@
 - gauss.c : ガウスの消去法(ピボット選択なし)
 - input1.dat : 入力サンプル1
 - input2.dat : 入力サンプル2
-
-## ラプラス方程式の境界値問題
-
-- laplace_lu.c : LU分解による求解
-- laplace_jacobi.c : ヤコビ法による求解(収束判定なし)

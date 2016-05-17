@@ -1,0 +1,55 @@
+\documentclass[11pt]{jarticle}
+
+\usepackage{amsmath}
+\usepackage{graphics}
+\usepackage{hyperref}
+
+\setlength{\oddsidemargin}{-0.7cm}
+\setlength{\topmargin}{-1.5cm}
+\setlength{\textwidth}{16.5cm}
+\setlength{\textheight}{26cm}
+\pagestyle{empty}
+
+\begin{document}
+
+\noindent
+{\bf\large 「計算機実験」実習課題(EX3)}
+\\[-0.5em]
+
+\noindent
+\begin{itemize}
+\item 講義のページ: \verb+http://exa.phys.s.u-tokyo.ac.jp/ja/lectures/2016S-computer+
+
+\item サンプルプログラム: \\ \verb+https://github.com/todo-group/computer-experiments/tree/master/exercise/linear_system+
+  
+\item 準備練習
+  \begin{enumerate}
+  \item ベクトル・行列を扱うためのユーティリティー関数が({\tt matrix\_util.h})に用意されている。サンプルプログラム{\tt matrix\_example.c}の中身を見て、その使い方を理解せよ
+  \item ガウスの消去法のサンプルプログラム({\tt gauss.c})をコンパイル・実行せよ。実行時にコマンドライン引数に行列の内容が書かれたファイル名({\tt input1.dat})を指定する必要があることに注意
+    \begin{quote} \tt
+      \$ \underline{cc gauss.c -o gauss} \\
+      \$ \underline{./gauss input1.dat}
+    \end{quote}
+  \item LU分解のサンプルプログラム({\tt lu\_decomp.c})をコンパイル・実行せよ。コンパイル時にLAPACKをリンク({\tt -llapack})する必要があることに注意(ハンドブック3.1.6節)
+    \begin{quote} \tt
+      \$ \underline{cc lu\_decomp.c -o lu\_decomp -llapack} \\
+      \$ \underline{./lu\_decomp input1.dat}
+    \end{quote}
+  \end{enumerate}
+
+\item 基本課題
+  \begin{enumerate}
+  \item {\tt gauss.c}では、ピボット選択を行っていないため、入力が {\tt input2.dat} の場合には正しい解が得られない。ピボット選択を行うよう{\tt gauss.c}を修正せよ
+  \item {\tt lu\_decomp.c}を参考にして、LU分解を用いて行列の行列式を計算するプログラムを作成せよ。$n \times n$のファンデルモンド行列($v_{ij}=x_j^{i-1}$) ($x_1 \cdots x_n$は実数)の行列式を計算し、厳密な値$\displaystyle \prod_{1 \le i \le j \le n} (x_j-x_i)$と比較せよ
+  \item LU分解を用いてディリクレ型の境界条件のもとでの二次元ラプラス方程式の解を求めるプログラムを作成せよ。適当な境界条件[例えば$u(0,y) = \sin(\pi y)$, $u(x,0)=u(x,1)=u(1,y)=0$]を仮定して解を計算し、Gnuplotの{\tt splot}コマンドを用いて解をプロットせよ。また、メッシュ数を増やすと、解の形や計算時間がどのように変わるか調べよ
+  \end{enumerate}
+  
+\item 応用課題
+  \begin{enumerate}
+  \item C言語におけるポインタの振る舞いをテストするプログラム({\tt pointer.c})のソースコードを見て、どのような出力が生成されるか予想せよ。実際にコンパイル・実行して予想を確かめてみよ
+  \item ラプラス方程式の境界値問題をヤコビ法で解くプログラムを作成せよ。計算結果や計算速度をLU分解による方法と比較せよ。さらに、ガウス・ザイデル法、SOR法のプログラムを作成し、収束までの回数を比較せよ。特にSOR法の場合、パラメータ$\omega$の選び方により、どのように収束回数が変化するか観察し、最適な$\omega$の値について考察せよ
+  \item photonでは、OS付属のLAPACK以外にも、Intel製のMKL (Math Kernel Library)に含まれるLAPACKルーチンが利用可能である\footnote{MKLを使うには、GNU Cコンパイラ({\tt cc}, {\tt gcc})の代わりにIntel Cコンパイラ({\tt icc})を使い、{\tt -llapack}の代わりに{\tt --mkl}を指定してリンクを行えばよい}。ガウスの消去法のプログラム({\tt gauss.c})、標準LAPACKを使ったLU分解({\tt lu\_decomp.c} あるいは {\tt laplace\_lu.c})、MKLを使ったLU分解の速度を比較せよ(特に$n=1000$以上の大きな行列について)。なぜ、速度に大きな差が生じるのか、MKLで使われている(と予想される)最適化手法について調べてみよ
+  \end{enumerate}  
+\end{itemize}
+
+\end{document}
