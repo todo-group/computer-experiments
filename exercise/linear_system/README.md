@@ -17,3 +17,7 @@
 - gauss.c : ガウスの消去法(ピボット選択なし)
 - input1.dat : 入力サンプル1
 - input2.dat : 入力サンプル2
+
+## LU分解
+
+- lu_decomp.c : LAPACKを使ってLU分解を行う例
