@@ -1,0 +1,54 @@
+\section{最小二乗法による回帰分析}
+
+\begin{frame}[t,fragile]{最小二乗法によるフィッティング}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 説明変数(例: 電圧): $x_1,x_2,x_3,\cdots,$
+  \item 観測値(例: 電流): $y_1,y_2,y_3,\cdots,$
+  \item 単回帰モデル: $y=a+bx+\epsilon$ \ \ ($\epsilon$: ノイズ)
+  \item 未知母数: $a,b$
+  \item 最小二乗法:
+    残差$\displaystyle R(a,b) = \sum_i (y_i - (a+bx_i))^2$を最小化
+    \[
+    \begin{split}
+      \frac{\partial R}{\partial a} &= - 2 \sum_i (y_i - (a+bx_i)) = 0 \\
+      \frac{\partial R}{\partial b} &= - 2 \sum_i (y_i - (a+bx_i))x_i = 0
+    \end{split}
+    \]
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{回帰分析の一般化}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 基底関数: $\phi_j(x)$ \ \ ($j=1 \cdots M$)
+  \item モデル: $\displaystyle y(x) = \sum_j \phi_j(x) w_j + \epsilon$
+  \item 残差: $\displaystyle R({\bf w}) = \sum_i (y_i - \sum_j \phi_j(x_i) w_j)^2$
+    \[
+    \frac{\partial R}{\partial w_k} = -2 \sum_i (y_i - \sum_j \phi_j(x_i) w_j) \phi_k(x_i) = 0
+    \]
+  \item 計画行列(design matrix) $\Phi_{ij} = \phi_j(x_i)$を導入すると
+    \[
+    R({\bf w}) = | {\bf y} - \Phi {\bf w} |^2
+    \]
+  \item 最小二乗解: $\Phi^{\rm t} \Phi {\bf w} = \Phi^{\rm t} {\bf y} \ \ \Rightarrow \ \
+{\bf w} = (\Phi^{\rm t} \Phi)^{-1}\Phi^{\rm t} {\bf y}$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{リッジ回帰(Ridge Regression)}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 基底関数の数(例: 多項式の次数)を増やしすぎると過学習 (over-fitting)」が生じる
+  \item 正則化最小二乗法 ($\lambda$は非負の定数)
+    \begin{align*}
+    R({\bf w}) &= \sum_i (y_i - \sum_j \phi_j(x_i) w_j)^2 + {\color{red} \lambda} \sum_j w_j^2 \\
+    &= | {\bf y} - \Phi {\bf w} |^2 + \lambda {\bf w}^{\rm t} {\bf w}
+    \end{align*}
+  \item 最小二乗解
+    \[
+    (\Phi^{\rm t} \Phi + \lambda \, {\rm I}) {\bf w} = \Phi^{\rm t} {\bf y} \ \ \Rightarrow \ \ 
+      {\bf w} = (\Phi^{\rm t} \Phi + \lambda \, {\rm I})^{-1}\Phi^{\rm t} {\bf y}
+      \]
+  \end{itemize}
+\end{frame}

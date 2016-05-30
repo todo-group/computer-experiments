@@ -1,0 +1,28 @@
+\section{実習その5}
+
+\begin{frame}[t,fragile]{EX5-1: 最小二乗フィッティング}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item[5-1-1] \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/linear_regression/regression.c}{exercise/linear\_regression/regression.c}は数値データを読み込み、一次式で最小二乗フィッテイングを行うプログラムである。実行すると最終行に一次式の係数が出力される。
+\begin{lstlisting}
+$ ./regression measurement1.dat
+\end{lstlisting}
+    ファイル{\tt measurement1.dat}の1カラム目は$x$、2カラム目は$y$、3カラム目は$y$の誤差の値(計算の中では使っていない)である。元データとフィッティング結果をグラフにせよ
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{EX5-2: 高次関数でのフィッティング}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item[5-2-1] {\tt regression.c}中で、15行目の{\tt nbase}は基底関数の数を表し、18行目からの関数{\tt f}は{\tt i}番目の基底関数の$x$における値を返す関数である。二次式でフィッティングが行えるよう、15行目から26行目を修正し、実行結果をグラフにせよ。一方、{\tt measurement2.dat}では、なめらかなバックグラウンドの上に中心$\mu=3.3$、分散$\sigma^2=1.3$のGaussianが乗っていることが分かっている。{\tt regression.c}を修正し、Gaussianの係数の大きさを見積もってみよ
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{EX5-3: 応用課題}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item[5-3-1] \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/linear_regression/regression_lu.c}{\tt exercise/linear\_regression/regression\_lu.c}はLU分解により最小二乗法の解を求めるプログラムである。{\tt regression.c}と同じ結果が出力されることを確認せよ。基底関数の中に互いに線形独立でないものがある場合には、{\tt regression\_lu.c}はエラーとなることを確認し、その理由について考察せよ。一方で、{\tt regression.c}は動作するが、どのような解を与えるか?
+  \item[5-3-2] {\tt regression.c}、{\tt regression\_lu.c}では、測定量の誤差の値は使っていない。残差を誤差で重み付けするようにプログラムを改良せよ。また、フィッティング結果(係数)の誤差はどのようにすれば見積もることができるか?
+  \item [5-3-3] 物理学実験で得られたデータをフィッティングしてみよう。フィッティング関数が係数に関して非線形である場合は、どのように解を求めればよいか?
+  \end{itemize}
+\end{frame}

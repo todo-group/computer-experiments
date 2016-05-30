@@ -1,0 +1,117 @@
+\section{ベイズ統計の基礎}
+
+\begin{frame}[t,fragile]{条件付き確率}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 子供が二人いる家族において「二人の子供のうち少くとも一人が女の子である場合」二人とも女の子である確率は?
+  \item 日本人の{\color{red} 1/10000}がウイルスAに感染しているとする。このウイルスに感染していると、{\color{red} 999/1000}の確率で検査で陽性となる。一方、感染していなくても、{\color{red} 1/100}の確率で陽性となってしまう(偽陽性)。検査結果が陽性の場合、感染している可能性は?
+    \begin{itemize}
+    \item 事象A：ウイルスに感染
+    \item 事象B：検査で陽性
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{ベイズの定理}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 確率に対する公式
+    \begin{align*}
+      P(A \cap B) &= P(B|A) P(A) = P(A|B) P(B) \\ P(B) &= P(B|A) P(A) + P(B|\bar{A}) P(\bar{A})
+    \end{align*}
+  \item ベイズの定理 (確率の反転)
+    \[
+    P(A|B) = \frac{P(B|A)P(A)}{P(B)} = \frac{P(B|A)P(A)}{P(B|A) P(A) + P(B|\bar{A}) P(\bar{A})}
+    \]
+  \item 検査が陽性でも、実際に感染している可能性(確率)は
+    \[
+    \frac{\frac{999}{1000} \cdot \frac{1}{10000}}{\frac{999}{1000} \cdot \frac{1}{10000} + \frac{1}{100} \cdot \frac{9999}{10000}} \approx {\color{red} 0.009}
+    \]
+    \begin{itemize}
+    \item 予想よりずっと小さい?
+    \item 「検査が陽性」という事実により、感染している確率が 0.01\%から 0.9\%に増加 $\Rightarrow$ ベイズ統計・機械学習の基礎公式
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{ベイズ統計学(Bayesian Statistics)}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 条件つき確率におけるベイズの定理
+    \[
+    p(\theta|y) \sim p(y|\theta) p(\theta)
+    \]
+  \item この(あたりまえの)関係式をベイズ統計では以下のように解釈する
+    \begin{itemize}
+    \item $\theta$未知母数(パラメータ) : 物理量の平均、分散、比例係数、etc
+    (確定した値ではなくある分布に従って変動する量として考える)
+    \item $y$ 観測値 : すでに「与えられた」確定したものと考える
+    \item $p(\theta)$ 事前確率 (prior probability) : 母数に関する何らかの事前情報
+    \item $p(y|\theta)$ 尤度 (likelihood) : $y$は与えられている$\theta$の関数と解釈。$l(\theta|y)$ と書く
+    \item $p(\theta|y)$ 事後確率 (posterior probability) : 観測で情報が増えた後の$\theta$の確率分布
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{頻度主義的アプローチとベイズ的アプローチ}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item コインを一回投げて表が出る確率 $q$
+  \item 連続して三回連続して表が出る($y$)確率 $p(y|q) = q^3 = l(q|y)$  ($q$ の尤度関数)
+  \item 頻度主義的アプローチ(最尤推定)
+    \begin{itemize}
+    \item $q$ の推定値 $q=1$ \ \ $\Rightarrow$ \ \ 未来永劫表が出続ける!
+    \item 観測データ数$\sim$母数の数の時 \ \ $\Rightarrow$ \ \ 過学習(over-fitting)
+    \end{itemize}
+  \item ベイズ的アプローチ
+    \begin{itemize}
+    \item $q$の事前分布として $p(q) = 1$  \ \ $\Rightarrow$ \ \ %事後分布
+      $p(q|y) \sim l(q|y) p(q) = q^3$
+    \end{itemize}
+  \item ベイズ的アプローチでは過学習の問題が生じない
+  \item 有効パラメータ数が自動的にデータ集合のサイズに適合
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{回帰分析への応用}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 単回帰モデル: $y=a+bx+\epsilon$ \ \ ($\epsilon$: ノイズ)
+  \item 尤度関数 (likelihood function) :
+    \[
+    l(a, b | \{x_i\}, \{y_i\}) = p(\{y_i\} | \{x_i\}, a, b) \sim \prod_i \exp \Big[ -\frac{(y_i - (a+bx_i))^2}{2\sigma^2}\Big]
+    \]
+  \item 事前分布を導入
+    \begin{itemize}
+    \item 例えば $a$, $b$ について ${\cal N}(0,1000)$
+    \end{itemize}
+  \item 事後分布:
+    \[
+    p(a,b | \{x_i\}, \{y_i\}) \sim l(a, b | \{x_i\}, \{y_i\}) p(a) p(b)
+    \]
+    \begin{itemize}
+      \item $a$, $b$ の事後周辺分布から期待値とその確からしさを推定
+      \item 最大事後確率(MAP)推定
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{最小二乗法・カーネル法・ベイズ推定}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 非線形最小二乗法
+    \begin{itemize}
+    \item 非線形の最小化問題
+    \end{itemize}
+  \item カーネル法
+    \begin{itemize}
+    \item 実質的に無限次元の問題を解くことができる
+    \item データサイズが大きくなるとその3乗に比例して計算量が増大
+    \end{itemize}
+  \item ベイズ推定
+    \begin{itemize}
+    \item 事後確率をコンパクトな形で求めることは難しい
+    \item モンテカルロ法の利用
+    \end{itemize}    
+  \end{itemize}
+\end{frame}

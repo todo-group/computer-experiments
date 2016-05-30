@@ -1,0 +1,49 @@
+\section{カーネル法}
+
+\begin{frame}[t,fragile]{カーネルトリック}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 方程式を変形 ${\bf w} = \frac{1}{\lambda} \Phi^{\rm t} ({\bf y} -\Phi {\bf w})$
+  \item $\alpha = \frac{1}{\lambda}({\bf y} -\Phi {\bf w})$と定義すると${\bf w} =\Phi^{\rm t} \alpha$
+    \item $w$は$\begin{pmatrix} \phi_1(x_1) \\ \vdots \\ \phi_M(x_1) \end{pmatrix} \cdots 
+      \begin{pmatrix} \phi_1(x_N) \\ \vdots \\ \phi_M(x_N) \end{pmatrix}$の線形結合
+    \item $M$次元中の$N$次元部分空間にある ($M$: 基底関数の数、$N$: サンプル数)
+    \item 基底関数を増やしても自由度は増えない
+    \item $w$を求める代わりに、直接$\alpha$を求めても良い (リプリゼンター定理)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{カーネルによる線形回帰}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 残差$R$を$\alpha$をつかって表現
+    \[
+    R(\alpha) = | y - \Phi \Phi^{\rm t} \alpha |^2 + \lambda \alpha^{\rm t} \Phi \Phi^{\rm t} \alpha
+    \]
+  \item グラム行列(Gram matrix) $K \equiv \Phi \Phi^{\rm t}$を導入すると
+    \[
+    R(\alpha) = | y - K \alpha |^2 + \lambda \alpha^{\rm t} K \alpha
+    \]
+  \item グラム行列($N \times N$対称行列)の成分
+    \[
+    K_{ik} = \sum_j \Phi_{ij} \Phi_{kj} = \sum_j \phi_j(x_i) \phi_j(x_k) \equiv {\color{red} k(x_i,x_k)}
+    \]
+  \item $M$個の基底関数の組を考えるかわりに1つのカーネル関数$k(x,x')$を導入すればよい(カーネル法)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{カーネルによる線形回帰}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 残差$R$の最小化
+    \[
+    \alpha = (K + \lambda \, {\rm I})^{-1} {\bf y}
+    \]
+  \item 点$x$における$y$の推定値
+    \begin{align*}
+    y &= \sum_j \phi_j(x) w_j = \sum_{i,j} \phi_j(x) \phi_j(x_i) \alpha_i = \sum_i k(x_i,x) \alpha_i \\ &= k^{\rm t}(x) \alpha = k^{\rm t}(x) (K + \lambda \, {\rm I})^{-1} {\bf y}
+k(x) = \begin{pmatrix} k(x_1,x) \\ k(x_2,x) \\ \vdots \\ k(x_N,x) \end{pmatrix}
+    \end{align*}
+  \item 例: ガウシアンカーネル $k(x,x') = \exp(-\beta|x-x'|^2)$
+  \end{itemize}
+\end{frame}
