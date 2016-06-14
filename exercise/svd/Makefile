@@ -1,8 +1,8 @@
-OBJ = diag double_well
+OBJ = svd full_svd
 default: $(OBJ)
 
 CFLAGS = -O3
-LDFLAGS = -llapack
+LDFLAGS = -llapack -lm
 
 clean:
 	rm -rf $(OBJ)
