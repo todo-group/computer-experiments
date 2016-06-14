@@ -1,0 +1,45 @@
+\section{囲い込み法}
+
+\begin{frame}[t,fragile]{囲い込み法(一次元の最適化)}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item $f(a) > f(b) < f(c)$を満たす3点の組$a < b < c$の領域を狭めていく
+  \item $[a,b]$、$[b,c]$の広い方(例えば後者)を$b$から見て
+    $0.382:0.618$ (黄金比)に内分する点を$x$とする
+    \begin{itemize}
+    \item $f(b) > f(x)$の場合: $[b,c]$を新しい領域にとる
+    \item $f(b) < f(x)$の場合: $[a,x]$を新しい領域にとる
+    \end{itemize}
+  \item もともとの$b$が$[a,c]$を$0.382:0.618$に内分する点だった場合、
+    新しい領域の幅は、どちらの場合も0.618
+  \item 最初の比率が黄金比からずれていたとしても、黄金比に収束
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{最初の囲い込み}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 1点を選び、適当な$\Delta x$を取る
+  \item 左右に$\Delta x$動かしてみて、関数値が小さくなる方へ動く
+  \item どちらに進んでも関数値が大きくなる場合には、囲い込み完了
+  \item 小さくなった場合、その方向へ再び増えるまで$\Delta x$を倍々に増やしながら進む
+  \item 最後の3点で極小値を囲い込むことができる
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{極小値をとる$x$の精度}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 実数の有効桁数を16桁($\epsilon \approx 10^{-16}$)とする(倍精度)
+  \item 真の極小($x_0$)のまわりでテイラー展開
+    \[
+    f(x) \approx f(x_0) + \frac{1}{2} f''(x_0) (x-x_0)^2
+    \]
+  \item $f''(x_0) / f(x_0)$が$O(1)$だとすると
+    \[
+    |x-x_0| \sim \sqrt{\epsilon} \sim 10^{-8}
+    \]
+    以下になると、第二項の第一項に対する比が$\epsilon$よりも小さくなる
+  \item それ以上領域を狭めても、関数値は変化しない
+  \end{itemize}
+\end{frame}
