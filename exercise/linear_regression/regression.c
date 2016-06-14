@@ -3,10 +3,12 @@
 #include <stdlib.h>
 #include <math.h>
 
-/* http://www.netlib. org/lapack/explore-html/d8/d2d/dgesvd_8f.html */
-void dgesvd_(char *JOBU, char* JOBVT, int *M, int *N, double* A,
-             int* LDA, double* S, double* U, int* LDU, double* VT, int* LDVT ,
-             double* WORK, int* LWORK, int* INFO);
+/* http://www.netlib.org/lapack/explore-html/d3/d6a/dgetrf_8f.html */
+void dgetrf_(int *M, int *N, double *A, int *LDA, int*IPIV, int *INFO);
+
+/* http://www.netlib.org/lapack/explore-html/d6/d49/dgetrs_8f.html */
+void dgetrs_(char *TRANS, int *N, int *NRHS, double *A, int *LDA, int *IPIV,
+             double *B, int *LDB, int *INFO);
 
  /* Maximum number of data points */
 const int maxdata = 100;
@@ -14,14 +16,12 @@ const int maxdata = 100;
  /* Number of Basis Functions */
 int nbase = 2;
 
-/* Basis Functions f(i, x) = Phi_i(x) */
+/* Basis Functions f(i, x) = phi_i(x) */
 double f(int i, double x) {
   if (i == 0)
     return 1.0;
   else if (i == 1)
     return x;
-  /* else if (i == 2) */
-  /*   return x * x; */
   return 0;
 }
 
@@ -42,13 +42,12 @@ int main(int argc, char** argv) {
   int i, j, k;
   int n;
   double x[maxdata], y[maxdata], yerror[maxdata];
-  double **a, **u, **vt;
-  double *b, *s, *w;
-  int lwork;
-  double *work;
+  double **a;
+  double *b;
+  int *ipiv;
   int info;
-  char jobu = 'S';
-  char jobvt = 'S';
+  char trans = 'T';
+  int nrhs = 1;
 
   if (argc < 2) {
     fprintf(stderr, "Usage: %s inputfile\n", argv[0]);
@@ -94,60 +93,27 @@ int main(int argc, char** argv) {
   printf("Phi^t y:\n");
   fprint_dvector(stdout, nbase, b);
 
-  /* perform svd on a */
-  u = alloc_dmatrix(nbase, nbase);
-  vt = alloc_dmatrix(nbase, nbase);
-  s = alloc_dvector(nbase);
-  lwork = 5 * nbase;
-  work = alloc_dvector(lwork);
-  dgesvd_(&jobu, &jobvt, &nbase, &nbase, &a[0][0], &nbase, &s[0], &vt[0][0],
-          &nbase, &u[0][0], &nbase, &work[0], &lwork, &info);
+  /* perform LU decomposition */
+  ipiv = alloc_ivector(nbase);
+  dgetrf_(&nbase, &nbase, &a[0][0], &nbase, &ipiv[0], &info);
   if (info != 0) {
-    fprintf(stderr, "Error: LAPACK::dgesvd failed\n");
+    fprintf(stderr, "Error: LAPACK::dgetrf failed\n");
     exit(1);
   }
-
-  printf("Result of SVD U:\n");
-  fprint_dmatrix(stdout, nbase, nbase, u);
-  printf("Result of SVD S:\n");
-  fprint_dvector(stdout, nbase, s);
-  printf("Result of SVD Vt:\n");
-  fprint_dmatrix(stdout, nbase, nbase, vt);
-
-  // check the result of SVD
-  for (i = 0; i < nbase; ++i) {
-    for (j = 0; j < nbase; ++j) {
-      a[i][j] = 0.0;
-      for (k = 0; k < nbase; ++k) {
-        a[i][j] += u[i][k] * s[k] * vt[k][j];
-      }
-    }
-  }
-  printf("Reconstruction of the original matrix A:\n");
+  printf("Result of LU decomposition:\n");
   fprint_dmatrix(stdout, nbase, nbase, a);
+  printf("Pivot for LU decomposition:\n");
+  fprint_ivector(stdout, nbase, ipiv);
 
-  /* invserse s */
-  for (i = 0; i < nbase; ++i) {
-    if (s[i] > 1.0e-10) s[i] = 1.0 / s[i];
-  }
-
-  w = alloc_dvector(nbase);
-  for (i = 0; i < nbase; ++i) {
-    w[i] = 0.0;
-    for (j = 0; j < nbase; ++j) {
-      for (k = 0; k < nbase; ++k) {
-        w[i] += vt[j][i] * s[j] * u[k][j] * b[k];
-      }
-    }
+  /* solve equations */
+  dgetrs_(&trans, &nbase, &nrhs, &a[0][0], &nbase, &ipiv[0], &b[0], &nbase, &info);
+  if (info != 0) {
+    fprintf(stderr, "Error: LAPACK::dgetrs failed\n");
+    exit(1);
   }
   printf("Result of linear regression w:\n");
-  fprint_dvector(stdout, nbase, w);
+  fprint_dvector(stdout, nbase, b);
   
   free_dmatrix(a);
-  free_dmatrix(u);
-  free_dmatrix(vt);
   free_dvector(b);
-  free_dvector(s);
-  free_dvector(w);
-  free_dvector(work);
 }

@@ -1,4 +1,4 @@
-OBJ = regression regression_lu
+OBJ = regression
 default: $(OBJ)
 
 CFLAGS = -O3
