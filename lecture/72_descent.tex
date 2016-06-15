@@ -67,7 +67,7 @@
       {\bf x}_{n+1} &= {\bf x}_n + \alpha_n {\bf p}_n \\
       {\bf r}_{n+1} &= {\bf r}_n - \alpha_n A {\bf p}_n = {\bf b} - A {\bf x}_{n+1} \\
       {\bf p}_{n+1} &= {\bf r}_{n+1} + \beta_n {\bf p}_n \\
-      \alpha_n &= \frac{{\bf r}_n^T {\bf r}_n}{{\bf p}_n^T A {\bf p}_n} \ \ \
+      \alpha_n &= \frac{{\bf r}_n^T {\bf p}_n}{{\bf p}_n^T A {\bf p}_n} \ \ \
       \beta_n = \frac{{\bf r}_{n+1}^T {\bf r}_{n+1}}{{\bf r}_n^T {\bf r}_n}
     \end{align*}
   \item このように作ると、全ての$i>j \ge 1$について、自動的に
