@@ -1,6 +1,5 @@
-#include <math.h>
 #include <stdio.h>
-#include <stdlib.h>
+#include <math.h>
 
 double f(const double *x) {
   double r2 = (x[0]*x[0] + x[1]*x[1]);
@@ -68,13 +67,34 @@ int main(int argc, char** argv) {
     }
 
     /* 最大値をのぞいた点の重心 */
+    for (j = 0; j < n; ++j) xg[j] = 0.0;
+    for (i = 0; i < n; ++i) {
+      for (j = 0; j < n; ++j) {
+        xg[j] += x[i][j];
+      }
+    }
+    for (j = 0; j < n; ++j) xg[j] /= n;
     
     /* 反射: x[n]をxgに関する対称な点に移動 */
-
-    /* 拡大: 反射点がy[0]よりも小さくなるようであればさらに先に進む */
-
-    /* 縮小: 二番目に悪い値よりもまだ大きい場合にはxgに近づける */
-
-    /* 収縮: それでもよくならない場合にはx[0]以外の点をx[0]に近づける */
+    for (j = 0; j < n; ++j) xnew[j] = xg[j] - (x[n][j] - xg[j]);
+    if (f(xnew) < y[n])
+      for (j = 0; j < n; ++j) x[n][j] = xnew[j];
+    if (f(xnew) < y[0]) {
+      /* 拡大: 反射点がy[0]よりも小さくなるようであればさらに先に進む */
+      for (j = 0; j < n; ++j) xnew[j] = xg[j] + 2 * (x[n][j] - xg[j]);
+      if (f(xnew) < y[0])
+        for (j = 0; j < n; ++j) x[n][j] = xnew[j];
+    } else if (f(x[n]) > y[n-1]) {
+      /* 縮小: 二番目に悪い値よりもまだ大きい場合にはxgに近づける */
+      for (j = 0; j < n; ++j) xnew[j] = xg[j] + 0.5 * (x[n][j] - xg[j]);
+      if (f(xnew) < f(x[n])) {
+        for (j = 0; j < n; ++j) x[n][j] = xnew[j];
+      } else {
+        /* 収縮: それでもよくならない場合にはx[0]以外の点をx[0]に近づける */
+        for (i = 1; i <= n; ++i) {
+          for (j = 0; j < n; ++j) x[i][j] = x[0][j] + 0.5 * (x[i][j] - x[0][j]);
+        }
+      }
+    }
   }
 }
