@@ -170,7 +170,7 @@ subroutine dgesvd(character JOBU, character JOBVT,
   \item ランク$r$ ($r<k$)の行列のうち、行列$A$を「最も良く近似」する$\tilde{A}$を選ぶ
   \item 「最も良く近似」= フロベニウスノルム$||A-\tilde{A}||_\mathrm{F}$を最小化
     \[
-    ||X||_\mathrm{F} \equiv \sum_{ij} x_{ij}^2
+    ||X||^2_\mathrm{F} \equiv \sum_{ij} x_{ij}^2
     \]
   \item 特異値のうち大きなものから$r$個とり、残りを零とした
     \[
