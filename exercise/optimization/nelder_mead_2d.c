@@ -1,10 +1,6 @@
+#include "func_2d.h"
 #include <stdio.h>
 #include <math.h>
-
-double f(const double *x) {
-  double r2 = (x[0]*x[0] + x[1]*x[1]);
-  return -10*r2 + r2*r2 - 2*(x[0]+x[1]);
-}
 
 /* v0 と v1 の値を交換する関数 */
 void swap(double* v0, double *v1) {
@@ -54,7 +50,7 @@ int main(int argc, char** argv) {
     }
 
     for (i = 0; i <= n; ++i) {
-      printf("(x[%d],y[%d]) = (%15.10f,%15.10f) %15.10f\n",
+      printf("(x[%d],y[%d]) = (%15.10f,%15.10f ) %15.10f\n",
              i, i, x[i][0], x[i][1], y[i]);
     }
 

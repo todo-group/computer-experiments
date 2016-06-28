@@ -1,10 +1,6 @@
+#include "func_1d.h"
 #include "mersenne_twister.h"
 #include <stdio.h>
-#include <math.h>
-
-double f(double x) {
-  return (5*x + x*x) + 70*sin(x);
-}
 
 int main(int argc, char** argv) {
   int seed = 12345;

@@ -1,10 +1,5 @@
-#include <math.h>
+#include "func_1d.h"
 #include <stdio.h>
-#include <stdlib.h>
-
-double f(double x) {
-  return (5*x + x*x) + 70*sin(x);
-}
 
 /* v0 と v1 の値を交換する関数 */
 void swap(double* v0, double *v1) {
