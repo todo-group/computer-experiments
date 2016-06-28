@@ -18,5 +18,6 @@ int main(int argc, char** argv) {
     x[0] -= epsilon * grad[0];
     x[1] -= epsilon * grad[1];
     printf("%d %f %f %f\n", i, x[0], x[1], f(x));
+    if (grad[0] * grad[0] + grad[1] * grad[1] < 1.0e-10) break;
   }
 }
