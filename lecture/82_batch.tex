@@ -1,0 +1,20 @@
+\section{バッチキューシステム}
+
+\begin{frame}[t,fragile]{バッチキューシステム}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 実習用計算機 photon
+    \begin{itemize}
+    \item ログインノード(2CPU, 12コア)+計算ノード(64CPU, 256コア)からなる「クラスタワークステーション」(並列計算機の一種)
+    \item 普段{\tt ssh}して作業しているのはログインノード
+    \end{itemize}
+  \item バッチーキューシステム
+    \begin{itemize}
+    \item 長い(大きな)計算は計算ノードを使う
+    \item 多数の計算ノードの割り振りを手でやるのは非効率的
+    \item バッチキューシステムを使って、「ジョブ」を投入する
+    \end{itemize}
+  \item 詳しい説明は「システム利用マニュアル」({\tt ssh}ログイン時に表示されるメッセージ参照)を見ること
+  \item photon は卒業まで継続して利用可 (希望すれば大学院でも)
+  \end{itemize}
+\end{frame}
