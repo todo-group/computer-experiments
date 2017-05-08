@@ -11,7 +11,7 @@ PDF = lecture-1.pdf lecture-2.pdf lecture-3.pdf lecture-4.pdf lecture-5.pdf \
 default: $(PDF)
 
 lecture-1.pdf: 00_about.tex 01_ssh.tex 10_error.tex 11_newton.tex
-lecture-2.pdf: 20_ode.tex 21_symplectic.tex 90_vcs.tex 91_subversion.tex
+lecture-2.pdf: 20_ode.tex 22_numerov.tex 21_symplectic.tex 30_intro.tex 31_direct.tex
 lecture-3.pdf: 30_intro.tex 31_direct.tex 32_iterative.tex 13_lapack.tex
 lecture-4.pdf: 40_intro.tex 41_dense.tex 42_sparse.tex 43_svd.tex
 lecture-5.pdf: 50_least-square.tex 52_bayes.tex 60_randomized.tex 61_montecarlo_integration.tex 62_random_number.tex 63_mcmc.tex
