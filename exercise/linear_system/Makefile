@@ -1,4 +1,4 @@
-OBJ = matrix_example pointer gauss lu_decomp random_matrix laplace_lu laplace_jacobi
+OBJ = matrix_example pointer gauss lu_decomp random_matrix
 default: $(OBJ)
 
 CFLAGS = -O3
