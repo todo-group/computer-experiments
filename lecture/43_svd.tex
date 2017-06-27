@@ -228,11 +228,11 @@ subroutine dgesvd(character JOBU, character JOBVT,
     \[
     ||A-X||_\mathrm{F}^2 = \sum_{ij}(a_{ij}-x_{ij})^2 = \text{tr} [(A-X)(A-X)^T]
     \]
-    を最小化すればよい。$UU^T=VV^T = I_k$より
+    を最小化すればよい。完全SVDについて$UU^T=I_m$, $VV^T = I_n$より
     \[
     \begin{split}
       ||A-X||_\mathrm{F}^2 &= \text{tr} [UU^T(A-X)VV^T(A-X)^T] \\
-      &= \text{tr} [U^T(A-X)V (U^T(A-X)V)^T] \\
+      %% &= \text{tr} [U^T(A-X)V (U^T(A-X)V)^T] \\
       &= \text{tr} [(\Lambda-G)(\Lambda-G)^T]  \ \ \ (G \equiv U^TXV)\\
       &= \sum_i^k (\lambda_i - g_{ii})^2 + \sum_i \sum_{j \ne i} g_{ij}^2
     \end{split}

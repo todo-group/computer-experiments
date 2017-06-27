@@ -1,0 +1,50 @@
+\documentclass[dvipdfmx]{beamer}
+\usepackage{tutorial}
+
+\title{計算機実験I (L4) \\ 疎行列の対角化・特異値分解・回帰分析}
+\date{2017/06/21}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+  \tableofcontents
+\end{frame}
+
+\input{42_sparse.tex}
+\input{43_svd.tex}
+\input{50_least-square.tex}
+
+\section{今後について}
+
+\begin{frame}[t,fragile]{計算機環境}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 教育用計算機システム
+  \item photonクラスタ
+    \begin{itemize}
+    \item 卒業まで利用可 (希望すれば大学院でも)
+    \item バッチシステムを使えば、かなり大規模な計算も可能
+    \end{itemize}
+  \item 計算機利用・シミュレーションに関する質問は今後も歓迎 {\tt computer@exa.phys.s.u-tokyo.ac.jp}
+  \item バージョン管理システムに関する講習を企画中
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{計算機実験II}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 3年冬学期、金曜5限
+  \item 全7回程度
+  \item 計算機実験Iで身に付けた知識をもとに、より高度な数値計算手法・アルゴリズムを学び、物理学における具体的な問題への応用を通して実践的な知識と経験を身につける。
+    \begin{itemize}
+      \item 数値対角化と量子力学 (講義と実習)
+      \item モンテカルロ法と統計物理 (講義と実習)
+      \item 最適化と実験データ解析 (講義と実習)
+      \item スパコンと並列計算 (講義と実習)
+    \end{itemize}
+    \item 実習はグループに分かれて課題に取り組む。
+  \end{itemize}
+\end{frame}
+
+\end{document}

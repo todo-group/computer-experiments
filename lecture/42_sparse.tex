@@ -117,13 +117,13 @@
   \item $v_2,v_3,\cdots$を生成する
     \begin{align*}
       v_2 &= (Av_1 - \alpha_1 v_1)/\beta_1 \\
-      v_3 &= (Av_2 - \alpha_2 v_2)/\beta_2 \\
+      v_3 &= (Av_2 - \beta_1 v_1 - \alpha_2 v_2)/\beta_2 \\
       \vdots
     \end{align*}
     ここで
     \begin{align*}
       \alpha_i &= v_i^T A v_i \\
-      \beta_i &= | A v_i - \beta_{i-1} v_{i-1} - \alpha_i v_i |
+      \beta_i &= | A v_i - \beta_{i-1} v_{i-1} - \alpha_i v_i |, \ \beta_0 = 0
     \end{align*}
     と選ぶ
   \end{itemize}
