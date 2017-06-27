@@ -1,8 +1,8 @@
 \documentclass[dvipdfmx]{beamer}
 \usepackage{tutorial}
 
-\title{計算機実験(L4) --- 行列の対角化}
-\date{2016/05/18}
+\title{計算機実験I (L4) \\ 疎行列の対角化・特異値分解・回帰分析}
+\date{2017/06/21}
 
 \begin{document}
 
@@ -11,66 +11,39 @@
   \tableofcontents
 \end{frame}
 
-\input{40_intro.tex}
-\input{41_dense.tex}
 \input{42_sparse.tex}
 \input{43_svd.tex}
+\input{50_least-square.tex}
 
-\section{}
-\begin{frame}[t,fragile]{実習・講義予定}
+\section{今後について}
+
+\begin{frame}[t,fragile]{計算機環境}
   \begin{itemize}
     \setlength{\itemsep}{1em}
-  \item 実習 EX3
+  \item 教育用計算機システム
+  \item photonクラスタ
     \begin{itemize}
-    \item ガウスの消去法、ピボット選択
-    \item LU分解
-    \item LAPACKの利用
+    \item 卒業まで利用可 (希望すれば大学院でも)
+    \item バッチシステムを使えば、かなり大規模な計算も可能
     \end{itemize}
-  \item 講義 L5
-    \begin{itemize}
-    \item 回帰分析
-    \item モンテカルロ法
-    \end{itemize}
-  \item 実習 EX4
-    \begin{itemize}
-    \item LAPACK固有値ソルバーの利用
-    \item 反復法による固有値問題の解法
-    \item シュレディンガー方程式の解
-    \item レポートNo.2
-    \end{itemize}
+  \item 計算機利用・シミュレーションに関する質問は今後も歓迎 {\tt computer@exa.phys.s.u-tokyo.ac.jp}
+  \item バージョン管理システムに関する講習を企画中
   \end{itemize}
 \end{frame}
 
-\begin{frame}[t,fragile]{レポート・グループワーク}
+\begin{frame}[t,fragile]{計算機実験II}
   \begin{itemize}
-    % \setlength{\itemsep}{1em}
-  \item レポートNo.1 (EX0 \& EX1 \& EX2)
-  \item レポートNo.2 (EX3 \& EX4)
-  \item レポートNo.3 (EX5 \& EX6)
-  \item グループワーク(発表会・グループレポート)
+    \setlength{\itemsep}{1em}
+  \item 3年冬学期、金曜5限
+  \item 全7回程度
+  \item 計算機実験Iで身に付けた知識をもとに、より高度な数値計算手法・アルゴリズムを学び、物理学における具体的な問題への応用を通して実践的な知識と経験を身につける。
     \begin{itemize}
-    \item ワークグループ(X1〜X9, Y1〜Y9)毎にテーマを決めて共同作業
-    \item テーマ: 実習の応用課題から選ぶ、他の講義や実験で出てきた問題を数値シミュレーションしてみる、五月祭の企画を発展させる、photonでの並列計算に取り組んでみる、など
-    \item 6月中旬くらいまでに各グループでテーマを決める ⇒ 6月中旬〜下旬にワークグループ毎に面談
-    \item 最終回(7/13)に発表会(プレビュー + ポスターセッション)
-    \item グループレポート(ポスター + $\alpha$を提出)
+      \item 数値対角化と量子力学 (講義と実習)
+      \item モンテカルロ法と統計物理 (講義と実習)
+      \item 最適化と実験データ解析 (講義と実習)
+      \item スパコンと並列計算 (講義と実習)
     \end{itemize}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[t,fragile]{昨年度のグループワークの課題例}
-  \begin{itemize}
-    % \setlength{\itemsep}{1em}
-  \item テント写像・ロジスティック方程式によるカオス
-  \item 硬い方程式とその解法
-  \item Runge-Kutta法・シンプレクティック法による二重振り子、三体問題の８の字解
-  \item Gauss-Seidel法とSOR法
-  \item Lanczos法で固有値を求める
-  \item SVD分解による画像ファイルの圧縮
-  \item いろいろな分布に従う乱数の発生、ブラウン運動の観察
-  \item マルコフ連鎖モンテカルロ法によるイジング模型・XY模型
-  \item パーコレーションモデルを用いた伝染病の解析
-  \item ホップフィールドネットワークによる連想記憶
+    \item 実習はグループに分かれて課題に取り組む。
   \end{itemize}
 \end{frame}
 
