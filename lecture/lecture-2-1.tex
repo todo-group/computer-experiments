@@ -1,0 +1,41 @@
+%-*- coding:utf-8 -*-
+
+\documentclass[dvipdfmx]{beamer}
+\usepackage{tutorial}
+
+\title{計算機実験II (L1) --- 対角化と量子力学}
+\date{2017/09/29}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+  \tableofcontents
+\end{frame}
+
+\input{01_about2.tex}
+\input{44_double-well.tex}
+
+\begin{frame}[t,fragile]{シューティング・対角化}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item シューティング
+    \begin{itemize}
+    \item 計算機実験I (L1) p.35
+    \item 2階常微分方程式の2次元1階連立微分方程式への書き換え[計算機実験I (L1) p.2]
+    \item オイラー法とその改良[計算機実験I (L1) p.4]
+    \item Numerov法[計算機実験I (L1) p.12]
+    \end{itemize}
+  \item ハミルトニアンの対角化
+    \begin{itemize}
+    \item 計算機実験I (L3) p.17
+    \item ハウスホルダー法(LAPACK) [計算機実験I (L3) p.26]
+    \item べき乗法[計算機実験I (L3) p.30]
+    \item Lanczos法[計算機実験I (L3) p.34]
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\input{14_bisection.tex}
+
+\end{document}

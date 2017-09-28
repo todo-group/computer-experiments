@@ -1,0 +1,40 @@
+\section{二重井戸ポテンシャル}
+
+\begin{frame}[t,fragile]{二重井戸ポテンシャル中の粒子}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 時間依存しないシュレディンガー方程式
+    \begin{align*}
+      \big[ -\frac{d^2}{dx^2} + V(x) \big] \psi(x) = E \psi(x)
+    \end{align*}
+    ($\hbar^2/2m = 1$となるように単位をとった)
+  \item 二重井戸ポテンシャル
+    \begin{align*}
+      V(x) = \begin{cases}
+        \infty & \text{$x < 0$, $x > 1$} \\
+        0 & \text{$0 < x < a$, $b < x < 1$} \\
+        v & \text{$a < x < b$}
+      \end{cases}
+    \end{align*}
+    ただし、$0<a<b<1$とする
+  \item 境界条件: $\psi(0) = \psi(1) = 0$、$0 < x < 1$で$\psi(x)$とその導関数が連続
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{シュレディンガー方程式の解法}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item シューティング
+    \begin{itemize}
+    \item 計算機実験I (L1) p.35
+    \item シューティングに用いる積分法: 2階常微分方程式の2次元1階連立微分方程式への書き換え[計算機実験I (L1) p.2]、オイラー法とその改良[計算機実験I (L1) p.4]、Numerov法[計算機実験I (L1) p.12]
+    \end{itemize}
+  \item ハミルトニアンの対角化
+    \begin{itemize}
+    \item 計算機実験I (L3) p.17
+    \item 対角化手法: ハウスホルダー法(LAPACK) [計算機実験I (L3) p.26]、べき乗法[計算機実験I (L3) p.30]、Lanczos法[計算機実験I (L3) p.34]
+    \end{itemize}
+  \item その他の方法: 手で解けるところはあらかじめ解いて次元を減らす
+  \item それぞれのコスト(=計算時間・メモリ)は?
+  \end{itemize}
+\end{frame}
