@@ -10,7 +10,7 @@ PDF = lecture-1.pdf lecture-2.pdf lecture-3.pdf lecture-4.pdf lecture-5.pdf \
 
 default: $(PDF)
 
-lecture-1.pdf: 00_about.tex 01_ssh.tex 10_error.tex 11_newton.tex
+lecture-1.pdf: 00_about1.tex 02_ssh.tex 10_error.tex 11_newton.tex
 lecture-2.pdf: 20_ode.tex 22_numerov.tex 21_symplectic.tex 30_intro.tex 31_direct.tex
 lecture-3.pdf: 30_intro.tex 31_direct.tex 32_iterative.tex 13_lapack.tex
 lecture-4.pdf: 40_intro.tex 41_dense.tex 42_sparse.tex 43_svd.tex
@@ -19,7 +19,7 @@ lecture-6.pdf: 70_optimization.tex 11_newton.tex 71_enclosure.tex 72_descent.tex
 lecture-7.pdf: 70_optimization.tex 72_descent.tex 76_comparison.tex 80_supercomputer.tex	81_parallel.tex 82_batch.tex
 appendix.pdf: 12_algebraic.tex 22_numerov.tex 09_exercise.tex 19_exercise.tex 29_exercise.tex 39_exercise.tex 49_exercise.tex 51_kernel.tex 59_exercise.tex 69_exercise.tex 79_exercise.tex 89_exercise.tex
 
-0_about.pdf: 00_about.tex 01_ssh.tex 09_exercise.tex
+0_about.pdf: 00_about1.tex 01_about2.tex 02_ssh.tex 09_exercise.tex
 1_basics.pdf: 10_error.tex 11_newton.tex 12_algebraic.tex 13_lapack.tex 19_exercise.tex
 2_ode.pdf: 20_ode.tex 21_symplectic.tex 22_numerov.tex 29_exercise.tex
 3_linear_system.pdf: 30_intro.tex 31_direct.tex 32_iterative.tex 39_exercise.tex
