@@ -1,0 +1,77 @@
+\section{解析計算による次元削減}
+
+\begin{frame}[t,fragile]{シュレディンガー方程式の一般解}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 二重井戸ポテンシャル
+    \begin{align*}
+      V(x) = \begin{cases}
+        \infty & \text{$x < 0$, $x > 1$} \\
+        0 & \text{$0 < x < a$, $b < x < 1$} \\
+        v & \text{$a < x < b$}
+      \end{cases}
+    \end{align*}
+  \item それぞれの領域内では手で解ける
+  \item 領域1 ($0 < x < a$)、領域3 ($b < x < 1$)では
+    \begin{align*}
+      -\frac{d^2}{dx^2}\psi(x) = E\psi(x)
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{シュレディンガー方程式の一般解}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 領域1 ($0 < x < a$)、領域3 ($b < x < 1$)における一般解
+    \begin{align*}
+      \psi(x) &= A_1 e^{i\sqrt{E}x} + B_1 e^{-i\sqrt{E}x} \\
+      \psi(x) &= A_3 e^{i\sqrt{E}x} + B_3 e^{-i\sqrt{E}x}
+    \end{align*}
+    あきらかに$E>0$であるので
+    \begin{align*}
+      \psi(x) &= \alpha_1 \cos(\sqrt{E}x) + \beta_1 \sin(\sqrt{E}x) \\
+      \psi(x) &= \alpha_3 \cos(\sqrt{E}x) + \beta_3 \sin(\sqrt{E}x)
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{シュレディンガー方程式の一般解}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 領域2 ($a < x < b$)における一般解
+    \begin{align*}
+      \psi(x) &= A_2 e^{i\sqrt{(E-v)}\,x} + B_1 e^{-i\sqrt{(E-v)}\,x}
+    \end{align*}
+  \item $E < v$の場合
+    \begin{align*}
+      \psi(x) &= \alpha_2 \exp(-\sqrt{(v-E)}\,x) + \beta_2 \exp(\sqrt{(v-E)}\,x)
+    \end{align*}
+  \item $E > v$の場合
+    \begin{align*}
+      \psi(x) &= \alpha_2 \cos(\sqrt{(E-v)}\,x) + \beta_2 \sin(\sqrt{(E-v)}\,x)
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{シュレディンガー方程式の一般解}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 境界条件($E < v$の場合)
+    \begin{align*}
+      &\alpha_1 = 0 \\
+      &\alpha_1 \cos(\sqrt{E}a) + \beta_1 \sin(\sqrt{E}a) \\
+      & \qquad =
+      \alpha_2 \exp(-\sqrt{(v-E)}\,a) + \beta_2 \exp(\sqrt{(v-E)}\,a) \\
+      &-\alpha_1 \sqrt{E} \sin(\sqrt{E}a) + \beta_1 \sqrt{E} \sin(\sqrt{E}a) \\
+      & \qquad =
+      - \alpha_2 \sqrt{(v-E)} \exp(-\sqrt{(v-E)}\,a) + \beta_2 \sqrt{(v-E)} \exp(\sqrt{(v-E)}\,a) \\
+      &\cdots
+    \end{align*}
+  \item $\beta_1$, $\alpha_2$, $\beta_2$, $\alpha_3$, $\beta_3$ に関する連立方程式
+    \begin{align*}
+      M x = 0
+    \end{align*}
+  \item $5 \times 5$行列$M$は$E$の関数
+  \item 非自明な解が存在するための条件: $\det M=0$
+  \end{itemize}
+\end{frame}

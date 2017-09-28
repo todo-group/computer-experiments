@@ -16,7 +16,7 @@ lecture-1-2.pdf: 20_ode.tex 22_numerov.tex 21_symplectic.tex 30_intro.tex 31_dir
 lecture-1-3.pdf: 13_lapack.tex 32_iterative.tex 40_intro.tex 41_dense.tex
 lecture-1-4.pdf: 42_sparse.tex 43_svd.tex 50_least-square.tex
 
-lecture-2-1.pdf: 01_about2.tex 44_double-well.tex
+lecture-2-1.pdf: 01_about2.tex 44_double-well.tex 45_dimensional-reduction.tex
 
 # lecture-6.pdf: 70_optimization.tex 11_newton.tex 71_enclosure.tex 72_descent.tex 73_cg.tex 74_simplex.tex 75_annealing.tex 76_comparison.tex
 # lecture-7.pdf: 70_optimization.tex 72_descent.tex 76_comparison.tex 80_supercomputer.tex	81_parallel.tex 82_batch.tex
