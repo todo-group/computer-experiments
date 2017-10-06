@@ -13,7 +13,7 @@
 \begin{document}
 
 \noindent
-{\bf\large 「計算機実験II」実習課題(EX1)}
+{\bf\large 「計算機実験II」実習課題(EX1) 2017-10-06}
 \\[-0.5em]
 
 \noindent
@@ -24,18 +24,18 @@
 
 \item 準備練習
   
-  計算機実験Iで行った基本的な操作・手順を復習する。必要ないと思う場合にはそのまま基本課題に進んでよい
+  計算機実験Iで行った基本的な操作・手順を復習する。復習は不要と思う場合にはそのまま基本課題に進んでよい
   \begin{enumerate}
   \item Emacsあるいは他のエディタを用いたファイル編集(ハンドブック2.3節)
   \item Cプログラムの作成・コンパイル・実行(ハンドブック3.1.1節)
-  \item LU分解のサンプルプログラム(\href{https://github.com/todo-group/computer-experiments/blob/master/exercise/linear_system/lu_decomp.c}{example-2-L1/lu\_decomp.c})のコンパイル・実行。コンパイル時にLAPACKをリンク({\tt -llapack})する必要があることに注意(ハンドブック3.1.6節)
+  \item LU分解のサンプルプログラム{\tt example-2-L1/lu\_decomp.c}のコンパイル・実行。コンパイル時にLAPACKをリンク({\tt -llapack})する必要があることに注意(ハンドブック3.1.6節)
   \end{enumerate}
 
 \item 基本課題
   \begin{enumerate}
   \item 関数のゼロ点を求める二つの方法、ニュートン法[計算機実験I (L1) p.17, 計算機実験I (EX1) 基本課題2]と二分法[計算機実験II (L1) p.12]を比較してみよう
     \begin{itemize}
-    \item サンプルプログラム\href{https://github.com/todo-group/computer-experiments/blob/master/exercise/basics/bisection.c}{example-2-L1/bisection.c}を、$x^3=10$を解いて$\sqrt[3]{10}$を計算するように修正せよ
+    \item サンプルプログラム{\tt example-2-L1/bisection.c}を、$x^3=10$を解くことで$\sqrt[3]{10}$を求めることができるように修正せよ
     \item ニュートン法と二分法それぞれについて、反復にしたがって値がどのように真値に近づいていくか図示せよ
     \item 二分法では正しくゼロ点が見つかるが、ニュートン法が失敗するような関数の例を考え、実際に実験してみよ
     \end{itemize}
@@ -71,9 +71,9 @@
   \end{enumerate}  
 \item 応用課題
   \begin{enumerate}
-  \item 計算機実験II (L1) p.14-17で導入した手法(シュレディンガー方程式の一般解について、境界条件に関する非線形連立方程式が非自明な解を持つ条件を考える)を使って固有値を求めるプログラムを作成せよ。(行列式の計算と二分法を用いる)
-  \item 基本課題3について、べき乗法ではなくLanzos法を用いて、基底状態と基底エネルギーを計算せよ。また、べき乗法とLanczos法について、収束までの反復回数を比較せよ
-  \end{enumerate}  
+  \item 計算機実験II (L1) p.14-17で導入した手法(シュレディンガー方程式の一般解について、境界条件に関する非線形連立方程式が非自明な解を持つ条件を考える)を使って固有値を求めるプログラムを作成せよ。[LU分解による行列式の計算({\tt example-2-L1/determinant.c})と二分法({\tt example-2-L1/bisection.c})を組み合わせる]
+  \item 基本課題3について、べき乗法ではなくLanczos法を用いて、基底状態と基底エネルギーを計算せよ。また、べき乗法とLanczos法について、収束までの反復回数を比較せよ
+  \end{enumerate}
 
 \item レポート課題
 
