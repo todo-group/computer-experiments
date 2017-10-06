@@ -1,0 +1,84 @@
+\documentclass[11pt]{jarticle}
+
+\usepackage{amsmath}
+\usepackage{graphics}
+\usepackage{hyperref}
+
+\setlength{\oddsidemargin}{-0.7cm}
+\setlength{\topmargin}{-1.5cm}
+\setlength{\textwidth}{16.5cm}
+\setlength{\textheight}{26cm}
+\pagestyle{empty}
+
+\begin{document}
+
+\noindent
+{\bf\large 「計算機実験II」実習課題(EX1)}
+\\[-0.5em]
+
+\noindent
+\begin{itemize}
+\item 講義のページ: \verb+http://exa.phys.s.u-tokyo.ac.jp/ja/lectures/2017W-computer2+
+
+\item サンプルプログラム: \\ {\small \verb+https://github.com/todo-group/computer-experiments/releases/tag/2017-2-L1+}からexample-2-L1.zipをダウンロードして展開する
+
+\item 準備練習
+  
+  計算機実験Iで行った基本的な操作・手順を復習する。必要ないと思う場合にはそのまま基本課題に進んでよい
+  \begin{enumerate}
+  \item Emacsあるいは他のエディタを用いたファイル編集(ハンドブック2.3節)
+  \item Cプログラムの作成・コンパイル・実行(ハンドブック3.1.1節)
+  \item LU分解のサンプルプログラム(\href{https://github.com/todo-group/computer-experiments/blob/master/exercise/linear_system/lu_decomp.c}{example-2-L1/lu\_decomp.c})のコンパイル・実行。コンパイル時にLAPACKをリンク({\tt -llapack})する必要があることに注意(ハンドブック3.1.6節)
+  \end{enumerate}
+
+\item 基本課題
+  \begin{enumerate}
+  \item 関数のゼロ点を求める二つの方法、ニュートン法[計算機実験I (L1) p.17, 計算機実験I (EX1) 基本課題2]と二分法[計算機実験II (L1) p.12]を比較してみよう
+    \begin{itemize}
+    \item サンプルプログラム\href{https://github.com/todo-group/computer-experiments/blob/master/exercise/basics/bisection.c}{example-2-L1/bisection.c}を、$x^3=10$を解いて$\sqrt[3]{10}$を計算するように修正せよ
+    \item ニュートン法と二分法それぞれについて、反復にしたがって値がどのように真値に近づいていくか図示せよ
+    \item 二分法では正しくゼロ点が見つかるが、ニュートン法が失敗するような関数の例を考え、実際に実験してみよ
+    \end{itemize}
+  %% \item 行列式を計算するプログラム(example-2-L1/determinant.c)を読み、どのようにして行列式を計算しているか理解せよ
+  %%   \begin{itemize}
+  %%   \item 配列{\tt ipiv}の値に応じて-1を掛けている箇所があるが、なぜそのような処理が必要なのか考えよ
+  %%   \item このプログラムによる行列式の計算時間は、行列の次元{\tt n}が大きくなるとどのように増えると予想されるか？予想通りの振る舞いになるかどうか実験してみよ
+  %%   \end{itemize}
+  \item プログラム{\tt example-2-L1/double\_well.c}は、ハウスホルダー法を用いた対角化により、二重井戸ポテンシャル
+    \begin{equation*}
+      V(x) = \begin{cases}
+        \infty & x < 0, \ x > 1 \\
+        0 & 0 < x < \frac{1}{2} - w/2, \ \frac{1}{2} + w/2 < x < 1 \\
+        v & \frac{1}{2} - w/2 < x < \frac{1}{2} + w/2
+      \end{cases}
+    \end{equation*}
+    の固有値と固有ベクトルを計算するプログラムである。コマンドライン引数として、刻み数{\tt n}、障壁の高さ$v$ ({\tt v})、障壁の幅$w$ ({\tt width})を指定する
+    \begin{itemize}
+      \item 障壁の幅や高さを変えた時に固有値や固有ベクトルがどのように変化するか調べ、図示せよ。また、その物理的意味を考察せよ。(ヒント: 障壁が無限に高い極限からの摂動を考えてみよ)
+      \item {\tt double\_well.c}では全ての変数が無次元化されている。粒子の質量、井戸の幅、障壁の幅、高さとして、(次元をもつ)物理的に妥当な値を仮定せよ。それらを無次元化すると、{\tt v}、{\tt width}の値はいくらになるか? また、それらの値から{\tt double\_well.c}により計算された固有値を、次元をもつ実際の値に換算してみよ
+    \end{itemize}
+  \item 基本課題2と同じハミルトニアンを考える
+    \begin{itemize}
+      \item ハミルトニアン行列とベクトル(波動関数)の積を計算する関数を作成せよ。計算量が行列の次元{\tt dim = n-1}に比例するようなコードとすること
+      \item 作成した行列ベクトル積の関数を用いて、べき乗法[計算機実験I (L3) p.30]によりハミルトニアンの基底状態と基底エネルギーを求め、基本課題2の結果と比較せよ
+    \end{itemize}
+  \item 基本課題2と同じハミルトニアンを考える
+     \begin{itemize}
+     \item Numerov法[計算機実験I (L2) p.13]を用いて、与えられたエネルギー固有値$E$の下で一次元シュレディンガー方程式を$x=0$から$x=1$まで積分するプログラムを作成せよ。境界条件は$\Psi(0)=0$とする。% ポテンシャルを関数({\tt V(x)})で与えられるような構造のプログラムとすること
+     \item $E$の値を変えると、それに従って解がどのように変化するか図示せよ
+     \item シューティング[計算機実験I (L3) p.16]により、固有値と固有ベクトルを一組求めるプログラムを作成し、基本課題2の結果と比較せよ
+    \end{itemize}
+  \end{enumerate}  
+\item 応用課題
+  \begin{enumerate}
+  \item 計算機実験II (L1) p.14-17で導入した手法(シュレディンガー方程式の一般解について、境界条件に関する非線形連立方程式が非自明な解を持つ条件を考える)を使って固有値を求めるプログラムを作成せよ。(行列式の計算と二分法を用いる)
+  \item 基本課題3について、べき乗法ではなくLanzos法を用いて、基底状態と基底エネルギーを計算せよ。また、べき乗法とLanczos法について、収束までの反復回数を比較せよ
+  \end{enumerate}  
+
+\item レポート課題
+
+  基本課題1,3についてレポートを作成し提出せよ(基本課題2,4はオプション)。実習2 (EX2)のレポート課題とあわせて、一つのレポートとして提出すること。提出締め切りは12月1日とする。提出方法については後日指示する
+  
+\end{itemize}
+
+\end{document}

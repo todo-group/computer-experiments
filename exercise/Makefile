@@ -1,4 +1,4 @@
-PDF = exercise-0.pdf exercise-1.pdf exercise-2.pdf
+PDF = exercise-0.pdf exercise-1.pdf exercise-2.pdf exercise-3.pdf exercise-4.pdf exercise-2-1.pdf
 ZIP = example-2-L1.zip
 
 EXAMPLE2L1 = basics/bisection.c eigenvalue_problem/double_well.c linear_system/determinant.c linear_system/lu_decomp.c linear_system/matrix_util.h linear_system/input1.dat linear_system/input2.dat
