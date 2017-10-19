@@ -5,6 +5,7 @@ ZIP = example-2-L1.zip example-2-L2.zip
 EXAMPLE2L1 = basics/bisection.c eigenvalue_problem/double_well.c linear_system/determinant.c linear_system/lu_decomp.c linear_system/matrix_util.h linear_system/input1.dat linear_system/input2.dat
 
 EXAMPLE2L2 = monte_carlo/random.c monte_carlo/histogram.c \
+	monte_carlo/harmonic.c monte_carlo/square_lattice.c \
 	linear_system/matrix_util.h
 
 .SUFFIXES: .pdf .dvi .tex

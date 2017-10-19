@@ -32,7 +32,7 @@
   \end{itemize}
   \item 磁性体
     \begin{itemize}
-    \item イジング模型 \ \ $\displaystyle H = -J \sum_{ij} \sigma_i \sigma_j$
+    \item イジング模型 \ \ $\displaystyle H = -J \sum_{ij} \sigma_i \sigma_j$ \ \ \ $\sigma_i = \pm 1$
     \end{itemize}
   \end{itemize}
 \end{frame}
@@ -40,20 +40,32 @@
 \begin{frame}[t,fragile]{多体系の統計力学}
   \begin{itemize}
     \setlength{\itemsep}{1em}
-  \item カノニカル分布 \ $P(c) = \exp [- H(c) / k_{\rm B}T ] / Z$
+  \item カノニカル分布 \ $P(c) = \exp [- \beta H(c) ] / Z$ \ \ \ ($\beta = k_{\rm B} T$)
   \item 分配関数・自由エネルギー
-    \begin{align}
-      Z(T) &= \int \exp [- H(p,q) / k_{\rm B}T ] \, dp \, dq \\
-      f(T) = - k_{\rm B} T \log Z(T)
-    \end{align}
+    \begin{align*}
+      Z(T) &= \int \exp [- \beta H(p,x) ] \, dp \, dx \qquad \text{(粒子系)} \\
+      &= \sum_c \exp [- \beta H(c) ] \qquad \text{(イジング模型)} \\
+      f(T) &= - \beta^{-1} \log Z(T)
+    \end{align*}
   \item 物理量の期待値
+    \begin{align*}
+      \langle A \rangle &= Z^{-1} \int A(p,x) \exp [- \beta H(p,x) ] \, dp \, dx \qquad \text{(粒子系)} \\
+      &= Z^{-1} \sum_c A(c) \exp [- \beta H(c) ] \qquad \text{(イジング模型)}
+    \end{align*}
   \end{itemize}
 \end{frame}
 
-\begin{frame}[t,fragile]{計算量の爆発}
+\begin{frame}[t,fragile]{多体系の統計力学}
   \begin{itemize}
     \setlength{\itemsep}{1em}
-  \item 
+  \item 内部エネルギー
+    \begin{align*}
+      E &= -\frac{\partial}{\partial\beta} \log Z = Z^{-1} \sum_c H(c) \exp [- \beta H(c) ]
+    \end{align*}
+  \item 比熱
+    \begin{align*}
+      C &= \frac{1}{N} \frac{\partial E}{\partial T} = \frac{\beta^2}{N} (\langle H^2 \rangle - \langle H \rangle^2)
+    \end{align*}
   \end{itemize}
 \end{frame}
 

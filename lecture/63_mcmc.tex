@@ -98,9 +98,7 @@
   \item 確率$\min \Big( 1, \frac{e^{-\beta V(x')}}{e^{-\beta V(x)}} \Big)$で$x'$を採択(accept)。棄却(reject)された場合にはもとの$x$のまま
   \item 物理量の測定 (reject された場合にもカウントする)
   \item 採択確率(acceptance probability)は、$\frac{e^{-\beta V(x')}}{e^{-\beta V(x)}+e^{-\beta V(x')}}$でもよい
-  \item コード例:
-
-    {\tiny \url{https://github.com/todo-group/computer-experiments/blob/master/exercise/monte_carlo/harmonic.c}}
+  \item 例: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/monte_carlo/harmonic.c}{example-2-L2/harmonic.c}
   \end{itemize}
 \end{frame}
 
@@ -158,5 +156,24 @@
     \item 非局所更新法、拡張アンサンブル法など様々な方法が使われている
     \end{itemize}
   \item 物理以外でも、Bayes推定や機械学習、社会現象のシミュレーションなど広く使われている
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{イジング模型に対するモンテカルロ法}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 更新の単位は一つのスピンとするのが一番自然 (cf. クラスターアルゴリズム)
+  \item メトロポリス法に必要なのは更新前後のエネルギー差だけなので、全エネルギーを計算しなおす必要なし
+\begin{verbatim}
+for (s = 0; s < num_sites; ++s) {
+  delta = 0.0;
+  for (j = 0; j < num_neighbors; ++j) {
+    v = neighbor(s, j);
+    delta += 2 * J * spin[s] * spin[v];
+  }
+  if (random() < exp(-beta * delta))
+    spin[s] = -1 * spin[s];
+}  
+\end{verbatim}
   \end{itemize}
 \end{frame}
