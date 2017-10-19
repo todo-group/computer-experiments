@@ -1,4 +1,4 @@
-OBJ = random harmonic histogram
+OBJ = random harmonic histogram square_lattice
 default: $(OBJ)
 
 CPPFLAGS = -I. -I../linear_system
