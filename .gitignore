@@ -8,5 +8,6 @@
 */*.toc
 */*.vrb
 exercise/*.pdf
+exercise/*.zip
 lecture/*.pdf
 handbook/main.pdf
