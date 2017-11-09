@@ -162,7 +162,7 @@
 \begin{frame}[t,fragile]{イジング模型に対するモンテカルロ法}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
-  \item 更新の単位は一つのスピンとするのが一番自然 (cf. クラスターアルゴリズム)
+  \item 更新の単位は一つのスピンとするのが一番自然
   \item メトロポリス法に必要なのは更新前後のエネルギー差だけなので、全エネルギーを計算しなおす必要なし
 \begin{verbatim}
 for (s = 0; s < num_sites; ++s) {
@@ -175,5 +175,40 @@ for (s = 0; s < num_sites; ++s) {
     spin[s] = -1 * spin[s];
 }  
 \end{verbatim}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{物理量の計算}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 内部エネルギー$E$
+    \begin{itemize}
+    \item 初期状態のスピンを全て上向き(1)に取ると$E=-J \times \text{ボンド数}$
+    \item モンテカルロステップ毎にエネルギーの変化分を計算しているので、採択された場合にはその値を足し込む
+    \end{itemize}
+  \item 比熱$C$: 内部エネルギーのゆらぎから計算できる
+    \[
+    C = \frac{1}{N} \frac{\partial E}{\partial T} = \frac{1}{NT^2} (\langle E^2 \rangle - \langle E \rangle^2)
+    \]
+  \item 磁化$m$: スピンの値の平均値 $m = \frac{1}{N} \sum_i \sigma_i$
+    \begin{itemize}
+    \item 外部磁場がない場合、対称性から$m$の長時間平均は厳密には零になる
+    \item 熱力学極限では対称性が自発的に破れて、低温で有限の$m$
+    \item シミュレーションでは$m$ではなく$m^2$を見るとよい
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{モンテカルロステップの設定}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 全てのスピンについて一通り更新を試すのを、1モンテカルロステップと数える
+  \item どれくらいのモンテカルロステップが必要かは、あらかじめは分からない
+  \item 典型的には、$10^4$---$10^6$程度にとることが多い
+  \item 熱平衡化 (thermalization)
+    \begin{itemize}
+    \item 初期配位依存性を取り除くため、モンテカルロステップの最初の部分は捨てる(burn-in time)
+    \item 典型的には、全体の1割程度を捨てることが多い
+    \end{itemize}
   \end{itemize}
 \end{frame}
