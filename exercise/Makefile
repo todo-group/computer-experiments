@@ -6,7 +6,7 @@ EXAMPLE2L1 = basics/bisection.c eigenvalue_problem/double_well.c linear_system/d
 
 EXAMPLE2L2 = monte_carlo/random.c monte_carlo/histogram.c \
 	monte_carlo/harmonic.c monte_carlo/square_lattice.c \
-	linear_system/matrix_util.h
+	linear_system/matrix_util.h monte_carlo/mersenne_twister.h
 
 .SUFFIXES: .pdf .dvi .tex
 
