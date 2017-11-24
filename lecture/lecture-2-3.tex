@@ -1,0 +1,397 @@
+%-*- coding:utf-8 -*-
+
+\documentclass[dvipdfmx]{beamer}
+\usepackage{tutorial}
+
+\title{計算機実験II (L3) --- 転送行列・分子動力学}
+\date{2017/11/24}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+  \tableofcontents
+\end{frame}
+
+\section{多体系の統計力学}
+
+\begin{frame}[t,fragile]{典型的な統計力学モデル}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 古典粒子系
+    \begin{itemize}
+    \item 調和振動子 \ \ $\displaystyle H = \frac{p^2}{2m} + \frac{k}{2}x^2$
+    \item 多粒子系
+      \[
+      H = \sum \frac{p_i^2}{2m} + \sum_{ij} V(x_i, x_j)
+      \]
+    \item バネビーズ模型
+      \[
+      H = \sum \frac{p_i^2}{2m} + \frac{k}{2} \sum_{ij} (x_i-x_j)^2
+      \]
+  \end{itemize}
+  \item 磁性体
+    \begin{itemize}
+    \item イジング模型 \ \ $\displaystyle H = -J \sum_{ij} \sigma_i \sigma_j$ \ \ \ $\sigma_i = \pm 1$
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{多体系の統計力学}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item カノニカル分布 \ $P(c) = \exp [- \beta H(c) ] / Z$ \ \ \ ($\beta = k_{\rm B} T$)
+  \item 分配関数・自由エネルギー
+    \begin{align*}
+      Z(T) &= \int \exp [- \beta H(p,x) ] \, dp \, dx \qquad \text{(粒子系)} \\
+      &= \sum_c \exp [- \beta H(c) ] \qquad \text{(イジング模型)} \\
+      f(T) &= - \beta^{-1} \log Z(T)
+    \end{align*}
+  \item 物理量の期待値
+    \begin{align*}
+      \langle A \rangle &= Z^{-1} \int A(p,x) \exp [- \beta H(p,x) ] \, dp \, dx \qquad \text{(粒子系)} \\
+      &= Z^{-1} \sum_c A(c) \exp [- \beta H(c) ] \qquad \text{(イジング模型)}
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{多体系の統計力学}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 内部エネルギー
+    \begin{align*}
+      E &= -\frac{\partial}{\partial\beta} \log Z = Z^{-1} \sum_c H(c) \exp [- \beta H(c) ]
+    \end{align*}
+  \item 比熱
+    \begin{align*}
+      C &= \frac{1}{N} \frac{\partial E}{\partial T} = \frac{\beta^2}{N} (\langle H^2 \rangle - \langle H \rangle^2)
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{代表的な数値計算手法}
+  \begin{itemize}
+    % \setlength{\itemsep}{1em}
+  \item {\color{red} 数え上げ}
+    \begin{itemize}
+      \item 計算コスト ✕ (指数関数的)
+      \item メモリコスト ○ (${\cal O}(1)$)
+    \end{itemize}
+  \item {\color{red} 転送行列法}
+    \begin{itemize}
+      \item 計算コスト △ (指数関数的)
+      \item メモリコスト △ (指数関数的)
+    \end{itemize}
+  \item {\color{red} 分子動力学法}
+    \begin{itemize}
+      \item 計算コスト ○ (${\cal O}(N)$)
+      \item メモリコスト ○ (${\cal O}(N)$)
+      \item 統計誤差あり
+    \end{itemize}
+  \item マルコフ連鎖モンテカルロ法
+    \begin{itemize}
+      \item 計算コスト ○ (${\cal O}(N)$)
+      \item メモリコスト ○ (${\cal O}(N)$)
+      \item 統計誤差あり
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\section{数え上げ}
+
+\begin{frame}[t,fragile]{厳密な数え上げ}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 全ての状態についてボルツマン重みを計算し足し合わせる
+    \begin{itemize}
+    \item 状態数 $= 2^N$ \ ($N$スピン数)
+    \end{itemize}
+  \item 状態を$N$ビットの整数で表す (0から$2^N-1$)
+    \begin{itemize}
+    \item $i$番目の格子点のスピンの状態を$i$ビット目に保存
+    \item $\sigma = \pm 1$をビットの 1 or 0で表現
+    \item シフト演算(\verb+>>+)とAND演算(\verb+&+)でスピン状態を取り出す
+    \end{itemize}
+  \item 例: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/monte_carlo/exact_counting.c}{example-2-L3/exact\_counting.c}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{Log-sum-exp法}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item Boltzmann重みは低温で非常に大きくなる
+    \begin{itemize}
+    \item そのまま足し合わせていくと、桁あふれの可能性
+    \item C言語のdoubleで表せる最大の数 〜 $10^{308}$
+    \item そのままの数ではなく、その{\color{red} 対数の値を保存}しておけばよい
+    \item それらの和を計算する時、どうすればよいのか？
+    \end{itemize}
+  \item Log-sum-exp法
+    \begin{itemize}
+    \item 対数の値から元の値に戻すと桁があふれるので、{\color{red} 途中で大きな数が出てこないように}する
+    \item $a > b$ の時: $e^c = e^a + e^b = e^a (1 + e^{-(a-b)})$
+    \item 対数を取ると $c = log(e^a + e^b) = a + log(1 + e^{-(a-b)})$
+    \item 右辺の指数関数の中身はかならず負
+    \item $a < b$の時も同様に考える。まとめると \\
+      $\color{red} c = max(a,b) + log(1 + e^{-|a-b|})$
+    \end{itemize}
+  \item 別の方法: 基底状態のエネルギーが分かっている場合には$e^{-\beta E_0}$で重みを規格化しておく
+  \end{itemize}
+\end{frame}
+
+\section{転送行列法}
+
+\begin{frame}[t,fragile]{転送行列: 一次元イジング模型}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item ハミルトニアン: $H = - \sum_i \sigma_i \sigma_{i+1}$
+  \item 分配関数
+    \[
+    Z = \sum_{\sigma_1}\sum_{\sigma_2}\cdots\sum_{\sigma_L} e^{\beta \sigma_1 \sigma_2} e^{\beta \sigma_2 \sigma_3} \cdots e^{\beta \sigma_L \sigma_1}
+    \]
+    \begin{itemize}
+    \item $e^{\beta \sigma_1 \sigma_2}$は4通りの値を持つ→$2\times2$行列$T_{\sigma_1 \sigma_2}$の形に書くと
+      \begin{align*}
+      \sum_{\sigma_2} e^{\beta \sigma_1 \sigma_2} e^{\beta \sigma_2 \sigma_3} &= \sum_{\sigma_2} T_{\sigma_1 \sigma_2} T_{\sigma_2 \sigma_3} = (T^2)_{\sigma_1 \sigma_3} \\
+      Z &= {\rm tr} T^L
+      \end{align*}
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{分配関数の計算方法}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item ${\rm tr} T^L$の計算方法
+    \begin{enumerate}
+    \item $L$個の行列$T$を掛けて、最後にトレースを取る (行列・行列積)
+    \item $(1,0)^t$と$(0,1)^t$にそれぞれ行列$T$を$L$回掛けて、それぞれの第1成分と第2成分を足し合わせる (行列・ベクトル積)
+    \item 行列$T$を固有値分解: $T = U\Lambda U^{-1}$しておくと
+      \[
+        {\rm tr} T^L = {\rm tr} (U \Lambda U^{-1})^L = {\rm tr} U \Lambda^L U^{-1} = {\rm tr} \Lambda^L = \lambda_1^L + \lambda_2^L
+        \]
+        特に$|\lambda_1| > |\lambda_2|$とすると$L\rightarrow\infty$で
+        \[
+          {\rm tr} T^L \simeq \lambda_1^L
+          \]
+    \end{enumerate}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{二次元正方格子への拡張}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item $L \times M$の正方格子
+    \begin{itemize}
+    \item 第$i$列のスピンをまとめて$s_i = ( \sigma_{i,1}, \sigma_{i,2}, \cdots, \sigma_{i,M})$とする
+    \item $s_i$は$2^M$通りの値をとる
+    \end{itemize}
+  \item 転送行列
+    \begin{itemize}
+    \item 横方向の相互作用: $\exp[\beta \sum_j \sigma_{i,j} \sigma_{i+1,j}]$ \ ($2^M \times 2^M$の密行列)
+    \item 縦方向の相互作用: $\exp[\beta \sum_j \sigma_{i,j} \sigma_{i,j+1}]$ \ ($2^M \times 2^M$の対角行列)
+    \item それぞれ$U$, $D$と表すと
+      \[
+      Z = {\rm tr} \, DUDU \cdots DU
+      \]
+    \item さらに$T=D^{1/2}TD^{1/2}$と定義すると、$T$は対称行列となり
+      \[
+      Z = {\rm tr} \, T^L
+      \]
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{計算コスト}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 必要メモリと必要計算量の見積もり
+    \begin{enumerate}
+    \item $L$個の行列$T$を掛けて、最後にトレースを取る \\
+      メモリ〜$(2^M)^2$, 計算量〜$L(2^M)^3$
+    \item $2^M$個の基底ベクトルにそれぞれ行列$T$を$L$回掛けて、それぞれの対応する成分を足し合わせる \\
+      メモリ〜$(2^M)^2$, 計算量〜$L(2^M)^3$
+    \item 行列$T$を固有値分解(Householder法) \\
+      メモリ〜$(2^M)^2$, 計算量〜$(2^M)^3$
+    \end{enumerate}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{疎行列分解}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 行列$U$は疎行列の積に分解できる: $U = U_1 U_2 \cdots U_M$ \\
+    ここで
+    \[
+    (U_k)_{s_i, s_{i+1}} = \exp[\beta \sigma_{i,k} \sigma_{i+1,k}] \prod_{j \ne k} \delta_{\sigma_{i,j} \sigma_{i+1,j}}
+    \]
+    \begin{itemize}
+    \item 各行各列に非零の要素は2つだけ
+    \item $U_k$の要素はその場で簡単に計算できる(メモリコスト=0)
+    \item ベクトルと行列$U_k$の積: 計算量〜$2 \times 2^M$
+    \item 密行列と行列$U_k$の積: 計算量〜$2 \times (2^M)^2$
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{計算コスト再見積もり}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 必要メモリと必要計算量の見積もり
+    \begin{enumerate}
+    \item $L$個の行列$T$を掛けて、最後にトレースを取る \\
+      メモリ〜$(2^M)^2$, 計算量〜$LM(2^M)^2$
+    \item $2^M$個の基底ベクトルにそれぞれ行列$T$を$L$回掛けて、それぞれの対応する成分を足し合わせる \\
+      メモリ〜$2^M$, 計算量〜$LM(2^M)^2$
+    \item 行列$T$を固有値分解
+      \begin{itemize}
+        \item $L$有限の場合 \\
+          メモリ〜$(2^M)^2$, 計算量〜$(2^M)^3$
+        \item $L\rightarrow\infty$の極限: 最大固有値$\lambda_1$のみ必要 \\
+          メモリ〜$2^M$, 計算量〜$O(100)\times M(2^M)$
+      \end{itemize}
+    \end{enumerate}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{BLASライブラリ}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 行列・行列積、行列・ベクトル積などを高速に行う最適化された関数群
+  \item コンパイル時に {\tt -lblas} オプションを指定してBLASライブラリをリンクする
+  \item 行列・行列積を計算するサブルーチン {\tt dgemm} \\
+    \url{http://www.netlib.org/lapack/explore-html/d7/d2b/dgemm_8f.html}
+    \begin{itemize}
+    \item $C = \alpha A \times B + \beta C$ を計算
+    \item BLASもFortranで書かれているので行列が転置される
+    \item 行列$A$と$B$については、引数{\tt TRANSA}、{\tt TRANSB}で転置するかどうか指定可能だが、行列$C$については不可
+    \item $C = A \times B$のかわりに$C^t = B^t \times A^t$を計算すればよい
+    \end{itemize}
+  \item 例: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/linear_system/multiply.c}{example-2-L3/multiply.c}, \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/linear_system/multiply_dgemm.c}{example-2-L3/multiply\_dgemm.c}
+  \end{itemize}
+\end{frame}
+
+\input{13_lapack.tex}
+
+\section{分子動力学法}
+
+\begin{frame}[t,fragile]{古典多粒子系}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item ハミルトニアン
+    \[
+    H = \sum \frac{p_i^2}{2m} + \sum_{ij} V(x_i, x_j)
+    \]
+  \item 分配関数
+    \[
+    Z(T) = \int \exp [- \beta H(p,x) ] \, dp \, dx
+    \]
+    \begin{itemize}
+    \item 運動量$p$に関する積分は簡単に実行できる(ガウス積分)
+    \item 位置$x$に関する積分: 数値積分、マルコフ連鎖モンテカルロ法、分子動力学法
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{数値積分}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 一次元の場合
+    \begin{itemize}
+    \item 台形公式: 積分区間$(a,b)$を$M$個の幅$\Delta=(b-a)/M$の区間に分けて線形関数で近似
+      \begin{align*}
+        \int_a^b f(x) \, dx &= \sum_{i=1}^M \int_{a+\Delta (i-1)}^{a+\Delta i} f(x) \, dx \\
+        &\simeq \sum_{i=1}^M \Delta \frac{f({a+\Delta (i-1)}) + f({a+\Delta i})}{2}
+      \end{align*}
+    \item より高次の公式: シンプソンの公式(区間を二次式で近似)など
+    \end{itemize}
+    \item 高次元になると区間の数が指数関数的に増える (次元の呪い)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{マルコフ連鎖モンテカルロ法}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item メトロポリス法
+    \begin{itemize}
+    \item 一つの粒子を選ぶ(位置$x$)
+    \item 新しい位置の候補をある確率分布に従って選ぶ($x'$)
+    \item ポテンシャルエネルギーの変化量($\Delta E$)を計算し、確率$P=\min(1,exp[-\beta\Delta E])$で新しい位置を採択
+    \end{itemize}
+  \item 新しい位置の選び方
+    \begin{itemize}
+    \item 大きく変えすぎると棄却率が増加
+    \item もとの位置を中心とする局所的な分布
+    \item $\sigma={\cal O}(1)$の標準偏差をもつ正規分布など: $N(x, \sigma^2)$
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{Box-Muller法}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 一様分布乱数から正規分布乱数を生成する方法
+    \begin{itemize}
+    \item 2次元の(標準)ガウス分布を考える
+      \[
+      f(x,y)\,dx\,dy= \frac{1}{2\pi} e^{-(x^2+y^2)/2} \,dx\,dy
+      \]
+    \item 極座標$(r,\theta)$に変換 ($x=r\cos\theta$, $y=r\sin\theta$)
+      \[
+      \frac{1}{2\pi} e^{-(x^2+y^2)/2} \,dx\,dy = \frac{1}{2\pi} r \, e^{-r^2/2} \,dr\,d\theta
+      \]
+    \item $\theta$は$(0,2\pi)$の一様分布
+    \item $r$は$f(r) = r \, e^{-r^2/2}$に従う
+      \begin{align*}
+        F(r) = \int_0^r f(r) \, dr = 1 - e^{-r^2/2}, \qquad F^{-1}(q) = \sqrt{- 2 \log(1-q)}
+      \end{align*}
+    \item 二つの一様乱数から二つの独立な正規分布乱数が生成される
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{分子動力学法}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 適当な初期条件から、運動方程式に従って位置と運動量を時間発展させる
+    \begin{itemize}
+    \item Euler法、Runge-Kutta法など
+    \item $6N$次元の連立微分方程式
+    \end{itemize}
+  \item 時間発展に関する物理量の時間平均から平均を評価
+    \begin{align*}
+      \langle A(p,x) \rangle &= \frac{1}{Z(E)} \int A(p,x) \, \delta(H(p,x)-E) \, dp \, dx \\
+      &\simeq \frac{1}{t_{\rm max}} \int_0^{t_{\rm max}} A(p(t),x(t)) \, dt
+    \end{align*}
+    \begin{itemize}
+    \item 運動方程式では全エネルギーが保存する→ミクロカノニカル分布
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{Nose-Hoover熱浴}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item カノニカル分布の実現
+    \begin{itemize}
+    \item 巨大な環境(熱浴)を付ける必要がある？
+    \end{itemize}
+  \item Nose-Hoover法
+    \begin{itemize}
+    \item 熱浴をたった1つの自由度($\zeta$)だけで実現する
+    \item 運動方程式
+      \begin{align*}
+        \dot{x}_i &= p_i / m \\
+        \dot{p}_i &= F_i(x) - {\color{red}\zeta p_i} \\
+        {\color{red}\dot{\zeta}} &{\color{red} = \frac{1}{\tau^2} \Big( \sum \frac{p_i^2}{m} - g k_B T\Big)} \qquad \text{($g$: 系の自由度)}
+      \end{align*}
+    \item $\sum \frac{p_i^2}{m}$: 全運動エネルギーの二倍 (熱平衡状態では期待値 $k_B T$)
+    \item $\zeta$によりネガティブフィードバックをかける
+    \item 平衡分布はカノニカル分布になる(証明略)
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\input{20_ode.tex}
+
+\end{document}

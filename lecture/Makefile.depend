@@ -77,3 +77,5 @@ lecture-2-1.pdf: 45_dimensional-reduction.tex
 lecture-2-2.pdf: 61_montecarlo_integration.tex
 lecture-2-2.pdf: 62_random_number.tex
 lecture-2-2.pdf: 63_mcmc.tex
+lecture-2-3.pdf: 13_lapack.tex
+lecture-2-3.pdf: 20_ode.tex
