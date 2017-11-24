@@ -8,7 +8,7 @@ EXAMPLE2L2 = monte_carlo/random.c monte_carlo/histogram.c \
 	monte_carlo/harmonic.c monte_carlo/square_lattice.c \
 	linear_system/matrix_util.h monte_carlo/mersenne_twister.h
 
-EXAMPLE2L3 = monte_carlo/bond_table.c monte_carlo/exact_counting.c
+EXAMPLE2L3 = monte_carlo/bond_table.c monte_carlo/exact_counting.c linear_system/matrix_util.h linear_system/mersenne_twister.h linear_system/multiply.c linear_system/multiply_dgemm.c
 
 .SUFFIXES: .pdf .dvi .tex
 
