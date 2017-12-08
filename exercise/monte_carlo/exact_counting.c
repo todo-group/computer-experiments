@@ -6,8 +6,8 @@ void init_bond_table(int L, int bond[2*L*L][2]) {
   /* size of bond should be [2*L*L][2] */
   int x, y, xn, yn, i, j;
   int b = 0;
-  for (int y = 0; y < L; ++y) {
-    for (int x = 0; x < L; ++x) {
+  for (y = 0; y < L; ++y) {
+    for (x = 0; x < L; ++x) {
       i = L * y + x;
       /* right */
       xn = (x + 1) % L;

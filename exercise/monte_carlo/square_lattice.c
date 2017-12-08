@@ -4,8 +4,8 @@
 void init_square_lattice(int L, int neighbor[L*L][4]) {
   /* size of neighbors should be [L*L][4] */
   int x, y, xn, yn, i, j;
-  for (int y = 0; y < L; ++y) {
-    for (int x = 0; x < L; ++x) {
+  for (y = 0; y < L; ++y) {
+    for (x = 0; x < L; ++x) {
       i = L * y + x;
       /* right */
       xn = (x + 1) % L;
