@@ -1,0 +1,49 @@
+\documentclass[11pt]{jarticle}
+
+\usepackage{amsmath}
+\usepackage{graphics}
+\usepackage{hyperref}
+
+\setlength{\oddsidemargin}{-0.7cm}
+\setlength{\topmargin}{-1.5cm}
+\setlength{\textwidth}{16.5cm}
+\setlength{\textheight}{26cm}
+\pagestyle{empty}
+
+\begin{document}
+
+\noindent
+{\bf\large 「計算機実験II」実習課題(EX3) 2017-12-08}
+\\[-0.5em]
+
+\noindent
+\begin{itemize}
+\item 講義のページ: \verb+http://exa.phys.s.u-tokyo.ac.jp/ja/lectures/2017W-computer2+
+
+\item サンプルプログラム: 「実習EX3サンプルプログラム」{\tt example-2-EX3.zip}
+
+\item 準備練習
+  
+\begin{enumerate}
+\item Box-Muller法を用いて、正規分布乱数を生成してみよ。ヒストグラムを作り、正しく正規分布となっていることを確認せよ
+\end{enumerate}
+
+\item 基本課題
+  \begin{enumerate}
+  \item {\tt example-2-EX3/exact\_counting.c}は、スピン配位をすべて数え上げることにより、二次元正方格子イジング模型の分配関数を計算するプログラムである。しかしながら、温度{\tt temperature}を低くしたり、システムサイズ{\tt L}を大きくすると、桁あふれにより答えが{\tt inf}となってしまう。そのような場合でも正しく計算が行えるよう、プログラムを修正せよ(参考: 講義資料 {\tt lecture-2-3.pdf} p.7)
+  \item {\tt example-2-EX3/multiply.c}は行列・行列積を計算するプログラムである。BLASの{\tt dgemm}関数を使った{\tt example-2-EX3/multiply\_dgemm.c}と速度の比較を行え。行列のサイズを$10 \times 10, 20 \times 20, 40 \times 40, \cdots$と増やしていった時に、それぞれ速度がどう増えていくか比較せよ(参考: 講義資料 {\tt lecture-2-3.pdf} p.14)。なお、実行時間は{\tt time}コマンドを使って測ることができる(参考: ハンドブック p.15)
+  \item {\tt example-2-EX3/transfer\_matrix.c}は、転送行列${\bf T}$から${\rm tr}\ {\bf T}^L$を計算することで$L \times M$正方格子イジング模型の自由エネルギーを計算するプログラムである。内部では、$2^M$次元のベクトル${\bf v}$に対角行列$D^{1/2}$を掛ける関数{\tt product\_D}、${\bf v}$に疎行列$U$を掛ける関数{\tt product\_U}、それらを組み合わせて$2^M$次元のベクトル${\bf v}$に転送行列${\bf T}$を掛ける関数{\tt product\_T}を使っている。 (桁あふれを防ぐために、それぞれのボンドのボルツマン重みはあらかじめ$\exp(1/T)$ ($T$は温度)で割ってあることに注意)
+
+    {\tt example-2-EX3/transfer\_matrix.c}では、最初に転送行列${\bf T}$を作り、行列・行列積により${\bf T}^L$を計算しているが、行列を陽に生成せずに$2^M$個の基底ベクトルにそれぞれ${\bf T}$を$L$回掛けて、それぞれの対応する成分を足し合わせる方法で転送行列を計算するようにプログラムを変更せよ。システムサイズを増やしていった時の計算時間やメモリ使用量の増加はどのように改善されるか? (参考: 講義資料 {\tt lecture-2-3.pdf} p.13) なお、実行中のメモリ使用量は{\tt top}コマンドでモニタすることができる
+  \item {\tt example-2-EX3/transfer\_matrix.c}内の関数{\tt product\_T}とべき乗法を用いて、転送行列${\bf T}$の最大固有値を求め、長さ$L$が無限の系の自由エネルギー密度を計算せよ(参考: 講義資料 {\tt lecture-1-4.pdf} p.4)。なお、温度$T=2$、幅$M=4$の時の自由エネルギー密度の厳密な値は、-2.0757223592$\cdots$である
+  \end{enumerate}
+\item 応用課題
+  \begin{enumerate}
+  \item BLASの{\tt dgemm}関数の実装には「キャッシュブロッキング」という手法が使われている。この手法について調べ、自分で行列・行列積を実装してみよ
+  \item BLASには行列・ベクトル積を計算する{\tt dgemv}関数が用意されている。{\tt dgemv}の仕様(引数の渡し方)を調べ、行列・ベクトル積のテストプログラムを作成せよ。明示的なfor文により行列・ベクトル積を計算するテストプログラムも作成し、両者の速度やサイズ依存性を比較せよ。行列・行列積の場合とどのような違いが見られるか?
+  \item 数え上げあるいは転送行列により計算されたイジング模型の分配関数を温度に関して数値微分することで、内部エネルギー、比熱を計算してみよ。EX2のモンテカルロの結果と一致するか比較せよ
+  \item イジング模型の転送行列に外部磁場の項を付け加え、磁場下での分配関数を計算できるように修正せよ。また、数値微分により帯磁率を求め、その温度依存性・システムサイズ依存性から、相転移の場所を見積もってみよ
+  \end{enumerate}
+\end{itemize}
+
+\end{document}
