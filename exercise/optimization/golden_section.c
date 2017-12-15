@@ -42,6 +42,23 @@ int main(int argc, char** argv) {
 
   /* 黄金分割法 */
   while ((c-a) > 1.0e-6 || (f(a)-f(b) > 1.0e-12) || (f(c)-f(b) > 1.0e-12)) {
-    /* ... */
+    if ((c-b) > (b-a)) {
+      x = b + w * (c-b);
+      if (f(x) < f(b)) {
+        a = b;
+        b = x;
+      } else {
+        c = x;
+      }
+    } else {
+      x = b + w * (a-b);
+      if (f(x) < f(b)) {
+        c = b;
+        b = x;
+      } else {
+        a = x;
+      }
+    }
+    printf("a = %15.10f, b = %15.10f, c = %15.10f, f(b) = %15.10f\n", a, b, c, f(b));
   }
 }
