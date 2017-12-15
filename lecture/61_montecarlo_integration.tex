@@ -45,7 +45,7 @@
   \item このモンテカルロ積分が実際に評価している積分
     \[
     \frac{1}{2c} \int_0^c \!\! \int_0^2 \!\! \theta(x,y) \, dx \, dy
-    \ \ \ \theta(x,y) = \begin{cases} 1 & \text{if $y < f(x)$} \\ 0 & \text{otherwise} \end{cases}
+    \ \ \ \theta(x,y) = \begin{cases} 2c & \text{if $y < f(x)$} \\ 0 & \text{otherwise} \end{cases}
     \]
   \item 統計誤差の評価
     \begin{itemize}
@@ -108,7 +108,7 @@
     \setlength{\itemsep}{1em}
   \item 関数 $f(x)/p(x)$ の分散
     \[
-    s^2 = \int_0^c \Big(\frac{f(x)}{p(x)}\Big)^2 p(x) \, dx - \pi^2 = c \int_0^\infty f^2(x) - \pi^2 = 4c - \pi^2
+    s^2 = \int_0^c \Big(\frac{f(x)}{p(x)}\Big)^2 p(x) \, dx - \pi^2 = c \int_0^\infty f^2(x) \, dx - \pi^2 = 4c - \pi^2
     \]
   \item $c=20$ のとき $s^2 \simeq 70.1$
   \item 同じ試行回数 $M$ の時, 誤差は$\sqrt{70.1/116} = 0.77$ 倍

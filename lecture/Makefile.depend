@@ -79,3 +79,11 @@ lecture-2-2.pdf: 62_random_number.tex
 lecture-2-2.pdf: 63_mcmc.tex
 lecture-2-3.pdf: 13_lapack.tex
 lecture-2-3.pdf: 20_ode.tex
+lecture-2-4.pdf: 70_optimization.tex
+lecture-2-4.pdf: 11_newton.tex
+lecture-2-4.pdf: 71_enclosure.tex
+lecture-2-4.pdf: 72_descent.tex
+lecture-2-4.pdf: 73_cg.tex
+lecture-2-4.pdf: 74_simplex.tex
+lecture-2-4.pdf: 75_annealing.tex
+lecture-2-4.pdf: 76_comparison.tex

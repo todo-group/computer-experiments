@@ -2,8 +2,25 @@
 
 \begin{frame}[t,fragile]{最適化問題}
   \begin{itemize}
-    %\setlength{\itemsep}{1em}
+    \setlength{\itemsep}{1em}
   \item 目的関数$f(x)$の最小値(あるいは最大値)とその場所を求めたい
+  \item どういう問題を解くのに使えるか？
+    \begin{itemize}
+    \item 変分原理が成り立つ問題: 最小作用の原理、最小エネルギーの原理
+    \item コスト関数が定義できる問題: 最小二乗法(線形回帰、非線形回帰)、(連立)方程式の求階、機械学習
+    \end{itemize}
+  \item ほとんど全ての問題はコスト関数をうまく定義することで、最適化問題に書き換えることができる
+    \begin{itemize}
+    \item (一般に)最適化問題として解くのは最終手段
+    \item もっと良い方法があるときはそちらを使う
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{最適化問題}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 最適化問題の種類
     \begin{itemize}
     \item 連続最適化問題
     \item 離散最適化(組み合わせ最適化)問題 $\Leftarrow$ 難しい
@@ -11,7 +28,7 @@
   \item 真の(大局的な)最小値(最大値)を求めるのは難しい
   \item 一般的には極値を求めることしかできない
   \item 多次元では極小を囲い込むことができない
-  \item 導関数を使う方法: ニュートン法、最急降下法、勾配降下法, 共役勾配法、準ニュートン法
-  \item 使わない方法: 囲い込み法、Nelder-Meadの滑降シンプレックス法、シミュレーテッド・アニーリング
+  \item 導関数を使う方法: ニュートン法、準ニュートン法、最急降下法、勾配降下法、共役勾配法、$\cdot$
+  \item 使わない方法: 囲い込み法、Nelder-Meadの滑降シンプレックス法、シミュレーテッド・アニーリング、$\cdot$
   \end{itemize}
 \end{frame}

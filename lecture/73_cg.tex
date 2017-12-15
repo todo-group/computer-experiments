@@ -1,6 +1,6 @@
 \section{共役勾配法}
 
-\begin{frame}[t,fragile]{共役勾配法(conjugate-gradient)}
+\begin{frame}[t,fragile]{共役勾配法(conjugate gradient)}
   \begin{itemize}
     \setlength{\itemsep}{1em}
   \item 関数がある点のまわりで
@@ -36,7 +36,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}[t,fragile]{共役勾配法(Conjugate-gradient)}
+\begin{frame}[t,fragile]{共役勾配法(conjugate gradient)}
   \begin{itemize}
     \setlength{\itemsep}{1em}
   \item 初期条件と漸化式
@@ -55,7 +55,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}[t,fragile]{共役勾配法(Conjugate-gradient)}
+\begin{frame}[t,fragile]{共役勾配法(conjugate gradient)}
   \begin{itemize}
     \setlength{\itemsep}{1em}
   \item 残差は互いに直交 $\Rightarrow$ $N$回反復すると残差は零 (完全な二次形式の場合)
@@ -66,19 +66,25 @@
   \end{itemize}
 \end{frame}
 
+\begin{frame}[t,fragile]{共役勾配法による連立一次方程式の求階}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 連立一次方程式$A{\bf x} = {\bf b}$の階は
+    \[
+    f({\bf x}) = \frac{1}{2} (A {\bf x} - {\bf b})^2
+    \]
+    を最小化する${\bf x}$
+  \item 連立方程式を解くのに共役勾配法を利用可
+  \item 行列ベクトル積だけで計算できるので、$A$が疎行列の時、特に有効
+  \end{itemize}
+\end{frame}
+
 \begin{frame}[t,fragile]{逆反復法による固有ベクトルの計算}
   \begin{itemize}
     \setlength{\itemsep}{1em}
-  \item $f(x)$の極小解は、連立一次方程式$A{\bf x} = {\bf b}$の解
-    \begin{itemize}
-    \item 連立方程式を解くのに共役勾配法を利用可
-    \item 行列ベクトル積だけで計算できるので、$A$が疎行列の時、特に有効
-    \end{itemize}
-  \item 逆反復法
-    \begin{itemize}
-    \item 近似固有値を$\mu$とするとき、行列$(A - \mu I)^{-1}$を考えると、固有ベクトルは$A$と同じ、固有値は$(\lambda-\mu)^{-1}$。
-    \item $\mu$が十分に正確であれば、$(\lambda-\mu)^{-1}$は絶対値最大の固有値。行列$(A - \mu I)^{-1}$を適当な初期ベクトルにかけ続けると$\lambda$に対応する固有ベクトルに収束(c.f. べき乗法)
-    \item 実際には$(A-\mu I) {\bf x}' = {\bf x}$という連立方程式を繰り返し解く
-    \end{itemize}
+  \item 行列の近似固有値を$\mu$とするとき、行列$(A - \mu I)^{-1}$を考えると、固有ベクトルは$A$と同じ、固有値は$(\lambda-\mu)^{-1}$。
+  \item $\mu$が十分に正確であれば、$(\lambda-\mu)^{-1}$は絶対値最大の固有値
+  \item 行列$(A - \mu I)^{-1}$を適当な初期ベクトルにかけ続けると$\lambda$に対応する固有ベクトルに収束(c.f. べき乗法)
+  \item 実際には$(A-\mu I) {\bf x}' = {\bf x}$という連立方程式を繰り返し解く
   \end{itemize}
 \end{frame}
