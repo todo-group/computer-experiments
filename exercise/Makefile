@@ -1,6 +1,6 @@
 PDF = exercise-0.pdf exercise-1.pdf exercise-2.pdf exercise-3.pdf exercise-4.pdf \
-	exercise-2-1.pdf exercise-2-2.pdf exercise-2-3.pdf
-ZIP = example-2-L1.zip example-2-L2.zip example-2-L3.zip example-2-EX3.zip example-2-L4.zip
+	exercise-2-1.pdf exercise-2-2.pdf exercise-2-3.pdf exercise-2-4.pdf
+ZIP = example-2-L1.zip example-2-L2.zip example-2-L3.zip example-2-EX3.zip example-2-L4.zip example-2-EX4.zip
 
 EXAMPLE2L1 = basics/bisection.c eigenvalue_problem/double_well.c linear_system/determinant.c linear_system/lu_decomp.c linear_system/matrix_util.h linear_system/input1.dat linear_system/input2.dat
 
@@ -13,6 +13,8 @@ EXAMPLE2L3 = monte_carlo/bond_table.c monte_carlo/exact_counting.c linear_system
 EXAMPLE2EX3 = monte_carlo/random.c monte_carlo/histogram.c monte_carlo/bond_table.c monte_carlo/exact_counting.c linear_system/matrix_util.h linear_system/mersenne_twister.h linear_system/multiply.c linear_system/multiply_dgemm.c monte_carlo/transfer_matrix.c
 
 EXAMPLE2L4 = optimization/func_1d.h optimization/func_2d.h optimization/golden_section.c optimization/mc_steepest_descent_1d.c optimization/mc_steepest_descent_2d.c optimization/simulated_annealing_1d.c optimization/simulated_annealing_2d.c monte_carlo/mersenne_twister.h
+
+EXAMPLE2EX4 = optimization/func_1d.h optimization/func_2d.h optimization/golden_section.c optimization/nelder_mead_2d.c linear_system/steepest_descent.c linear_system/matrix_util.h linear_system/input3.dat optimization/measurement-3.dat
 
 .SUFFIXES: .pdf .dvi .tex
 
@@ -59,6 +61,13 @@ example-2-L4.zip : $(EXAMPLE2L4)
 	cp -p $(EXAMPLE2L4) example-2-L4
 	zip example-2-L4.zip example-2-L4/*
 	rm -rf example-2-L4
+
+example-2-EX4.zip : $(EXAMPLE2EX4)
+	rm -rf example-2-EX4
+	mkdir example-2-EX4
+	cp -p $(EXAMPLE2EX4) example-2-EX4
+	zip example-2-EX4.zip example-2-EX4/*
+	rm -rf example-2-EX4
 
 clean:
 	rm -f *.aux *.dvi *.log *.nav *.out *.snm *.toc *.vrb

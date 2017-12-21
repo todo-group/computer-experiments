@@ -1,0 +1,9 @@
+determinant
+gauss
+lu_decomp
+matrix_example
+multiply
+multiply_dgemm
+pointer
+random_matrix
+steepest_descent

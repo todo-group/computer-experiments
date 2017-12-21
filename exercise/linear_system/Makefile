@@ -1,4 +1,4 @@
-OBJ = matrix_example pointer gauss lu_decomp determinant random_matrix multiply multiply_dgemm
+OBJ = matrix_example pointer gauss lu_decomp determinant random_matrix multiply multiply_dgemm steepest_descent
 default: $(OBJ)
 
 CFLAGS = -O3
