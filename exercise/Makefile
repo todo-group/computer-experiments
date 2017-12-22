@@ -14,7 +14,8 @@ EXAMPLE2EX3 = monte_carlo/random.c monte_carlo/histogram.c monte_carlo/bond_tabl
 
 EXAMPLE2L4 = optimization/func_1d.h optimization/func_2d.h optimization/golden_section.c optimization/mc_steepest_descent_1d.c optimization/mc_steepest_descent_2d.c optimization/simulated_annealing_1d.c optimization/simulated_annealing_2d.c monte_carlo/mersenne_twister.h
 
-EXAMPLE2EX4 = optimization/func_1d.h optimization/func_2d.h optimization/golden_section.c optimization/nelder_mead_2d.c linear_system/steepest_descent.c linear_system/matrix_util.h linear_system/input3.dat optimization/measurement-3.dat
+EXAMPLE2EX4 = optimization/func_1d.h optimization/func_2d.h optimization/golden_section.c optimization/nelder_mead_2d.c linear_system/steepest_descent.c linear_system/matrix_util.h linear_system/input3.dat optimization/measurement-3.dat linear_system/poisson.h linear_system/poisson_dense.c linear_system/poisson_lu.c linear_system/poisson_sparse.c
+
 
 .SUFFIXES: .pdf .dvi .tex
 

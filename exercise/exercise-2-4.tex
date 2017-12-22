@@ -27,16 +27,17 @@
 \begin{enumerate}
   \item {\tt example-2-EX4/golden\_section.c}は、黄金分割法により一次元関数$f(x) = 5x+x^2+70\sin(x)$の極値を求めるプログラムである。コンパイルして実行せよ。コードの中身を読んで確認せよ(参考: 講義資料{\tt lecture-2.4.pdf} p.22)
   \item {\tt example-2-EX4/nelder\_mead\_2d.c}は、Nelder-Mead法により二次元関数$f(x, y) = −10(x^2 + y^2) + (x^2 + y^2)^2 − 2(x + y)$の極値を求めるプログラムである。コンパイルして実行せよ。コードの中身を読んで確認せよ(参考: 講義資料{\tt lecture-2.4.pdf} p.22)
-  \item 最急降下法による連立一次方程式の解法に関する解説
-  \item 共役勾配法に関する補足説明
+  \item 最急降下法による連立一次方程式の解法に関する解説、共役勾配法に関する補足説明
 \end{enumerate}
 
 \item 基本課題
   \begin{enumerate}
   \item {\tt example-2-EX4/steepest\_descent.c}は、最急降下法(参照: 補足説明)により連立一次方程式を解くプログラムである。実行時には引数として、行列$A$と右辺ベクトル$b$が入ったファイル名({\tt input3.dat})を指定する。コンパイルして実行し、LU分解による解法{\tt example-2-EX4/lu\_decomp.c}と解が一致することを確かめよ
   \item {\tt example-2-EX4/steepest\_descent.c}を元にして、行列$A$と右辺ベクトル$b$をファイルから読み込み共役勾配法(参照: 補足説明)により連立一次方程式を解くプログラムを作成せよ。最急降下法と収束回数を比較せよ
-    \item 共役勾配法を用いて、Dirichlet型の境界条件のもとでの二次元 Laplace 方程式の解を求めるプログラムを作成せよ。実行時間のメッシュ数依存性をLU分解を用いた場合と比較せよ ＊＊＊作成中
   \item 測定データ{\tt example-2-EX4/measurement-3.dat}を関数$f(x)=ax+e^{−(x−c)^2}$でフィッティングしよう。パラメータ$a, c$を、勾配降下法、Nelder-Mead法などを用いて残差を最小化することにより推定せよ
+  \item 共役勾配法を用いて、Dirichlet型の境界条件のもとでの二次元Poisson方程式(あるいはLaplace方程式)の解を求めるプログラムを作成せよ。実行時間のメッシュ数依存性をLU分解を用いた場合と比較せよ。(参考: 計算機実験I 講義資料{\tt lecture-1-2.pdf} p.22、実習資料{\tt exercise-3.pdf} 基本課題2)
+
+    (ヒント: Poisson方程式を行列形式に書き直すことが難しい場合には、{\tt example-2-EX4/poisson.h}を参考にしてもよい。行列生成({\tt poisson\_dense.c})、行列ベクトル積({\tt poisson\_sparse.c})、LU分解による求解({\tt poisson\_lu.c})のテストプログラムも用意されている)
   \end{enumerate}  
 \item 応用課題
   \begin{enumerate}
