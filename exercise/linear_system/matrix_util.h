@@ -8,6 +8,7 @@
 
   alloc_dmatrix : allocate matrix of double
   alloc_fmatrix : allocate matrix of float
+  alloc_imatrix : allocate matrix of int
 
   free_dvector : deallocate vector of double
   free_fvector : deallocate vector of float
@@ -15,13 +16,14 @@
 
   free_dmatrix : deallocate matrix of double
   free_fmatrix : deallocate matrix of float
+  free_imatrix : deallocate matrix of int
 
-  print_dvector: print out vector of double
-  print_fvector: print out vector of float
-  print_ivector: print out vector of int
+  fprint_dvector: print out vector of double
+  fprint_fvector: print out vector of float
+  fprint_ivector: print out vector of int
 
-  print_dmatrix: print out matrix of double
-  print_fmatrix: print out matrix of float
+  fprint_dmatrix: print out matrix of double
+  fprint_fmatrix: print out matrix of float
 
   read_dvector: read vector of double from file
   read_fvector: read vector of float from file
@@ -29,6 +31,7 @@
 
   read_dmatrix: read matrix of double from file
   read_fmatrix: read matrix of float from file
+  read_imatrix: read matrix of int from file
 */
 
 #ifndef MATRIX_UTIL_H
@@ -106,6 +109,24 @@ static inline float **alloc_fmatrix(int m, int n) {
   return mat;
 }
 
+/* allocate m x n matrix of int */
+static inline int **alloc_imatrix(int m, int n) {
+  int i;
+  int **mat;
+  mat = (int**)malloc((size_t)(m * sizeof(int*)));
+  if (mat == NULL) {
+    fprintf(stderr, "Error: allocation failed in alloc_imatrix\n");
+    exit(1);
+  }
+  mat[0] = (int*)malloc((size_t)(m * n * sizeof(int)));
+  if (mat[0] == NULL) {
+    fprintf(stderr, "Error: allocation failed in alloc_imatrix\n");
+    exit(1);
+  }
+  for (i = 1; i < m; ++i) mat[i] = mat[i-1] + n;
+  return mat;
+}
+
 /* deallocate vector of double */
 static inline void free_dvector(double *vec) {
   free(vec);
@@ -129,6 +150,12 @@ static inline void free_dmatrix(double **mat) {
 
 /* deallocate float matrix of float */
 static inline void free_fmatrix(float **mat) {
+  free(mat[0]);
+  free(mat);
+}
+
+/* deallocate float matrix of int */
+static inline void free_imatrix(int **mat) {
   free(mat[0]);
   free(mat);
 }
@@ -173,6 +200,16 @@ static inline void fprint_fmatrix(FILE *fp, int m, int n, float **mat) {
   fprintf(fp, "%d %d\n", m, n);
   for (i = 0; i < m; ++i) {
     for (j = 0; j < n; ++j) fprintf(fp, "%10.5f ", mat[i][j]);
+    fprintf(fp, "\n");
+  }
+}
+
+/* print out matrix of int */
+static inline void fprint_imatrix(FILE *fp, int m, int n, int **mat) {
+  int i, j;
+  fprintf(fp, "%d %d\n", m, n);
+  for (i = 0; i < m; ++i) {
+    for (j = 0; j < n; ++j) fprintf(fp, "%d ", mat[i][j]);
     fprintf(fp, "\n");
   }
 }
