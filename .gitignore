@@ -7,6 +7,10 @@
 */*.snm
 */*.toc
 */*.vrb
+*/*.synctex.gz
+*/*.fdb_latexmk
+*/*.fls
+
 exercise/*.pdf
 exercise/*.zip
 lecture/*.pdf

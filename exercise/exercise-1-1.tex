@@ -18,7 +18,7 @@
 
 \noindent
 \begin{itemize}
-\item 講義のページ: \verb+http://exa.phys.s.u-tokyo.ac.jp/ja/lectures/2017S-computer1+
+\item 講義のページ: \verb+http://exa.phys.s.u-tokyo.ac.jp/ja/lectures/2018s-computer1+
 
 \item 実習用ワークステーション「photon」について
   \begin{itemize}
@@ -31,10 +31,9 @@
 \item 準備練習
   \begin{enumerate}
   \item 実習用ワークステーション(photon)へ{\tt ssh}を使ってログイン(ハンドブック2.2節)。
-  \item photon 上の{\tt /home/public/ce2017/ex1/hello.c}を{\tt scp}をつかってiMacへコピー(ハンドブック2.2節)。Cコンパイラでコンパイルし、実行(ハンドブック3.1.1節)。
+  \item photon 上の{\tt /home/public/ce2018/ex1/hello.c}を{\tt scp}をつかってiMacへコピー(ハンドブック2.2節)。Cコンパイラでコンパイルし、実行(ハンドブック3.1.1節)。
   \item ハンドブック3.2.1〜3.2.2節(制御文), 3.6.2〜3.6.3節(関数)の例題を試す。
-  \item Gnuplotを使い、$\sin$関数をプロットし、PostScript形式でファイル(*.eps)に出力(ハンドブック2.4節)。作成した図のファイルを \LaTeX に張り込み、PDFファイルを作成(ハンドブック4.8節)。
-  \item 上記、準備練習3,4を、実習用ワークステーション(photon)でも行ってみよ。
+  \item 上記、準備練習3を、実習用ワークステーション(photon)でも行ってみよ。
   \end{enumerate}
 
 \item 基本課題
@@ -47,6 +46,7 @@
   \begin{enumerate}
   \item 領域$[0,1]$から$[0,1]$への写像$x_{n+1} = \min(2x_n,2-2x_n)$を繰り返す時、解軌道$\{x_0,x_1,x_2,x_3,\cdots\}$の振る舞いが、初期値$x_0$にどのように依存するか予想せよ。また、プログラムを作成し、いくつかの初期値についてその解軌道を図示せよ。予想と全く異なる振る舞いが観測されるのはなぜか? その理由について考察せよ。
   \item 代数方程式の解をすべてもとめる方法について調べよ。Durand-Kerner-Aberth法を用いて、代数方程式の全ての解を求めるプログラムを作成せよ。方程式の次数を増やすにつれ、収束までにかかる時間がどのように増えるか調べよ。
+  \item 教育用計算機システムECCSのiMacでは、数式処理ソフトウェアMathematicaが利用できる。Mathematicaを用いて、$\sqrt[3]{10}$を20桁の精度で求めてみよ。
   \end{enumerate}  
 
 \item 追加課題(自宅で)
