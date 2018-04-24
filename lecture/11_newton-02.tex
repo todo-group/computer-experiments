@@ -1,0 +1,16 @@
+\begin{frame}[t,fragile]{ニュートン法の収束}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item $x_n$が$x_0$に十分近い時
+    \begin{align*}
+      f(x_n) &\approx f'(x_0) (x_n-x_0) + f''(x_0) \frac{(x_n - x_0)^2}{2} \\
+      f'(x_n) &\approx f'(x_0) + f''(x_0) (x_n - x_0)
+    \end{align*}
+  \item ニュートン法で一回反復すると
+    \begin{align*}
+      x_{n+1} =  x_n - \frac{f(x_n)}{f'(x_n)} &\approx x_n - (1-\frac{f''(x_0)}{f'(x_0)}\frac{(x_n-x_0)}{2})(x_n-x_0) \\
+      (x_{n+1}-x_0) &\approx \frac{f''(x_0)}{2f'(x_0)} (x_n - x_0)^2
+    \end{align*}
+    \item 一回の反復で誤差が2乗で減る(正しい桁数が倍に増える) ⇒ 二次収束
+  \end{itemize}
+\end{frame}

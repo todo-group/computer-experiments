@@ -1,0 +1,22 @@
+\begin{frame}[t,fragile]{計算をいつやめるか？}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 残差による判定
+    \[
+    |f(x)| < \delta
+    \]
+  \item 誤差による判定
+    \[
+    | x_{n+1} - x_{n} | < \epsilon
+    \]
+  \item 解$x=x_0$が$m$重解の場合、$x=x_0$のまわりで展開すると
+    \[
+    f(x) \simeq \alpha (x-x_0)^m
+    \]
+    残差が$\delta$程度になったときの誤差は、$\delta^{1/m}$程度
+
+    逆に$|x-x_0|$が$\delta^{1/m}$以下になると、$f(x)$の値がそれ以上変化しない $\Rightarrow$ $m$重解の精度は計算精度の$1/m$桁程度しかない
+
+  \item 残差による判定と誤差による判定を併用するのがよい
+  \end{itemize}
+\end{frame}

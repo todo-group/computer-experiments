@@ -1,0 +1,15 @@
+\begin{frame}[t,fragile]{ニュートン法}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 反復法により方程式$f(x)=0$の解を求める
+  \item 真の解を$x_0$、現在の解の候補を$x_n=x_0+\epsilon$とすると
+    \[
+    0 = f(x_0) = f(x_0+\epsilon-\epsilon) = f(x_n) - f'(x_n) \epsilon + O(\epsilon^2)
+    \]
+  \item 次の解の候補 (反復法、逐次近似法)
+    \[
+    \epsilon \approx \frac{f(x_n)}{f'(x_n)} \quad\quad x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}
+    \]
+  \item 複素変数の複素関数や多変数の場合にも自然に拡張可
+  \end{itemize}
+\end{frame}

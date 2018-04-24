@@ -1,79 +1,10 @@
 \section{ニュートン法}
 
-\begin{frame}[t,fragile]{ニュートン法}
-  \begin{itemize}
-    \setlength{\itemsep}{1em}
-  \item 反復法により方程式$f(x)=0$の解を求める
-  \item 真の解を$x_0$、現在の解の候補を$x_n=x_0+\epsilon$とすると
-    \[
-    0 = f(x_0) = f(x_0+\epsilon-\epsilon) = f(x_n) - f'(x_n) \epsilon + O(\epsilon^2)
-    \]
-  \item 次の解の候補 (反復法、逐次近似法)
-    \[
-    \epsilon \approx \frac{f(x_n)}{f'(x_n)} \quad\quad x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}
-    \]
-  \item 複素変数の複素関数や多変数の場合にも自然に拡張可
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[t,fragile]{ニュートン法の収束}
-  \begin{itemize}
-    \setlength{\itemsep}{1em}
-  \item $x_n$が$x_0$に十分近い時
-    \begin{align*}
-      f(x_n) &\approx f'(x_0) (x_n-x_0) + f''(x_0) \frac{(x_n - x_0)^2}{2} \\
-      f'(x_n) &\approx f'(x_0) + f''(x_0) (x_n - x_0)
-    \end{align*}
-  \item ニュートン法で一回反復すると
-    \begin{align*}
-      x_{n+1} =  x_n - \frac{f(x_n)}{f'(x_n)} &\approx x_n - (1-\frac{f''(x_0)}{f'(x_0)}\frac{(x_n-x_0)}{2})(x_n-x_0) \\
-      (x_{n+1}-x_0) &\approx \frac{f''(x_0)}{2f'(x_0)} (x_n - x_0)^2
-    \end{align*}
-    \item 一回の反復で誤差が2乗で減る(正しい桁数が倍に増える) ⇒ 二次収束
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[t,fragile]{多次元の場合}
-  \begin{itemize}
-    \setlength{\itemsep}{1em}
-  \item $f(x)=0$: $d$次元(非線形)連立方程式
-  \item $x$は$d$次元のベクトル: $x = (x_1,x_2,\cdots,x_d)$
-  \item $f(x)$も$d$次元のベクトル: $f(x) = (f_1(x), f_2(x),\cdots,f_d(x))$
-  \item 真の解のまわりでの展開 ($x_n = x_0 + \epsilon$)
-    \[
-    0 = f(x_0) = f(x_0+\epsilon-\epsilon) = f(x_n) - \frac{\partial f(x_n)}{\partial x} \cdot \epsilon + O(|\epsilon|^2)
-    \]
-  \item ヤコビ行列($d\times d$): $\displaystyle \Big(\frac{\partial f(x_n)}{\partial x}\Big)_{ij} = \frac{\partial f_i(x_n)}{\partial x_j}$
-  \item 次の解の候補: $\displaystyle x_{n+1} = x_n - \Big(\frac{\partial f(x_n)}{\partial x}\Big)^{-1} f(x_n)$
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[t,fragile]{ニュートン法による最適化}
-  \begin{itemize}
-    \setlength{\itemsep}{1em}
-  \item $x$は$d$次元のベクトル: $x = (x_1,x_2,\cdots,x_d)$, $g(x)$はスカラー
-  \item 勾配ベクトル: $\displaystyle (\nabla g(x))_i = \frac{\partial g(x)}{\partial x_i}$
-  \item 極小値(最小値)となる条件: $\nabla g(x)=0$
-  \item ニュートン法で$f(x)$を$\nabla g(x)$で置き換えればよい
-  \item 次の解の候補: $\displaystyle x_{n+1} = x_n - H^{-1}(x_n) \nabla g(x_n)$
-  \item ヘッセ行列(Hessian): $\displaystyle H_{ij}(x_n) = \frac{\partial^2 g}{\partial x_i \partial x_j}(x_n)$
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[t,fragile]{準ニュートン法}
-  \begin{itemize}
-    %\setlength{\itemsep}{1em}
-  \item ニュートン法では、ヘッセ行列の計算・保存が必要
-  \item 準ニュートン法: それまでの反復で計算した勾配ベクトルから、ヘッセ行列を近似($B_n$)
-  \item BFGS法(Broyden-Fletcher-Goldfarb-Shanno)
-    \[
-    B_{n+1} = B_{n} + \frac{y_n y_n^T}{y_n^T s_n} - \frac{B_{n} s_n (B_{n} s_n)^T}{s_n^T B_n s_n}
-    \]
-  \item $s_n = x_{n+1} - x_n$、$y_n = \nabla g(x_{n+1}) - \nabla g(x_n)$
-  \item 直接$B_{n}$の逆行列$C_{n}$を更新することも可能
-    \[
-    C_{n+1} = B_{n+1}^{-1} = C_n + \Big( 1 + \frac{y_n^T C_n y_n}{y_n^T s_n} \Big)
-    \frac{s_n s_n^T}{y_n^T s_n} - \frac{C_n y_n s_n^T + s_n y_n^T C_n^T}{y_n^T s_n} \]
-  \item 他にも、SR1法、BHHH法、記憶制限BFGS法
-  \end{itemize}
-\end{frame}
+\input{11_newton-01.tex}
+\input{11_newton-02.tex}
+\input{11_newton-03.tex}
+\input{11_newton-04.tex}
+\input{11_newton-05.tex}
+\input{11_newton-06.tex}
+\input{11_newton-07.tex}
+\input{11_newton-08.tex}

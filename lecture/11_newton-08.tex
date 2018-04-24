@@ -1,0 +1,17 @@
+\begin{frame}[t,fragile]{初期段階における収束の改善}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item Newton法は初期値によっては収束しない
+  \item 発散や振動を抑える方法として「減速」が有効な場合も
+  \item 減速
+    \begin{itemize}
+    \item 反復式を少し修正する
+      \[
+      x_{n+1} = x_n - \mu_n \frac{f(x_n)}{f'(x_n)}
+      \]
+    \item まずは$\mu_n=1$として計算
+    \item $|f(x_{n+1})| < |f(x_{n})|$が成り立たないようであれば、$\mu_n$を半分にして再計算
+    \item $\mu_n$が十分に小さくなれば、$|f(x)|$は必ず減少する
+    \end{itemize}
+  \end{itemize}
+\end{frame}
