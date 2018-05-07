@@ -35,6 +35,7 @@ free(v); /* 確保した領域を開放 */
     \end{itemize}
   \item C言語では配列の添字は0から始まることに注意
   \item \verb^double v[10];^ と宣言した場合、\verb^v[0]^ 〜 \verb^v[9]^ の10個の要素を持つ配列が作られる。\verb^v[10]^ は存在しない。値を代入したり参照しようとするとエラーとなる
+  \item ポインタ確認プログラム: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/matrix/pointer.c}{pointer.c}
   \end{itemize}
 \end{frame}
 
@@ -52,6 +53,7 @@ free(v); /* 確保した領域を開放 */
     \item \verb^*(m+2)[3]^ と \verb^*((m+2)[3])^ と \verb^*(m[5])^ と\verb^m[5][0]^ は等価
     \item \verb^[]^は\verb^*^よりも強い
     \end{itemize}
+  \item ポインタ確認プログラム: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/matrix/pointer.c}{pointer.c}
   \end{itemize}
 \end{frame}
 
@@ -68,7 +70,7 @@ for (int i = 0; i < m; ++i)
   a[i] = (double*)malloc((size_t)(n * sizeof(double));
 \end{lstlisting}
 \item 各行を保持する配列が、メモリ上で連続に確保される保証はない
-\item LAPACKを使うときに問題となる
+\item 行列用のライブラリ(LAPACK等)を使うときに問題となる
   \end{itemize}
 \end{frame}
 
@@ -93,20 +95,58 @@ free(a);
   \end{itemize}
 \end{frame}
 
+\begin{frame}[t,fragile]{Column-majorとraw-major}
+  \begin{itemize}
+    % \setlength{\itemsep}{1em}
+  \item CとFortranで、二次元配列のメモリ上での並びが違う \\
+    Cはrow-major: {\tt a[0][0], a[0][1], a[0][2], $\cdots$} \\
+    Fortranはcolumn-major: {\tt a(1,1), a(2,1), a(3,1), $\cdots$}
+  \item 多くの線形代数ライブラリはFortranで書かれている
+  \item Cで作成した行列をFortranに渡すと転置されてしまう
+
+    {\tt a[i][j]}はFortranでは行列の(j,i)成分と解釈される
+  \item あらかじめ転置して(i,j)成分を{\tt a[j][i]}にセットすれば良い
+  \item C言語のマクロを使うと(少し?)便利
+\begin{lstlisting}
+#define mat_elem(mat, i, j) (mat)[j][i]
+\end{lstlisting}
+このマクロを使うと(i,j)成分の操作は以下のように書ける
+\begin{lstlisting}
+mat_elem(a, i, j) = ...;
+\end{lstlisting}
+  \end{itemize}
+\end{frame}
+
 \begin{frame}[t,fragile]{動的二次元配列の確保}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
-  \item 二次元配列の確保({\tt alloc\_dmatrix})、開放({\tt free\_dmatrix})、出力({\tt print\_dmatrix})、読み込み({\tt read\_dmatrix})を行うためのユーティリティ関数を準備
-  \item ソースコード: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/linear_system/matrix_util.h}{exercise/linear\_system/matrix\_util.h}
+    %\setlength{\itemsep}{1em}
+  \item Column-major形式の二次元配列の確保({\tt alloc\_dmatrix})、開放({\tt free\_dmatrix})、出力({\tt print\_dmatrix})、読み込み({\tt read\_dmatrix})を行うためのユーティリティ関数、(i,j)成分にアクセスするためのマクロ({\tt mat\_elem})他を準備
+  \item ソースコード: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/matrix/cmatrix.h}{cmatrix.h}
   \item 使用例
 \begin{lstlisting}
-#include "matrix_util.h"
+#include "cmatrix.h"
 ...
 double **mat;
 mat = alloc_dmatrix(m, n);
+mat_elem(mat, 1, 3) = 5.0;
 ...
 free_dmatrix(mat);
 \end{lstlisting}
+  \item サンプルコード: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/matrix/matrix_example.c}{matrix\_example.c}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{BLASライブラリ}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 行列・行列積、行列・ベクトル積などを高速に行う最適化された関数群
+  \item 行列・行列積を計算するサブルーチン {\tt dgemm} \\
+    \url{http://www.netlib.org/lapack/explore-html/d7/d2b/dgemm_8f.html}
+    \begin{itemize}
+    \item $C = \alpha A \times B + \beta C$ を計算
+    \item BLASもFortranで書かれている
+    \end{itemize}
+  \item 例: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/matrix/multiply.c}{multiply.c}, \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/matrix/multiply_dgemm.c}{multiply\_dgemm.c}
   \end{itemize}
 \end{frame}
 
@@ -138,7 +178,7 @@ subroutine dgetrf(integer M, integer N,
          integer LDA, integer, dimension(*) IPIV,
          integer INFO)
 \end{lstlisting}
-\item {\tt A}: 左辺の行列、{\tt N,M}: 次元、{\tt IPIV}: 選択されたピボット行のリスト、{\tt lda}: {\tt M}と同じで良い
+\item {\tt A}: 左辺の行列、{\tt N,M}: 次元、{\tt IPIV}: 選択されたピボット行のリスト、{\tt lda}: 通常{\tt M} (行数)と同じで良い
   \end{itemize}
 \end{frame}
 
@@ -153,12 +193,12 @@ void dgetrf_(int *M, int *N, double *A,
 関数名は全て小文字。関数名の最後に {\tt \_} (下線)を付ける
 \item LU分解の例
 \begin{lstlisting}
-M = 10;
-N = 10;
-LDA = 10;
-dgetrf_(&M, &N, &A[0][0], &LDA, &IPIV[0], &INFO);
+m = 10;
+m = 10;
+lda = 10;
+dgetrf_(&M, &N, mat_ptr(A), &M, mat_ptr(IPIV), &INFO);
 \end{lstlisting}
-完全なソースコード: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/linear_system/lu_decomp.c}{exercise/linear\_system/lu\_decomp.c}
+完全なソースコード: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/linear_system/lu_decomp.c}{lu\_decomp.c}
   \end{itemize}
 \end{frame}
 
@@ -166,11 +206,12 @@ dgetrf_(&M, &N, &A[0][0], &LDA, &IPIV[0], &INFO);
   \begin{itemize}
     \setlength{\itemsep}{1em}
   \item スカラーも配列も全てポインタ渡しとする
-  \item C言語は添字が0から始まる。Fortranは1から始まる
-  \item CとFortranで、二次元配列のメモリ上での並びが違う \\
-    Cはrow-major: {\tt a[0][0], a[0][1], a[0][2], $\cdots$} \\
-    Fortranはcolumn-major: {\tt a(1,1), a(2,1), a(3,1), $\cdots$} \\
-  \item Cで作成した行列をFortranに渡すと転置されてしまう
-  \item コンパイル時には{\tt -llapack}オプションを指定し、LAPACKライブラリをリンクする(ハンドブック3.1.6節)
+  \item 行列やベクトルは最初の要素へのポインタを渡す
+    \begin{itemize}
+      \item 行列の最初の要素(0,0)へのポインタ: \verb+&a[0][0]+
+      \item ベクトルの最初の要素(0)へのポインタ: \verb+&v[0]+
+      \item \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/matrix/cmatrix.h}{cmatrix.h}にマクロ({\tt mat\_ptr}、{\tt vec\_ptr})が準備されているのでそれぞれ、{\tt mat\_ptr(a)}、{\tt vec\_ptr(v)}と書ける
+    \end{itemize}
+  \item コンパイル時には{\tt -llapack -lblas}オプションを指定し、LAPACKライブラリとBLASライブラリをリンクする(ハンドブック3.1.6節)
   \end{itemize}
 \end{frame}

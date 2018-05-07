@@ -33,17 +33,24 @@
 %\logo{\pgfuseimage{university-logo}\hspace*{2em}}
 
 % ソースコード表示用
-\usepackage{listings,jlisting}
+%\usepackage{listings,jlisting}
+\usepackage{listings}
 \input{python_listing.tex}
 % 実行コマンド記述用のスタイル(bashシェル用で、生成されたPDFからコピー＆ペーストできるように空白を保つ)
 \lstdefinestyle{shstyle}{
     language=bash,
     basicstyle=\ttfamily\tiny,
+    keywordstyle={\color{RGB}{139,175,219}},
     frame=single,
     keepspaces=true,
     rulecolor=\color[cmyk]{0, 0.29,0.84,0}
 }
-\lstset{language={C},basicstyle=\ttfamily\scriptsize,showspaces=false,rulecolor=\color[cmyk]{0, 0.29,0.84,0}}
+\lstset{language={C},
+  basicstyle=\ttfamily\scriptsize,
+  showspaces=false,
+  keywordstyle=\color[cmyk]{1, 0.6, 0, 0},
+  rulecolor=\color[cmyk]{0, 0.29,0.84,0}
+}
 
 % 箇条書きの２階層目のマーカを三角にする
 \setbeamertemplate{itemize subitem}[triangle]

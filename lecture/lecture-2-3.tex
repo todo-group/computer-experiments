@@ -254,23 +254,6 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}[t,fragile]{BLASライブラリ}
-  \begin{itemize}
-    %\setlength{\itemsep}{1em}
-  \item 行列・行列積、行列・ベクトル積などを高速に行う最適化された関数群
-  \item コンパイル時に {\tt -lblas} オプションを指定してBLASライブラリをリンクする
-  \item 行列・行列積を計算するサブルーチン {\tt dgemm} \\
-    \url{http://www.netlib.org/lapack/explore-html/d7/d2b/dgemm_8f.html}
-    \begin{itemize}
-    \item $C = \alpha A \times B + \beta C$ を計算
-    \item BLASもFortranで書かれているので行列が転置される
-    \item 行列$A$と$B$については、引数{\tt TRANSA}、{\tt TRANSB}で転置するかどうか指定可能だが、行列$C$については不可
-    \item $C = A \times B$のかわりに$C^t = B^t \times A^t$を計算すればよい
-    \end{itemize}
-  \item 例: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/linear_system/multiply.c}{example-2-L3/multiply.c}, \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/linear_system/multiply_dgemm.c}{example-2-L3/multiply\_dgemm.c}
-  \end{itemize}
-\end{frame}
-
 \input{13_lapack.tex}
 
 \section{分子動力学法}
