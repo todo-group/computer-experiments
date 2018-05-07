@@ -1,4 +1,4 @@
-#include "matrix_util.h"
+#include "cmatrix.h"
 #include <stdio.h>
 
 int main() {

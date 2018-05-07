@@ -1,4 +1,4 @@
-#include "matrix_util.h"
+#include "cmatrix.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -19,7 +19,7 @@ int main(int argc, char** argv) {
 
   int *ipiv;
   int info;
-  char trans = 'T';
+  char trans = 'N';
   int nrhs = 1;
 
   if (argc < 2) {
@@ -51,7 +51,7 @@ int main(int argc, char** argv) {
 
   /* perform LU decomposition */
   ipiv = alloc_ivector(n);
-  dgetrf_(&n, &n, &a[0][0], &n, &ipiv[0], &info);
+  dgetrf_(&n, &n, mat_ptr(a), &n, vec_ptr(ipiv), &info);
   if (info != 0) {
     fprintf(stderr, "Error: LAPACK::dgetrf failed\n");
     exit(1);
@@ -62,7 +62,7 @@ int main(int argc, char** argv) {
   fprint_ivector(stdout, n, ipiv);
 
   /* solve equations */
-  dgetrs_(&trans, &n, &nrhs, &a[0][0], &n, &ipiv[0], &b[0], &n, &info);
+  dgetrs_(&trans, &n, &nrhs, mat_ptr(a), &n, vec_ptr(ipiv), vec_ptr(b), &n, &info);
   if (info != 0) {
     fprintf(stderr, "Error: LAPACK::dgetrs failed\n");
     exit(1);

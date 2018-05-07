@@ -1,12 +1,8 @@
-#include "matrix_util.h"
+#include "cmatrix.h"
+#include "dgesvd.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-/* http://www.netlib.org/lapack/explore-html/d8/d2d/dgesvd_8f.html */
-void dgesvd_(char *JOBU, char* JOBVT, int *M, int *N, double* A,
-             int* LDA, double* S, double* U, int* LDU, double* VT, int* LDVT ,
-             double* WORK, int* LWORK, int* INFO);
 
 int imin(int x, int y) { return (x < y) ? x : y; }
 int imax(int x, int y) { return (x > y) ? x : y; }
@@ -51,8 +47,8 @@ int main(int argc, char** argv) {
   work = alloc_dvector(lwork);
   
   /* perform SVD */
-  dgesvd_(&jobu, &jobvt, &n, &m, &a[0][0], &n, &s[0], &vt[0][0], &n,
-          &u[0][0], &m, &work[0], &lwork, &info);
+  dgesvd_(&jobu, &jobvt, &m, &n, mat_ptr(a), &m, vec_ptr(s), mat_ptr(u), &m,
+          mat_ptr(vt), &n, vec_ptr(work), &lwork, &info);
   if (info != 0) {
     fprintf(stderr, "Error: LAPACK::dgesvd failed\n");
     exit(1);
@@ -67,9 +63,9 @@ int main(int argc, char** argv) {
   // check the result of SVD
   for (i = 0; i < m; ++i) {
     for (j = 0; j < n; ++j) {
-      a[i][j] = 0.0;
+      mat_elem(a, i, j) = 0.0;
       for (k = 0; k < r; ++k) {
-        a[i][j] += u[i][k] * s[k] * vt[k][j];
+        mat_elem(a, i, j) += mat_elem(u, i, k) * s[k] * mat_elem(vt, k, j);
       }
     }
   }
@@ -80,9 +76,9 @@ int main(int argc, char** argv) {
   s[r-1] = 0.0; // set the last singular value to zero
   for (i = 0; i < m; ++i) {
     for (j = 0; j < n; ++j) {
-      a[i][j] = 0.0;
+      mat_elem(a, i, j) = 0.0;
       for (k = 0; k < r; ++k) {
-        a[i][j] += u[i][k] * s[k] * vt[k][j];
+        mat_elem(a, i, j) += mat_elem(u, i, k) * s[k] * mat_elem(vt, k, j);
       }
     }
   }

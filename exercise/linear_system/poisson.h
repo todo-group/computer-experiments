@@ -1,3 +1,4 @@
+#include "cmatrix.h"
 #include <math.h>
 
 /* 二次元ポアソン方程式の行列表示: Ax=b
@@ -38,16 +39,16 @@ double f(int n, int x, int y) {
 }
 
 /* 二次元ポワソン方程式の行列を生成する */
-/* 行列: a[(n-1)*(n-1)][(n-1)*(n-1)] */
+/* 行列: [(n-1)*(n-1)] x [(n-1)*(n-1)] 行列 */
 void generate_dense(int n, double h, double **a) {
   int dim = matrix_dimension(n);
   int i, j, x, y, xn, yn;
   double h2inv = 1.0 / (h*h);
 
   /* ゼロで初期化 */
-  for (i = 0; i < dim; ++i) {
-    for (j = 0; j < dim; ++j) {
-      a[i][j] = 0.0;
+  for (j = 0; j < dim; ++j) {
+    for (i = 0; i < dim; ++i) {
+      mat_elem(a, i, j) = 0.0;
     }
   }
 
@@ -56,23 +57,23 @@ void generate_dense(int n, double h, double **a) {
     for (y = 1; y < n; ++y) {
       i = (n-1) * (y-1) + (x-1);
       /* diagonal element */
-      a[i][i] = -4 * h2inv;
+      mat_elem(a, i, i) = -4 * h2inv;
       /* up direction */
       xn = x;
       yn = y + 1;
-      if (yn != n) a[i][(n-1) * (yn-1) + (xn-1)] = h2inv;
+      if (yn != n) mat_elem(a, i, (n-1) * (yn-1) + (xn-1)) = h2inv;
       /* down direction */
       xn = x;
       yn = y - 1;
-      if (yn != 0) a[i][(n-1) * (yn-1) + (xn-1)] = h2inv;
+      if (yn != 0) mat_elem(a, i, (n-1) * (yn-1) + (xn-1)) = h2inv;
       /* right direction */
       xn = x + 1;
       yn = y;
-      if (xn != n) a[i][(n-1) * (yn-1) + (xn-1)] = h2inv;
+      if (xn != n) mat_elem(a, i, (n-1) * (yn-1) + (xn-1)) = h2inv;
       /* left direction */
       xn = x - 1;
       yn = y;
-      if (xn != 0) a[i][(n-1) * (yn-1) + (xn-1)] = h2inv;
+      if (xn != 0) mat_elem(a, i, (n-1) * (yn-1) + (xn-1)) = h2inv;
     }
   }
 }
@@ -80,8 +81,8 @@ void generate_dense(int n, double h, double **a) {
 /* 二次元ポワソン方程式の行列を生成する */
 /* 非ゼロの要素のみを格納
      n_elem[n-1]: 各行の非ゼロ要素の数(最大5)
-     col[n-1][5]: 非ゼロ要素の列
-     val[n-1][5]: 非ゼロ要素の値 */
+     col[n-1, 5]: 非ゼロ要素の列
+     val[n-1, 5]: 非ゼロ要素の値 */
 void generate_sparse(int n, double h, int *n_elem, int **col, double **val) {
   int i, x, y, xn, yn;
   double h2inv = 1.0 / (h*h);
@@ -90,39 +91,39 @@ void generate_sparse(int n, double h, int *n_elem, int **col, double **val) {
       i = (n-1) * (y-1) + (x-1);
       n_elem[i] = 0;
       /* diagonal element */
-      col[i][n_elem[i]] = i;
-      val[i][n_elem[i]] = -4 * h2inv;
+      mat_elem(col, i, n_elem[i]) = i;
+      mat_elem(val, i, n_elem[i]) = -4 * h2inv;
       n_elem[i] += 1;
       /* up direction */
       xn = x;
       yn = y + 1;
       if (yn != n) {
-        col[i][n_elem[i]] = (n-1) * (yn-1) + (xn-1);
-        val[i][n_elem[i]] = h2inv;
+        mat_elem(col, i, n_elem[i]) = (n-1) * (yn-1) + (xn-1);
+        mat_elem(val, i, n_elem[i]) = h2inv;
         n_elem[i] += 1;
       }
       /* down direction */
       xn = x;
       yn = y - 1;
       if (yn != 0)  {
-        col[i][n_elem[i]] = (n-1) * (yn-1) + (xn-1);
-        val[i][n_elem[i]] = h2inv;
+        mat_elem(col, i, n_elem[i]) = (n-1) * (yn-1) + (xn-1);
+        mat_elem(val, i, n_elem[i]) = h2inv;
         n_elem[i] += 1;
       }
       /* right direction */
       xn = x + 1;
       yn = y;
       if (xn != n)  {
-        col[i][n_elem[i]] = (n-1) * (yn-1) + (xn-1);
-        val[i][n_elem[i]] = h2inv;
+        mat_elem(col, i, n_elem[i]) = (n-1) * (yn-1) + (xn-1);
+        mat_elem(val, i, n_elem[i]) = h2inv;
         n_elem[i] += 1;
       }
       /* left direction */
       xn = x - 1;
       yn = y;
       if (xn != 0)  {
-        col[i][n_elem[i]] = (n-1) * (yn-1) + (xn-1);
-        val[i][n_elem[i]] = h2inv;
+        mat_elem(col, i, n_elem[i]) = (n-1) * (yn-1) + (xn-1);
+        mat_elem(val, i, n_elem[i]) = h2inv;
         n_elem[i] += 1;
       }
     }
@@ -172,7 +173,7 @@ void product_sparse(int n, int *n_elem, int **col, double **val,
   for (i = 0; i < dim; ++i) {
     v_out[i] = 0;
     for (j = 0; j < n_elem[i]; ++j) {
-      v_out[i] += val[i][j] * v_in[col[i][j]];
+      v_out[i] += mat_elem(val, i, j) * v_in[mat_elem(col, i, j)];
     }
   }
 }

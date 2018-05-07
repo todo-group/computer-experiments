@@ -1,10 +1,7 @@
-#include "matrix_util.h"
+#include "cmatrix.h"
+#include "dsyev.h"
 #include <stdio.h>
 #include <stdlib.h>
-
-/* http://www.netlib.org/lapack/explore-html/dd/d4c/dsyev_8f.html */
-void dsyev_(char *JOBZ, char *UPLO, int *N, double *A, int *LDA, double *W,
-            double *WORK, int *LWORK, int *INFO);
 
 int main(int argc, char** argv) {
   char* filename;
@@ -43,14 +40,14 @@ int main(int argc, char** argv) {
   w = alloc_dvector(n);
   lwork = 3*n - 1;
   work = alloc_dvector(lwork);
-  dsyev_(&jobz, &uplo, &n, &a[0][0], &n, &w[0], &work[0], &lwork, &info);
+  dsyev_(&jobz, &uplo, &n, mat_ptr(a), &n, vec_ptr(w), vec_ptr(work), &lwork, &info);
   if (info != 0) {
     fprintf(stderr, "Error: LAPACK::dsyev failed\n");
     exit(1);
   }
   printf("Eigenvalues:\n");
   fprint_dvector(stdout, n, w);
-  printf("Eigenvectors [each row (not column) represents each eigenvector]:\n");
+  printf("Eigenvectors [each column represents each eigenvector]:\n");
   fprint_dmatrix(stdout, n, n, a);
 
   free_dmatrix(a);

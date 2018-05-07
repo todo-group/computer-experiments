@@ -1,4 +1,4 @@
-#include "matrix_util.h"
+#include "cmatrix.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -42,9 +42,9 @@ int main(int argc, char** argv) {
   for (k = 0; k < n; ++k) {
     for (i = k + 1; i < n; ++i) {
       for (j = k + 1; j < n; ++j) {
-        a[i][j] -= a[k][j] * a[i][k] / a[k][k];
+        mat_elem(a, i, j) -= mat_elem(a, k, j) * mat_elem(a, i, k) / mat_elem(a, k, k);
       }
-      b[i] -= b[k] * a[i][k] / a[k][k];
+      b[i] -= b[k] * mat_elem(a, i, k) / mat_elem(a, k, k);
     }
   }
   printf("Result of Gauss elimination (only upper triangular has meaning):\n");
@@ -55,9 +55,9 @@ int main(int argc, char** argv) {
   /* backward substitution */
   for (k = n-1; k >= 0; --k) {
     for (j = k + 1; j < n; ++j) {
-      b[k] -= a[k][j] * b[j];
+      b[k] -= mat_elem(a, k, j) * b[j];
     }
-    b[k] /= a[k][k];
+    b[k] /= mat_elem(a, k, k);
   }
   printf("Solution X (transposed):\n");
   fprint_dvector(stdout, n, b);

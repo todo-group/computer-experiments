@@ -1,11 +1,7 @@
+#include "cmatrix.h"
+#include "dgemm.h"
 #include <stdio.h>
 #include <math.h>
-#include "matrix_util.h"
-
-/* dgemm: C = alpha * A * B + beta * C */
-void dgemm_(char *TRANSA, char *TRANSB, int *M, int *N, int *K,
-            double *ALPHA, double *A, int *LDA, double *B, int *LDB,
-            double *BETA, double *C, int *LDC);
 
 /* v = D^{1/2} v */
 void product_D(int M, double temperature, double *v) {
@@ -84,24 +80,24 @@ int main(int argc, char** argv) {
   T1 = alloc_dmatrix(dim, dim);
   /* T0 = identity matrix */
   for (i = 0; i < dim; ++i) {
-    for (j = 0; j < dim; ++j) T0[i][j] = 0.0;
-    T0[i][i] = 1.0;
+    for (j = 0; j < dim; ++j) mat_elem(T0, i, j) = 0.0;
+    mat_elem(T0, i, i) = 1.0;
   }
   for (k = 0; k < L; ++k) {
     /* T1 = T * T0 */
-    dgemm_(&trans, &trans, &dim, &dim, &dim, &alpha, &T0[0][0],
-           &dim, &T[0][0], &dim, &beta, &T1[0][0], &dim);
+    dgemm_(&trans, &trans, &dim, &dim, &dim, &alpha, mat_ptr(T),
+           &dim, mat_ptr(T0), &dim, &beta, mat_ptr(T1), &dim);
     /* T0 = T1 */
-    for (i = 0; i < dim; ++i) {
-      for (j = 0; j < dim; ++j) {
-        T0[i][j] = T1[i][j];
+    for (j = 0; j < dim; ++j) {
+      for (i = 0; i < dim; ++i) {
+        mat_elem(T0, i, j) = mat_elem(T1, i, j);
       }
     }
   }
 
   /* take trace of T^L */
   sum = 0.0;
-  for (i = 0; i < dim; ++i) sum += T0[i][i];
+  for (i = 0; i < dim; ++i) sum += mat_elem(T0, i, i);
   
   printf("temperature = %15.10f\n", temperature);
   printf("L = %d\n", L);

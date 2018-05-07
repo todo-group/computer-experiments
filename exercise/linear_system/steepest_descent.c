@@ -1,4 +1,4 @@
-#include "matrix_util.h"
+#include "cmatrix.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,7 +9,7 @@ void residual(int n, double **a, double *b, double *x, double *r) {
   for (i = 0; i < n; ++i) {
     r[i] = b[i];
     for (j = 0; j < n; ++j) {
-      r[i] -= a[i][j] * x[j];
+      r[i] -= mat_elem(a, i, j) * x[j];
     }
   }
 }
@@ -30,7 +30,7 @@ double quad(int n, double **a, double *x) {
   double r = 0.0;
   for (i = 0; i < n; ++i) {
     for (j = 0; j < n; ++j) {
-      r += x[i] * a[i][j] * x[j];
+      r += x[i] * mat_elem(a, i, j) * x[j];
     }
   }
   return r;

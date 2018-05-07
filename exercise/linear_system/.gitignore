@@ -1,9 +1,7 @@
 determinant
 gauss
 lu_decomp
-matrix_example
-multiply
-multiply_dgemm
-pointer
-random_matrix
+poisson_dense
+poisson_lu
+poisson_sparse
 steepest_descent

@@ -1,7 +1,6 @@
+#include "poisson.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "matrix_util.h"
-#include "poisson.h"
 
 int main(int argc, char** argv) {
   int n, dim, i, j;

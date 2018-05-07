@@ -1,4 +1,4 @@
-#include "matrix_util.h"
+#include "cmatrix.h"
 #include <stdio.h>
 
 int main() {
@@ -31,9 +31,9 @@ int main() {
   
   /* test for matrix */
   m = alloc_dmatrix(n, n);
-  for (i = 0; i < n; ++i)
-    for (j = 0; j < n; ++j)
-      m[i][j] = 100 * i + j;
+  for (j = 0; j < n; ++j)
+    for (i = 0; i < n; ++i)
+      mat_elem(m, i, j) = 100 * i + j;
   fprint_dmatrix(stdout, n, n, m);
   
   printf("m        = %lu\n", (long)m);

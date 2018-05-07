@@ -1,10 +1,7 @@
-#include "matrix_util.h"
+#include "cmatrix.h"
+#include "dsyev.h"
 #include <stdio.h>
 #include <stdlib.h>
-
-/* http://www.netlib.org/lapack/explore-html/dd/d4c/dsyev_8f.html */
-void dsyev_(char *JOBZ, char *UPLO, int *N, double *A, int *LDA, double *W,
-            double *WORK, int *LWORK, int *INFO);
 
 double potential(double x, double v, double width) {
   if (x > (0.5 - 0.5 * width) && x < (0.5 + 0.5 * width)) {
@@ -57,11 +54,11 @@ int main(int argc, char** argv) {
   for (i = 0; i < dim; ++i) {
     x = 1.0 * (i+1) / n; /* x = 0 for i = -1 and x = 1 for i = dim */
     if (i > 0) {
-      mat[i][i-1] = offdiag;
+      mat_elem(mat, i, i-1) = offdiag;
     }
-    mat[i][i] = diag + potential(x, v, width);
+    mat_elem(mat, i, i) = diag + potential(x, v, width);
     if (i < (dim - 1)) {
-      mat[i][i+1] = offdiag;
+      mat_elem(mat, i, i+1) = offdiag;
     }
   }
   
@@ -69,7 +66,7 @@ int main(int argc, char** argv) {
   ene = alloc_dvector(dim);
   lwork = 3*dim - 1;
   work = alloc_dvector(lwork);
-  dsyev_(&jobz, &uplo, &dim, &mat[0][0], &dim, &ene[0], &work[0],
+  dsyev_(&jobz, &uplo, &dim, mat_ptr(mat), &dim, vec_ptr(ene), vec_ptr(work),
          &lwork, &info);
   if (info != 0) {
     fprintf(stderr, "Error: LAPACK::dsyev failed\n");
@@ -93,7 +90,7 @@ int main(int argc, char** argv) {
   for (j = 0; j < dim; ++j) {
     printf("%10.5f ", 1.0 * (j+1) / n);
     for (i = 0; i < num_states; ++i) {
-      printf("%10.5f ", mat[i][j]);
+      printf("%10.5f ", mat_elem(mat, j, i));
     }
     printf("\n");
   }

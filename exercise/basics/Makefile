@@ -5,17 +5,14 @@ OBJ = bisection hello hello_cxx hello_f fibonacci fibonacci_cxx fibonacci_f diff
 
 F90 = gfortran
 
-CFLAGS = -O2
+CFLAGS = -O3 -Wall
 CXXFLAGS = $(CFLAGS)
 FFLAGS = $(CFLAGS)
-
-LDFLAGS =
-LDLIBS =
 
 default: $(OBJ)
 
 .f90:
-	$(F90) $(FFLAGS) $(LDFLAGS) $< $(LIBS) -o $@
+	$(F90) $(FFLAGS) $(LDFLAGS) $< $(LDLIBS) -o $@
 
 clean:
 	rm -f a.out *.o $(OBJ)

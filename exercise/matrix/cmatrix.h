@@ -8,6 +8,7 @@
 
   alloc_dmatrix : allocate matrix of double
   alloc_fmatrix : allocate matrix of float
+  alloc_imatrix : allocate matrix of int
 
   free_dvector : deallocate vector of double
   free_fvector : deallocate vector of float
@@ -15,13 +16,14 @@
 
   free_dmatrix : deallocate matrix of double
   free_fmatrix : deallocate matrix of float
+  free_imatrix : deallocate matrix of int
 
-  print_dvector: print out vector of double
-  print_fvector: print out vector of float
-  print_ivector: print out vector of int
+  fprint_dvector: print out vector of double
+  fprint_fvector: print out vector of float
+  fprint_ivector: print out vector of int
 
-  print_dmatrix: print out matrix of double
-  print_fmatrix: print out matrix of float
+  fprint_dmatrix: print out matrix of double
+  fprint_fmatrix: print out matrix of float
 
   read_dvector: read vector of double from file
   read_fvector: read vector of float from file
@@ -29,13 +31,19 @@
 
   read_dmatrix: read matrix of double from file
   read_fmatrix: read matrix of float from file
+  read_imatrix: read matrix of int from file
 */
 
-#ifndef MATRIX_UTIL_H
-#define MATRIX_UTIL_H
+#ifndef CMATRIX_H
+#define CMATRIX_H
 
 #include <stdlib.h>
 #include <stdio.h>
+
+/* useful macros */
+#define vec_ptr(vec) &(vec)[0]
+#define mat_ptr(mat) &(mat)[0][0]
+#define mat_elem(mat, i, j) (mat)[j][i]
 
 /* allocate vector of double */
 static inline double *alloc_dvector(int n) {
@@ -70,11 +78,11 @@ static inline int *alloc_ivector(int n) {
   return vec;
 }
 
-/* allocate m x n matrix of double */
+/* allocate m x n column-major matrix of double */
 static inline double **alloc_dmatrix(int m, int n) {
   int i;
   double **mat;
-  mat = (double**)malloc((size_t)(m * sizeof(double*)));
+  mat = (double**)malloc((size_t)(n * sizeof(double*)));
   if (mat == NULL) {
     fprintf(stderr, "Error: allocation failed in alloc_dmatrix\n");
     exit(1);
@@ -84,15 +92,15 @@ static inline double **alloc_dmatrix(int m, int n) {
     fprintf(stderr, "Error: allocation failed in alloc_dmatrix\n");
     exit(1);
   }
-  for (i = 1; i < m; ++i) mat[i] = mat[i-1] + n;
+  for (i = 1; i < n; ++i) mat[i] = mat[i-1] + m;
   return mat;
 }
 
-/* allocate m x n matrix of float */
+/* allocate m x n column-major matrix of float */
 static inline float **alloc_fmatrix(int m, int n) {
   int i;
   float **mat;
-  mat = (float**)malloc((size_t)(m * sizeof(float*)));
+  mat = (float**)malloc((size_t)(n * sizeof(float*)));
   if (mat == NULL) {
     fprintf(stderr, "Error: allocation failed in alloc_fmatrix\n");
     exit(1);
@@ -102,7 +110,25 @@ static inline float **alloc_fmatrix(int m, int n) {
     fprintf(stderr, "Error: allocation failed in alloc_fmatrix\n");
     exit(1);
   }
-  for (i = 1; i < m; ++i) mat[i] = mat[i-1] + n;
+  for (i = 1; i < n; ++i) mat[i] = mat[i-1] + m;
+  return mat;
+}
+
+/* allocate m x n column-major matrix of int */
+static inline int **alloc_imatrix(int m, int n) {
+  int i;
+  int **mat;
+  mat = (int**)malloc((size_t)(n * sizeof(int*)));
+  if (mat == NULL) {
+    fprintf(stderr, "Error: allocation failed in alloc_imatrix\n");
+    exit(1);
+  }
+  mat[0] = (int*)malloc((size_t)(m * n * sizeof(int)));
+  if (mat[0] == NULL) {
+    fprintf(stderr, "Error: allocation failed in alloc_imatrix\n");
+    exit(1);
+  }
+  for (i = 1; i < n; ++i) mat[i] = mat[i-1] + m;
   return mat;
 }
 
@@ -129,6 +155,12 @@ static inline void free_dmatrix(double **mat) {
 
 /* deallocate float matrix of float */
 static inline void free_fmatrix(float **mat) {
+  free(mat[0]);
+  free(mat);
+}
+
+/* deallocate float matrix of int */
+static inline void free_imatrix(int **mat) {
   free(mat[0]);
   free(mat);
 }
@@ -162,7 +194,7 @@ static inline void fprint_dmatrix(FILE *fp, int m, int n, double **mat) {
   int i, j;
   fprintf(fp, "%d %d\n", m, n);
   for (i = 0; i < m; ++i) {
-    for (j = 0; j < n; ++j) fprintf(fp, "%10.5f ", mat[i][j]);
+    for (j = 0; j < n; ++j) fprintf(fp, "%10.5f ", mat_elem(mat, i, j));
     fprintf(fp, "\n");
   }
 }
@@ -172,7 +204,17 @@ static inline void fprint_fmatrix(FILE *fp, int m, int n, float **mat) {
   int i, j;
   fprintf(fp, "%d %d\n", m, n);
   for (i = 0; i < m; ++i) {
-    for (j = 0; j < n; ++j) fprintf(fp, "%10.5f ", mat[i][j]);
+    for (j = 0; j < n; ++j) fprintf(fp, "%10.5f ", mat_elem(mat, i, j));
+    fprintf(fp, "\n");
+  }
+}
+
+/* print out matrix of int */
+static inline void fprint_imatrix(FILE *fp, int m, int n, int **mat) {
+  int i, j;
+  fprintf(fp, "%d %d\n", m, n);
+  for (i = 0; i < m; ++i) {
+    for (j = 0; j < n; ++j) fprintf(fp, "%d ", mat_elem(mat, i, j));
     fprintf(fp, "\n");
   }
 }
@@ -200,7 +242,7 @@ static inline void read_dmatrix(FILE *fp, int *m, int *n, double ***mat) {
   fscanf(fp, "%d", n);
   *mat = alloc_dmatrix(*m, *n);
   for (i = 0; i < *m; ++i) {
-    for (j = 0; j < *n; ++j) fscanf(fp, "%lf", &(*mat)[i][j]);
+    for (j = 0; j < *n; ++j) fscanf(fp, "%lf", &mat_elem(*mat, i, j));
   }
 }
 
@@ -211,7 +253,7 @@ static inline void read_fmatrix(FILE *fp, int *m, int *n, float ***mat) {
   fscanf(fp, "%d", n);
   *mat = alloc_fmatrix(*m, *n);
   for (i = 0; i < *m; ++i) {
-    for (j = 0; j < *n; ++j) fscanf(fp, "%f", &(*mat)[i][j]);
+    for (j = 0; j < *n; ++j) fscanf(fp, "%f", &mat_elem(*mat, i, j));
   }
 }
 

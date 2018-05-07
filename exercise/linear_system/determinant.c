@@ -1,4 +1,4 @@
-#include "matrix_util.h"
+#include "cmatrix.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -35,7 +35,7 @@ int main(int argc, char** argv) {
 
   /* perform LU decomposition */
   ipiv = alloc_ivector(n);
-  dgetrf_(&n, &n, &a[0][0], &n, &ipiv[0], &info);
+  dgetrf_(&n, &n, mat_ptr(a), &n, vec_ptr(ipiv), &info);
   if (info != 0) {
     fprintf(stderr, "Error: LAPACK::dgetrf failed\n");
     exit(1);
@@ -48,7 +48,7 @@ int main(int argc, char** argv) {
   /* calculate determinant */
   det = 1.0;
   for (i = 0; i < n; ++i) {
-    det *= a[i][i];
+    det *= mat_elem(a, i, i);
     if (ipiv[i] != i+1) det = -det;
   }
   printf("Determinant of A = %lf\n", det);

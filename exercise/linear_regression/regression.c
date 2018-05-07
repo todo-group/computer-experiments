@@ -1,4 +1,4 @@
-#include "matrix_util.h"
+#include "cmatrix.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -46,7 +46,7 @@ int main(int argc, char** argv) {
   double *b;
   int *ipiv;
   int info;
-  char trans = 'T';
+  char trans = 'N';
   int nrhs = 1;
 
   if (argc < 2) {
@@ -73,9 +73,9 @@ int main(int argc, char** argv) {
   a = alloc_dmatrix(nbase, nbase);
   for (i = 0; i < nbase; ++i) {
     for (j = 0; j < nbase; ++j) {
-      a[i][j] = 0.0;
+      mat_elem(a, i, j) = 0.0;
       for (k = 0; k < n; ++k) {
-        a[i][j] += f(i, x[k]) * f(j, x[k]);
+        mat_elem(a, i, j) += f(i, x[k]) * f(j, x[k]);
       }
     }
   }
@@ -95,7 +95,7 @@ int main(int argc, char** argv) {
 
   /* perform LU decomposition */
   ipiv = alloc_ivector(nbase);
-  dgetrf_(&nbase, &nbase, &a[0][0], &nbase, &ipiv[0], &info);
+  dgetrf_(&nbase, &nbase, mat_ptr(a), &nbase, vec_ptr(ipiv), &info);
   if (info != 0) {
     fprintf(stderr, "Error: LAPACK::dgetrf failed\n");
     exit(1);
@@ -106,7 +106,7 @@ int main(int argc, char** argv) {
   fprint_ivector(stdout, nbase, ipiv);
 
   /* solve equations */
-  dgetrs_(&trans, &nbase, &nrhs, &a[0][0], &nbase, &ipiv[0], &b[0], &nbase, &info);
+  dgetrs_(&trans, &nbase, &nrhs, mat_ptr(a), &nbase, vec_ptr(ipiv), vec_ptr(b), &nbase, &info);
   if (info != 0) {
     fprintf(stderr, "Error: LAPACK::dgetrs failed\n");
     exit(1);

@@ -2,8 +2,8 @@ OBJ = generate_sample
 default: $(OBJ)
 
 CPPFLAGS = -I$(BOOST_ROOT)/include
-CFLAGS = -O3
-LDFLAGS = -llapack -lm
+CXXFLAGS = -O3
+LDLIBS = -llapack -lm
 
 clean:
 	rm -rf $(OBJ)

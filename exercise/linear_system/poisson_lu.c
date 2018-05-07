@@ -1,7 +1,6 @@
+#include "poisson.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "matrix_util.h"
-#include "poisson.h"
 
 /* http://www.netlib.org/lapack/explore-html/d3/d6a/dgetrf_8f.html */
 extern void dgetrf_(int *M, int *N, double *A, int *LDA, int*IPIV, int *INFO);
@@ -17,7 +16,7 @@ int main(int argc, char** argv) {
 
   int *ipiv;
   int info;
-  char trans = 'T';
+  char trans = 'N';
   int nrhs = 1;
 
   if (argc < 2) {
@@ -34,14 +33,14 @@ int main(int argc, char** argv) {
 
   /* perform LU decomposition */
   ipiv = alloc_ivector(dim);
-  dgetrf_(&dim, &dim, &a[0][0], &dim, &ipiv[0], &info);
+  dgetrf_(&dim, &dim, mat_ptr(a), &dim, vec_ptr(ipiv), &info);
   if (info != 0) {
     fprintf(stderr, "Error: LAPACK::dgetrf failed\n");
     exit(1);
   }
 
   /* solve equations */
-  dgetrs_(&trans, &dim, &nrhs, &a[0][0], &dim, &ipiv[0], &b[0], &dim, &info);
+  dgetrs_(&trans, &dim, &nrhs, mat_ptr(a), &dim, vec_ptr(ipiv), vec_ptr(b), &dim, &info);
   if (info != 0) {
     fprintf(stderr, "Error: LAPACK::dgetrs failed\n");
     exit(1);

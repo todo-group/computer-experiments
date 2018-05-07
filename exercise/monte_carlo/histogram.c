@@ -1,5 +1,5 @@
 #include "mersenne_twister.h"
-#include "matrix_util.h"
+#include "cmatrix.h"
 #include <stdio.h>
 #include <math.h>
 
