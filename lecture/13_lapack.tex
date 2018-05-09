@@ -1,5 +1,122 @@
 \section{C言語における行列・LAPACKの利用}
 
+\begin{frame}[t,fragile]{C言語におけるポインタ}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 変数はメモリ上のどこかに格納されている
+    \begin{itemize}
+    \item 変数の値: メモリに格納されている数値
+    \item アドレス: 変数の値が格納されているメモリ上の番地
+    \end{itemize}
+  \item ポインタ変数
+    \begin{itemize}
+    \item 値としてアドレスを格納する変数のこと
+    \item ポインタ変数の値(アドレス)とポインタ変数のアドレスは異なるものであることに注意
+    \end{itemize}
+  \item ポインタ変数の宣言、代入、実体へのアクセス
+    \begin{itemize}
+    \item 整数型ポインタ変数の宣言: {\color{red} \verb+int *p;+}
+    \item 整数型変数の宣言: \verb+int q;+
+    \item 変数\verb+q+のアドレスをポインタ変数\verb+p+に代入: {\color{red} \verb+p = &q;+}
+    \item ポインタ変数\verb+p+に格納されているアドレスに格納されている値の参照(間接参照): {\color{red} \verb+*p+}
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{ポインタの例(1)}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 例3.5.1 (ハンドブック3.5節)
+\begin{lstlisting}
+#include <stdio.h>
+int main() {
+  int *p;
+  int q;
+  q = 200;
+  p = &q;
+  printf("q is %d and *p is %d.\n", q, *p);
+  return 0;
+}
+\end{lstlisting}
+\begin{itemize}
+\item \verb+q+のアドレスを\verb+p+に代入
+\item \verb+q+と\verb+*p+の値を出力 → 両者とも200
+\end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{ポインタの例(2)}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 例3.5.2 (ハンドブック3.5節)
+\begin{lstlisting}
+#include <stdio.h>
+int main() {
+  int *p;
+  int q;
+  p = &q;
+  *p = 300;
+  printf("q is %d and *p is %d.\n", q, *p);
+  return 0;
+}
+\end{lstlisting}
+\begin{itemize}
+\item \verb+q+のアドレスを\verb+p+に代入
+\item \verb+*p+に300を代入 (ここで\verb+q=300;+と書いても等価)
+\item \verb+q+と\verb+*p+の値を出力 → 両者とも300
+\end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{関数呼び出し(ポインタ渡し)}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 例3.6.4 (ハンドブック3.6節)
+\begin{lstlisting}
+#include <stdio.h>
+void division(int divident, int divisor, int *quotient,
+              int *residual) {
+  *quotient = divident / divisor;
+  *residual = divident % divisor;
+}
+int main() {
+  int josuu = 3;
+  int hi_josuu = 13;
+  int shou, amari;
+  division(hi_josuu, josuu, &shou, &amari);
+  printf("%d / %d = %d ... %d\n", hi_josuu, josuu,
+         shou, amari);
+}
+\end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{間違った例(値渡し)}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 例3.6.5 (ハンドブック3.6節)
+\begin{lstlisting}
+#include <stdio.h>
+void division(int divident, int divisor, int quotient,
+  int residual) {
+  quotient = divident / divisor;
+  residual = divident % divisor;
+}
+int main() {
+  int josuu = 3;
+  int hi_josuu = 13;
+  int shou, amari;
+  division(hi_josuu, josuu, shou, amari);
+  printf("%d / %d = %d ... %d\n", hi_josuu, josuu,
+         shou, amari);
+}
+\end{lstlisting}
+\begin{itemize}
+\item 誤った答えが出力される。なぜ？
+\end{itemize}
+  \end{itemize}
+\end{frame}
+
 \begin{frame}[t,fragile]{一次元配列}
   \begin{itemize}
     \setlength{\itemsep}{1em}
