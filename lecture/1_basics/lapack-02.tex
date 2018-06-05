@@ -1,0 +1,21 @@
+\begin{frame}[t,fragile]{ポインタの例(1)}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 例3.5.1 (ハンドブック3.5節)
+\begin{lstlisting}
+#include <stdio.h>
+int main() {
+  int *p;
+  int q;
+  q = 200;
+  p = &q;
+  printf("q is %d and *p is %d.\n", q, *p);
+  return 0;
+}
+\end{lstlisting}
+\begin{itemize}
+\item \verb+q+のアドレスを\verb+p+に代入
+\item \verb+q+と\verb+*p+の値を出力 → 両者とも200
+\end{itemize}
+  \end{itemize}
+\end{frame}

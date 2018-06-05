@@ -1,7 +1,12 @@
-ZIP = example-1-L2.zip \
+ZIP = example-1-L2.zip example-1-L3.zip \
 	example-2-L1.zip example-2-L2.zip example-2-L3.zip example-2-EX3.zip example-2-L4.zip example-2-EX4.zip
 
 EXAMPLE1L2 = matrix/cmatrix.h matrix/matrix_example.c matrix/vector.dat matrix/matrix.dat \
+	matrix/dgemm.h matrix/multiply.c matrix/multiply_dgemm.c \
+	linear_system/lu_decomp.c linear_system/input1.dat \
+	monte_carlo/mersenne_twister.h
+
+EXAMPLE1L3 = matrix/cmatrix.h matrix/matrix_example.c matrix/vector.dat matrix/matrix.dat \
 	matrix/pointer.c \
 	matrix/dgemm.h matrix/multiply.c matrix/multiply_dgemm.c \
 	linear_system/lu_decomp.c linear_system/input1.dat \
@@ -40,6 +45,15 @@ example-1-L2.zip : $(EXAMPLE1L2)
 	echo "LDLIBS = -llapack -lblas" >> example-1-L2/Makefile
 	zip example-1-L2.zip example-1-L2/*
 	rm -rf example-1-L2
+
+example-1-L3.zip : $(EXAMPLE1L3)
+	rm -rf example-1-L3
+	mkdir example-1-L3
+	cp -p $(EXAMPLE1L3) example-1-L3
+	echo "CFLAGS = -O3" > example-1-L3/Makefile
+	echo "LDLIBS = -llapack -lblas" >> example-1-L3/Makefile
+	zip example-1-L3.zip example-1-L3/*
+	rm -rf example-1-L3
 
 example-2-L1.zip : $(EXAMPLE2L1)
 	rm -rf example-2-L1

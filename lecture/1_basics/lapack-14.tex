@@ -1,0 +1,18 @@
+\begin{frame}[t,fragile]{cmatrix.hライブラリ}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item Column-major形式の二次元配列の確保({\tt alloc\_dmatrix})、開放({\tt free\_dmatrix})、出力({\tt print\_dmatrix})、読み込み({\tt read\_dmatrix})を行うためのユーティリティ関数、(i,j)成分にアクセスするためのマクロ({\tt mat\_elem})他を準備
+  \item ソースコード: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/matrix/cmatrix.h}{cmatrix.h}
+  \item 使用例
+\begin{lstlisting}
+#include "cmatrix.h"
+...
+double **mat;
+mat = alloc_dmatrix(m, n);
+mat_elem(mat, 1, 3) = 5.0;
+...
+free_dmatrix(mat);
+\end{lstlisting}
+  \item サンプルコード: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/matrix/matrix_example.c}{matrix\_example.c}
+  \end{itemize}
+\end{frame}

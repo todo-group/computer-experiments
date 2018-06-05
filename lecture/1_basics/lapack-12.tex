@@ -1,0 +1,15 @@
+\begin{frame}[t,fragile]{LAPACKによる連立一次方程式の求解}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item LU分解を行うサブルーチン {\tt dgetrf} \\
+    \url{http://www.netlib.org/lapack/explore-html/d3/d6a/dgetrf_8f.html}
+  \item Fortranによる関数宣言
+\begin{lstlisting}
+subroutine dgetrf(integer M, integer N,
+         double precision, dimension(lda, *) A,
+         integer LDA, integer, dimension(*) IPIV,
+         integer INFO)
+\end{lstlisting}
+\item {\tt A}: 左辺の行列、{\tt M,N}: 次元、{\tt IPIV}: 選択されたピボット行のリスト、{\tt lda}: 通常{\tt M} (行数)と同じで良い
+  \end{itemize}
+\end{frame}

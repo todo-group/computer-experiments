@@ -1,0 +1,20 @@
+\begin{frame}[t,fragile]{LAPACKによる連立一次方程式の求解}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item C言語から呼び出すための関数宣言を作成 (ハンドブック3.6.4節)
+\begin{lstlisting}
+void dgetrf_(int *M, int *N, double *A,
+             int *LDA, int*IPIV, int *INFO);
+\end{lstlisting}
+関数名は全て小文字。関数名の最後に {\tt \_} (下線)を付ける
+\item LU分解の例
+\begin{lstlisting}
+m = 10;
+n = 10;
+a = alloc_dmatrix(m, n);
+...
+dgetrf_(&m, &n, mat_ptr(a), &m, mat_ptr(ipiv), &info);
+\end{lstlisting}
+完全なソースコード: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/linear_system/lu_decomp.c}{lu\_decomp.c}
+  \end{itemize}
+\end{frame}

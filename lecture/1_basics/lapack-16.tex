@@ -1,0 +1,22 @@
+\begin{frame}[t,fragile]{要素アクセス・先頭アドレス}
+  \begin{itemize}
+    % \setlength{\itemsep}{1em}
+  \item 行列の(i,j)成分は\verb+a[j][i]+に格納されている
+    \begin{itemize}
+      \item \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/matrix/cmatrix.h}{cmatrix.h}ではマクロ(\verb+mat_elem+)を準備
+\begin{lstlisting}
+#define mat_elem(mat, i, j) (mat)[j][i]
+\end{lstlisting}
+\item このマクロを使うと、例えば(i,j)成分への代入は以下のように書ける
+\begin{lstlisting}
+mat_elem(a, i, j) = 1;
+\end{lstlisting}
+\end{itemize}
+  \item LAPACKにベクトルや行列の最初の要素へのポインタを渡す
+    \begin{itemize}
+      \item ベクトルの最初の要素(0)へのポインタ: \verb+&v[0]+
+      \item 行列の最初の要素(0,0)へのポインタ: \verb+&a[0][0]+
+      \item \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/matrix/cmatrix.h}{cmatrix.h}にマクロ({\tt vec\_ptr}、{\tt mat\_ptr})が準備されているのでそれぞれ、{\tt vec\_ptr(v)}、{\tt mat\_ptr(a)}と書ける
+    \end{itemize}
+  \end{itemize}
+\end{frame}

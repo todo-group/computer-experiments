@@ -1,0 +1,22 @@
+\begin{frame}[t,fragile]{C言語におけるポインタ}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 変数はメモリ上のどこかに格納されている
+    \begin{itemize}
+    \item 変数の値: メモリに格納されている数値
+    \item アドレス: 変数の値が格納されているメモリ上の番地
+    \end{itemize}
+  \item ポインタ変数
+    \begin{itemize}
+    \item 値としてアドレスを格納する変数のこと
+    \item ポインタ変数の値(アドレス)とポインタ変数のアドレスは異なるものであることに注意
+    \end{itemize}
+  \item ポインタ変数の宣言、代入、実体へのアクセス
+    \begin{itemize}
+    \item 整数型ポインタ変数の宣言: {\color{red} \verb+int *p;+}
+    \item 整数型変数の宣言: \verb+int q;+
+    \item 変数\verb+q+のアドレスをポインタ変数\verb+p+に代入: {\color{red} \verb+p = &q;+}
+    \item ポインタ変数\verb+p+に格納されているアドレスに格納されている値の参照(間接参照): {\color{red} \verb+*p+}
+    \end{itemize}
+  \end{itemize}
+\end{frame}

@@ -1,0 +1,21 @@
+\begin{frame}[t,fragile]{一次元配列}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item (静的)一次元配列 (ハンドブック3.3.1節)
+\begin{lstlisting}
+double v[10];
+v[0] = 1.0;
+v[1] = 2.0;
+...
+\end{lstlisting}
+    要素数はコンパイル時にすでに決まっている定数でなければならない
+  \item (動的)一次元配列 (ハンドブック3.11節)
+\begin{lstlisting}
+double *v; /* ポインタ */
+v = (double*)malloc((size_t)(10 * sizeof(double));
+...
+free(v); /* 確保した領域を開放 */
+\end{lstlisting}
+実行時に要素数を指定可能
+  \end{itemize}
+\end{frame}

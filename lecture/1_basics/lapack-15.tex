@@ -1,0 +1,16 @@
+\begin{frame}[t,fragile]{alloc\_dmatrixでの動的二次元配列の確保}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 長さ$m \times n$の一次元配列を用意し、各列(それぞれ$m$要素)の先頭アドレスを長さ$n$のポインター配列に格納する
+\begin{lstlisting}
+double **a;
+m = 10;  
+n = 10;  
+a = (double**)malloc((size_t)(n * sizeof(double*));
+a[0] = (double*)malloc((size_t)(m*n * sizeof(double));
+for (int i = 1; i < n; ++i)
+  a[i] = a[i-1] + m;
+\end{lstlisting}
+\item 行列の(i,j)成分を\verb+a[j][i]+に格納することにする (column-major)
+  \end{itemize}
+\end{frame}
