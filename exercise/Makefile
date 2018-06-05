@@ -7,7 +7,6 @@ EXAMPLE1L2 = matrix/cmatrix.h matrix/matrix_example.c matrix/vector.dat matrix/m
 	monte_carlo/mersenne_twister.h
 
 EXAMPLE1L3 = matrix/cmatrix.h matrix/matrix_example.c matrix/vector.dat matrix/matrix.dat \
-	matrix/pointer.c \
 	matrix/dgemm.h matrix/multiply.c matrix/multiply_dgemm.c \
 	linear_system/lu_decomp.c linear_system/input1.dat \
 	monte_carlo/mersenne_twister.h
