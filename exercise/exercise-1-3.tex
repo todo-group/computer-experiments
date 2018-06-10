@@ -18,19 +18,14 @@
 
 \noindent
 \begin{itemize}
-\item 講義のページ: \verb+http://exa.phys.s.u-tokyo.ac.jp/ja/lectures/2017S-computer1+
+\item 講義のページ: \verb+http://exa.phys.s.u-tokyo.ac.jp/ja/lectures/2018s-computer1+
 
-\item サンプルプログラム: \\ {\small \verb+https://github.com/todo-group/computer-experiments/tree/master/exercise/linear_system+}
+\item サンプルプログラム: \\ {\small \verb+https://github.com/todo-group/computer-experiments/releases/download/2018-1-L3/example-1-L3.zip+}
   
 \item 準備練習
   \begin{enumerate}
-  \item ベクトルや行列を扱うためのユーティリティー関数が({\tt matrix\_util.h})に用意されている。サンプルプログラム{\tt matrix\_example.c}の中身を見て、その使い方を確認せよ。
-%  \item ガウスの消去法のサンプルプログラム({\tt gauss.c})をコンパイル・実行せよ。実行時にコマンドライン引数に行列の内容が書かれたファイル名({\tt input1.dat})を指定する必要があることに注意
-%    \begin{quote} \tt
-%      \$ \underline{cc gauss.c -o gauss} \\
-%      \$ \underline{./gauss input1.dat}
-%    \end{quote}
-  \item LU分解のサンプルプログラム({\tt lu\_decomp.c})をコンパイル・実行せよ。コンパイル時にLAPACKをリンク({\tt -llapack})する必要があることに注意(ハンドブック3.1.6節)。
+  \item ベクトルや行列を扱うためのユーティリティー関数が({\tt cmatrix\.h})に用意されている。サンプルプログラム{\tt matrix\_example.c}や行列・行列積を計算するプログラム{\tt multiply.c}の中身を見て、その使い方を確認せよ
+  \item LU分解のサンプルプログラム({\tt lu\_decomp.c})をコンパイル・実行せよ。コンパイル時にLAPACKをリンク({\tt -llapack})する必要があることに注意(ハンドブック3.1.6節)
     \begin{quote} \tt
       \$ \underline{cc lu\_decomp.c -o lu\_decomp -llapack} \\
       \$ \underline{./lu\_decomp input1.dat}
@@ -39,17 +34,16 @@
 
 \item 基本課題
   \begin{enumerate}
-%  \item {\tt gauss.c}では、ピボット選択を行っていないため、入力が {\tt input2.dat} の場合には正しい解が得られない。ピボット選択を行うよう{\tt gauss.c}を修正せよ
-  \item {\tt lu\_decomp.c}を参考にして、LU分解を用いて行列の行列式を計算するプログラムを作成せよ。$n \times n$のVandermonde行列($v_{ij}=x_j^{i-1}$) ($x_1 \cdots x_n$は実数)の行列式を計算し、厳密な値$\displaystyle \prod_{1 \le i < j \le n} (x_j-x_i)$と比較せよ。
-  \item LU分解を用いてDirichlet型の境界条件のもとでの二次元Laplace方程式の解を求めるプログラムを作成せよ。適当な境界条件[例えば$u(0,y) = \sin(\pi y)$, $u(x,0)=u(x,1)=u(1,y)=0$]を仮定して解を計算し、Gnuplotの{\tt splot}コマンドを用いて解をプロットせよ。また、メッシュ数を増やすと、解の形や計算時間がどのように変化するか調べよ(計算時間の測り方については、ハンドブック2.1.6節参照)。
-  \item Laplace方程式の境界値問題をJacobi法で解くプログラムを作成せよ。メッシュ数を増やしていった場合の計算速度を隣の学生のプログラムと比較し、速度差の原因を考察せよ。
+  \item {\tt lu\_decomp.c}を参考にして、LU分解を用いて行列の行列式を計算するプログラムを作成せよ。$n \times n$のVandermonde行列($v_{ij}=x_j^{i-1}$) ($x_1 \cdots x_n$は実数)の行列式を計算し、厳密な値$\displaystyle \prod_{1 \le i < j \le n} (x_j-x_i)$と比較せよ
+  \item LU分解を用いてDirichlet型の境界条件のもとでの二次元Laplace方程式の解を求めるプログラムを作成せよ。適当な境界条件[例えば$u(0,y) = \sin(2 \pi y)$, $u(1,y) = \sin(\pi y)$, $u(x,0)=u(x,1)=0$]を仮定して解を計算し、Gnuplotの{\tt splot}コマンドを用いて解をプロットせよ。また、メッシュ数を増やすと、解の形や計算時間がどのように変化するか調べよ(計算時間の測り方については、ハンドブック2.1.6節参照)
+  \item Laplace方程式の境界値問題をJacobi法で解くプログラムを作成せよ。メッシュ数を増やしていった場合の計算速度を隣の学生のプログラムと比較し、速度差の原因を考察せよ
   \end{enumerate}
   
 \item 応用課題
   \begin{enumerate}
-  \item C言語におけるポインタの振る舞いをテストするプログラム({\tt pointer.c})のソースコードを見て、どのような出力が生成されるか予想せよ。実際にコンパイル・実行して予想を確かめてみよ。
-  \item Laplace方程式の境界値問題をGauss-Seidel法、SOR法で解くプログラムを作成し、計算結果や計算速度をLU分解・Jacobi法と比較せよ。また、収束までの回数をJacobi法と比較せよ。特にSOR法の場合、パラメータ$\omega$の選び方により、どのように収束回数が変化するか観察し、最適な$\omega$の値について考察せよ。
-  \item photonでは、OS付属のLAPACK以外にも、Intel製のMKL (Math Kernel Library)に含まれるLAPACKルーチンが利用可能である\footnote{MKLを使うには、GNU Cコンパイラ({\tt cc}, {\tt gcc})の代わりにIntel Cコンパイラ({\tt icc})を使い、{\tt -llapack}の代わりに{\tt -mkl}を指定してリンクを行えばよい。例: \underline{\tt icc lu\_decomp.c -o lu\_decomp -mkl}}。ガウスの消去法のプログラム({\tt gauss.c})、標準LAPACKを使ったLU分解({\tt lu\_decomp.c})、MKLを使ったLU分解の速度を比較せよ(特に$n=1000$以上の大きな行列について)。なぜ、速度に大きな差が生じるのか、MKLで使われている(と予想される)最適化手法について調べてみよ。
+  \item C言語におけるポインタの振る舞いをテストするプログラム({\tt pointer.c})のソースコードを見て、どのような出力が生成されるか予想せよ。実際にコンパイル・実行して予想を確かめてみよ
+  \item Laplace方程式の境界値問題をGauss-Seidel法、SOR法で解くプログラムを作成し、計算結果や計算速度をLU分解・Jacobi法と比較せよ。また、収束までの回数をJacobi法と比較せよ。特にSOR法の場合、パラメータ$\omega$の選び方により、どのように収束回数が変化するか観察し、最適な$\omega$の値について考察せよ
+  \item 行列・行列積の計算を行うサンプルプログラム{\tt multiply.c}とBLASライブラリを使ってそれと等価な計算を行う{\tt multiply\_dgemm.c}の速度を比較せよ\footnote{photonでは、OS付属のBLAS、LAPACK以外にも、Intel製のMKL (Math Kernel Library)に含まれるBLASやLAPACKが利用可能である。MKLを使うには、GNU Cコンパイラ({\tt cc}, {\tt gcc})の代わりにIntel Cコンパイラ({\tt icc})を使い、{\tt -lblas}や{\tt -llapack}の代わりに{\tt -mkl}を指定してリンクを行えばよい。例: \underline{\tt icc -O3 multiply\_dgemm.c -mkl}}。行列サイズによっては数十倍もの性能差が出ことがあるが、BLASで使われている最適化手法について調べてみよ
   \end{enumerate}  
 \end{itemize}
 
