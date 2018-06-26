@@ -1,8 +1,8 @@
 \documentclass[dvipdfmx]{beamer}
 \usepackage{tutorial}
 
-\title{計算機実験I (L4) \\ 疎行列の対角化・特異値分解・回帰分析}
-\date{2017/06/21}
+\title{計算機実験I (L4) \\ 行列の対角化・特異値分解・回帰分析}
+\date{2018/06/27}
 
 \begin{document}
 
@@ -11,6 +11,8 @@
   \tableofcontents
 \end{frame}
 
+\input{40_intro.tex}
+\input{41_dense.tex}
 \input{42_sparse.tex}
 \input{43_svd.tex}
 \input{50_least-square.tex}
@@ -35,15 +37,13 @@
   \begin{itemize}
     \setlength{\itemsep}{1em}
   \item 3年冬学期、金曜5限
-  \item 全7回程度
+  \item 全8回程度
   \item 計算機実験Iで身に付けた知識をもとに、より高度な数値計算手法・アルゴリズムを学び、物理学における具体的な問題への応用を通して実践的な知識と経験を身につける。
     \begin{itemize}
       \item 数値対角化と量子力学 (講義と実習)
-      \item モンテカルロ法と統計物理 (講義と実習)
-      \item 最適化と実験データ解析 (講義と実習)
-      \item スパコンと並列計算 (講義と実習)
+      \item モンテカルロ法・分子動力学と統計物理 (講義と実習)
+      \item 最適化問題 (講義と実習)
     \end{itemize}
-    \item 実習はグループに分かれて課題に取り組む。
   \end{itemize}
 \end{frame}
 

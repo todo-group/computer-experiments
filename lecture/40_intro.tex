@@ -38,6 +38,7 @@
     [-\frac{d^2}{dx^2}+V(x)]\psi(x) = E \psi(x)
     \]
   \item 連立差分方程式を行列の形で表す($\psi(x_0)=\psi(x_n)=0$)
+    \begin{footnotesize}
     \[
     \begin{pmatrix}
       \frac{2}{h^2}+V(x_1) & -\frac{1}{h^2} \\
@@ -53,15 +54,16 @@
       \vdots \\
       \psi(x_{n-1}) \\
     \end{pmatrix}
-    = E
-    \begin{pmatrix}
-      \psi(x_1) \\
-      \psi(x_2) \\
-      \psi(x_3) \\
-      \vdots \\
-      \psi(x_{n-1}) \\
-    \end{pmatrix}
+    = \cdots % E
+    %% \begin{pmatrix}
+    %%   \psi(x_1) \\
+    %%   \psi(x_2) \\
+    %%   \psi(x_3) \\
+    %%   \vdots \\
+    %%   \psi(x_{n-1}) \\
+    %% \end{pmatrix}
     \]
+    \end{footnotesize}
   \item $(n-1) \times (n-1)$の疎行列の固有値問題
     \begin{itemize}
     \item 固有値: 固有エネルギー
@@ -79,7 +81,8 @@
     \]
   \item 局所スピン模型(ハイゼンベルグ模型)
     \[
-    H = \sum_{\langle i,j \rangle} S_i \cdot S_j
+    H = -J\sum_{\langle i,j \rangle} S_i \cdot S_j
+    = -J\sum_{\langle i,j \rangle} [S_i^z S_j^z +\frac{1}{2} (S_i^+ S_j^- + S_i^- S_j^+) ]
     \]
   \item 格子点の数を$n$とすると、ハミルトニアンはそれぞれ$4^n \times 4^n$、$2^n \times 2^n$の(疎)行列で表される。
   \item $n$が大きくなると、行列の次元は指数関数的に増加
