@@ -1,4 +1,4 @@
-ZIP = example-1-L2.zip example-1-L3.zip \
+ZIP = example-1-L2.zip example-1-L3.zip example-1-EX4.zip \
 	example-2-L1.zip example-2-L2.zip example-2-L3.zip example-2-EX3.zip example-2-L4.zip example-2-EX4.zip
 
 EXAMPLE1L2 = matrix/cmatrix.h matrix/matrix_example.c matrix/vector.dat matrix/matrix.dat \
@@ -10,6 +10,11 @@ EXAMPLE1L3 = matrix/cmatrix.h matrix/matrix_example.c matrix/vector.dat matrix/m
 	matrix/dgemm.h matrix/multiply.c matrix/multiply_dgemm.c \
 	linear_system/lu_decomp.c linear_system/input1.dat \
 	monte_carlo/mersenne_twister.h
+
+EXAMPLE1EX4 = matrix/cmatrix.h \
+	eigenvalue_problem/diag.c eigenvalue_problem/dsyev.h eigenvalue_problem/matrix1.dat \
+	svd/svd.c svd/full_svd.c svd/dgesvd.h svd/matrix2.dat svd/matrix3.dat svd/matrix4.dat \
+	linear_regression/measurement1.dat linear_regression/measurement2.dat
 
 EXAMPLE2L1 = basics/bisection.c eigenvalue_problem/double_well.c linear_system/determinant.c linear_system/lu_decomp.c matrix/cmatrix.h linear_system/input1.dat linear_system/input2.dat
 
@@ -53,6 +58,15 @@ example-1-L3.zip : $(EXAMPLE1L3)
 	echo "LDLIBS = -llapack -lblas" >> example-1-L3/Makefile
 	zip example-1-L3.zip example-1-L3/*
 	rm -rf example-1-L3
+
+example-1-EX4.zip : $(EXAMPLE1EX4)
+	rm -rf example-1-EX4
+	mkdir example-1-EX4
+	cp -p $(EXAMPLE1EX4) example-1-EX4
+	echo "CFLAGS = -O3" > example-1-EX4/Makefile
+	echo "LDLIBS = -llapack -lblas" >> example-1-EX4/Makefile
+	zip example-1-EX4.zip example-1-EX4/*
+	rm -rf example-1-EX4
 
 example-2-L1.zip : $(EXAMPLE2L1)
 	rm -rf example-2-L1

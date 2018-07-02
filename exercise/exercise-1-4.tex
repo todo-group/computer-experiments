@@ -18,18 +18,18 @@
 
 \noindent
 \begin{itemize}
-\item 講義のページ: \verb+http://exa.phys.s.u-tokyo.ac.jp/ja/lectures/2017S-computer1+
+\item 講義のページ: \verb+http://exa.phys.s.u-tokyo.ac.jp/ja/lectures/2018s-computer1+
 
-\item サンプルプログラム: \\ {\small \verb+https://github.com/todo-group/computer-experiments/tree/master/exercise/ex4+}
+\item サンプルプログラム: \\ {\small \verb+https://github.com/todo-group/computer-experiments/releases/download/2018-1-EX4/example-1-EX4.zip+}
   
 \item 準備練習
   \begin{enumerate}
-  \item ハウスホルダー法による対角化のサンプルプログラム({\tt diag.c})をコンパイル・実行せよ。
+  \item ハウスホルダー法による対角化のサンプルプログラム({\tt diag.c})をコンパイル・実行せよ
     \begin{quote} \tt
       \$ \underline{cc diag.c -o diag -llapack -lm} \\
       \$ \underline{./diag matrix1.dat}
     \end{quote}
-  \item {\tt diag.c}で得られた固有ベクトルが互いに正規直交していることを確認するコードを作成し実行せよ。(それぞれの固有ベクトルを行とする行列とその転置行列をかけて、単位行列になることを確認すればよい)
+  \item {\tt diag.c}で得られた固有ベクトルが互いに正規直交していることを確認するコードを作成し実行せよ。(それぞれの固有ベクトルを行とする行列とその転置行列をかけて、単位行列になることを確認すればよい。可能であればBLASライブラリの{\tt dgemm} [EX3応用課題3]を使ってみよ)
   \end{enumerate}
 
 \item 基本課題
@@ -38,20 +38,22 @@
     \[ \lambda_k = \frac{1}{2 (1 - \cos (\pi (2 k - 1) / (2 n + 1)))} \ \ (k=1,\cdots,n)\]
     で与えられることが知られている。べき乗法を用いて、最大固有値を計算するプログラムを作成し、その結果を理論式と比較せよ。(上の式では添字は1から始まっているが、C言語では0から始まることに注意)
 
-    また、$n$を変えた時、最大固有値の収束の速さがどのように変わるか調べよ。
-  \item ファイル{\tt measurement.dat}に、ある実験で得られたデータが収められている。1カラム目は$x$、2カラム目は$y$、3カラム目は$y$の誤差の値である。最小二乗法によりデータを多項式でフィッティングするプログラムを作成せよ。
+    また、$n$を変えた時、最大固有値の収束の速さがどのように変わるか調べよ
+  \item ファイル{\tt measurement1.dat}に、ある実験で得られたデータが収められている。1カラム目は$x$、2カラム目は$y$、3カラム目は$y$の誤差の値である。最小二乗法によりデータを多項式でフィッティングするプログラムを作成せよ。(実習EX3で用いたLU分解、あるいは応用課題2の特異値分解を使って良い)
 
-    多項式の最大次数を大きくしていくとフィッティング結果はどのように変化するか？何次の多項式を使うのが最も良いと考えられるか考察せよ。
+    多項式の最大次数を大きくしていくとフィッティング結果はどのように変化するか？何次の多項式を使うのが最も良いと考えられるか考察せよ
+
+    また、同様の解析をファイル{\tt measurement2.dat}に対して行ってみよ
   \end{enumerate}  
 \item 応用課題
   \begin{enumerate}
-  \item Lanczos法により固有値を計算するプログラムを作成せよ。Ritz値が、繰り返しに従ってどのように振る舞うか図示してみよ。収束の速さをべき乗法と比較せよ。
-  \item 特異値分解のサンプルプログラム({\tt svd.c})をコンパイル・実行せよ。入力{\tt matrix2.dat}を用いて、講義L4の例が再現されるかどうか確認せよ。
+  \item Lanczos法により固有値を計算するプログラムを作成せよ。Ritz値が、繰り返しに従ってどのように振る舞うか図示してみよ。収束の速さをべき乗法と比較せよ
+  \item 特異値分解のサンプルプログラム({\tt svd.c})をコンパイル・実行せよ。入力{\tt matrix2.dat}を用いて、講義L4の例が再現されるかどうか確認せよ
     \begin{quote} \tt
       \$ \underline{cc svd.c -o svd -llapack -lm} \\
       \$ \underline{./svd matrix2.dat}
     \end{quote}
-  \item {\tt svd.c}中のLAPACKの特異値分解{\tt dgesvd}の呼び出し(54行目)では、行列の次元({\tt m}と{\tt n})、左特異ベクトル({\tt u})と右特異ベクトル({\tt vt})の順番が、もともとの{\tt dgesvd}のドキュメント\footnote{\url{http://www.netlib.org/lapack/explore-html/d8/d2d/dgesvd_8f.html}}とは逆になっている。このプログラムが期待通り正しくSVDを行うなぜか? (ヒント: 講義L3 p.11「Cで作成した行列をFortranに渡すと転置されてしまう」)
+    さらに、完全SVDを行うプログラム例({\tt full\_svd.c})、$m<n$の行列({\tt matrix3.dat})、ランク落ちしている正方行列({\tt matrix4.dat})も用意されている。出力結果を確認してみよ
   \item 画像ファイルを行列形式に変換\footnote{\url{https://github.com/todo-group/computer-experiments/tree/master/misc}に、JPEGやPNGなどの形式の画像ファイルをグレイスケールに変換し、行列の形で書き出すPythonスクリプトがある}し、SVDで圧縮してみよ。どの程度まで圧縮可能か?
   \end{enumerate}  
 \end{itemize}
