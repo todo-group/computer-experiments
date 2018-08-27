@@ -738,12 +738,8 @@ Emacs には実に様々なコマンドがあるが、その中でも使用頻�
 \label{sec:unix:gnuplot}
 
 計算結果をグラフに変換するツールはいろいろあるが、UNIXで最もよく使われているものの一つに{\tt gnuplot}がある。この節では、{\tt gnuplot}の基本的な使い方を解説する。
-%% \footnote{日本語版のマニュアルは \Machine の /usr/local/phys/doc/gnuplot/gnuplot.ps として置いておきます。\\
-%% \begin{commandline2}
-%% \prompt \underline{gv /usr/local/phys/doc/gnuplot/gnuplot.ps}\\
-%% \end{commandline2} \noindent
-%% として参考にしてください。このマニュアルは、東京大学の田丸博晴さんが作成されたgnuplot3.2のgnuplot.docの日本語訳を、大阪大学の升谷保博さんがgnuplot3.5用に変更したものです。ページが多いので、できるだけ印刷は控えてましょう。
-%% }
+
+\subsection{Gnuplotの起動とデータのプロット}
 
 ターミナルで
 \begin{commandline2}
@@ -757,7 +753,17 @@ gnuplot>
 \begin{commandline2}
 gnuplot> \underline{exit}
 \end{commandline2} \noindent
-と入力する。次に、データをプロットしてみよう。data.txt という名前で、中身が
+と入力する。また、
+\begin{commandline2}
+gnuplot> \underline{help}
+\end{commandline2} \noindent
+あるいは、
+\begin{commandline2}
+gnuplot> \underline{help {\it command}}
+\end{commandline2} \noindent
+でコマンドの説明が表示される。
+
+次に、データをプロットしてみよう。Emacsやviなどのエディタを使って、{\tt data.dat}という名前で、中身が
 \begin{quote}
  1.0 2.0 \\
  2.0 4.0 \\
@@ -767,26 +773,107 @@ gnuplot> \underline{exit}
 \end{quote}
 のようなファイルを用意し、
 \begin{commandline2}
-gnuplot> \underline{plot "data.txt"}
+gnuplot> \underline{plot 'data.dat'}
 \end{commandline2} \noindent
-と入力するとプロットされる。 データファイルには1行に「横軸の値と縦軸の値」を入れる。グラフの右上にデータセット名(デフォルトではファイル名)を示す"data.txt"が表示される。これは任意の名前あるいは非表示に変更できる。
+と入力するとプロットされる。 データファイルには1行に「横軸の値と縦軸の値」を入れる。グラフの右上にデータセット名(デフォルトではファイル名)を示す「data.dat」が表示される。これは任意の名前あるいは非表示に変更できる。
 
-点が線でつながったプロットを行うには、
+上の例では、データファイル{\tt data.dat}が置いてあるディレクトリで{\tt gnuplot}を起動している。別ディレクトリにあるデータファイルをプロットするには、絶対パスか相対パスでファイル名を指定するか、
 \begin{commandline2}
-gnuplot> \underline{plot "data.txt" with line}
+gnuplot> \underline{cd '{\it directory}'}
 \end{commandline2} \noindent
-とする。これらを応用すると、次のようなことができる。
+でデータファイルの置いてあるディレクトリに移動した後、プロットすればよい。現在どのディレクトリにいるかを知るには{\tt pwd}コマンド({\bf p}resent {\bf w}orking {\bf d}irectoryの略)を使う。
 \begin{commandline2}
-gnuplot> \underline{plot "data.txt" with line, "data2.txt"}
+gnuplot> \underline{pwd}\\
+/Users/...  
 \end{commandline2} \noindent
-では、dataの点は線でつながり、data2は点のみでプロットされる。(data2.txtも自分で用意すること。)
+
+\subsection{スクリプトファイルの読み込み、書き出し}
+
+{\tt gnuplot}は1行ずつコマンドを実行しプロットしていく対話型スタイルが基本であるが、複雑なプロットの場合には、実行したいコマンドをスクリプトファイルの形でにあらかじめ用意しておき、一括して読み込む方が便利である。例えば、Emacsやviなどのエディタを使って、{\tt plot.plt}という名前で、中身が
+\begin{quote}
+plot 'data.dat'
+\end{quote}
+のようなファイルを用意し、{\tt gnuplot}の中で
 \begin{commandline2}
-gnuplot> \underline{plot "data.txt" with line, "data2.txt" with line}
+gnuplot> \underline{load 'plot.plt'}
 \end{commandline2} \noindent
-だとどちらも線でつながる。また、常に、点ではなくつながった線で表示させるには、
+と入力すると、上の例と同じプロットが表示される。あるいは、ターミナルで直接
+\begin{commandline2}
+\prompt \underline{gnuplot plot.plt}
+\end{commandline2} \noindent
+としてもよい。環境によっては、プロットが一瞬だけ表示されてすぐに消えてしまうが、その場合は、
+\begin{commandline2}
+\prompt \underline{gnuplot -persist plot.plt}
+\end{commandline2} \noindent
+とすればよい。
+
+対話形式で作成したプロットをスクリプトファイルに保存することもできる。
+\begin{commandline2}
+gnuplot> \underline{save 'plot2.plt'}
+\end{commandline2} \noindent
+以下で説明するx軸やy軸、キャプション、矢印の設定など、その時点での全ての設定が保存される。保存したスクリプトファイルは{\tt load}コマンドで再度読み込むことができる。
+
+\subsection{プロットスタイル}
+関数をプロットするには、
+\begin{commandline2}
+gnuplot> plot sin(x)
+\end{commandline2} \noindent
+のようにすればよい。次のように関数を定義して使うこともできる。
+\begin{commandline2}
+gnuplot> \underline{f(x) = sin(x)} \\
+gnuplot> \underline{g(x) = A*cos(x)*exp(x)} \\
+gnuplot> \underline{A = 10.0} \\
+gnuplot> \underline{plot f(x), g(x)}
+\end{commandline2} \noindent
+関数の値のサンプリングのピッチを変えるには、
+\begin{commandline2}
+gnuplot> \underline{set sample 10000}
+\end{commandline2} \noindent
+とする。
+
+一方、データファイル内のデータをプロットするには、引用符内にデータファイル名を指定する。
+\begin{commandline2}
+gnuplot> plot '{\it filename}'
+\end{commandline2} \noindent
+{\tt plot}コマンドには様々なオプションが指定できる。以下、代表的なものを挙げる。
+\begin{itemize}
+\item {\tt index 0:0} \\
+  データファイルの内、最初のデータセットを使う(省略可)
+\item {\tt using 1:3} \ ({\tt u 1:3}と省略可。{\tt using (\$1):(\$3)}と等価) \\
+  データセットの1列目をx座標、3列目をy座標としてプロットする
+\item {\tt using 1:(\$2*10)} \\
+  データセットの2列目の値を10倍したものを$y$座標としてプロットする  
+\item {\tt using 1:(\$2+f(\$1))} \\\
+  関数$f(x)$を定義しておき、その関数値をプロットすることもできる
+\item {\tt with line} \ ({\tt w l}と省略可) \\
+  データを線で結ぶ
+\item {\tt with linespoints} \\
+  データをシンボルで表示し、さらに線で結ぶ
+\item {\tt using 1:2:3 with yerrorbars} \\
+  y座標の値にエラーバーを付ける。エラーバーとしてどの列を使うかは{\tt using}オプションで指定する
+\item {\tt using 1:2:3 with yerrorlines} \\
+  y座標の値にエラーバーを付け、線で結ぶ
+\item {\tt title 'hoge'} \ ({\tt ti 'hoge'}と省略可) \\
+  図の凡例の文字列を指定する
+\item {\tt notitle} \\
+  凡例をつけない
+\item {\tt linewidth 3} \ ({\tt lw 3}と省略可) \\
+  線の幅を3倍にする(論文用の図としては{\tt lw 3}くらいがよい)
+\item {\tt linecolor 7} \ ({\tt lc 7}と省略可) \\
+  線の色を指定する。青は6、赤は7など。
+\item {\tt dashtype 2} \ ({\tt dt 2}と省略可) \\
+  2から5まで4種類の破線や点線が選べる
+\item {\tt pointtype 2} \ ({\tt pt 2}と省略可) \\
+  データ点のシンボルを指定する。1は十字、2はX印、4は四角など
+\end{itemize}
+これらを応用すると、次のようなことができる。
+\begin{commandline2}
+gnuplot> \underline{plot 'data.dat' with line linecolor 6, 'data2.dat' linecolor 7}
+\end{commandline2} \noindent
+では、{\tt data.dat}の点は青線でつながり、{\tt data2.dat}は赤点のみでプロットされる(data2.datも自分で用意すること)。また、点ではなく常につながった線で表示させるには、
 \begin{commandline2}
 gnuplot> \underline{set style data line}\\
-gnuplot> \underline{plot "data.txt", "data2.txt"}
+gnuplot> \underline{plot 'data.dat', 'data2.dat'}
 \end{commandline2} \noindent
 とする。
 
@@ -795,6 +882,26 @@ gnuplot> \underline{plot "data.txt", "data2.txt"}
 gnuplot> \underline{replot}
 \end{commandline2} \noindent
 とする。
+
+\subsection{三次元プロット}
+
+二次元関数をプロットするには{\tt splot}コマンドを使う。
+\begin{commandline2}
+gnuplot> \underline{splot x*y}
+\end{commandline2} \noindent
+メッシュの幅を指定するには、
+\begin{commandline2}
+gnuplot> \underline{set isosamples 20}
+\end{commandline2} \noindent
+とする。
+
+データファイルから三次元プロットするには
+\begin{commandline2}
+gnuplot> \underline{splot '{\it filename}' using 1:2:5}
+\end{commandline2} \noindent
+のようにする。{\tt using}オプションで、x座標、y座標、関数値の列を指定する。二次元プロットと同様に、エラーバーをつけることも可能である。
+
+\subsection{x軸・y軸の設定}
 
 x軸をlogスケールにするには、
 \begin{commandline2}
@@ -810,64 +917,102 @@ gnuplot> \underline{set log y}
 \end{commandline2} \noindent
 などとする。
 
-前述したグラフの右上にあるデータ名(「レジェンド」と呼ばれる)を変更するには、
+x軸にラベルを付けるには、
 \begin{commandline2}
-gnuplot> \underline{plot "data.txt" title "Title of data"}
+gnuplot> \underline{set xlabel 'x axis'}
 \end{commandline2} \noindent
-とする。また、レジェンドを非表示にするためには、
+x軸のプロット範囲を指定するには、
+\begin{commandline2}
+gnuplot> \underline{set xrange [-10:10]}
+\end{commandline2} \noindent
+のようにする。x軸上に長めの目盛り(tic)を5おきに、数値とともに打つには、
+\begin{commandline2}
+gnuplot> \underline{set xtics 5}
+\end{commandline2} \noindent
+とする。あるいは、x軸の目盛りを-3から1おきに5までふるには、
+\begin{commandline2}
+gnuplot> \underline{set xtics -3,1,5}
+\end{commandline2} \noindent
+とすればよい。x軸の長めの目盛りの間を10分割して、短い目盛りをふるには、
+\begin{commandline2}
+gnuplot> \underline{set mxtics 10}
+\end{commandline2} \noindent
+とする。y軸に関しても同様である。
+
+プロット中に$y=0$の軸を引くには、
+\begin{commandline2}
+gnuplot> \underline{set xzeroaxis}
+\end{commandline2} \noindent
+とする。
+
+\subsection{表題・凡例・図の形}
+
+グラフそのものに表題を付けるには、
+\begin{commandline2}
+gnuplot> \underline{set title 'Title of this plot'}
+\end{commandline2} \noindent
+とする。
+レジェンド(凡例)の表示位置は、標準で右上(right top)に表示されるが、位置を変更するには
+\begin{commandline2}
+gnuplot> \underline{set key left bottom}
+\end{commandline2} \noindent
+のようにする。レジェンド全体を非表示にするには、
 \begin{commandline2}
 gnuplot> \underline{unset key}
 \end{commandline2} \noindent
-とする。x軸にラベルを付けるためには、
+とする。
+
+図全体の形は{\tt set size}コマンドで変更できる。図を真四角にするには、
 \begin{commandline2}
-gnuplot> \underline{set xlabel "x axis"}
+gnuplot> \underline{set size square}
 \end{commandline2} \noindent
-グラフそのものに表題を付けるには、
+図の縦横比を 1:1.5 にするには、
 \begin{commandline2}
-gnuplot> \underline{set title "Title of this plot"}
+gnuplot> \underline{set size ratio 1.5}
 \end{commandline2} \noindent
 とする。
 
-{\tt gnuplot}で標準に用意された関数を表示するには、
-\begin{commandline2}
-gnuplot> \underline{plot sin(x)}
-\end{commandline2} \noindent
-とする。これらを応用すると、次のようなこともできる。
-\begin{commandline2}
-gnuplot> \underline{f(x) = sin(x)} \\
-gnuplot> \underline{g(x) = A*cos(x)*exp(x)} \\
-gnuplot> \underline{A = 10.0} \\
-gnuplot> \underline{plot "data.txt", f(x), g(x)}
-\end{commandline2} \noindent
-関数の値のサンプリングのピッチを変えるには、
-\begin{commandline2}
-gnuplot> \underline{set sample 10000}
-\end{commandline2} \noindent
-とする。
+\subsection{矢印・文字列}
 
-x軸のプロットの範囲を変えるには、
+図中に矢印や文字列を表示することができる。{\tt (x1,y1)}から{\tt (x2,y2)}に矢印を引くには、
 \begin{commandline2}
-gnuplot> \underline{set xrange [0:10]}
+gnuplot> \underline{set arrow from x1,y1 to x2,y2}
 \end{commandline2} \noindent
-とする。y軸も同様である。
+とする。また、位置{\tt (x,y)}に文字列を表示するには、
+\begin{commandline2}
+gnuplot> \underline{set label '{\it text}' at x1,y1}
+\end{commandline2} \noindent
+とすればよい。
+
+\subsection{文字のスタイル}
+
+表題や凡例、軸のラベルなどに使う文字のサイズやフォントは変更することができる。また、ギリシャ文字や上付き・下付き文字を使うこともできる。以下に例を示す。
+\begin{itemize}
+\item {\tt '\{/=36 energy\}'} \\
+  36ポイントの大きさで表示される
+\item {\tt '\{/=36 \{/Arial-Italic E\}\}'} \\
+  36ポイント斜体で$E$のように表示される
+\item {\tt '\{/=36 \{/Symbol D\}\}'} \\
+  ギリシャ文字の$\Delta$
+\item {\tt '\{/=36 \{/Symbol c\}\^{}\{total\}\_e\}'} \\
+  $\chi^{\rm total}_{\rm e}$
+\end{itemize}
+
+\subsection{ファイルへの出力}
 
 図をポストスクリプト形式でファイルに出力するには、次のようにする。
 \begin{commandline2}
 gnuplot> \underline{set term postscript eps color} \\
-gnuplot> \underline{set out "output.eps"} \\
-gnuplot> \underline{replot}
+gnuplot> \underline{set output 'figure.eps'} \\
+gnuplot> \underline{load 'figure.plt'}
 \end{commandline2} \noindent
-直前のプロットの内容がポストスクリプト形式でoutput.epsに出力される。もちろん、最後の行は、
-\begin{commandline2}
-gnuplot> \underline{plot sin(x)}
-\end{commandline2} \noindent
-のようにしてもよい。
+プロットの内容がポストスクリプト形式で{\tt figure.eps}に出力される。出力された図は、\LaTeX に取り込むことができる。
 
-その他の機能については、{\tt gnuplot}のhelpを参照してほしい。helpは
+なお、これ以降の操作も{\tt figure.eps}に上書きされるので注意が必要である。全てをリセットして元に戻すには、
 \begin{commandline2}
-gnuplot> \underline{help}
+gnuplot> \underline{reset}
 \end{commandline2} \noindent
-で表示することができる。
+を実行する。
 
 %% %\newpage
 %% \section{プログラムの作成と実行}
