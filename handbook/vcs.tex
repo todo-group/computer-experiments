@@ -1,3 +1,41 @@
+\documentclass[a4j]{jsbook}
+
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[top=20truemm,bottom=20truemm,left=30truemm,right=20truemm]{geometry}
+\usepackage{eclbkbox}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+
+\newcommand{\prompt}{\$ }
+\newenvironment{commandline2}{%
+  \begin{tcolorbox}\tt%
+}{%
+  \end{tcolorbox}%
+}
+
+\newenvironment{myframe2}[1]{%
+  \vspace{12pt}%
+  \begin{breakbox}%
+  {\parindent=0pt\textbf{\underline{#1}}}%
+}{%
+  \end{breakbox}\vspace{12pt}%
+}
+
+\newcounter{reidai}[section]
+\def\thereidai{\thesection.\arabic{reidai}.}
+\newenvironment{reidai}{%
+  \refstepcounter{reidai}%
+  \begin{myframe2}{例 \thereidai}%
+  \baselineskip=12pt%
+  \begin{quote}%
+}{%
+  \end{quote}%
+  \end{myframe2}%
+}
+
+\begin{document}
+
+\chapter{バージョン管理システム}
 \section{バージョン管理システムとは?}
 
 計算機を使って何らかのシミュレーション(実験)を行う場合、実験の場合と同様に、どのような計算を行ったか、詳細な記録を残さなければならない。行った計算、特に結果を論文として発表した計算については、結果を再現するのに最低限必要な情報を正確に残しておくことが重要である。また、作業効率という観点からも、履歴をきちんと管理し、系統的にバックアップを残しておくことのメリットは大きい。計算機上においたファイルの場合、手書きのノートと異なり簡単に上書きできてしまう。さらに通常(最後に変更された日時以外)何の痕跡も残らない。その意味では、実際のノート以上に履歴管理に注意する必要があるといえる。
@@ -434,3 +472,5 @@ Committed revision 7.
 %%   \end{itemize}
 %% \item svn stat, svn diff はネットワークにつながってなくても使用可。
 %% \end{itemize}
+
+\end{document}
