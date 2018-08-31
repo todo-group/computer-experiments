@@ -1008,9 +1008,10 @@ gnuplot> \underline{load 'figure.plt'}
 \end{commandline2} \noindent
 プロットの内容がポストスクリプト形式で{\tt figure.eps}に出力される。出力された図は、\LaTeX に取り込むことができる。
 
-なお、これ以降の操作も{\tt figure.eps}に上書きされるので注意が必要である。全てをリセットして元に戻すには、
+なお、これ以降の操作も{\tt figure.eps}に上書きされるので注意が必要である。元の設定に戻すには
 \begin{commandline2}
-gnuplot> \underline{reset}
+gnuplot> \underline{set output} \\
+gnuplot> \underline{set term pop}
 \end{commandline2} \noindent
 を実行する。
 
