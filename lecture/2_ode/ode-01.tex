@@ -1,0 +1,23 @@
+\begin{frame}[t,fragile]{準備: 微分方程式の書き換え}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 2階の常微分方程式の一般形
+    \[
+    \frac{d^2y}{dx^2} + p(x)\frac{dy}{dx} + q(x)y = r(x)
+    \]
+  \item $y_1 \equiv y$, $y_2 \equiv \frac{dy}{dx}$とおくと
+    \[
+    \left\{
+    \begin{array}{ccl}
+      \frac{dy_1}{dx} & = & y_2 \\
+      \frac{dy_2}{dx} & = & r(x) - p(x) y_2 - q(x) y_1
+    \end{array}
+    \right.
+    \]
+  \item さらに$\bm{y}\equiv(y_1, y_2)$, $\bm{f}(x, \bm{y})\equiv \left(y_2, r(x)-p(x)y_2 - q(x)y_1\right)$
+    \[
+    \frac{d\bm{y}}{dx} = \bm{f}(x, \bm{y})
+    \]
+  \item $n$階常微分方程式 $\Rightarrow$ $n$次元の1階常微分方程式
+  \end{itemize}
+\end{frame}

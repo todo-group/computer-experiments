@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
-$latex            = 'TEXINPUTS=.:./style//:./1_basics//: platex -synctex=1 -halt-on-error';
-$latex_silent     = 'TEXINPUTS=.:./style//:./1_basics//: platex -synctex=1 -halt-on-error -interaction=batchmode';
+$latex            = 'TEXINPUTS=.:./style//:./1_basics//:./2_ode//: platex -synctex=1 -halt-on-error';
+$latex_silent     = 'TEXINPUTS=.:./style//:./1_basics//:./2_ode//: platex -synctex=1 -halt-on-error -interaction=batchmode';
 $bibtex           = 'pbibtex';
 $dvipdf           = 'dvipdfmx %O -o %D %S';
 $makeindex        = 'mendex %O -o %D %S';

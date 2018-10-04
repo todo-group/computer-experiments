@@ -1,0 +1,22 @@
+\begin{frame}[t,fragile]{計算コストと精度}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 実際の計算では$f(t,y)$の計算にほとんどのコストがかかる
+  \item 計算回数と計算精度の関係
+    \begin{center}
+      \begin{tabular}[h]{c|cccc}
+        & 1次(Euler法) & 2次(中点法) & 3次 & 4次 \\
+        \hline
+        計算精度 & $O(h)$ & $O(h^2)$ & $O(h^3)$ & $O(h^4)$ \\
+        計算回数 & $N$ & $2N$ & $3N$ & $4N$
+      \end{tabular}
+    \end{center}
+  \item 高次のRunge-Kuttaを使う方が効率的
+  \item どれくらい小さな$h$が必要となるか、前もっては分からない
+  \item 刻み幅を変えて($h,h/2,h/4,\dots$)計算してみることが大事
+    \begin{itemize}
+    \item 誤差の評価
+    \item 公式の間違いの発見
+    \end{itemize}
+  \end{itemize}
+\end{frame}

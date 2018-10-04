@@ -1,0 +1,13 @@
+\begin{frame}[t,fragile]{Numerov法}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 方程式が線形の場合、$f(x,y) = -a(x) y(x)$を代入すると
+    \[
+    y_{i+1} = 2y_i - y_{i-1} - \frac{h^2}{12} (a_{i+1}y_{i+1} + 10a_{i}y_{i} + a_{i-1}y_{i-1}) + O(h^6)
+    \]
+  $y_{i+1}$を左辺に集めると、陽解法となる
+    \[
+    y_{i+1} = \frac{2 (1-\frac{5h^2}{12} a_i)y_i - (1 + \frac{h^2}{12} a_{i-1}) y_{i-1}}{1 + \frac{h^2}{12} a_{i+1}} + O(h^6)
+    \]
+  \end{itemize}
+\end{frame}

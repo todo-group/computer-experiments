@@ -5,11 +5,10 @@
     %\setlength{\itemsep}{1em}
   \item 理論・実験を問わず、学部〜大学院〜で必要となる現代的かつ普遍的な計算機の素養を身につける
   \item {\color{gray}UNIX環境に慣れる(シェル、ファイル操作、エディタ)}
-  \item {\color{gray}ネットワークの活用 (リモートログイン、バージョン管理、共同作業)}
+  \item {\color{gray}ネットワークの活用 (リモートログイン、共同作業)}
   \item {\color{gray}プログラムの作成(C言語、コンパイラ、プログラム実行)}
   \item 基本的な数値計算アルゴリズム・数値計算の常識を学ぶ
   \item {\color{gray}科学技術文書作成に慣れる(\LaTeX, グラフ作成)}
-  \item {\color{gray}(Mathematica (数式処理)、Python (スクリプト言語)等の利用)}
   \item {\color{red}物理学における具体的な問題を通して実践的な知識と経験を身につける}
   \end{itemize}
 \end{frame}
@@ -28,44 +27,21 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}[t]{「計算機実験I」で学んだ項目}
-  \begin{itemize}
-    %\setlength{\itemsep}{1em}
-  \item UNIX、ネットワーク、\LaTeX、gnuplot
-  \item プログラミング: C言語、配列、数値計算ライブラリ
-  \item 数値計算の基礎: 数値誤差、ニュートン法
-  \item 常微分方程式: Euler法・Runge-Kutta法、Numerov法、シンプレクティック積分法、陰解法
-  \item 連立一次方程式: ガウスの消去法、LU分解、ヤコビ法・ガウスザイデル法・SOR法
-  \item 行列の対角化: Jacobi法、Householder法、べき乗法、Lancos法、特異値分解
-  \item 線形回帰の基礎
-  \end{itemize}
-\end{frame}
-
 \begin{frame}[t]{講義・実習内容}
-  問題解決型
   \begin{itemize}
     \setlength{\itemsep}{1em}
-  \item (数値対角化と)量子力学
-  \item (モンテカルロ法と)統計物理
-  \item (最適化と)実験データ解析
-  \item スパコンと並列計算
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[t,fragile]{講義と実習}
-  \begin{itemize}
-    \setlength{\itemsep}{1em}
+  \item 問題解決型: 計算機実験Iで身に付けた知識をもとに、より高度な数値計算手法・アルゴリズムを学び、物理学における具体的な問題への応用を通して実践的な知識と経験を身につける
+    \begin{itemize}
+    \item 数値対角化と量子力学
+    \item モンテカルロ法・分子動力学と統計物理
+    \item 最適化問題
+    \end{itemize}
   \item スタッフ \href{mailto:computer@exa.phys.s.u-tokyo.ac.jp}{computer@exa.phys.s.u-tokyo.ac.jp}
     \begin{itemize}
     \item 講義: 藤堂
-    \item 実習: 鈴木(早野研)、斉藤(古澤研)
-    \item 実習TA: 鈴木(藤堂研M1)、井坂(古澤研M1)
+    \item 実習: 鈴木(元早野研)、斉藤(古澤研)
+    \item 実習TA: 山本(藤堂研D1)、近藤(藤堂研M1)
     \end{itemize}
-  \item 評価
-    \begin{itemize}
-    \item 出席(講義・実習)
-    \item レポート
-    \end{itemize}    
   \end{itemize}    
 \end{frame}
 
@@ -85,30 +61,5 @@
   \item 問題を再現する手順を明記する
   \item 関連するファイル(Cや \LaTeX のソースコード等)を添付する
   \item エラーメッセージを添付する
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[t,fragile]{実習環境}
-  \begin{itemize}
-    \setlength{\itemsep}{1em}
-  \item 情報基盤センター大演習室 (iMac端末)
-    \begin{itemize}
-    \item Cプログラミング、\LaTeX、Gnuplot、などに利用
-    \end{itemize}
-  \item 計算機端末室
-    \begin{itemize}
-    \item 理学部4号館1215室 (iMac 16台)
-    \item {\color{red}(長期休暇を除き)週7日24時間利用可}
-    \end{itemize}
-  \item 物理学教室ワークステーションクラスタ photon
-    \begin{itemize}
-    \item SSHでリモートログインして使用する(ハンドブック2.2節)
-    \item あらかじめ公開鍵の登録が必要(計算機実験I 実習EX0 準備練習2,3)
-    \end{itemize}
-  \item MateriApps LIVE! (USBメモリで配布)
-    \begin{itemize}
-    \item Mac, Windows PC 上で動作する仮想UNIX環境
-    \item 再度インストールを行いたい人はUSBを貸与するので申し出ること
-    \end{itemize}
   \end{itemize}
 \end{frame}

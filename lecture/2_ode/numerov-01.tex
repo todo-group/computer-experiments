@@ -1,0 +1,17 @@
+\begin{frame}[t,fragile]{時間依存しないシュレディンガー方程式}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 井戸型ポテンシャル中の一粒子問題
+    \begin{align*}
+      \big[ -\frac{\hbar^2}{2m}\frac{d^2}{dx^2} + V(x) \big] \psi(x) = E \psi(x) \\
+      V(x) = \begin{cases}
+        0 & \text{$a \le x \le b$} \\ \infty & \text{otherwise}
+      \end{cases}
+    \end{align*}
+  \item $\hbar^2/2m = 1$、$a=0$、$b=1$となるように変数変換して
+    \begin{align*}
+      \big( \frac{d^2}{dx^2} + E \big) \psi(x) = 0 \qquad 0 \le x \le 1
+    \end{align*}
+    を境界条件$\psi(0) = \psi(1) = 0$のもとで解けば良い
+  \end{itemize}
+\end{frame}

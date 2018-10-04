@@ -1,0 +1,24 @@
+\begin{frame}[t,fragile]{Euler法の改良}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 積分方程式の被積分関数をもう1次高次まで展開
+    \[
+    f(t_n+h\tau, y(t_n+h\tau)) = f(t_n, y(t_n)) +
+    \tau h
+    \left\{
+    \frac{\partial f}{\partial t}
+    + f \frac{\partial f}{\partial y}
+    \right\}_{t=t_n, y=y_n}
+    \!\!\!\!\!\!\!\!\!\!\!\! + O(h^2)
+    \]
+  \item 積分を実行すると
+    \[
+    y(t_{n+1}) = y(t_n) + h f(t_n, y_n) + \frac{1}{2}h^2
+    \left\{
+    \frac{\partial f}{\partial t}
+    + f \frac{\partial f}{\partial y}
+    \right\}_{t=t_n, y=y_n}
+    \!\!\!\!\!\!\!\!\!\!\!\! + O(h^3)
+    \]
+  \end{itemize}
+\end{frame}

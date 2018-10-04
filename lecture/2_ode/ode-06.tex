@@ -1,0 +1,32 @@
+\begin{frame}[t,fragile]{中点法(2次Runge-Kutta法)}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 2次公式
+    \[
+    \begin{array}{rcl}
+      k_1 & = & h f(t_n, y_n) \\
+      k_2 & = & h f(t_n + \frac{1}{2}h, y_n + \frac{1}{2}k_1) \\
+      y_{n+1} & = & y_n + k_2
+    \end{array}
+    \]
+  \item このとき
+    \[
+    k_2 = h 
+    \left\{
+    f(t_n, y_n)
+    + \frac{1}{2}h \frac{\partial f}{\partial t}
+    + \frac{1}{2}k_1 \frac{\partial f}{\partial y}
+    + O(h^2)
+    \right\}
+    \]
+  \item したがって
+    \[
+    y_{n+1} = y_n + h f(t_n, y_n) + \frac{1}{2}h^2
+    \left\{
+    \frac{\partial f}{\partial t}
+    + f \frac{\partial f}{\partial y}
+    \right\}_{t=t_n, y=y_n}
+    \!\!\!\!\!\!\!\!\!\!\!\!+ O(h^3)
+    \]
+  \end{itemize}
+\end{frame}

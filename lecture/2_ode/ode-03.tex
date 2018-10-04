@@ -1,0 +1,17 @@
+\begin{frame}[t,fragile]{初期値問題の解法 (Euler法)}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 微分を差分で近似する(前進差分)
+    \[
+    \frac{dy}{dt} \approx \frac{y(t+\Delta t) - y(t)}{\Delta t} = f(t, y)
+    \]
+  \item $t=0$における$y(t)$の初期値を$y_0$、$h$を微少量、$t_n \equiv nh$、$y_n$を$y(t_n)$の近似値とおくと、
+    \[
+    y_{n+1}-y_n = h f( t_n, y_n)
+    \]
+  \item Euler法
+    \begin{itemize}
+    \item $y_0$からはじめて、$y_1,y_2,\cdots$を順次求めていく
+    \end{itemize}
+  \end{itemize}
+\end{frame}

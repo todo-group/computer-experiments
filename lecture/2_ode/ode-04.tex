@@ -1,0 +1,15 @@
+\begin{frame}[t,fragile]{Euler法の精度}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 微分方程式の両辺を$t_n$から$t_{n+1}$まで積分(積分方程式)
+    \[
+    y(t_{n+1}) - y(t_n) = \int^{t_{n+1}}_{t_n} \!\! f(t, y(t)) dt = h \int^1_0 \! f(t_n+h\tau, y(t_n+h\tau)) d\tau
+    \]
+  \item Euler法は、被積分関数を定数で近似することに対応
+    \[
+    f(t_n+h\tau, y(t_n+h\tau)) = f(t_n, y(t_n)) + O(h)
+    \]
+  \item $t=0$からある$t_f$まで積分すると、反復回数$N = t_f / h$
+  \item $t=t_f$における誤差 $\sim N \times h \times O(h) = O(h)$
+  \end{itemize}
+\end{frame}
