@@ -1,0 +1,10 @@
+\begin{frame}[t,fragile]{逆行列の「正しい」求め方}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 連立一次方程式 $A {\bf x} = {\bf e}_j$ を全ての${\bf e}_j$について解く
+  \item Gaussの消去法による連立一次方程式の解法: 計算量〜$O(n^3)$
+  \item Gaussの消去法の途中で出てくる下三角行列(L)と上三角行列(U)行列を再利用(LU分解)すれば、逆行列全体を求めるための計算量も$O(n^3)$
+  \item 行列式も$O(n^3)$で計算可
+  \item $n=100$の場合: $n^3 = 10^6 \ll 9.3 \times 10^{157}$
+  \end{itemize}
+\end{frame}

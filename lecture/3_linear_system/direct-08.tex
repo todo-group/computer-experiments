@@ -1,0 +1,21 @@
+\begin{frame}[t,fragile]{ガウスの消去法のコード}
+\begin{lstlisting}
+for (k = 0; k < n; ++k) {
+  for (i = k + 1; i < n; ++i) {
+    for (j = k + 1; j < n; ++j) {
+      a[i][j] -= a[k][j] * a[i][k] / a[k][k];
+    }
+    b[i] -= b[k] * a[i][k] / a[k][k];
+  }
+}
+for (k = n-1; k >= 0; --k) {
+  for (j = k + 1; j < n; ++j) {
+    b[k] -= a[k][j] * b[j];
+  }
+  b[k] /= a[k][k];
+}
+\end{lstlisting}
+\begin{itemize}
+\item C言語では配列の添字が0から始まることに注意
+\end{itemize}
+\end{frame}

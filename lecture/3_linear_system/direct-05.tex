@@ -1,0 +1,18 @@
+\begin{frame}[t,fragile]{ガウスの消去法}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 2行目を$m_{i2} = a_{i2}^{(2)}/a_{22}^{(2)}$倍して、$i$行目($i \ge 3$)から引く
+    \begin{align*}
+    a_{11}^{(1)} x_1 + a_{12}^{(1)} x_2 + a_{13}^{(1)} x_3 + \cdots + a_{1n}^{(1)} x_n &= b_{1}^{(1)} \\
+    a_{22}^{(2)} x_2 + a_{23}^{(2)} x_3 + \cdots + a_{2n}^{(2)} x_n &= b_{2}^{(2)} \\
+    a_{33}^{(3)} x_3 + \cdots + a_{3n}^{(3)} x_n &= b_{3}^{(3)} \\
+    \cdots \\
+    a_{n3}^{(3)} x_3 + \cdots + a_{nn}^{(3)} x_n &= b_{n}^{(3)}
+    \end{align*}
+  \item ここで
+    \begin{align*}
+      a_{ij}^{(3)} &= a_{ij}^{(2)} - m_{i2} a_{2j}^{(2)} \qquad i \ge 3, j \ge 3 \\
+      b_{i}^{(3)} &= b_{i}^{(2)} - m_{i2} b_{2}^{(2)} \qquad i \ge 3
+    \end{align*}
+  \end{itemize}
+\end{frame}

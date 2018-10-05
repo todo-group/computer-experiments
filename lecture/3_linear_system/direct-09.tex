@@ -1,0 +1,13 @@
+\begin{frame}[t,fragile]{ピボット選択}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item ガウスの消去法の途中で$a_{kk}^{(k)}$が零になると、計算を先に進めることができなくなる
+  \item 行を入れ替えても、方程式の解は変わらない $\Rightarrow$ $k$行以降で、$a_{ik}^{(k)}$が非零の行と入れ替える (ピボット選択)
+  \item 実際のコードでは、情報落ちを防ぐため、$a_{kk}^{(k)}$が零でない場合でも、$a_{ik}^{(k)}$の絶対値が最大の行と入れ替える
+  \item ピボット選択が必要となる例
+    \begin{align*}
+      \begin{pmatrix} 1 & 2 & 3 \\ 3 & 6 & 4 \\ 4 & 6 & 7 \end{pmatrix} \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} = \begin{pmatrix} 8 \\ 19 \\ 23 \end{pmatrix}
+    \end{align*}
+    \item 行列がrank落ちしている場合は、ピボット選択を行っても途中で0になる (cf. 特異値分解を用いた最小二乗解)
+  \end{itemize}
+\end{frame}

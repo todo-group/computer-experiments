@@ -1,0 +1,20 @@
+\begin{frame}[t,fragile]{LU分解}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item $M_k$の逆行列
+    \begin{align*}
+      L_k = M_k^{-1} = 
+      \begin{pmatrix}
+        1 & \\
+        0 & 1 \\
+        0 & 0 & \ddots \\
+        \vdots & \vdots & & 1 \\
+        \vdots & \vdots & & m_{k+1,k} & 1 & \\
+        \vdots & \vdots & & m_{k+2,k} & 0 & \ddots \\
+        \vdots & \vdots & & \vdots & \vdots & & 1 & \\
+        0 & 0 & \hdots & m_{nk} & 0 & \hdots & 0 & 1
+      \end{pmatrix}
+    \end{align*}
+    から$L=L_1L_2\cdots L_{n-1}$を定義すると、$L$は下三角行列、また$U = A^{(n)}$ (上三角行列)とすると、$A = LU$
+  \end{itemize}
+\end{frame}

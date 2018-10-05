@@ -16,7 +16,7 @@ EXAMPLE1EX4 = matrix/cmatrix.h \
 	svd/svd.c svd/full_svd.c svd/dgesvd.h svd/matrix2.dat svd/matrix3.dat svd/matrix4.dat \
 	linear_regression/measurement1.dat linear_regression/measurement2.dat
 
-EXAMPLE2L1 = basics/bisection.c eigenvalue_problem/double_well.c linear_system/determinant.c linear_system/lu_decomp.c matrix/cmatrix.h linear_system/input1.dat linear_system/input2.dat
+EXAMPLE2L1 = basics/bisection.c eigenvalue_problem/double_well.c eigenvalue_problem/dsyev.h matrix/cmatrix.h matrix/matrix_example.c linear_system/determinant.c linear_system/lu_decomp.c linear_system/input1.dat linear_system/input2.dat
 
 EXAMPLE2L2 = monte_carlo/random.c monte_carlo/histogram.c \
 	monte_carlo/harmonic.c monte_carlo/square_lattice.c \
