@@ -1,0 +1,17 @@
+\begin{frame}[t,fragile]{3重対角行列の対角化}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 二分法、QR分解、分割統治法、MRRRなど様々な方法が知られている
+  \item 固有ベクトル
+    \begin{itemize}
+    \item QR分解では3重対角行列の固有ベクトルも同時に求まる
+    \item あるいは、固有値を求めた後、逆反復法を用いて固有ベクトルを求める
+    \end{itemize}
+  \item 逆反復法
+    \begin{itemize}
+    \item 近似固有値を$\mu$とするとき、行列$(A - \mu I)^{-1}$を考えると、固有ベクトルは$A$と同じ、固有値は$(\lambda-\mu)^{-1}$。
+    \item $\mu$が十分に正確であれば、$(\lambda-\mu)^{-1}$は絶対値最大の固有値。行列$(A - \mu I)^{-1}$を適当な初期ベクトルにかけ続けると$\lambda$に対応する固有ベクトルに収束(c.f. べき乗法)
+    \item 実際には$(A-\mu I) x' = x$という連立方程式を繰り返し解く
+    \end{itemize}
+  \end{itemize}
+\end{frame}

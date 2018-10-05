@@ -1,0 +1,21 @@
+\begin{frame}[t,fragile]{LAPACKの対角化ルーチン}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 様々な対角化ルーチンが準備されている
+    \begin{itemize}
+    \item 倍精度実対称行列の対角化 {\tt dsyev}
+      \url{http://www.netlib.org/lapack/explore-html/dd/d4c/dsyev_8f.html}
+    \item Fortranによる関数宣言
+\begin{lstlisting}
+subroutine dsyev(character JOBZ, character UPLO,
+  integer N, double precision, dimension(lda, *) A,
+  integer LDA, double precision, dimension(*) W,
+  double precision, dimension(*) WORK,
+  integer LWORK, integer INFO)		
+\end{lstlisting}
+    \end{itemize}
+  \item 他にも{\tt dsyevd}、{\tt dsyevr}、{\tt dsyevx}などがある \\
+    3重対角化までは同じ。3重対角行列の対角化が異なる
+  \item 単精度版の{\tt ssyev}、複素(エルミート行列)版の{\tt zheev}など
+  \end{itemize}
+\end{frame}

@@ -1,0 +1,17 @@
+\begin{frame}[t,fragile]{行列のべき乗・指数関数}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 行列のべき乗
+    \begin{align*}
+      A^p &= (U \Lambda U^T)(U \Lambda U^T) \cdots (U \Lambda U^T) \\
+      &= U \Lambda^p U^T \qquad \Lambda^p = \text{diag}(\lambda_1^p,\cdots,\lambda_N^p)
+    \end{align*}
+  \item 行列の指数関数
+    \begin{align*}
+      e^{xA} &= \sum_{n=0}^{\infty} \frac{1}{n!}(xA)^n = U \Big[ \sum_{n=0}^{\infty} \frac{1}{n!}(x\Lambda)^n \Big] U^T \\
+      &= U e^{x \Lambda} U^T \qquad e^{x \Lambda} = \text{diag}(e^{x\lambda_1},\cdots,e^{x\lambda_N})
+    \end{align*}
+  \item 逆行列 $A^{-1} = U \Lambda^{-1} U^T$
+  \item 行列式 $|A| = \prod_i \lambda_i$、対角和(トレース) ${\rm tr} A = \sum_i \lambda_i$
+  \end{itemize}
+\end{frame}

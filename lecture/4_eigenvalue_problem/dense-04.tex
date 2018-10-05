@@ -1,0 +1,17 @@
+\begin{frame}[t,fragile]{Jacobi法の収束}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 相似変換により対角和は不変に保たれるので
+    \[
+      {\rm tr} \, A^T A = {\rm tr} \, B^T B \ \ \Rightarrow \ \
+      \sum_{i,j} a_{ij}^2 = \sum_{i,j} b_{ij}^2
+    \]
+  \item 一方、この変換で
+    \[
+    b_{pp}^2 + b_{qq}^2 = b_{pp}^2 + 2 b_{pq}^2 + b_{qq}^2 = a_{pp}^2 + 2 a_{pq}^2 + a_{qq}^2
+    \]
+    すなわち、変換により、対角成分の二乗和は増加する $\Rightarrow$ 非対角成分の二乗和は単調減少
+  \item 全ての非対角成分が十分小さくなるまで繰り返す
+  \item 固有値=対角成分、固有ベクトル$=U_1 U_2 U_3 \cdots$
+  \end{itemize}
+\end{frame}

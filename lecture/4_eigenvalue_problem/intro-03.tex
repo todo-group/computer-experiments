@@ -1,0 +1,41 @@
+\begin{frame}[t,fragile]{シュレディンガー方程式の行列表示}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item シュレディンガー方程式
+    \[
+    [-\frac{d^2}{dx^2}+V(x)]\psi(x) = E \psi(x)
+    \]
+  \item 連立差分方程式を行列の形で表す($\psi(x_0)=\psi(x_n)=0$)
+    \begin{footnotesize}
+    \[
+    \begin{pmatrix}
+      \frac{2}{h^2}+V(x_1) & -\frac{1}{h^2} \\
+      -\frac{1}{h^2} & \frac{2}{h^2}+V(x_2) & -\frac{1}{h^2} \\
+      & -\frac{1}{h^2} & \frac{2}{h^2}+V(x_3) & -\frac{1}{h^2} \\
+      & & \ddots & \ddots \\
+      & & & -\frac{1}{h^2} & \frac{2}{h^2}+V(x_{n-1}) \\
+    \end{pmatrix}
+    \begin{pmatrix}
+      \psi(x_1) \\
+      \psi(x_2) \\
+      \psi(x_3) \\
+      \vdots \\
+      \psi(x_{n-1}) \\
+    \end{pmatrix}
+    = \cdots % E
+    %% \begin{pmatrix}
+    %%   \psi(x_1) \\
+    %%   \psi(x_2) \\
+    %%   \psi(x_3) \\
+    %%   \vdots \\
+    %%   \psi(x_{n-1}) \\
+    %% \end{pmatrix}
+    \]
+    \end{footnotesize}
+  \item $(n-1) \times (n-1)$の疎行列の固有値問題
+    \begin{itemize}
+    \item 固有値: 固有エネルギー
+    \item 固有ベクトル: 波動関数
+    \end{itemize}
+  \end{itemize}
+\end{frame}

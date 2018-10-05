@@ -1,0 +1,21 @@
+\begin{frame}[t,fragile]{行列の数値対角化}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 一般的に次元が5以上の行列の固有値は、あらかじめ定まる有限回の手続きでは求まらない
+  \item 必ず何らかの反復法(+収束判定)が必要となる
+  \item 密行列向きの方法
+    \begin{itemize}
+    \item Jacobi法
+    \item Givens変換・Householder法(三重対角化) + QR法など
+    \end{itemize}
+  \item 疎行列向きの方法
+    \begin{itemize}
+    \item べき乗法
+    \item Lanczos法(三重対角化) + QR法など
+    \end{itemize}
+  \item 固有ベクトル
+    \begin{itemize}
+    \item 逆反復法
+    \end{itemize}
+  \end{itemize}
+\end{frame}

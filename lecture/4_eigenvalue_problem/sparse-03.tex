@@ -1,0 +1,15 @@
+\begin{frame}[t,fragile]{べき乗法の収束}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item べき乗法による固有値
+    \[
+    \frac{v_{n+1}^T v_{n+1}}{v_{n+1}^T v_n} = \lambda_1 + O\Big( \big(\frac{\lambda_2}{\lambda_1} \big)^{2n}\Big)
+    \]
+  \item 誤差の収束
+    \[
+    \frac{v_{n+1}^T v_{n+1}}{v_{n+1}^T v_n} \approx \lambda_1 + e^{-2n \ln (\lambda_1/\lambda_2)}
+    \]
+  \item $1 / \ln (\lambda_1/\lambda_2)$ 程度の反復が必要
+  \item $\lambda_1$と$\lambda_2$が近い場合には、反復回数が非常に多くなる
+  \end{itemize}
+\end{frame}

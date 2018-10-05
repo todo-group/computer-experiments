@@ -1,0 +1,17 @@
+\begin{frame}[t,fragile]{Jacobi法による相似変換}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item $B=U_{pq}^{-1} A U_{pq}$により、$A$の$p$行、$q$行、$p$列、$q$列のみが変更を受ける
+    \begin{align*}
+      b_{pk} &= b_{kp} = a_{pk} \cos \theta - a_{qk} \sin \theta \qquad k \ne p,q \\
+      b_{qk} &= b_{kq} = a_{pk} \sin \theta + a_{qk} \cos \theta \qquad k \ne p,q \\
+      b_{pp} &= \frac{a_{pp}+a_{qq}}{2} + \frac{a_{pp}-a_{qq}}{2} \cos 2 \theta - a_{pq} \sin 2 \theta \\
+      b_{qq} &= \frac{a_{pp}+a_{qq}}{2} - \frac{a_{pp}-a_{qq}}{2} \cos 2 \theta + a_{pq} \sin 2 \theta \\
+      b_{pq} &= b_{qp} = \frac{a_{pp}-a_{qq}}{2} \sin 2 \theta + a_{pq} \cos 2 \theta
+    \end{align*}
+  \item $b_{pq} = b_{qp} = 0$とするには、$\theta$を次のように選べば良い
+    \[
+    \tan 2 \theta = - \frac{2 a_{pq}}{a_{pp}-a_{qq}}
+    \]
+  \end{itemize}
+\end{frame}

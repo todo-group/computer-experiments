@@ -1,0 +1,20 @@
+\begin{frame}[t,fragile]{複素エルミート行列の固有分解}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 固有値は実数
+  \item これまでの方法がそのまま使える (ただし、転置 $\rightarrow$ 複素転置)
+  \item 実対称行列用のサブルーチンを使っての対角化も可能
+    \begin{itemize}
+    \item エルミート行列を実部と虚部に分ける: $A = R + iW$
+    \item エルミート行列の固有値問題 $(R + iW)(u+iv) = \lambda(u+iv)$を$2N \times 2N$の実対称行列の問題に書き換える
+      \[
+      \begin{pmatrix} R & -W \\ W & R \end{pmatrix}
+      \begin{pmatrix} u \\ v \end{pmatrix}
+      = 
+      \lambda \begin{pmatrix} u \\ v \end{pmatrix}
+      \]
+    \item 固有値は同じ固有値が2度づつ現れる
+    \item 対応する複素行列の固有ベクトルは、$u+iv$と$-v+iu$
+    \end{itemize}
+  \end{itemize}
+\end{frame}

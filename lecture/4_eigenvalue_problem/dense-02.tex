@@ -1,0 +1,21 @@
+\begin{frame}[t,fragile]{Jacobi法}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 直交行列$U_{pq}$を以下のように選ぶ ($(p,p),(p,q),(q,p),(q,q)$成分を除くと単位行列)
+    \[
+    U_{pq} =
+    \begin{pmatrix}
+      1 \\
+      & \ddots \\
+      & & 1 \\
+      & & & \cos \theta & & & \sin \theta \\
+      & & & & 1 \\
+      & & & & & 1 \\
+      & & & -\sin \theta & & & \cos \theta \\
+      & & & & & & & 1 \\
+      & & & & & & & & \ddots \\
+      & & & & & & & & & 1 \\
+    \end{pmatrix}
+    \]
+  \end{itemize}
+\end{frame}

@@ -1,0 +1,17 @@
+\begin{frame}[t,fragile]{3重対角化}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 対角化は有限回の手続きでは行えない
+  \item 3重対角化であれば、$O(N^3)$の有限回の計算で決定論的に行える
+  \item Givens変換: Jacobi変換と同じ相似変換を利用
+    \begin{itemize}
+    \item $U_{32}$で(3,1)と(1,3)を消去 $\Rightarrow$ $U_{42}$で(4,1)と(1,4)を消去 $\Rightarrow$ $U_{52}$で(5,1)と(1,5)を消去 $\Rightarrow$ $U_{62},\cdots,U_{N,2}$ $\Rightarrow$ $U_{43},U_{53},\cdots,U_{N,3}$ $\Rightarrow$ $\cdots$ $\Rightarrow$ $U_{n,n-1}$で($n,n-2$)と($n-2,n$)を消去
+    \item $(4/3)N^3$回の乗算と$(2/3)N^3$回の加減算で3重対角化される
+    \end{itemize}
+  \item Householder変換: $U = I - 2 w w^T / |w|^2$
+    \begin{itemize}
+    \item $(2/3)N^3$回の乗算と加減算で3重対角化される
+    \item Givens変換に比べ少し効率的なので、こちらが広く使われている
+    \end{itemize}
+  \end{itemize}
+\end{frame}

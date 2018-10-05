@@ -14,7 +14,8 @@
 \end{frame}
 
 \input{01_about2.tex}
-\input{44_double-well.tex}
+
+\input{4_eigenvalue_problem/double-well.tex}
 
 \section{シューティング}
 
@@ -25,7 +26,6 @@
 \input{2_ode/numerov-02.tex}
 \input{2_ode/numerov-03.tex}
 \input{2_ode/numerov-04.tex}
-\input{2_ode/numerov-05.tex}
 \input{1_basics/bisection.tex}
 
 \section{対角化による解法}
@@ -33,15 +33,28 @@
 \begin{frame}[t,fragile]{対角化}
   \begin{itemize}
     \setlength{\itemsep}{1em}
-  \item シュレディンガー方程式の行列表示[計算機実験I (L3) p.17]
-  \item ハウスホルダー法(LAPACK) [計算機実験I (L3) p.26-28]
-  \item べき乗法[計算機実験I (L3) p.30-32]
-  \item Lanczos法[計算機実験I (L3) p.34-40]
+  \item シュレディンガー方程式の行列表示
+  \item ハウスホルダー法(LAPACK)
+  \item べき乗法
+  \item Lanczos法
   \item ハウスホルダー法によるプログラムの例: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/eigenvalue_problem/double_well.c}{example-2-L1/double\_well.c}
   \end{itemize}
 \end{frame}
 
-\input{45_dimensional-reduction.tex}
+\input{4_eigenvalue_problem/intro-03.tex}
+\input{4_eigenvalue_problem/intro-07.tex}
+\input{4_eigenvalue_problem/dense-01.tex}
+\input{4_eigenvalue_problem/dense-07.tex}
+\input{4_eigenvalue_problem/sparse-01.tex}
+\input{4_eigenvalue_problem/sparse-02.tex}
+\input{4_eigenvalue_problem/sparse-03.tex}
+\input{4_eigenvalue_problem/sparse-07.tex}
+\input{4_eigenvalue_problem/sparse-08.tex}
+\input{4_eigenvalue_problem/sparse-09.tex}
+\input{4_eigenvalue_problem/sparse-10.tex}
+\input{4_eigenvalue_problem/sparse-11.tex}
+
+\input{4_eigenvalue_problem/dimensional-reduction.tex}
 
 \begin{frame}[t,fragile]{行列式の計算}
   \begin{itemize}

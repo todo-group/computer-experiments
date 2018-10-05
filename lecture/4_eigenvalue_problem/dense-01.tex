@@ -1,0 +1,19 @@
+\begin{frame}[t,fragile]{基本方針}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item やってはいけない方法: 特性方程式
+    \[
+    |\lambda I - A| = 0
+    \]
+    の係数を求めて、代数方程式として解く
+    \begin{itemize}
+    \item 数値的に不安定 (代数方程式の解は係数の誤差に対して敏感)
+    \item 計算コスト大[$\sim O(N!)$]
+    \end{itemize}
+  \item スタンダードな方法: 行列を次々に直交変換して、対角行列(あるいは三重対角行列)に近づけていく
+    \[
+    A \rightarrow U_1^T A U_1 \rightarrow U_2^T (U_1^T A U_1) U_2 \rightarrow U_3^T (U_2^T (U_1^T A U_1) U_2) U_3 \rightarrow \cdots
+    \]
+  \item 固有値は変換された行列の固有値、固有ベクトルは変換後の行列の固有ベクトルに左から$U_1 U_2 U_3 \cdots$を掛けたもの
+  \end{itemize}
+\end{frame}

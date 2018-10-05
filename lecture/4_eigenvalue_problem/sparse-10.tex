@@ -1,0 +1,27 @@
+\begin{frame}[t,fragile]{Lanczos法}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 行列で表現すると
+    \begin{align*}
+      \hspace*{-2em}
+      A
+      (v_1v_2\cdots v_M)
+      &=
+      (v_1v_2\cdots v_M v_{M+1})
+      \begin{pmatrix}
+        \alpha_1 & \beta_1\\
+        \beta_1 & \alpha_2 & \beta_2 \\
+        & \beta_2 & \alpha_3 & \beta_3 \\
+        & & \beta_3 & \alpha_4 & \beta_4 \\
+        & & & \ddots & \ddots & \ddots \\
+        & & & & \beta_{M-1} & \alpha_M \\
+        & & & & & \beta_M \\
+      \end{pmatrix}
+    \end{align*}
+    両辺に左から$(v_1v_2\cdots v_M)^T$をかけると
+    \[
+    (v_1v_2\cdots v_M)^T A (v_1v_2\cdots v_M)
+    \]
+    は3重対角行列となることがわかる
+  \end{itemize}
+\end{frame}
