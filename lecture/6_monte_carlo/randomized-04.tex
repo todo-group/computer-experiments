@@ -1,0 +1,14 @@
+\begin{frame}[t,fragile]{最小カット問題}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 「最小カット (min-cut)」= 連結グラフを二つの部分に分けるために切らなければならない辺(エッジ)の集合のうち、もっとも小さいもの
+  \item ``Randomized Min-Cut Algorithm''
+    \begin{itemize}
+    \item ランダムに辺を一つ選ぶ
+    \item 辺の両端の頂点を一つにつぶす(自己ループは取り除く)
+    \item 残りの頂点が二つになるまで繰り返す
+    \end{itemize}
+  \item 上の試行を何回も繰り返して、得られたうちで最小なカットを結果とする
+  \item 頂点の数が $n$ のグラフに関して、正解が得られる確率：少なくとも $\frac{2}{n(n-1)}$
+  \end{itemize}
+\end{frame}
