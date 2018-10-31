@@ -1,0 +1,16 @@
+\begin{frame}[t,fragile]{自己相関関数(autocorrelation function)}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item エルゴード性 + つりあい条件 ⇒ 原理的に正しいマルコフ連鎖モンテカルロ
+  \item 実際には自己相関を考慮する必要あり
+  \item 自己相関関数
+    \[
+    C(t) = \frac{\langle A_{i+t}A_i \rangle - \langle A \rangle^2}{\langle A^2 \rangle - \langle A \rangle^2} \sim \exp(-\frac{t}{\tau})
+    \]
+  \item $\tau$: 自己相関時間(autocorrelation time)
+  \item 自己相関の影響により、統計的な「有効サンプル数」が減少
+    \[
+    M \rightarrow \frac{M}{1+2\tau}
+    \]
+  \end{itemize}
+\end{frame}

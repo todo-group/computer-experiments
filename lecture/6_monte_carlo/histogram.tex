@@ -5,6 +5,7 @@
     \setlength{\itemsep}{1em}
   \item 連続変数(実数)のデータの場合 ([]内はサンプルプログラムでの変数名)
     \begin{itemize}
+    \item $N$: サンプル数 [{\tt samples}]
     \item $x_{\rm min}$: データの最小値(カットオフ) [{\tt xmin}]
     \item $x_{\rm max}$: データの最大値(カットオフ) [{\tt xmax}]
     \item $n$: ビンの個数 [{\tt bins}]
@@ -28,9 +29,10 @@
     \item データが統計的に独立である場合、それぞれのビンのカウント数$m$はポワソン分布に従う
     \item 統計誤差 $\sim \sqrt{m}$
     \end{itemize}
-  \item いくつかの公式が提案されているが、分布の形によっては不適切な場合も
+  \item いくつかの方法・公式が提案されているが、分布の形によっては不適切な場合も
     \begin{itemize}
-    \item 例: スタージェスの公式 $n = \log_2 N + 1$
+    \item スタージェスの公式 $n = \log_2 N + 1$
+    \item スコットの公式 $\Delta = 3.5 \sigma / N^{1/3}$
     \end{itemize}
   \item 実際には、ビンの個数を何通りか試してみるのが良い
   \item データを取り直すことが出来ない or コストがかかる場合は、生データをいったんファイルに保存しておく

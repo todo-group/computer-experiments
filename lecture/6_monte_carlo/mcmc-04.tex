@@ -1,0 +1,18 @@
+\begin{frame}[t,fragile]{Perron-Frobeniusの定理}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 正の正方行列$A$(すべての要素が正)について以下が成り立つ
+    \begin{itemize}
+      \item 他の全ての固有値よりも絶対値の大きな正の固有値$r$が存在する
+      \item 固有値$r$は単純固有値である(縮退していない)
+      \item 固有値$r$に対する右(左)固有ベクトル$v$ ($w$) は正のベクトルである
+      \item 固有値 $r$ は $\displaystyle \min_i \sum_j a_{ij} \le r \le \max_i \sum_j a_{ij}$ を満たす
+    \end{itemize}
+  \item $A$が零の要素を持つ場合でも$A$が原始的(primitive = エルゴード的)である限り、上の結果は成り立つ
+  \item 遷移行列は上の条件を満たす
+    \begin{itemize}
+    \item Boltzmann分布は絶対値最大の固有ベクトル
+    \item 遷移行列を掛けていくとBoltzmann分布に収束
+    \end{itemize}
+  \end{itemize}
+\end{frame}

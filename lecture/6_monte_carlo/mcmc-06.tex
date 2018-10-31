@@ -1,0 +1,14 @@
+\begin{frame}[t,fragile]{調和ポテンシャル中の古典粒子}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item ポテンシャルエネルギー
+    \[ \hspace*{-4em} V(x) = x^2 \]
+  \item Bolotzmann分布
+    \[ \hspace*{-4em} P(x) = \frac{e^{-\beta V(x)}}{\int e^{-\beta V(x)} \, dx} \]
+  \item 物理量の期待値
+    \[ \hspace*{-4em} \langle x^2 \rangle = \frac{\int x^2 e^{-\beta V(x)} \, dx}{\int e^{-\beta V(x)} \, dx} \]
+  \item 逆温度$\beta$が大きいと被積分関数の分散が非常に大きい $\Rightarrow$ 重点的サンプリング
+  \end{itemize}
+  \vspace*{-16em} \hfill
+  \resizebox{4cm}{!}{\includegraphics{image/harmonic.pdf}}
+\end{frame}

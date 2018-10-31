@@ -1,0 +1,15 @@
+\begin{frame}[t,fragile]{マルコフ連鎖モンテカルロ法}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 統計誤差はサンプルの生の分散$s^2$とサンプル数$M$、自己相関時間$\tau$で決まる
+    \[
+    \sigma^2 \simeq \frac{s^2 (1+2\tau)}{M}
+    \]
+    \begin{itemize}
+    \item 一度に大きく配位を動かそうとすると棄却率が増加 $\Rightarrow$ $\tau$が増加
+    \item 動かす幅を小さくすると棄却率は高いが相関が消えない $\Rightarrow$ $\tau$が増加
+    \item 非局所更新法、拡張アンサンブル法など様々な方法が使われている
+    \end{itemize}
+  \item 物理以外でも、Bayes推定や機械学習、社会現象のシミュレーションなど広く使われている
+  \end{itemize}
+\end{frame}

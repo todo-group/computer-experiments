@@ -1,0 +1,15 @@
+\begin{frame}[t,fragile]{統計物理における平衡状態}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item Boltzmann分布 ($\beta \equiv 1/k_B T$)
+    \[
+    \pi(s) = \exp[-\beta {\cal H}(s)] \Big / \sum_s \exp[-\beta {\cal H}(s)]
+    \]
+  \item 物理量の期待値
+    \[
+    \langle A \rangle = \sum_s A(s) \exp[-\beta {\cal H}(s)] \Big/ \sum_s \exp[-\beta {\cal H}(s)]
+    \]
+  \item $\sum_s$は全ての状態に関する和 (系の体積に対して指数関数的に増加)
+  \item 全ての状態について和をとるかわりに、Boltzmann重みが大きい(=$\cal H$が小さい)ところだけをモンテカルロ・サンプリング
+  \end{itemize}
+\end{frame}

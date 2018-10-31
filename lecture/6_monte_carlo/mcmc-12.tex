@@ -1,0 +1,18 @@
+\begin{frame}[t,fragile]{イジング模型に対するモンテカルロ法}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 更新の単位は一つのスピンとするのが一番自然
+  \item メトロポリス法に必要なのは更新前後のエネルギー差だけなので、全エネルギーを計算しなおす必要なし
+\begin{verbatim}
+for (s = 0; s < num_sites; ++s) {
+  delta = 0.0;
+  for (j = 0; j < num_neighbors; ++j) {
+    v = neighbor(s, j);
+    delta += 2 * J * spin[s] * spin[v];
+  }
+  if (random() < exp(-beta * delta))
+    spin[s] = -1 * spin[s];
+}  
+\end{verbatim}
+  \end{itemize}
+\end{frame}
