@@ -1,0 +1,22 @@
+\begin{frame}[t,fragile]{ハミルトン力学系}
+  \begin{itemize}
+    % \setlength{\itemsep}{1em}
+  \item 時間をあらわに含まない場合のハミルトン方程式
+    \[
+    \frac{dq}{dt} = \frac{\partial H}{\partial p}, \ \frac{dp}{dt} = -\frac{\partial H}{\partial q}
+    \]
+    \begin{itemize}
+    \item エネルギー保存則
+      \[
+      \frac{dH}{dt} = \frac{\partial H}{\partial q} \frac{dq}{dt} + \frac{\partial H}{\partial p} \frac{dp}{dt} = 0
+      \]
+    \item 位相空間の体積が保存(Liouvilleの定理)
+
+      位相空間上の流れの場$\bm{v} = (\frac{dq}{dt},\frac{dp}{dt})$について
+      \[
+      \text{div} \bm{v} = \frac{\partial}{\partial q} \frac{dq}{dt} + \frac{\partial}{\partial p} \frac{dp}{dt} = 0
+      \]
+    \end{itemize}
+  \item Euler法、Runge-Kutta法などはいずれの性質も満たさない
+  \end{itemize}
+\end{frame}

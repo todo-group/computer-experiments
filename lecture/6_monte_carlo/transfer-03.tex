@@ -1,0 +1,23 @@
+\begin{frame}[t,fragile]{二次元正方格子への拡張}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item $L \times M$の正方格子
+    \begin{itemize}
+    \item 第$i$列のスピンをまとめて$s_i = ( \sigma_{i,1}, \sigma_{i,2}, \cdots, \sigma_{i,M})$とする
+    \item $s_i$は$2^M$通りの値をとる
+    \end{itemize}
+  \item 転送行列
+    \begin{itemize}
+    \item 横方向の相互作用: $\exp[\beta \sum_j \sigma_{i,j} \sigma_{i+1,j}]$ \ ($2^M \times 2^M$の密行列)
+    \item 縦方向の相互作用: $\exp[\beta \sum_j \sigma_{i,j} \sigma_{i,j+1}]$ \ ($2^M \times 2^M$の対角行列)
+    \item それぞれ$U$, $D$と表すと
+      \[
+      Z = {\rm tr} \, DUDU \cdots DU
+      \]
+    \item さらに$T=D^{1/2}TD^{1/2}$と定義すると、$T$は対称行列となり
+      \[
+      Z = {\rm tr} \, T^L
+      \]
+    \end{itemize}
+  \end{itemize}
+\end{frame}

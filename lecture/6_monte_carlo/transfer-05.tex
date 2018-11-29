@@ -1,0 +1,16 @@
+\begin{frame}[t,fragile]{疎行列分解}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 行列$U$は疎行列の積に分解できる: $U = U_1 U_2 \cdots U_M$ \\
+    ここで
+    \[
+    (U_k)_{s_i, s_{i+1}} = \exp[\beta \sigma_{i,k} \sigma_{i+1,k}] \prod_{j \ne k} \delta_{\sigma_{i,j} \sigma_{i+1,j}}
+    \]
+    \begin{itemize}
+    \item 各行各列に非零の要素は2つだけ
+    \item $U_k$の要素はその場で簡単に計算できる(メモリコスト=0)
+    \item ベクトルと行列$U_k$の積: 計算量〜$2 \times 2^M$
+    \item 密行列と行列$U_k$の積: 計算量〜$2 \times (2^M)^2$
+    \end{itemize}
+  \end{itemize}
+\end{frame}

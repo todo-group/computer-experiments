@@ -1,0 +1,18 @@
+\begin{frame}[t,fragile]{分配関数の計算方法}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item ${\rm tr} T^L$の計算方法
+    \begin{enumerate}
+    \item $L$個の行列$T$を掛けて、最後にトレースを取る (行列・行列積)
+    \item $(1,0)^t$と$(0,1)^t$にそれぞれ行列$T$を$L$回掛けて、それぞれの第1成分と第2成分を足し合わせる (行列・ベクトル積)
+    \item 行列$T$を固有値分解: $T = U\Lambda U^{-1}$しておくと
+      \[
+        {\rm tr} T^L = {\rm tr} (U \Lambda U^{-1})^L = {\rm tr} U \Lambda^L U^{-1} = {\rm tr} \Lambda^L = \lambda_1^L + \lambda_2^L
+        \]
+        特に$|\lambda_1| > |\lambda_2|$とすると$L\rightarrow\infty$で
+        \[
+          {\rm tr} T^L \simeq \lambda_1^L
+          \]
+    \end{enumerate}
+  \end{itemize}
+\end{frame}

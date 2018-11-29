@@ -1,0 +1,16 @@
+\begin{frame}[t,fragile]{シンプレクティック数値積分法(Symplectic Integrator)}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 体積保存を満たす解法
+  \item 例: 調和振動子$H=\frac{1}{2}(p^2+q^2)$の運動方程式
+    \[
+    \frac{dq}{dt} = p, \ \frac{dp}{dt} = -q
+    \]
+    の一方をEuler法で、他方を逆オイラー法で解く
+    \begin{align*}
+      q_{n+1} &= q_n + h p_n \\
+      p_{n+1} &= p_n - h q_{n+1} = (1-h^2) p_n - h q_n \\
+      \begin{pmatrix} q_{n+1} \\ p_{n+1} \end{pmatrix} &= \begin{pmatrix} 1 & h \\ -h & 1-h^2 \end{pmatrix} \begin{pmatrix} q_{n} \\ p_{n} \end{pmatrix}
+    \end{align*}
+  \end{itemize}
+\end{frame}

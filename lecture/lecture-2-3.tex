@@ -4,7 +4,7 @@
 \usepackage{tutorial}
 
 \title{計算機実験II (L3) --- 転送行列・分子動力学}
-\date{2017/11/24}
+\date{2018/11/30}
 
 \begin{document}
 
@@ -15,246 +15,29 @@
 
 \section{多体系の統計力学}
 
-\begin{frame}[t,fragile]{典型的な統計力学モデル}
-  \begin{itemize}
-    %\setlength{\itemsep}{1em}
-  \item 古典粒子系
-    \begin{itemize}
-    \item 調和振動子 \ \ $\displaystyle H = \frac{p^2}{2m} + \frac{k}{2}x^2$
-    \item 多粒子系
-      \[
-      H = \sum \frac{p_i^2}{2m} + \sum_{ij} V(x_i, x_j)
-      \]
-    \item バネビーズ模型
-      \[
-      H = \sum \frac{p_i^2}{2m} + \frac{k}{2} \sum_{ij} (x_i-x_j)^2
-      \]
-  \end{itemize}
-  \item 磁性体
-    \begin{itemize}
-    \item イジング模型 \ \ $\displaystyle H = -J \sum_{ij} \sigma_i \sigma_j$ \ \ \ $\sigma_i = \pm 1$
-    \end{itemize}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[t,fragile]{多体系の統計力学}
-  \begin{itemize}
-    \setlength{\itemsep}{1em}
-  \item カノニカル分布 \ $P(c) = \exp [- \beta H(c) ] / Z$ \ \ \ ($\beta = k_{\rm B} T$)
-  \item 分配関数・自由エネルギー
-    \begin{align*}
-      Z(T) &= \int \exp [- \beta H(p,x) ] \, dp \, dx \qquad \text{(粒子系)} \\
-      &= \sum_c \exp [- \beta H(c) ] \qquad \text{(イジング模型)} \\
-      f(T) &= - \beta^{-1} \log Z(T)
-    \end{align*}
-  \item 物理量の期待値
-    \begin{align*}
-      \langle A \rangle &= Z^{-1} \int A(p,x) \exp [- \beta H(p,x) ] \, dp \, dx \qquad \text{(粒子系)} \\
-      &= Z^{-1} \sum_c A(c) \exp [- \beta H(c) ] \qquad \text{(イジング模型)}
-    \end{align*}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[t,fragile]{多体系の統計力学}
-  \begin{itemize}
-    \setlength{\itemsep}{1em}
-  \item 内部エネルギー
-    \begin{align*}
-      E &= -\frac{\partial}{\partial\beta} \log Z = Z^{-1} \sum_c H(c) \exp [- \beta H(c) ]
-    \end{align*}
-  \item 比熱
-    \begin{align*}
-      C &= \frac{1}{N} \frac{\partial E}{\partial T} = \frac{\beta^2}{N} (\langle H^2 \rangle - \langle H \rangle^2)
-    \end{align*}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[t,fragile]{代表的な数値計算手法}
-  \begin{itemize}
-    % \setlength{\itemsep}{1em}
-  \item {\color{red} 数え上げ}
-    \begin{itemize}
-      \item 計算コスト ✕ (指数関数的)
-      \item メモリコスト ○ (${\cal O}(1)$)
-    \end{itemize}
-  \item {\color{red} 転送行列法}
-    \begin{itemize}
-      \item 計算コスト △ (指数関数的)
-      \item メモリコスト △ (指数関数的)
-    \end{itemize}
-  \item {\color{red} 分子動力学法}
-    \begin{itemize}
-      \item 計算コスト ○ (${\cal O}(N)$)
-      \item メモリコスト ○ (${\cal O}(N)$)
-      \item 統計誤差あり
-    \end{itemize}
-  \item マルコフ連鎖モンテカルロ法
-    \begin{itemize}
-      \item 計算コスト ○ (${\cal O}(N)$)
-      \item メモリコスト ○ (${\cal O}(N)$)
-      \item 統計誤差あり
-    \end{itemize}
-  \end{itemize}
-\end{frame}
+\input{6_monte_carlo/statphys-01.tex}
+\input{6_monte_carlo/statphys-02.tex}
+\input{6_monte_carlo/statphys-03.tex}
+\input{6_monte_carlo/statphys-05.tex}
 
 \section{数え上げ}
 
-\begin{frame}[t,fragile]{厳密な数え上げ}
-  \begin{itemize}
-    \setlength{\itemsep}{1em}
-  \item 全ての状態についてボルツマン重みを計算し足し合わせる
-    \begin{itemize}
-    \item 状態数 $= 2^N$ \ ($N$スピン数)
-    \end{itemize}
-  \item 状態を$N$ビットの整数で表す (0から$2^N-1$)
-    \begin{itemize}
-    \item $i$番目の格子点のスピンの状態を$i$ビット目に保存
-    \item $\sigma = \pm 1$をビットの 1 or 0で表現
-    \item シフト演算(\verb+>>+)とAND演算(\verb+&+)でスピン状態を取り出す
-    \end{itemize}
-  \item 例: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/monte_carlo/exact_counting.c}{example-2-L3/exact\_counting.c}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[t,fragile]{Log-sum-exp法}
-  \begin{itemize}
-    %\setlength{\itemsep}{1em}
-  \item Boltzmann重みは低温で非常に大きくなる
-    \begin{itemize}
-    \item そのまま足し合わせていくと、桁あふれの可能性
-    \item C言語のdoubleで表せる最大の数 〜 $10^{308}$
-    \item そのままの数ではなく、その{\color{red} 対数の値を保存}しておけばよい
-    \item それらの和を計算する時、どうすればよいのか？
-    \end{itemize}
-  \item Log-sum-exp法
-    \begin{itemize}
-    \item 対数の値から元の値に戻すと桁があふれるので、{\color{red} 途中で大きな数が出てこないように}する
-    \item $a > b$ の時: $e^c = e^a + e^b = e^a (1 + e^{-(a-b)})$
-    \item 対数を取ると $c = log(e^a + e^b) = a + log(1 + e^{-(a-b)})$
-    \item 右辺の指数関数の中身はかならず負
-    \item $a < b$の時も同様に考える。まとめると \\
-      $\color{red} c = max(a,b) + log(1 + e^{-|a-b|})$
-    \end{itemize}
-  \item 別の方法: 基底状態のエネルギーが分かっている場合には$e^{-\beta E_0}$で重みを規格化しておく
-  \end{itemize}
-\end{frame}
+\input{6_monte_carlo/counting-01.tex}
+\input{6_monte_carlo/counting-02.tex}
 
 \section{転送行列法}
 
-\begin{frame}[t,fragile]{転送行列: 一次元イジング模型}
-  \begin{itemize}
-    \setlength{\itemsep}{1em}
-  \item ハミルトニアン: $H = - \sum_i \sigma_i \sigma_{i+1}$
-  \item 分配関数
-    \[
-    Z = \sum_{\sigma_1}\sum_{\sigma_2}\cdots\sum_{\sigma_L} e^{\beta \sigma_1 \sigma_2} e^{\beta \sigma_2 \sigma_3} \cdots e^{\beta \sigma_L \sigma_1}
-    \]
-    \begin{itemize}
-    \item $e^{\beta \sigma_1 \sigma_2}$は4通りの値を持つ→$2\times2$行列$T_{\sigma_1 \sigma_2}$の形に書くと
-      \begin{align*}
-      \sum_{\sigma_2} e^{\beta \sigma_1 \sigma_2} e^{\beta \sigma_2 \sigma_3} &= \sum_{\sigma_2} T_{\sigma_1 \sigma_2} T_{\sigma_2 \sigma_3} = (T^2)_{\sigma_1 \sigma_3} \\
-      Z &= {\rm tr} T^L
-      \end{align*}
-    \end{itemize}
-  \end{itemize}
-\end{frame}
+\input{6_monte_carlo/transfer-01.tex}
+\input{6_monte_carlo/transfer-02.tex}
+\input{6_monte_carlo/transfer-03.tex}
+\input{6_monte_carlo/transfer-04.tex}
 
-\begin{frame}[t,fragile]{分配関数の計算方法}
-  \begin{itemize}
-    \setlength{\itemsep}{1em}
-  \item ${\rm tr} T^L$の計算方法
-    \begin{enumerate}
-    \item $L$個の行列$T$を掛けて、最後にトレースを取る (行列・行列積)
-    \item $(1,0)^t$と$(0,1)^t$にそれぞれ行列$T$を$L$回掛けて、それぞれの第1成分と第2成分を足し合わせる (行列・ベクトル積)
-    \item 行列$T$を固有値分解: $T = U\Lambda U^{-1}$しておくと
-      \[
-        {\rm tr} T^L = {\rm tr} (U \Lambda U^{-1})^L = {\rm tr} U \Lambda^L U^{-1} = {\rm tr} \Lambda^L = \lambda_1^L + \lambda_2^L
-        \]
-        特に$|\lambda_1| > |\lambda_2|$とすると$L\rightarrow\infty$で
-        \[
-          {\rm tr} T^L \simeq \lambda_1^L
-          \]
-    \end{enumerate}
-  \end{itemize}
-\end{frame}
+\input{1_basics/lapack-10.tex}
+\input{1_basics/lapack-11.tex}
+\input{4_eigenvalue_problem/dense-07.tex}
 
-\begin{frame}[t,fragile]{二次元正方格子への拡張}
-  \begin{itemize}
-    \setlength{\itemsep}{1em}
-  \item $L \times M$の正方格子
-    \begin{itemize}
-    \item 第$i$列のスピンをまとめて$s_i = ( \sigma_{i,1}, \sigma_{i,2}, \cdots, \sigma_{i,M})$とする
-    \item $s_i$は$2^M$通りの値をとる
-    \end{itemize}
-  \item 転送行列
-    \begin{itemize}
-    \item 横方向の相互作用: $\exp[\beta \sum_j \sigma_{i,j} \sigma_{i+1,j}]$ \ ($2^M \times 2^M$の密行列)
-    \item 縦方向の相互作用: $\exp[\beta \sum_j \sigma_{i,j} \sigma_{i,j+1}]$ \ ($2^M \times 2^M$の対角行列)
-    \item それぞれ$U$, $D$と表すと
-      \[
-      Z = {\rm tr} \, DUDU \cdots DU
-      \]
-    \item さらに$T=D^{1/2}TD^{1/2}$と定義すると、$T$は対称行列となり
-      \[
-      Z = {\rm tr} \, T^L
-      \]
-    \end{itemize}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[t,fragile]{計算コスト}
-  \begin{itemize}
-    \setlength{\itemsep}{1em}
-  \item 必要メモリと必要計算量の見積もり
-    \begin{enumerate}
-    \item $L$個の行列$T$を掛けて、最後にトレースを取る \\
-      メモリ〜$(2^M)^2$, 計算量〜$L(2^M)^3$
-    \item $2^M$個の基底ベクトルにそれぞれ行列$T$を$L$回掛けて、それぞれの対応する成分を足し合わせる \\
-      メモリ〜$(2^M)^2$, 計算量〜$L(2^M)^3$
-    \item 行列$T$を固有値分解(Householder法) \\
-      メモリ〜$(2^M)^2$, 計算量〜$(2^M)^3$
-    \end{enumerate}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[t,fragile]{疎行列分解}
-  \begin{itemize}
-    \setlength{\itemsep}{1em}
-  \item 行列$U$は疎行列の積に分解できる: $U = U_1 U_2 \cdots U_M$ \\
-    ここで
-    \[
-    (U_k)_{s_i, s_{i+1}} = \exp[\beta \sigma_{i,k} \sigma_{i+1,k}] \prod_{j \ne k} \delta_{\sigma_{i,j} \sigma_{i+1,j}}
-    \]
-    \begin{itemize}
-    \item 各行各列に非零の要素は2つだけ
-    \item $U_k$の要素はその場で簡単に計算できる(メモリコスト=0)
-    \item ベクトルと行列$U_k$の積: 計算量〜$2 \times 2^M$
-    \item 密行列と行列$U_k$の積: 計算量〜$2 \times (2^M)^2$
-    \end{itemize}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[t,fragile]{計算コスト再見積もり}
-  \begin{itemize}
-    \setlength{\itemsep}{1em}
-  \item 必要メモリと必要計算量の見積もり
-    \begin{enumerate}
-    \item $L$個の行列$T$を掛けて、最後にトレースを取る \\
-      メモリ〜$(2^M)^2$, 計算量〜$LM(2^M)^2$
-    \item $2^M$個の基底ベクトルにそれぞれ行列$T$を$L$回掛けて、それぞれの対応する成分を足し合わせる \\
-      メモリ〜$2^M$, 計算量〜$LM(2^M)^2$
-    \item 行列$T$を固有値分解
-      \begin{itemize}
-        \item $L$有限の場合 \\
-          メモリ〜$(2^M)^2$, 計算量〜$(2^M)^3$
-        \item $L\rightarrow\infty$の極限: 最大固有値$\lambda_1$のみ必要 \\
-          メモリ〜$2^M$, 計算量〜$O(100)\times M(2^M)$
-      \end{itemize}
-    \end{enumerate}
-  \end{itemize}
-\end{frame}
-
-\input{1_basics/lapack.tex}
+\input{6_monte_carlo/transfer-05.tex}
+\input{6_monte_carlo/transfer-06.tex}
 
 \section{分子動力学法}
 
@@ -310,28 +93,28 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}[t,fragile]{Box-Muller法}
-  \begin{itemize}
-    \setlength{\itemsep}{1em}
-  \item 一様分布乱数から正規分布乱数を生成する方法
-    \begin{itemize}
-    \item 2次元の(標準)ガウス分布を考える
-      \[
-      f(x,y)\,dx\,dy= \frac{1}{2\pi} e^{-(x^2+y^2)/2} \,dx\,dy
-      \]
-    \item 極座標$(r,\theta)$に変換 ($x=r\cos\theta$, $y=r\sin\theta$)
-      \[
-      \frac{1}{2\pi} e^{-(x^2+y^2)/2} \,dx\,dy = \frac{1}{2\pi} r \, e^{-r^2/2} \,dr\,d\theta
-      \]
-    \item $\theta$は$(0,2\pi)$の一様分布
-    \item $r$は$f(r) = r \, e^{-r^2/2}$に従う
-      \begin{align*}
-        F(r) = \int_0^r f(r) \, dr = 1 - e^{-r^2/2}, \qquad F^{-1}(q) = \sqrt{- 2 \log(1-q)}
-      \end{align*}
-    \item 二つの一様乱数から二つの独立な正規分布乱数が生成される
-    \end{itemize}
-  \end{itemize}
-\end{frame}
+%% \begin{frame}[t,fragile]{Box-Muller法}
+%%   \begin{itemize}
+%%     \setlength{\itemsep}{1em}
+%%   \item 一様分布乱数から正規分布乱数を生成する方法
+%%     \begin{itemize}
+%%     \item 2次元の(標準)ガウス分布を考える
+%%       \[
+%%       f(x,y)\,dx\,dy= \frac{1}{2\pi} e^{-(x^2+y^2)/2} \,dx\,dy
+%%       \]
+%%     \item 極座標$(r,\theta)$に変換 ($x=r\cos\theta$, $y=r\sin\theta$)
+%%       \[
+%%       \frac{1}{2\pi} e^{-(x^2+y^2)/2} \,dx\,dy = \frac{1}{2\pi} r \, e^{-r^2/2} \,dr\,d\theta
+%%       \]
+%%     \item $\theta$は$(0,2\pi)$の一様分布
+%%     \item $r$は$f(r) = r \, e^{-r^2/2}$に従う
+%%       \begin{align*}
+%%         F(r) = \int_0^r f(r) \, dr = 1 - e^{-r^2/2}, \qquad F^{-1}(q) = \sqrt{- 2 \log(1-q)}
+%%       \end{align*}
+%%     \item 二つの一様乱数から二つの独立な正規分布乱数が生成される
+%%     \end{itemize}
+%%   \end{itemize}
+%% \end{frame}
 
 \begin{frame}[t,fragile]{分子動力学法}
   \begin{itemize}
@@ -352,6 +135,12 @@
   \end{itemize}
 \end{frame}
 
+\input{2_ode/ode-03.tex}
+\input{2_ode/ode-06.tex}
+\input{2_ode/ode-07.tex}
+\input{2_ode/ode-08.tex}
+\input{2_ode/symplectic-05.tex}
+
 \begin{frame}[t,fragile]{Nose-Hoover熱浴}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
@@ -359,22 +148,148 @@
     \begin{itemize}
     \item 巨大な環境(熱浴)を付ける必要がある？
     \end{itemize}
-  \item Nose-Hoover法
+  \item Nose (能勢)-Hoover法
     \begin{itemize}
-    \item 熱浴をたった1つの自由度($\zeta$)だけで実現する
-    \item 運動方程式
+    \item 熱浴をたった1つの自由度($s$)だけで実現する!
+    \item 現実系のハミルトニアン
       \begin{align*}
-        \dot{x}_i &= p_i / m \\
-        \dot{p}_i &= F_i(x) - {\color{red}\zeta p_i} \\
-        {\color{red}\dot{\zeta}} &{\color{red} = \frac{1}{\tau^2} \Big( \sum \frac{p_i^2}{m} - g k_B T\Big)} \qquad \text{($g$: 系の自由度)}
+        H(\mathbf{p},\mathbf{x}) &= \sum_i \frac{p_i^2}{2m} + U(\mathbf{x})
       \end{align*}
-    \item $\sum \frac{p_i^2}{m}$: 全運動エネルギーの二倍 (熱平衡状態では期待値 $k_B T$)
-    \item $\zeta$によりネガティブフィードバックをかける
-    \item 平衡分布はカノニカル分布になる(証明略)
+    \item 仮想系のハミルトニアン (温度$T$をパラメータとして含む)
+      \begin{align*}
+        H'(\mathbf{p}',\mathbf{x}',{\color{red}p_s},{\color{red}s}) &= \sum_i \frac{{p'_i}^2}{2m{\color{red}s^2}} + U(\mathbf{x}') + {\color{red}\frac{p_s^2}{2Q} + g k_B T\log s}
+      \end{align*}
+      $s$: 熱浴の自由度、$p_s$: $s$に共役な運動量、$Q$: 熱浴の「質量」、$g$: 系の自由度($3N+1$または$3N$)
     \end{itemize}
   \end{itemize}
 \end{frame}
 
-\input{20_ode.tex}
+\begin{frame}[t,fragile]{Nose-Hoover熱浴}
+  \begin{itemize}
+  \item 仮想系の運動方程式
+    \begin{align*}
+      \frac{dx_i'}{dt'} &= \frac{\partial H'}{\partial p_i'} = \frac{p_i'}{ms^2} \\
+      \frac{dp_i'}{dt'} &= -\frac{\partial H'}{\partial x_i'} = -\frac{\partial U}{\partial x_i'} \\
+      \frac{ds}{dt'} &= \frac{\partial H'}{\partial p_s} = \frac{p_s}{Q} \\
+      \frac{dp_s}{dt'} &= -\frac{\partial H'}{\partial s} = \sum_i \frac{{p'_i}^2}{ms^3} - \frac{g k_B T}{s}
+    \end{align*}
+  \item 現実系と仮想系との間に以下の関係を仮定する
+
+    $x_i=x_i'$、$p_i=p_i'/{\color{red}s}$、$t=\int^t s^{-1} dt'$、$dt=dt'/{\color{red}s}$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{Nose-Hoover熱浴}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 現実系の変数による書き換え
+    \begin{align*}
+      \frac{dx_i}{dt} &= \frac{\partial H}{\partial p_i} \\
+      \frac{dp_i}{dt} &= -\frac{\partial U}{\partial x_i} -\frac{p_s}{Q} p_i \\
+      \frac{dp_s}{dt} &= 2 \big[ \sum_i \frac{{p_i}^2}{2m} - \frac{g k_B T}{2} \big]
+    \end{align*}
+  \item あるいは、$x_s = \log x$を導入すると、最後の2つの式は
+    \begin{align*}
+      % \frac{dx_i}{dt} &= \frac{\partial H}{\partial p_i} \\
+      \frac{dp_i}{dt} &= -\frac{\partial U}{\partial x_i} -\frac{dx_s}{dt} p_i \\
+      \frac{d^2x_s}{dt^2} &= \frac{2}{Q} \big[ \sum_i \frac{{p_i}^2}{2m} - \frac{g k_B T}{2} \big]
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{カノニカル分布の実現}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item $H'(\mathbf{p}',\mathbf{x}',p_s,s)$による仮想時間発展によりエネルギー$E'$のミクロカノニカルアンサンブルが実現しているとする
+
+    $\Leftrightarrow$ 仮想時間$t'$でサンプルすると$2(3N+1)$次元の位相空間上で$H'=E$の曲面上に均等に分布(エルゴード性)
+    
+    $\Leftrightarrow$ 分布関数: $\delta [ H'(\mathbf{p}',\mathbf{x}',p_s,s) - E']$
+    
+    $\Rightarrow$ 現実系の変数$(p,q)$に関する周辺分布を考える
+  \item 仮想系のミクロカノニカル分配関数
+    \begin{align*}
+      Z'&=\int d\mathbf{p}' d\mathbf{x}' dp_s ds \, \delta [ H'(\mathbf{p}',\mathbf{x}',p_s,s) - E'] \\
+      &=\int d\mathbf{{\color{red}p}} d\mathbf{{\color{red}x}} dp_s ds \, {\color{red}s^{3N}} \delta [ {\color{red}H(\mathbf{p},\mathbf{x})} + \frac{p_s^2}{2Q} + g k_B T \log s - E']
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{カノニカル分布の実現}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item $s$について積分(*)
+    \begin{align*}
+      \int ds \, s^{3N} \delta[f(s)] = s_0^{3N} / | f'(s_0) | = s_0^{3N+1} / g k_B T
+    \end{align*}
+    $f(s) \equiv H(\mathbf{p},\mathbf{x}) + \frac{p_s^2}{2Q} + g k_B T \log s - E'$、$s_0$は$f(s)=0$の解
+    \begin{align*}
+      s_0 = \exp \Big[ -\frac{1}{gk_BT} \Big( H(p,x) + \frac{p_s^2}{2Q} - E' \Big) \Big]
+    \end{align*}
+  \item さらに$p_s$についてガウス積分を行い、$g=3N+1$とすると
+    \begin{align*}
+      Z' = \frac{1}{3N+1} \sqrt{\frac{2Q\pi}{k_BT}} e^{E'/k_BT} \int d\mathbf{p}d\mathbf{x} \, {\color{red}\exp [- H(p,x)/k_BT ]}
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{補足(*)}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item $f(s)=0$の解を$s_0$とすると、$\displaystyle \delta [f(s)] = \frac{\delta(s-s_0)}{|f'(s_0)|}$が成り立つ
+
+    証明: $u=f(s)$とおくと、$du = f'(s)ds$から
+    \begin{align*}
+      \int h(s) {\color{red}\delta [f(s)]} \, ds= \int h(f^{-1}(u)) \delta(u) \frac{du}{|f'(f^{-1}(u))|}
+    \end{align*}
+    $f^{-1}(0)=s_0$なので
+    \begin{align*}
+      = \frac{h(s_0)}{|f'(s_0)|} = \int h(s) {\color{red}\frac{\delta(s-s_0)}{|f'(s_0)|}} ds
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{実時間発展の場合}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 実時間に直した方程式の時間発展を計算した場合、物理量$A(\mathbf{p},\mathbf{x})$の実時間平均は
+    \begin{align*}
+      \langle A \rangle_t &= \lim_{\tau\rightarrow\infty} \frac{1}{\tau} \int_0^\tau dt \, A(\mathbf{p}(t),\mathbf{x}(t)) \\
+      &= \lim_{\tau\rightarrow\infty} \frac{\tau'}{\tau} \frac{1}{\tau'} \int_0^{\tau'} dt' \, A(\mathbf{p}'(t')/s(t'),\mathbf{x}'(t')) / s(t')
+    \end{align*}
+  \item $\tau = \int_0^{\tau} dt = \int_0^{\tau'} dt'/s(t')$なので
+    \begin{align*}
+      \langle A \rangle_t &= \frac{\lim_{\tau'\rightarrow\infty} \frac{1}{\tau'} \int_0^{\tau'} dt' \, A(\mathbf{p}'(t')/s(t'),\mathbf{x}'(t')) / s(t')}{\lim_{\tau'\rightarrow\infty} \frac{1}{\tau'} \int_0^{\tau'} dt' \, 1/ s(t')} \\
+      &= \langle A(\mathbf{p},\mathbf{x}) / s \rangle_{t'} / \langle 1 / s \rangle_{t'}
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{実時間発展の場合}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 分子・分母の$t'$に関する期待値を計算すると、$s_0$が1つキャンセルするので
+    \begin{align*}
+      \langle A \rangle_t &= \frac{\int d\mathbf{p} d\mathbf{x} \, A(\mathbf{p},\mathbf{x}) \exp [ -\frac{3N}{gk_BT} H(\mathbf{p}, \mathbf{x})]}{\int d\mathbf{p} d\mathbf{x} \, \exp [ -\frac{3N}{gk_BT} H(\mathbf{p}, \mathbf{x})]}
+    \end{align*}
+    \item {\color{red}$g=3N$}とすると、実時間発展の長時間平均とカノニカル分布における位相平均が一致
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{Nose-Hoover熱浴}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 熱浴をたった1つの自由度($s$)だけで実現する!
+  \item 運動方程式(実時間発展の場合)
+    \begin{align*}
+      \frac{dx_i}{dt} &= \frac{\partial H}{\partial p_i} \\
+      \frac{dp_i}{dt} &= -\frac{\partial U}{\partial x_i} -\frac{p_s}{Q} p_i \\
+      \frac{dp_s}{dt} &= 2 \big[ \sum_i \frac{{p_i}^2}{2m} - \frac{g k_B T}{2} \big]
+    \end{align*}
+  \item $\sum \frac{p_i^2}{2m}$: 現実系の全運動エネルギー
+  \item 「摩擦係数」$p_s$にネガティブフィードバックがかかる
+  \item $g=3N$ととれば、$(\mathbf{p},\mathbf{q})$の周辺分布はカノニカル分布になる
+  \end{itemize}
+\end{frame}
 
 \end{document}

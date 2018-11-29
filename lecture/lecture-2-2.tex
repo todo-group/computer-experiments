@@ -15,87 +15,10 @@
 
 \section{多体系の統計力学}
 
-\begin{frame}[t,fragile]{典型的な統計力学モデル}
-  \begin{itemize}
-    %\setlength{\itemsep}{1em}
-  \item 古典粒子系
-    \begin{itemize}
-    \item 調和振動子 \ \ $\displaystyle H = \frac{p^2}{2m} + \frac{k}{2}x^2$
-    \item 多粒子系
-      \[
-      H = \sum \frac{p_i^2}{2m} + \sum_{ij} V(x_i, x_j)
-      \]
-    \item バネビーズ模型
-      \[
-      H = \sum \frac{p_i^2}{2m} + \frac{k}{2} \sum_{ij} (x_i-x_j)^2
-      \]
-  \end{itemize}
-  \item 磁性体
-    \begin{itemize}
-    \item イジング模型 \ \ $\displaystyle H = -J \sum_{ij} \sigma_i \sigma_j$ \ \ \ $\sigma_i = \pm 1$
-    \end{itemize}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[t,fragile]{多体系の統計力学}
-  \begin{itemize}
-    \setlength{\itemsep}{1em}
-  \item カノニカル分布 \ $P(c) = \exp [- \beta H(c) ] / Z$ \ \ \ ($\beta = k_{\rm B} T$)
-  \item 分配関数・自由エネルギー
-    \begin{align*}
-      Z(T) &= \int \exp [- \beta H(p,x) ] \, dp \, dx \qquad \text{(粒子系)} \\
-      &= \sum_c \exp [- \beta H(c) ] \qquad \text{(イジング模型)} \\
-      f(T) &= - \beta^{-1} \log Z(T)
-    \end{align*}
-  \item 物理量の期待値
-    \begin{align*}
-      \langle A \rangle &= Z^{-1} \int A(p,x) \exp [- \beta H(p,x) ] \, dp \, dx \qquad \text{(粒子系)} \\
-      &= Z^{-1} \sum_c A(c) \exp [- \beta H(c) ] \qquad \text{(イジング模型)}
-    \end{align*}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[t,fragile]{多体系の統計力学}
-  \begin{itemize}
-    \setlength{\itemsep}{1em}
-  \item 内部エネルギー
-    \begin{align*}
-      E &= -\frac{\partial}{\partial\beta} \log Z = Z^{-1} \sum_c H(c) \exp [- \beta H(c) ]
-    \end{align*}
-  \item 比熱
-    \begin{align*}
-      C &= \frac{1}{N} \frac{\partial E}{\partial T} = \frac{\beta^2}{N} (\langle H^2 \rangle - \langle H \rangle^2)
-    \end{align*}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[t,fragile]{代表的な数値計算手法}
-  \begin{itemize}
-    % \setlength{\itemsep}{1em}
-  \item 数え上げ
-    \begin{itemize}
-      \item 計算コスト × (指数関数的)
-      \item メモリコスト ○ (${\cal O}(1)$)
-    \end{itemize}
-  \item 転送行列法
-    \begin{itemize}
-      \item 計算コスト △ (指数関数的)
-      \item メモリコスト △ (指数関数的)
-    \end{itemize}
-  \item 分子動力学法
-    \begin{itemize}
-      \item 計算コスト ○ (${\cal O}(N)$)
-      \item メモリコスト ○ (${\cal O}(N)$)
-      \item 統計誤差あり
-    \end{itemize}
-  \item {\color{red}マルコフ連鎖モンテカルロ法}
-    \begin{itemize}
-      \item 計算コスト ○ (${\cal O}(N)$)
-      \item メモリコスト ○ (${\cal O}(N)$)
-      \item 統計誤差あり
-    \end{itemize}
-  \end{itemize}
-\end{frame}
+\input{6_monte_carlo/statphys-01.tex}
+\input{6_monte_carlo/statphys-02.tex}
+\input{6_monte_carlo/statphys-03.tex}
+\input{6_monte_carlo/statphys-04.tex}
 
 \section{乱択アルゴリズム}
 \input{6_monte_carlo/randomized-01.tex}

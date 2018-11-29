@@ -1,0 +1,16 @@
+\begin{frame}[t,fragile]{厳密な数え上げ}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 全ての状態についてボルツマン重みを計算し足し合わせる
+    \begin{itemize}
+    \item 状態数 $= 2^N$ \ ($N$スピン数)
+    \end{itemize}
+  \item 状態を$N$ビットの整数で表す (0から$2^N-1$)
+    \begin{itemize}
+    \item $i$番目の格子点のスピンの状態を$i$ビット目に保存
+    \item $\sigma = \pm 1$をビットの 1 or 0で表現
+    \item シフト演算(\verb+>>+)とAND演算(\verb+&+)でスピン状態を取り出す
+    \end{itemize}
+  \item 例: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/monte_carlo/exact_counting.c}{exact\_counting.c}
+  \end{itemize}
+\end{frame}

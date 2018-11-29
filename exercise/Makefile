@@ -22,7 +22,7 @@ EXAMPLE2L2 = monte_carlo/random.c monte_carlo/histogram.c \
 	monte_carlo/harmonic.c monte_carlo/square_lattice.c \
 	matrix/cmatrix.h monte_carlo/mersenne_twister.h
 
-EXAMPLE2L3 = monte_carlo/bond_table.c monte_carlo/exact_counting.c matrix/cmatrix.h monte_carlo/mersenne_twister.h matrix/multiply.c matrix/multiply_dgemm.c
+EXAMPLE2L3 = monte_carlo/bond_table.h monte_carlo/mersenne_twister.h monte_carlo/exact_counting.c matrix/cmatrix.h matrix/multiply.c matrix/multiply_dgemm.c matrix/dgemm.h eigenvalue_problem/dsyev.h eigenvalue_problem/diag.c eigenvalue_problem/matrix1.dat
 
 EXAMPLE2EX3 = monte_carlo/random.c monte_carlo/histogram.c monte_carlo/bond_table.c monte_carlo/exact_counting.c matrix/cmatrix.h monte_carlo/mersenne_twister.h matrix/multiply.c matrix/multiply_dgemm.c monte_carlo/transfer_matrix.c
 

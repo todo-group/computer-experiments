@@ -1,0 +1,19 @@
+\begin{frame}[t,fragile]{計算コスト再見積もり}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 必要メモリと必要計算量の見積もり
+    \begin{enumerate}
+    \item $L$個の行列$T$を掛けて、最後にトレースを取る \\
+      メモリ〜$(2^M)^2$, 計算量〜$LM(2^M)^2$
+    \item $2^M$個の基底ベクトルにそれぞれ行列$T$を$L$回掛けて、それぞれの対応する成分を足し合わせる \\
+      メモリ〜$2^M$, 計算量〜$LM(2^M)^2$
+    \item 行列$T$を固有値分解
+      \begin{itemize}
+        \item $L$有限の場合 \\
+          メモリ〜$(2^M)^2$, 計算量〜$(2^M)^3$
+        \item $L\rightarrow\infty$の極限: 最大固有値$\lambda_1$のみ必要 \\
+          メモリ〜$2^M$, 計算量〜$O(100)\times M(2^M)$
+      \end{itemize}
+    \end{enumerate}
+  \end{itemize}
+\end{frame}

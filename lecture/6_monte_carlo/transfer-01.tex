@@ -1,0 +1,17 @@
+\begin{frame}[t,fragile]{転送行列: 一次元イジング模型}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item ハミルトニアン: $H = - \sum_i \sigma_i \sigma_{i+1}$
+  \item 分配関数
+    \[
+    Z = \sum_{\sigma_1}\sum_{\sigma_2}\cdots\sum_{\sigma_L} e^{\beta \sigma_1 \sigma_2} e^{\beta \sigma_2 \sigma_3} \cdots e^{\beta \sigma_L \sigma_1}
+    \]
+    \begin{itemize}
+    \item $e^{\beta \sigma_1 \sigma_2}$は4通りの値を持つ→$2\times2$行列$T_{\sigma_1 \sigma_2}$の形に書くと
+      \begin{align*}
+      \sum_{\sigma_2} e^{\beta \sigma_1 \sigma_2} e^{\beta \sigma_2 \sigma_3} &= \sum_{\sigma_2} T_{\sigma_1 \sigma_2} T_{\sigma_2 \sigma_3} = (T^2)_{\sigma_1 \sigma_3} \\
+      Z &= {\rm tr} T^L
+      \end{align*}
+    \end{itemize}
+  \end{itemize}
+\end{frame}

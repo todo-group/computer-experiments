@@ -1,0 +1,22 @@
+\begin{frame}[t,fragile]{Log-sum-exp法}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item Boltzmann重みは低温で非常に大きくなる
+    \begin{itemize}
+    \item そのまま足し合わせていくと、桁あふれの可能性
+    \item C言語のdoubleで表せる最大の数 〜 $10^{308}$
+    \item そのままの数ではなく、その{\color{red} 対数の値を保存}しておけばよい
+    \item それらの和を計算する時、どうすればよいのか？
+    \end{itemize}
+  \item Log-sum-exp法
+    \begin{itemize}
+    \item 対数の値から元の値に戻すと桁があふれるので、{\color{red} 途中で大きな数が出てこないように}する
+    \item $a > b$ の時: $e^c = e^a + e^b = e^a (1 + e^{-(a-b)})$
+    \item 対数を取ると $c = log(e^a + e^b) = a + log(1 + e^{-(a-b)})$
+    \item 右辺の指数関数の中身はかならず負
+    \item $a < b$の時も同様に考える。まとめると \\
+      $\color{red} c = max(a,b) + log(1 + e^{-|a-b|})$
+    \end{itemize}
+  \item 別の方法: 基底状態のエネルギーが分かっている場合には$e^{-\beta E_0}$で重みを規格化しておく
+  \end{itemize}
+\end{frame}

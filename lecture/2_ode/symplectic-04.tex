@@ -1,0 +1,12 @@
+\begin{frame}[t,fragile]{2次のシンプレクティック積分法}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item ハミルトニアンが$H(p,q) = T(p) + V(q)$の形で書けるとする
+  \item リープ・フロッグ法
+    \begin{align*}
+      {\color{red} p(t+h/2)} &= p(t) - \frac{h}{2} \frac{\partial V(q)}{\partial q}|_{q=q(t)} \\
+      {\color{blue} q(t+h)} &= q(t) + h {\color{red}p(t+h/2)} \\
+      p(t+h) &= {\color{red}p(t+h/2}) - \frac{h}{2} \frac{\partial V(q)}{\partial q}|_{q=q(t+h)}
+    \end{align*}
+  \end{itemize}
+\end{frame}
