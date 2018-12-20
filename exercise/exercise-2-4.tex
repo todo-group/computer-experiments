@@ -13,31 +13,30 @@
 \begin{document}
 
 \noindent
-{\bf\large 「計算機実験II」実習課題(EX4) 2017-12-22}
+{\bf\large 「計算機実験II」実習課題(EX4) 2018-12-25}
 \\[-0.5em]
 
 \noindent
 \begin{itemize}
-\item 講義のページ: \verb+http://exa.phys.s.u-tokyo.ac.jp/ja/lectures/2017W-computer2+
+\item 講義のページ: \verb+http://exa.phys.s.u-tokyo.ac.jp/ja/lectures/2018w-computer2+
 
-\item サンプルプログラム: 「実習EX4サンプルプログラム」{\tt example-2-EX4.zip}
+\item サンプルプログラム: 「講義L4サンプルプログラム」{\tt example-2-L4.zip}
 
 \item 準備練習
   
 \begin{enumerate}
-  \item {\tt example-2-EX4/golden\_section.c}は、黄金分割法により一次元関数$f(x) = 5x+x^2+70\sin(x)$の極値を求めるプログラムである。コンパイルして実行せよ。コードの中身を読んで確認せよ(参考: 講義資料{\tt lecture-2.4.pdf} p.22)
-  \item {\tt example-2-EX4/nelder\_mead\_2d.c}は、Nelder-Mead法により二次元関数$f(x, y) = −10(x^2 + y^2) + (x^2 + y^2)^2 − 2(x + y)$の極値を求めるプログラムである。コンパイルして実行せよ。コードの中身を読んで確認せよ(参考: 講義資料{\tt lecture-2.4.pdf} p.22)
-  \item 最急降下法による連立一次方程式の解法に関する解説、共役勾配法に関する補足説明
+  \item {\tt golden\_section.c}は、黄金分割法により一次元関数$f(x) = 5x+x^2+70\sin(x)$の極値を求めるプログラムである。コンパイルして実行せよ。コードの中身を読んで確認せよ(参考: 講義資料{\tt lecture-2.4.pdf} p.8)
+  \item {\tt nelder\_mead\_2d.c}は、Nelder-Mead法により二次元関数$f(x, y) = −10(x^2 + y^2) + (x^2 + y^2)^2 − 2(x + y)$の極値を求めるプログラムである。コンパイルして実行せよ。コードの中身を読んで確認せよ(参考: 講義資料{\tt lecture-2.4.pdf} p.23)
 \end{enumerate}
 
 \item 基本課題
   \begin{enumerate}
-  \item {\tt example-2-EX4/steepest\_descent.c}は、最急降下法(参照: 補足説明)により連立一次方程式を解くプログラムである。実行時には引数として、行列$A$と右辺ベクトル$b$が入ったファイル名({\tt input3.dat})を指定する。コンパイルして実行し、LU分解による解法{\tt example-2-EX4/lu\_decomp.c}と解が一致することを確かめよ
-  \item {\tt example-2-EX4/steepest\_descent.c}を元にして、行列$A$と右辺ベクトル$b$をファイルから読み込み共役勾配法(参照: 補足説明)により連立一次方程式を解くプログラムを作成せよ。最急降下法と収束回数を比較せよ
-  \item 測定データ{\tt example-2-EX4/measurement-3.dat}を関数$f(x)=ax+e^{−(x−c)^2}$でフィッティングしよう。パラメータ$a, c$を、勾配降下法、Nelder-Mead法などを用いて残差を最小化することにより推定せよ
-  \item 共役勾配法を用いて、Dirichlet型の境界条件のもとでの二次元Poisson方程式(あるいはLaplace方程式)の解を求めるプログラムを作成せよ。実行時間のメッシュ数依存性をLU分解を用いた場合と比較せよ。(参考: 計算機実験I 講義資料{\tt lecture-1-2.pdf} p.22、実習資料{\tt exercise-3.pdf} 基本課題2)
+  \item {\tt steepest\_descent.c}は、最急降下法により連立一次方程式を解くプログラムである。実行時には引数として、行列$A$と右辺ベクトル$b$が入ったファイル名({\tt input3.dat})を指定する。コンパイルして実行し、LU分解による解法{\tt lu\_decomp.c}と解が一致することを確かめよ
+  \item {\tt steepest\_descent.c}を元にして、行列$A$と右辺ベクトル$b$をファイルから読み込み「共役勾配法」により連立一次方程式を解くプログラムを作成せよ。最急降下法と収束回数を比較せよ
+  \item 測定データ{\tt measurement-3.dat}を関数$f(x)=ax+e^{−(x−c)^2}$で最小二乗フィッティングしよう。パラメータ$a, c$を、勾配降下法、Nelder-Mead法などを用いて残差を最小化することにより推定せよ
+  \item 共役勾配法を用いて、Dirichlet型の境界条件のもとでの二次元Poisson方程式(あるいはLaplace方程式)の解を求めるプログラムを作成せよ。実行時間のメッシュ数依存性をLU分解を用いた場合と比較せよ。(参考: 計算機実験I 講義資料{\tt lecture-1-3.pdf} p.3、実習資料{\tt exercise-1-3.pdf} 基本課題2)
 
-    (ヒント: Poisson方程式を行列形式に書き直すことが難しい場合には、{\tt example-2-EX4/poisson.h}を参考にしてもよい。行列生成({\tt poisson\_dense.c})、行列ベクトル積({\tt poisson\_sparse.c})、LU分解による求解({\tt poisson\_lu.c})のテストプログラムも用意されている)
+    (ヒント: Poisson方程式を行列形式に書き直すことが難しい場合には、{\tt poisson.h}を参考にしてもよい。行列生成({\tt poisson\_dense.c})、行列ベクトル積({\tt poisson\_sparse.c})、LU分解による求解({\tt poisson\_lu.c})のテストプログラムも用意されている)
   \end{enumerate}  
 \item 応用課題
   \begin{enumerate}
@@ -49,155 +48,6 @@
 
 \item レポート課題No.2
 
-  実習3(EX3)の基本課題1,2,3,4、および実習4(EX4)の基本課題1,2,3,4についてレポートを作成し提出せよ。一つのレポート(PDF)としてまとめ、ITC-LMSで提出すること。提出締め切りは2018年1月26日とする。ソースコードを全て含める必要はないが、プログラム作成時に苦労した点、工夫した点などについて適宜ソースコードを引用して説明すること
+基本課題2,3,4についてレポートを作成し提出せよ。実習3(EX3)のレポート課題(基本課題1,3,5)とあわせて、一つのレポート(PDF)としてITC-LMSで提出すること。提出締め切りは1月11日とする。ソースコードを全て含める必要はないが、プログラム作成時に苦労した点、工夫した点などについて適宜ソースコードを引用して説明すること。レポート対象になっていない基本課題・応用課題についても解いている場合や、特に深い解析・考察を行っている場合は、加点の対象とする
 \end{itemize}
-
-\clearpage
-
-\noindent [補足説明]
-
-\section{最急降下法、共役勾配法による連立一次方程式の求解}
-
-行列$A$を正定値対称行列とする。連立方程式$A{\bf x}={\bf b}$の解を$\hat{\bf x}$とすると、目的関数
-\begin{align}
-f({\bf x}) = \frac{1}{2} (\hat{\bf x} - {\bf x})^T A (\hat{\bf x} - {\bf x})
-\end{align}
-は${\bf x} = \hat{\bf x}$の時、最小値0をとる。
-
-この時、${\bf x}$における目的関数の勾配は、連立方程式の「残差」の形で書ける。
-\begin{align}
--\nabla f = A (\hat{\bf x} - {\bf x}) = {\bf b} - A {\bf x} \equiv {\bf r}
-\end{align}
-
-\subsection{直線上の最適化}
-
-$N$次元空間上の直線
-\begin{align}
-{\bf x} = {\bf x_0} + \alpha {\bf p}
-\end{align}
-を考える($\alpha$は実数)。直線上の点${\bf x}$で$f({\bf x})$が最小値をとるためには、${\bf x}$における勾配と直線の方向ベクトル${\bf p}$が垂直にならなければならない。
-\begin{align}
-  -[\nabla f({\bf x})]^T {\bf p} = ({\bf b} - A {\bf x})^T {\bf p} = {\bf r}^T {\bf p} = ({\bf b} - A ({\bf x_0}+\alpha {\bf p}))^T {\bf p} = ({\bf r}_0 - \alpha A {\bf p})^T {\bf p} = 0
-  \label{eqn:residual}
-\end{align}
-ここで、${\bf r}_0 \equiv {\bf b} - A{\bf x}_0$。よって
-\begin{align}
-\alpha = \frac{{\bf r}_0^T {\bf p}}{{\bf p}^T A {\bf p}}
-\end{align}
-と定めればよい。
-
-\subsection{最急降下法(steepest descent)}
-
-勾配の方向に沿って一次元最小化を繰り返す。
-\begin{itemize}
-  \item 初期条件
-\begin{align}
-  {\bf p}_0 &= {\bf r}_0 = {\bf b} - A {\bf x}_0
-\end{align}
-  \item 漸化式
-\begin{align}
-  \alpha_n &= \frac{{\bf r}_n^T {\bf p}_n}{{\bf p}_n^T A {\bf p}_n} \\
-  {\bf x}_{n+1} &= {\bf x}_n + \alpha_n {\bf p}_n \\
-  {\bf p}_{n+1} &= {\bf r}_{n+1} = {\bf b} - A {\bf x}_{n+1}
-\end{align}
-\end{itemize}
-
-\subsection{共役な方向とは?}
-
-最急降下法は谷が細長い場合には収束が遅い。単に新しい勾配方向ではなく、それまでとは「共役な方向」に進みたい。
-
-あるベクトル${\bf p}$に沿った一次元の最適化が完了したとする。
-その点における${\bf p}$方向の勾配は零。すなわち$[\nabla f({\bf x})]^T{\bf p}=0$。
-すでに最適化が完了した${\bf p}$方向の勾配の値を今後変化させないようにしたい。
-
-次に${\bf q}$にそって、${\bf x}+\epsilon {\bf q}$と移動するとする。その時、勾配の変化は
-\begin{align}
-\delta(\nabla f) = A \times (\epsilon {\bf q}) \sim A {\bf q}
-\end{align}
-これが${\bf p}$に垂直であるためには
-\begin{align}
-  {\bf p}^T A {\bf q} = 0
-\end{align}
-この関係が成り立つ時、${\bf p}$と${\bf q}$は「互いに共役」という
-
-\subsection{共役勾配法(conjugate gradient)}
-
-\begin{itemize}
-\item 初期条件
-  \begin{align}
-    {\bf p}_0 &= {\bf r}_0 = {\bf b} - A {\bf x}_0
-  \end{align}
-\item 漸化式
-\begin{align}
-  \alpha_n &= \frac{{\bf r}_n^T {\bf p}_n}{{\bf p}_n^T A {\bf p}_n} \\
-  {\bf x}_{n+1} &= {\bf x}_n + \alpha_n {\bf p}_n \\
-  {\bf r}_{n+1} &= {\bf r}_n - \alpha_n A {\bf p}_n = {\bf b} - A {\bf x}_{n+1} \\
-  \beta_n &= - \frac{{\bf p}_{n}^T A {\bf r}_{n+1}}{{\bf p}_n^T A {\bf p}_n} = \frac{{\bf r}_{n+1}^T {\bf r}_{n+1}}{{\bf p}_{n}^T{\bf r}_{n}}
-  \label{eqn:beta} \\
-  {\bf p}_{n+1} &= {\bf r}_{n+1} + \beta_n {\bf p}_n
-\end{align}
-\end{itemize}
-
-\subsection{共役な方向の決め方}
-
-\begin{align}
-  {\bf p}_{n+1} = {\bf r}_{n+1} + \beta_n {\bf p}_n
-\end{align}
-$\beta_n=0$とすると最急降下法と等価。共役勾配法では、${\bf p}_{n+1}$と${\bf p}_{n}$が共役となるように$\beta_n {\bf p}_n$だけ補正を加える。
-\begin{align}
-  {\bf p}_n^T A {\bf p}_{n+1} = {\bf p}_n^T A ({\bf r}_{n+1} + \beta_n {\bf p}_n) = 0
-\end{align}
-を解くことで式(\ref{eqn:beta})を得る。
-
-\subsection{残差の直交性}
-
-$i < j, j \le n$をみたす全ての$i,j$について
-\begin{align}
-  {\bf p}_i^T A {\bf p}_j &= 0
-\end{align}
-が成り立つとすると、$i<n$に対して
-\begin{align}
-  {\bf x}_{n+1} &= {\bf x}_n + \alpha_n {\bf p}_n
-  = {\bf x}_{n-1} + \alpha_{n-1} {\bf p}_{n-1} + \alpha_n {\bf p}_n = \cdots
-  = {\bf x}_{i+1} + \sum_{j=i+1}^n \alpha_{j} {\bf p}_j \\
-  {\bf r}_{n+1} &= {\bf b} - A {\bf x}_{n+1} = {\bf b} - A ({\bf x}_{i+1} + \sum_{j=i+1}^n \alpha_{j} {\bf p}_j)
-  = {\bf r}_{i+1} - \sum_{j=i+1}^n \alpha_{j} A {\bf p}_j
-\end{align}
-
-直線上で最小化を行ってきているので、式(\ref{eqn:residual})より${\bf p}_i^T  {\bf r}_{i+1} = 0$、また仮定より${\bf p}_i^T A {\bf p}_j = 0$。したがって
-\begin{align}
-  {\bf p}_i^T {\bf r}_{n+1} = {\bf p}_i^T {\bf r}_{i+1} - \sum_{j=i+1}^n \alpha_{j} {\bf p}_i^T A {\bf p}_j = 0 \qquad (i < n)
-\end{align}
-さらに${\bf p}_n^T  {\bf r}_{n+1} = 0$も成り立つ。言い換えると、${\bf x}_n$を通り、${\bf p}_0 \cdots {\bf p}_n$に並行な「平面」上で$f({\bf x}_{n+1})$は最小となっている。
-
-さらに、
-\begin{align}
-  0 = {\bf p}_i^T {\bf r}_{n+1} = ({\bf r}_i + \beta_{i-1} {\bf p}_{i-1})^T {\bf r}_{n+1} = {\bf r}_i^T {\bf r}_{n+1} \qquad (i \le n)
-\end{align}
-が成り立つ。つまり、残差はすべて直交する。
-
-\subsection{共役性}
-
-帰納法により証明する。
-$i < j, j \le n$をみたす全ての$i,j$について${\bf p}_i^T A {\bf p}_j = 0$が成り立つとすると、
-\begin{align}
-  {\bf p}_i^T A {\bf p}_{n+1} = {\bf p}_i^T A ({\bf r}_{n+1} + \beta_n {\bf p}_n) = {\bf p}_i^T A {\bf r}_{n+1}
-\end{align}
-さらに、${\bf x}_{i+1} = {\bf x}_i + \alpha_i {\bf p}_i$から
-\begin{align}
-  {\bf p}_i^T A {\bf p}_{n+1} &= \frac{1}{\alpha_i} ({\bf x}_{i+1} - {\bf x}_i)^T A {\bf r}_{n+1} = \frac{1}{\alpha_i} (A{\bf x}_{i+1} - A{\bf x}_i)^T {\bf r}_{n+1} \\ &= -\frac{1}{\alpha_i} ({\bf r}_{i+1} - {\bf r}_i)^T {\bf r}_{n+1} = 0 \qquad (i < n)
-\end{align}
-また、式(\ref{eqn:beta})より$i=n$についても成り立つ。
-
-最後に
-\begin{align}
-  {\bf p}_n^T A {\bf r}_{n+1} = -\frac{1}{\alpha_n} ({\bf r}_{n+1} - {\bf r}_n)^T {\bf r}_{n+1} = -\frac{1}{\alpha_n} {\bf r}_{n+1}^T {\bf r}_{n+1}
-\end{align}
-から
-\begin{align}
-  \beta_n &= - \frac{{\bf p}_{n}^T A {\bf r}_{n+1}}{{\bf p}_n^T A {\bf p}_n}
-  = \frac{1}{\alpha_n} \frac{{\bf r}_{n+1}^T {\bf r}_{n+1}}{{\bf p}_n^T A {\bf p}_n}
-  = \frac{{\bf p}_n^T A {\bf p}_n}{{\bf p}_n^T {\bf r}_n} \frac{{\bf r}_{n+1}^T {\bf r}_{n+1}}{{\bf p}_n^T A {\bf p}_n}
-  =  \frac{{\bf r}_{n+1}^T {\bf r}_{n+1}}{{\bf p}_n^T {\bf r}_n}
-\end{align}
 \end{document}

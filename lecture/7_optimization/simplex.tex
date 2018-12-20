@@ -17,7 +17,7 @@
 
 \begin{frame}[t,fragile]{Nelder-Meadの滑降シンプレックス法}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
+    %\setlength{\itemsep}{1em}
   \item $N+1$個の点$x_0,x_1,\cdots,x_N$は$f(x_0) \le f(x_1) \le \cdots \le f(x_N)$と並べられているとする
   \item 最大値を取る点$x_N$を除く$N$点の重心を$x_g$とする
   \item Nelder-Mead法では以下のステップを繰り返す
@@ -27,6 +27,7 @@
       \item $x_N$の関数値が$x_{N-1}$のものよりもまだ大きい場合には$x_N$を$x_g$に近づける(縮小)
       \item それでも$x_N$の関数値が小さくならない場合、$x_0$以外の点を$x_0$に一様に近づける(収縮)
     \end{itemize}
+  \item プログラム例: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/optimization/nelder_mead_2d.c}{nelder\_mead\_2d.c}
   \end{itemize}
 \end{frame}
 

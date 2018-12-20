@@ -26,9 +26,7 @@ EXAMPLE2L3 = monte_carlo/bond_table.h monte_carlo/mersenne_twister.h monte_carlo
 
 EXAMPLE2EX3 = monte_carlo/random.c monte_carlo/histogram.c monte_carlo/bond_table.c monte_carlo/exact_counting.c matrix/cmatrix.h monte_carlo/mersenne_twister.h matrix/multiply.c matrix/multiply_dgemm.c monte_carlo/transfer_matrix.c
 
-EXAMPLE2L4 = optimization/func_1d.h optimization/func_2d.h optimization/golden_section.c optimization/mc_steepest_descent_1d.c optimization/mc_steepest_descent_2d.c optimization/simulated_annealing_1d.c optimization/simulated_annealing_2d.c monte_carlo/mersenne_twister.h
-
-EXAMPLE2EX4 = optimization/func_1d.h optimization/func_2d.h optimization/golden_section.c optimization/nelder_mead_2d.c linear_system/steepest_descent.c matrix/cmatrix.h linear_system/input3.dat optimization/measurement-3.dat linear_system/poisson.h linear_system/poisson_dense.c linear_system/poisson_lu.c linear_system/poisson_sparse.c
+EXAMPLE2L4 = optimization/func_1d.h optimization/func_2d.h optimization/golden_section.c optimization/mc_steepest_descent_1d.c optimization/mc_steepest_descent_2d.c optimization/simulated_annealing_1d.c optimization/simulated_annealing_2d.c monte_carlo/mersenne_twister.h optimization/nelder_mead_2d.c linear_system/steepest_descent.c matrix/cmatrix.h linear_system/input3.dat optimization/measurement-3.dat linear_system/poisson.h linear_system/poisson_dense.c linear_system/poisson_lu.c linear_system/poisson_sparse.c linear_system/lu_decomp.c
 
 .SUFFIXES: .pdf .dvi .tex
 
