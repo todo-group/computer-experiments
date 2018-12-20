@@ -1,0 +1,135 @@
+\section{共役勾配法}
+
+\begin{frame}[t,fragile]{共役勾配法(conjugate gradient)}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 目的関数がある点のまわりで
+    \[
+    f({\bf x}) \approx c - {\bf b}^T {\bf x} + \frac{1}{2} {\bf x}^T A {\bf x}
+    \]
+    と近似できるとする
+  \item ${\bf x}$における勾配は、連立方程式$A{\bf x}={\bf b}$の「残差」の形で書ける
+    \[
+    -\nabla f = {\bf b} - A {\bf x}
+    \]
+  \item 新しい勾配方向ではなく、それまでとは「共役な方向」に進みたい
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{「共役な方向」とは}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item あるベクトル${\bf p}$にそった一次元の最適化が完了したとする
+    \begin{itemize}
+    \item その点における${\bf p}$方向の勾配は零。すなわち${\bf p}^T (\nabla f)=0$
+    \item ${\bf p}$方向の勾配の値を変化させないようにしたい
+  \end{itemize}
+  \item 次に、${\bf q}$にそって、${\bf x}+\epsilon {\bf q}$と移動するとする。その時の勾配の変化は
+    \[
+      \delta(\nabla f) = A \times (\epsilon {\bf q}) \sim A {\bf q}
+      \]
+      これが${\bf p}$に垂直であるためには
+    \[
+      {\bf p}^T A {\bf q} = 0
+      \]
+    \item この関係が成り立つ時、${\bf p}$と${\bf q}$は「互いに共役」という
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{共役勾配法(conjugate gradient)}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 初期条件: 位置 ${\bf x} = {\bf x}_0$
+    \begin{align*}
+      & \text{勾配:} \ {\bf p} = {\bf p}_0 = -\nabla f({\bf x}_0) = {\bf b} - A {\bf x}_0 \\
+      & \text{残差:} \ {\bf r} = {\bf r}_0 = {\bf p}_0
+    \end{align*}
+  \item 最適化(第$n$ステップ)
+    \begin{align*}
+      \alpha_n &= \frac{{\bf r}_n^T {\bf p}_n}{{\bf p}_n^T A {\bf p}_n} \\
+            {\bf x}_{n+1} &= {\bf x}_n + \alpha_n {\bf p}_n \\
+            {\bf r}_{n+1} &= {\bf r}_n - \alpha_n A {\bf p}_n = {\bf b} - A {\bf x}_{n+1} \\
+            \beta_n &= - \frac{{\bf p}_{n}^T A {\bf r}_{n+1}}{{\bf p}_n^T A {\bf p}_n} \\
+                 {\bf p}_{n+1} &= {\bf r}_{n+1} + \beta_n {\bf p}_n
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{共役勾配法 - 直線上の最適化}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 直線${\bf x} = {\bf x}_n + \alpha {\bf p}_n$上での最適化
+  \item 点${\bf x}$で$f({\bf x})$が最小値をとるためには、${\bf x}$における勾配と直線の方向ベクトル${\bf p_n}$が垂直にならなければならない
+    \begin{align*}
+      -[\nabla f({\bf x})]^T {\bf p}_n &= ({\bf b} - A {\bf x})^T {\bf p}_n = {\bf r}^T {\bf p}_n = ({\bf b} - A ({\bf x}_n+\alpha {\bf p}_n))^T {\bf p}_n \\ &= ({\bf r}_n - \alpha A {\bf p}_n)^T {\bf p}_n = 0
+    \end{align*}
+    (${\bf r}_n \equiv {\bf b} - A{\bf x}_ n$)
+  \item 最適解: $\displaystyle \alpha = \frac{{\bf r}_n^T {\bf p}_n}{{\bf p}_n^T A {\bf p}_n}$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{共役勾配法 - 共役な方向の決め方}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 新たな最適化方向: ${\bf p}_{n+1} = {\bf r}_{n+1} + \beta_n {\bf p}_n$
+  \item $\beta_n=0$とすると最急降下法と等価
+  \item 共役勾配法では、${\bf p}_{n+1}$と${\bf p}_{n}$が共役となるように$\beta_n {\bf p}_n$だけ補正を加える
+    \begin{align*}
+      {\bf p}_n^T A {\bf p}_{n+1} = {\bf p}_n^T A ({\bf r}_{n+1} + \beta_n {\bf p}_n) = 0
+    \end{align*}
+  \item $\beta_n$について解くと
+    \begin{align*}
+      \beta_n &= - \frac{{\bf p}_{n}^T A {\bf r}_{n+1}}{{\bf p}_n^T A {\bf p}_n}
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{共役勾配法 - 共役性と直交性}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 共役性: $\{{\bf p}_i\}$は自動的に互いに共役となる
+    \begin{align*}
+      {\bf p}_i^T A {\bf p}_j &= 0 \qquad \text{($i < j \le n$)}
+    \end{align*}
+  \item ${\bf x}_n$を通り${\bf p}_0 \cdots {\bf p}_n$に並行な「平面」上で$f({\bf x}_{n+1})$は最小
+    \begin{align*}
+      {\bf p}_i^T {\bf r}_{n+1} &= 0 \qquad \text{($i \le n$)}
+    \end{align*}
+  \item 直交性: $\{{\bf r}_i\}$は自動的に互いに直交する
+    \begin{align*}
+      {\bf r}_i^T {\bf r}_j &= 0 \qquad \text{($i < j \le n+1$)}
+    \end{align*}
+  \item $N$回反復すると残差は零 (実際は数値誤差により直交性がくずれる)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{共役勾配法による連立一次方程式の求階}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 行列$A$を正定値対称行列とする
+  \item 連立方程式$A{\bf x}={\bf b}$の解を$\hat{\bf x}$とすると、目的関数
+    \begin{align*}
+      f({\bf x}) = \frac{1}{2} (\hat{\bf x} - {\bf x})^T A (\hat{\bf x} - {\bf x})
+    \end{align*}
+    は${\bf x} = \hat{\bf x}$の時、最小値0をとる
+  \item ${\bf x}$における目的関数の勾配は、連立方程式の「残差」の形で書ける
+    \begin{align*}
+      -\nabla f = A (\hat{\bf x} - {\bf x}) = {\bf b} - A {\bf x} \equiv {\bf r}
+    \end{align*}
+  \item $f({\bf x})$の値を計算するには真の解$\hat{\bf x}$が必要だが、$f({\bf x})$の値そのものではなく勾配のみがあれば良い
+  \item 行列ベクトル積だけで計算できるので、$A$が疎行列の時、特に有効
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{共役勾配法による一般の関数の最適化}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item $f({\bf x})$は厳密な二次形式ではない
+  \item 係数行列$A$も分からない
+  \item $\alpha_n$は一次元最適化を使って反復法で求める
+  \item $\beta_n$は、$A$を知らなくても計算可能
+    \begin{align*}
+      \beta_n &= \frac{{\bf r}_{n+1}^T {\bf r}_{n+1}}{{\bf r}_n^T {\bf r}_n}
+    \end{align*}
+  \end{itemize}
+\end{frame}

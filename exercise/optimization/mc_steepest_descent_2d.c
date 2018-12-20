@@ -13,6 +13,7 @@ int main(int argc, char** argv) {
   int n = 1000;
 
   int i;
+  double diff;
   
   /* set seed of Mersenne-Twister pseudo random number generator */
   init_genrand(seed);
@@ -25,6 +26,7 @@ int main(int argc, char** argv) {
       x[0] = xnew[0];
       x[1] = xnew[1];
     }
-    printf("%d %f %f %f\n", i, x[0], x[1], f(x));
+    diff = sqrt((x[0] - minx) * (x[0] - minx) + (x[1] - miny) * (x[1] - miny));
+    printf("%d %f %f %20.12f %20.12f\n", i, x[0], x[1], f(x), diff);
   }
 }

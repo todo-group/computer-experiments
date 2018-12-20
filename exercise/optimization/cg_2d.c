@@ -78,6 +78,7 @@ int main(int argc, char** argv) {
 
   double alpha, beta, norm2;
   int i;
+  double diff;
   
   printf("%d %f %f %f\n", 0, x[0], x[1], f(x));
   df(x, r);
@@ -92,7 +93,8 @@ int main(int argc, char** argv) {
     beta = (r[0] * r[0] + r[1] * r[1]) / norm2;
     p[0] = r[0] + beta * p[0];
     p[1] = r[1] + beta * p[1];
-    printf("%d %f %f %f\n", i, x[0], x[1], f(x));
+    diff = sqrt((x[0] - minx) * (x[0] - minx) + (x[1] - miny) * (x[1] - miny));
+    printf("%d %f %f %20.12f %20.12f\n", i, x[0], x[1], f(x), diff);
     if (norm2 < 1.0e-10) break;
   }
 }

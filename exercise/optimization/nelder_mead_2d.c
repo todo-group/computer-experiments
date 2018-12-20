@@ -50,8 +50,9 @@ int main(int argc, char** argv) {
     }
 
     for (i = 0; i <= n; ++i) {
-      printf("(x[%d],y[%d]) = (%15.10f,%15.10f ) %15.10f\n",
-             i, i, x[i][0], x[i][1], y[i]);
+      diff = sqrt((x[i][0] - minx) * (x[i][0] - minx) + (x[i][1] - miny) * (x[i][1] - miny));
+      printf("(x[%d],y[%d]) = (%15.10f,%15.10f ) %20.12f %20.12f\n",
+             i, i, x[i][0], x[i][1], y[i], diff);
     }
 
     /* 収束判定 */
