@@ -13,7 +13,9 @@
     \item パスワード認証: ハンドブック2.2節ではこちらを説明
     \item 公開鍵認証方式: よりセキュリティーの高い方法
 
-      近年はこちらが主流 (photon や ECCS SSHサーバも公開鍵認証)
+      近年はこちらが主流
+
+      参考: \href{https://hwb.ecc.u-tokyo.ac.jp/wp/information-2/coding/crypt/}{https://hwb.ecc.u-tokyo.ac.jp/wp/information-2/\ coding/crypt/}
     \end{itemize}
   \end{itemize}
 \end{frame}
@@ -23,7 +25,7 @@
     \setlength{\itemsep}{1em}
   \item あらかじめクライアント(接続元)側で、「秘密鍵」と「公開鍵」のペアを生成し、「公開鍵」をサーバ(接続先)に置いておく
     \begin{itemize}
-    \item 生成には {\tt ssh-keygen} コマンドを使う(準備練習EX0-2)
+    \item 生成には {\tt ssh-keygen} コマンドを使う(準備EX0-3)
     \item クライアント側に「秘密鍵」、サーバ側に「公開鍵」の両者が揃ってはじめて、クライアントからサーバにリモートログインできる
     \item たとえ「公開鍵」が盗まれてしまっても、それだけではリモートログインできないので安心
     \item 「秘密鍵」は絶対に人に見られてはならない
