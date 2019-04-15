@@ -18,11 +18,9 @@
 
 \noindent
 \begin{itemize}
-\item 講義のページ: \verb+http://exa.phys.s.u-tokyo.ac.jp/ja/lectures/2018s-computer1+
-
-\item 実習用ワークステーション「photon」へのSSHログイン
+\item 知の物理学研究センターワークステーション(ai)へのSSHログイン
   \begin{itemize}
-  \item ホスト名: {\tt cmp.phys.s.u-tokyo.ac.jp}
+  \item ホスト名: {\tt ai.phys.s.u-tokyo.ac.jp}
   \item ユーザ名: {\tt ce}+学籍番号(ハイフン無し・8桁): \ 例: {\tt ce05181583}
   \item 前回作成した公開鍵を登録済
   \item 学外から直接SSHログインすることは不可。ただし、一旦、ECCS SSHサーバを経由すれば可。(参考: \verb+http://www.ecc.u-tokyo.ac.jp/system/outside.html+)
@@ -30,28 +28,34 @@
   
 \item 準備練習
   \begin{enumerate}
-  \item 実習用ワークステーション(photon)へ{\tt ssh}を使ってログイン(ハンドブック2.2節)
-  \item photon 上の{\tt /home/public/ce2018/ex1/hello.c}を{\tt scp}をつかってiMacへコピー(ハンドブック2.2節)。Cコンパイラでコンパイルし、実行(ハンドブック3.1.1節)
+  \item 実習用ワークステーション(ai)へ{\tt ssh}を使ってログイン(ハンドブック2.2節)
+  \item ai上の{\tt /home/public/ce2019/ex1/hello.c}を{\tt scp}をつかってiMacへコピー(ハンドブック2.2節)。Cコンパイラでコンパイルし、実行(ハンドブック3.1.1節)
   \item ハンドブック3.2.1〜3.2.2節(制御文), 3.6.2〜3.6.3節(関数)の例題を試す
-  \item 上記、準備練習3で作成したファイルを、photonに{\tt scp}して、コンパイル・実行
+  \item 上記、準備練習3で作成したファイルを、aiに{\tt scp}して、コンパイル・実行
   \end{enumerate}
 
 \item 基本課題
   \begin{enumerate}
-  \item $f(x)=\sin x$について、$x=0.3\pi$における$f'(x)$の値を数値微分により計算するプログラムを作成せよ。数値微分の刻みを$h=1,1/2,1/4,1/8,\cdots$と減少させていった時、誤差がどのように振る舞うか図示せよ。最低次近似(2点差分)と3点差分(さらにはより高次の近似)における誤差の振る舞いの違いを調べよ(前回講義スライドp.15)。
+  \item $f(x)=\sin x$について、$x=0.3\pi$における$f'(x)$の値を数値微分により計算するプログラムを作成せよ。数値微分の刻みを$h=1,1/2,1/4,1/8,\cdots$と減少させていった時、誤差がどのように振る舞うか図示せよ。一次近似(2点差分)と3点差分における誤差の振る舞いの違いを調べよ(参考: 講義資料{\tt lecture-1.1.pdf} p.16)
   \item $f(x)=\tanh x + 0.2 x + 0.3 = 0$の解をNewton法により求めよ。反復にしたがって、値がどのように真値($x=-0.2544612950513368\cdots$)に近づいていくか図示せよ。また、初期値による収束の違いを調べ、その理由について考察せよ
   \end{enumerate}
   
 \item 応用課題
   \begin{enumerate}
   \item C言語における倍精度実数({\tt double})、単精度実数({\tt float})の有効桁数、最大値、(正の)最小値を確認するプログラムを作成せよ
+  \item $n$個の互いに異なる実数$a_1,a_2,\cdots,a_n$が与えられた時、$g=h^{-k} \sum_{k=1}^n c_k \, f(x+a_k h)$が、関数$f(x)$の$m$階導関数の$(n-m)$次の差分近似となるように係数$\{ c_k \}_{k=1,\cdots,n}$を決めたい。ただし$n>m$とする。
+    例: $(m,n)=(2,3), a_1=-1, a_2=0, a_3=1$の時、$c_1=1, c_2=-2,c_3=1$、すなわち
+    \[
+    f^{(2)}(x) = \frac{f(x-h)-2f(x)+f(x+h)}{h^2} + O(h^2).
+    \]
+    一般の$(m,n), \{a_k\}_{k=1,\cdots,n}$の場合に$\{ c_k \}_{k=1,\cdots,n}$の満たすべき連立方程式を求めよ。
   \item 代数方程式の解をすべてもとめる方法について調べよ。Durand-Kerner-Aberth法を用いて、代数方程式の全ての解を求めるプログラムを作成せよ。方程式の次数を増やすにつれ、収束までにかかる時間がどのように増えるか調べよ
-  \item 教育用計算機システムECCSのiMacでは、数式処理ソフトウェアMathematicaが利用できる。Mathematicaを用いて、基本課題2の解を20桁の精度で求めてみよ。
   \end{enumerate}  
 
 \item 追加課題(自宅で)
   \begin{enumerate}
-  \item 学外からECCS SSHサーバにリモートログインし、さらにそこから photon にリモートログインしてみよ。なお、事前に「SSH公開鍵アップロード」による公開鍵の配置が必要である。(\verb+http://www.ecc.u-tokyo.ac.jp/system/outside.html+)
+  \item MATLABを用いて、基本課題2の解を40桁の精度で求めよ
+  \item 学外からECCS SSHサーバにリモートログインし、さらにそこから ai にリモートログインしてみよ。なお、事前に「SSH公開鍵アップロード」による公開鍵の配置が必要である。(\verb+http://www.ecc.u-tokyo.ac.jp/system/outside.html+)
   \end{enumerate}
 
 \end{itemize}
