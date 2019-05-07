@@ -1,10 +1,10 @@
-\begin{frame}[t,fragile]{Numerov法による固有値問題の解法}
+\begin{frame}[t,fragile]{固有値問題の解法}
   \begin{itemize}
     \setlength{\itemsep}{1em}
   \item $x_i=h \times i$ ($h=1/n$)、$x_0=0$、$x_n=1$とする
   \item $\psi(x_0)=0$、$\psi(x_1) = 1$を仮定 ($\psi'(x_0)=1/h$と与えたことに相当)
   \item $E = 0$とおく
-  \item Numerov法を用いて、$x=x_n$まで積分
+  \item Runge-Kutta法、Numerov法などを用いて$x=x_n$まで積分
   \item $\psi(x_n)$の符号がかわるまで、$E$を少しずつ増やす
   \item 符号が変わったら、$E$の区間を半分ずつに狭めていき、$\psi(x_n)=0$となる$E$ (固有エネルギー)と$\psi(x)$ (波動関数)を得る
   \end{itemize}
