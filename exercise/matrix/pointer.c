@@ -1,17 +1,21 @@
-#include "cmatrix.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 int main() {
-  int n, i, j;
+  int n, i;
   double *v;
-  double **m;
-  n = 10;
 
-  /* test for vector */
-  v = alloc_dvector(n);
+  /* allocate vector of length n */
+  n = 10;
+  v = (double*)malloc((size_t)(n * sizeof(double)));
   for (i = 0; i < n; ++i) v[i] = i;
-  fprint_dvector(stdout, n, v);
+
+  printf("%d\n", n);
+  for (i = 0; i < n; ++i) printf("%10.5f ", v[i]);
+  printf("\n");
   
+  printf("sizeof(double) = %lu\n", sizeof(double));
+
   printf("v     = %lu\n", (long)v);
   printf("&v[0] = %lu\n", (long)&v[0]);
 
@@ -27,35 +31,5 @@ int main() {
   printf("(v+2)[3] = %10.5f\n", (v+2)[3]);
   printf("*(v+2+3) = %10.5f\n", *(v+2+3));
 
-  free_dvector(v);
-  
-  /* test for matrix */
-  m = alloc_dmatrix(n, n);
-  for (j = 0; j < n; ++j)
-    for (i = 0; i < n; ++i)
-      mat_elem(m, i, j) = 100 * i + j;
-  fprint_dmatrix(stdout, n, n, m);
-  
-  printf("m        = %lu\n", (long)m);
-  printf("&m[0]    = %lu\n", (long)&m[0]);
-
-  printf("m[0]     = %lu\n", (long)m[0]);
-  printf("&m[0][0] = %lu\n", (long)&m[0][0]);
-
-  printf("m[2]     = %lu\n", (long)m[2]);
-  printf("&m[2][0] = %lu\n", (long)&m[2][0]);
-
-  printf("m+2      = %lu\n", (long)(m+2));
-  printf("&m[2]    = %lu\n", (long)&m[2]);
-
-  printf("(*(m+2))[3] = %10.5f\n", (*(m+2))[3]);
-  printf("*(*(m+2)+3) = %10.5f\n", *(*(m+2)+3));
-  printf("m[2][3]     = %10.5f\n", m[2][3]);
-
-  printf("*(m+2)[3]   = %10.5f\n", *(m+2)[3]);
-  printf("*((m+2)[3]) = %10.5f\n", *((m+2)[3]));
-  printf("*(m[5])     = %10.5f\n", *(m[5]));
-  printf("m[5][0]     = %10.5f\n", m[5][0]);
-
-  free_dmatrix(m);
+  free(v);
 }
