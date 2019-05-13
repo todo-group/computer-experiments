@@ -8,6 +8,9 @@ int main() {
   double **matA, **matB, **matC;
   int i, j, k;
 
+  /* initialize random number generator */
+  init_genrand(seed);
+  
   /* generate random matrices */
   matA = alloc_dmatrix(n, n);
   matB = alloc_dmatrix(n, n);

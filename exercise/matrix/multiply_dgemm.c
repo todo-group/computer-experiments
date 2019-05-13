@@ -12,6 +12,9 @@ int main() {
   double alpha = 1.0;
   double beta = 0.0;
 
+  /* initialize random number generator */
+  init_genrand(seed);
+  
   /* generate random matrices */
   matA = alloc_dmatrix(n, n);
   matB = alloc_dmatrix(n, n);
