@@ -1,0 +1,19 @@
+\begin{frame}[t,fragile]{「共役な方向」とは}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item あるベクトル${\bf p}$にそった一次元の最適化が完了したとする
+    \begin{itemize}
+    \item その点における${\bf p}$方向の勾配は零。すなわち${\bf p}^T (\nabla f)=0$
+    \item ${\bf p}$方向の勾配の値を変化させないようにしたい
+  \end{itemize}
+  \item 次に、${\bf q}$にそって、${\bf x}+\epsilon {\bf q}$と移動するとする。その時の勾配の変化は
+    \[
+      \delta(\nabla f) = A \times (\epsilon {\bf q}) \sim A {\bf q}
+      \]
+      これが${\bf p}$に垂直であるためには
+    \[
+      {\bf p}^T A {\bf q} = 0
+      \]
+    \item この関係が成り立つ時、${\bf p}$と${\bf q}$は「互いに共役」という
+  \end{itemize}
+\end{frame}

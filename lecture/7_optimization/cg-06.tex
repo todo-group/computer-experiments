@@ -1,0 +1,18 @@
+\begin{frame}[t,fragile]{共役勾配法 - 共役性と直交性}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 共役性: $\{{\bf p}_i\}$は自動的に互いに共役となる
+    \begin{align*}
+      {\bf p}_i^T A {\bf p}_j &= 0 \qquad \text{($i < j \le n$)}
+    \end{align*}
+  \item ${\bf x}_n$を通り${\bf p}_0 \cdots {\bf p}_n$に並行な「平面」上で$f({\bf x}_{n+1})$は最小
+    \begin{align*}
+      {\bf p}_i^T {\bf r}_{n+1} &= 0 \qquad \text{($i \le n$)}
+    \end{align*}
+  \item 直交性: $\{{\bf r}_i\}$は自動的に互いに直交する
+    \begin{align*}
+      {\bf r}_i^T {\bf r}_j &= 0 \qquad \text{($i < j \le n+1$)}
+    \end{align*}
+  \item $N$回反復すると残差は零 (実際は数値誤差により直交性がくずれる)
+  \end{itemize}
+\end{frame}

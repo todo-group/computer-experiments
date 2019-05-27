@@ -1,0 +1,12 @@
+\begin{frame}[t,fragile]{共役勾配法による一般の関数の最適化}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item $f({\bf x})$は厳密な二次形式ではない
+  \item 係数行列$A$も分からない
+  \item $\alpha_n$は一次元最適化を使って反復法で求める
+  \item $\beta_n$は、$A$を知らなくても計算可能
+    \begin{align*}
+      \beta_n &= \frac{{\bf r}_{n+1}^T {\bf r}_{n+1}}{{\bf r}_n^T {\bf r}_n}
+    \end{align*}
+  \end{itemize}
+\end{frame}

@@ -1,16 +1,16 @@
 \begin{frame}[t,fragile]{動的二次元配列の確保}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
+    %\setlength{\itemsep}{1em}
   \item 各行を表す配列とそれぞれの先頭アドレスを保持する配列の二種類が必要
-\begin{lstlisting}
+    \begin{lstlisting}
 double **a;
-m = 10;  
 n = 10;  
-a = (double**)malloc((size_t)(m * sizeof(double*));
-for (int i = 0; i < m; ++i)
-  a[i] = (double*)malloc((size_t)(n * sizeof(double));
-\end{lstlisting}
-\item 各行を保持する配列が、メモリ上で連続に確保される保証はない
-\item 行列用のライブラリ(LAPACK等)を使うときに問題となる
+a = (double**)malloc((size_t)(n * sizeof(double*)));
+for (int i = 0; i < n; ++i)
+  a[i] = (double*)malloc((size_t)(n * sizeof(double)));
+    \end{lstlisting}
+  \item メモリ上では各行の要素が連続して保存される(\verb+m[i][j]+の次に\verb!m[i][j+1]!、``row-major''と呼ぶ)
+  \item 各行を保持する配列が、メモリ上で連続に確保される保証はない
+  \item 行列用のライブラリ(BLAS, LAPACK等)を使うときに問題となる (⇒後述の\verb+cmatrix.h+ライブラリを利用する)
   \end{itemize}
 \end{frame}

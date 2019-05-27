@@ -2,16 +2,16 @@
   \begin{itemize}
     \setlength{\itemsep}{1em}
   \item C言語では、二次元配列は一次元配列の先頭をさす(ポインタ)の配列として表される(と理解しておけば良い)
-  \item \verb+m[i]+は、要素\verb+m[i][0]+を指すポインタ
+  \item \verb+a[i]+は、要素\verb+a[i][0]+を指すポインタ
     \begin{itemize}
-    \item \verb+m+ と \verb+&m[0]+ は等価 (\verb+&m[0][0]+ ではない)
-    \item \verb+m[0]+ と \verb+&m[0][0]+ は等価
-    \item \verb+m[2]+ と \verb+&m[2][0]+ は等価
-    \item \verb^(m+2)^ と \verb^&m[2]^ は等価
-    \item \verb^(*(m+2))[3]^ と \verb^*(*(m+2)+3)^ と \verb^m[2][3]^ は等価
-    \item \verb^*(m+2)[3]^ と \verb^*((m+2)[3])^ と \verb^*(m[5])^ と\verb^m[5][0]^ は等価
+    \item \verb+a+ と \verb+&a[0]+ は等価 (\verb+&a[0][0]+ ではない)
+    \item \verb+a[0]+ と \verb+&a[0][0]+ は等価
+    \item \verb+a[2]+ と \verb+&a[2][0]+ は等価
+    \item \verb^(a+2)^ と \verb^&a[2]^ は等価
+    \item \verb^(*(a+2))[3]^ と \verb^*(*(a+2)+3)^ と \verb^a[2][3]^ は等価
+    \item \verb^*(a+2)[3]^ と \verb^*((a+2)[3])^ と \verb^*(a[5])^ と\verb^a[5][0]^ は等価
     \item \verb^[]^は\verb^*^よりも強い
     \end{itemize}
-  \item ポインタ確認プログラム: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/matrix/pointer.c}{pointer.c}
+  \item ポインタ確認プログラム: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/matrix/pointer-matrix.c}{pointer-matrix.c}
   \end{itemize}
 \end{frame}

@@ -3,19 +3,21 @@
 for (k = 0; k < n; ++k) {
   for (i = k + 1; i < n; ++i) {
     for (j = k + 1; j < n; ++j) {
-      a[i][j] -= a[k][j] * a[i][k] / a[k][k];
+      mat_elem(a,i,j) -= mat_elem(a,k,j) * mat_elem(a,i,k) / mat_elem(a,k,k);
     }
-    b[i] -= b[k] * a[i][k] / a[k][k];
+    b[i] -= b[k] * mat_elem(a,i,k) / mat_elem(a,k,k);
   }
 }
 for (k = n-1; k >= 0; --k) {
   for (j = k + 1; j < n; ++j) {
-    b[k] -= a[k][j] * b[j];
+    b[k] -= mat_elem(a,k,j) * b[j];
   }
-  b[k] /= a[k][k];
+  b[k] /= mat_elem(a,k,k);
 }
 \end{lstlisting}
 \begin{itemize}
 \item C言語では配列の添字が0から始まることに注意
+\item \verb+mat_elem(a,i,j)+は行列aの(i,j)成分を表す(後述)
+\item サンプルコード: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/linear_system/gauss.c}{gauss.c}
 \end{itemize}
 \end{frame}

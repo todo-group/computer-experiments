@@ -1,0 +1,17 @@
+\begin{frame}[t,fragile]{最適化問題として連立一次方程式の解を求める}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 行列$A$を正定値対称行列とする
+  \item 連立方程式$A{\bf x}={\bf b}$の解を$\hat{\bf x}$とすると、目的関数
+    \begin{align*}
+      f({\bf x}) = \frac{1}{2} (\hat{\bf x} - {\bf x})^T A (\hat{\bf x} - {\bf x})
+    \end{align*}
+    は${\bf x} = \hat{\bf x}$の時、最小値0をとる
+  \item ${\bf x}$における目的関数の勾配は、連立方程式の「残差」の形で書ける
+    \begin{align*}
+      -\nabla f = A (\hat{\bf x} - {\bf x}) = {\bf b} - A {\bf x} \equiv {\bf r}
+    \end{align*}
+  \item $f({\bf x})$の値を計算するには真の解$\hat{\bf x}$が必要だが、$f({\bf x})$の値そのものではなく勾配のみがあれば良い
+  \item 行列ベクトル積だけで計算できるので、$A$が疎行列の時、特に有効 ⇒ 共役勾配法を利用
+  \end{itemize}
+\end{frame}

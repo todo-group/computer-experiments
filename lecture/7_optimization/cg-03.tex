@@ -1,0 +1,18 @@
+\begin{frame}[t,fragile]{共役勾配法(conjugate gradient)}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 初期条件: 位置 ${\bf x} = {\bf x}_0$
+    \begin{align*}
+      & \text{勾配:} \ {\bf p} = {\bf p}_0 = -\nabla f({\bf x}_0) = {\bf b} - A {\bf x}_0 \\
+      & \text{残差:} \ {\bf r} = {\bf r}_0 = {\bf p}_0
+    \end{align*}
+  \item 最適化(第$n$ステップ)
+    \begin{align*}
+      \alpha_n &= \frac{{\bf r}_n^T {\bf p}_n}{{\bf p}_n^T A {\bf p}_n} \\
+            {\bf x}_{n+1} &= {\bf x}_n + \alpha_n {\bf p}_n \\
+            {\bf r}_{n+1} &= {\bf r}_n - \alpha_n A {\bf p}_n = {\bf b} - A {\bf x}_{n+1} \\
+            \beta_n &= - \frac{{\bf p}_{n}^T A {\bf r}_{n+1}}{{\bf p}_n^T A {\bf p}_n} \\
+                 {\bf p}_{n+1} &= {\bf r}_{n+1} + \beta_n {\bf p}_n
+    \end{align*}
+  \end{itemize}
+\end{frame}

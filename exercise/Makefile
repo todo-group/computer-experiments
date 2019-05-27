@@ -3,9 +3,10 @@ ZIP = example-1-L2.zip example-1-L3.zip example-1-EX4.zip \
 
 EXAMPLE1L2 = matrix/cmatrix.h matrix/pointer.c matrix/pointer-matrix.c
 
-EXAMPLE1L3 = matrix/cmatrix.h matrix/matrix_example.c matrix/vector.dat matrix/matrix.dat \
+EXAMPLE1L3 = linear_system/gauss.c linear_system/input1.dat linear_system/input2.dat linear_system/input3.dat \
+	matrix/cmatrix.h matrix/pointer-matrix.c matrix/matrix_example.c matrix/vector.dat matrix/matrix.dat \
 	matrix/dgemm.h matrix/multiply.c matrix/multiply_dgemm.c \
-	linear_system/lu_decomp.c linear_system/input1.dat \
+	linear_system/lu_decomp.c \
 	monte_carlo/mersenne_twister.h
 
 EXAMPLE1EX4 = matrix/cmatrix.h \
