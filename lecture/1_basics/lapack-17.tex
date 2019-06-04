@@ -13,7 +13,7 @@ m = 10;
 n = 10;
 a = alloc_dmatrix(m, n);
 ...
-dgetrf_(&m, &n, mat_ptr(a), &m, mat_ptr(ipiv), &info);
+dgetrf_(&m, &n, mat_ptr(a), &m, vec_ptr(ipiv), &info);
 \end{lstlisting}
 完全なソースコード: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/linear_system/lu_decomp.c}{lu\_decomp.c}
   \end{itemize}

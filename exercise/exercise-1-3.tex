@@ -18,14 +18,12 @@
 
 \noindent
 \begin{itemize}
-\item 講義のページ: \verb+http://exa.phys.s.u-tokyo.ac.jp/ja/lectures/2018s-computer1+
-
-\item サンプルプログラム: \\ {\small \verb+https://github.com/todo-group/computer-experiments/releases/download/2018-1-L3/example-1-L3.zip+}
+\item サンプルプログラム: example-1-L3.zip
   
 \item 準備練習
   \begin{enumerate}
   \item ベクトルや行列を扱うためのユーティリティー関数が({\tt cmatrix.h})に用意されている。サンプルプログラム{\tt matrix\_example.c}や行列・行列積を計算するプログラム{\tt multiply.c}の中身を見て、その使い方を確認せよ
-  \item LU分解のサンプルプログラム({\tt lu\_decomp.c})をコンパイル・実行せよ。コンパイル時にLAPACKをリンク({\tt -llapack})する必要があることに注意(ハンドブック3.1.6節)
+  \item LU分解のサンプルプログラム({\tt lu\_decomp.c})をコンパイル・実行せよ。コンパイル時にLAPACKとBLASをリンク({\tt -llapack -lblas})する必要がある(ハンドブック3.1.6節)
     \begin{quote} \tt
       \$ \underline{cc lu\_decomp.c -o lu\_decomp -llapack} \\
       \$ \underline{./lu\_decomp input1.dat}
@@ -34,16 +32,21 @@
 
 \item 基本課題
   \begin{enumerate}
-  \item {\tt lu\_decomp.c}を参考にして、LU分解を用いて行列の行列式を計算するプログラムを作成せよ。$n \times n$のVandermonde行列($v_{ij}=x_j^{i-1}$) ($x_1 \cdots x_n$は実数)の行列式を計算し、厳密な値$\displaystyle \prod_{1 \le i < j \le n} (x_j-x_i)$と比較せよ
-  \item LU分解を用いてDirichlet型の境界条件のもとでの二次元Laplace方程式の解を求めるプログラムを作成せよ。適当な境界条件[例えば$u(0,y) = \sin(2 \pi y)$, $u(1,y) = \sin(\pi y)$, $u(x,0)=u(x,1)=0$]を仮定して解を計算し、Gnuplotの{\tt splot}コマンドを用いて解をプロットせよ。また、メッシュ数を増やすと、解の形や計算時間がどのように変化するか調べよ(計算時間の測り方については、ハンドブック2.1.6節参照)
-  \item Laplace方程式の境界値問題をJacobi法で解くプログラムを作成せよ。メッシュ数を増やしていった場合の計算速度を隣の学生のプログラムと比較し、速度差の原因を考察せよ
+  \item {\tt lu\_decomp.c}を参考にして、LU分解を用いて行列の行列式を計算するプログラムを作成せよ。$n \times n$のVandermonde行列($v_{ij}=x_j^{i-1}$) ($x_1 \cdots x_n$は実数)の行列式を計算し、厳密な値$\displaystyle \prod_{1 \le i < j \le n} (x_j-x_i)$と比較せよ。(ピボット選択で行を入れ替えると、行列式の符号が反転することに注意)
+  \item LU分解を用いてDirichlet型の境界条件のもとでの二次元Laplace方程式の解を求めるプログラムを作成せよ。適当な境界条件[例えば$u(0,y) = \sin(2 \pi y)$, $u(1,y) = \sin(\pi y)$, $u(x,0)=u(x,1)=0$]や電荷分布を仮定して解を計算し、Gnuplotの{\tt splot}コマンドを用いて解をプロットせよ。また、メッシュ数を増やすと、解の形や計算時間がどのように変化するか調べよ(計算時間の測り方については、ハンドブック2.1.6節参照)
+  \item 非線形連立方程式
+    \begin{align*}
+      & f(x,y) = x^2 + y^2 - 1 = 0 \\
+      & g(x,y) = x^2(2+x) - y^2 (2-x) = 0
+    \end{align*}
+    を多次元のニュートン法(L1スライドp.20)を用いて解け。ヤコビ行列の逆行列をかける代わりに、LU分解で線形連立方程式を解くこと
   \end{enumerate}
   
 \item 応用課題
   \begin{enumerate}
-  \item C言語におけるポインタの振る舞いをテストするプログラム({\tt pointer.c})のソースコードを見て、どのような出力が生成されるか予想せよ。実際にコンパイル・実行して予想を確かめてみよ
+  \item C言語におけるポインタの振る舞いをテストするプログラム({\tt pointer-matrix.c})のソースコードを見て、どのような出力が生成されるか予想せよ。実際にコンパイル・実行して予想を確かめてみよ
   \item Laplace方程式の境界値問題をGauss-Seidel法、SOR法で解くプログラムを作成し、計算結果や計算速度をLU分解・Jacobi法と比較せよ。また、収束までの回数をJacobi法と比較せよ。特にSOR法の場合、パラメータ$\omega$の選び方により、どのように収束回数が変化するか観察し、最適な$\omega$の値について考察せよ
-  \item 行列・行列積の計算を行うサンプルプログラム{\tt multiply.c}とBLASライブラリを使ってそれと等価な計算を行う{\tt multiply\_dgemm.c}の速度を比較せよ\footnote{photonでは、OS付属のBLAS、LAPACK以外にも、Intel製のMKL (Math Kernel Library)に含まれるBLASやLAPACKが利用可能である。MKLを使うには、GNU Cコンパイラ({\tt cc}, {\tt gcc})の代わりにIntel Cコンパイラ({\tt icc})を使い、{\tt -lblas}や{\tt -llapack}の代わりに{\tt -mkl}を指定してリンクを行えばよい。例: \underline{\tt icc -O3 multiply\_dgemm.c -mkl}}。行列サイズによっては数十倍もの性能差が出ことがあるが、BLASで使われている最適化手法について調べてみよ
+  \item 行列・行列積の計算を行うサンプルプログラム{\tt multiply.c}とBLASライブラリを使ってそれと等価な計算を行う{\tt multiply\_dgemm.c}の速度を比較せよ\footnote{aiでは、OS付属のBLAS、LAPACKではなく、Intel製のMKL (Math Kernel Library)に含まれるBLASやLAPACKを利用するのがよい。MKLを使うには、GNU Cコンパイラ({\tt cc}, {\tt gcc})の代わりにIntel Cコンパイラ({\tt icc})を使い、{\tt -llapack -lblas}の代わりに{\tt -mkl}を指定してリンクする。例: \underline{\tt icc -O3 multiply\_dgemm.c -mkl}}。行列サイズによっては数十倍もの性能差が出ことがあるが、BLASで使われている最適化手法について調べてみよ
   \end{enumerate}  
 \end{itemize}
 
