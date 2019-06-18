@@ -8,13 +8,13 @@
     \[
     A = U \Lambda V^T
     \]
-    の形に(一意に)分解できる
+    の形に(一意に)分解できる ($k=\min(m,n)$)
   \item $U$: $(m \times k)$行列(列ベクトルは互いに正規直交) \\
     $V$: $(n \times k)$行列(列ベクトルは互いに正規直交) \\
-    $\Lambda$: diag($\lambda_1,\lambda_2,\cdots,\lambda_k$) \ \ ($\lambda_1\ge\lambda_2\ge\cdots\ge\lambda_k>0$) 特異値
+    $\Lambda = \text{diag}(\lambda_1,\lambda_2,\cdots,\lambda_k)$ \ \ ($\lambda_1\ge\lambda_2\ge\cdots\ge\lambda_k\ge 0$) 特異値
   \item ベクトル表示 (行列をランク1の行列で分解)
     \[
-    A = \sum_{\ell=1}^k \lambda_\ell u_\ell v_\ell^{T}
+    A = \sum_{i=1}^k \lambda_i u_i v_i^{T}
     \]
   \end{itemize}
 \end{frame}
@@ -80,7 +80,7 @@
   \]
   \begin{itemize}
     % \setlength{\itemsep}{1em}
-  \item $U$, $V$が直交行列になるように、基底ベクトルを追加
+  \item $U$, $V$が直交行列になるように、足りない基底ベクトルを追加
   \item こちらを「SVD」、もともとの分解を「thin SVD」と呼ぶ場合も多い
   \end{itemize}
 \end{frame}
@@ -117,10 +117,10 @@ subroutine dgesvd(character JOBU, character JOBVT,
     \item 完全SVD  $A=U \Lambda V^T$を考えると
     \item $B=A^T A = V \Lambda U^T U \Lambda V^T = V \Lambda^2 V^T$は実対称行列
 
-      固有値:$\lambda_\ell^2$、固有ベクトル$V$
+      固有値:$\lambda_i^2$、固有ベクトル$V$
     \item $C=A A^T = U \Lambda V^T V \Lambda U^T = U \Lambda^2 U^T$も実対称行列
 
-      固有値:$\lambda_\ell^2$、固有ベクトル$U$
+      固有値:$\lambda_i^2$、固有ベクトル$U$
     \end{itemize}
   \end{itemize}
 \end{frame}
@@ -228,7 +228,7 @@ subroutine dgesvd(character JOBU, character JOBVT,
     \[
     ||A-X||_\mathrm{F}^2 = \sum_{ij}(a_{ij}-x_{ij})^2 = \text{tr} [(A-X)(A-X)^T]
     \]
-    を最小化すればよい。完全SVDについて$UU^T=I_m$, $VV^T = I_n$より
+    を最小化すればよい。完全SVDについて$UU^T=E_m$, $VV^T = E_n$より
     \[
     \begin{split}
       ||A-X||_\mathrm{F}^2 &= \text{tr} [UU^T(A-X)VV^T(A-X)^T] \\

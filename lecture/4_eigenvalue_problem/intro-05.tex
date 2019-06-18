@@ -1,18 +1,18 @@
 \begin{frame}[t,fragile]{実対称行列(エルミート行列)の性質}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
-  \item $N \times N$実対称行列$A$ ($=A^T$)の固有値問題
+  \item $n \times n$実対称行列$A$ ($=A^T$)の固有値問題
     \[
     A x = \lambda x
     \]
-  \item $N$個の固有値($\lambda_1,\lambda_2,\cdots,\lambda_N$)は全て実。固有ベクトル($\xi_1,\xi_2,\cdots,\xi_N$)は互いに正規直交するようにとることができる。行列$U$を
+  \item $n$個の固有値($\lambda_1,\lambda_2,\cdots,\lambda_n$)は全て実。固有ベクトル($\xi_1,\xi_2,\cdots,\xi_n$)は互いに正規直交するようにとることができる。行列$U$を
     \[
-    U = \Big( \xi_1 \, \xi_2 \, \cdots \, \xi_N \Big)
+    U = \Big( \xi_1 \, \xi_2 \, \cdots \, \xi_n \Big)
     \]
-    と定義すると、$U$は直交(ユニタリ)行列($U^T U = U^{-1} U = I$)
+    と定義すると、$U$は直交(ユニタリ)行列($U^T U = U^{-1} U = E$)
   \item $A$の固有分解(固有値分解)
     \[
-    A = U \Lambda U^T \qquad \Lambda = \text{diag}(\lambda_1,\cdots,\lambda_N)
+    A = U \Lambda U^T \qquad \Lambda = \text{diag}(\lambda_1,\cdots,\lambda_n)
     \]
   \end{itemize}
 \end{frame}

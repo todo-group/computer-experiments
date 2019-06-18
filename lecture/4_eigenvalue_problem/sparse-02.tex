@@ -4,15 +4,15 @@
   \item 適当なベクトル$v_1$から出発する
   \item $v_1$が最大固有ベクトル$\xi_1$と直交していないとすると
     \[
-    v_1 = c_1 \xi_1 + c_2 \xi_2 + c_3 \xi_3 + \cdots + c_N \xi_N
+    v_1 = c_1 \xi_1 + c_2 \xi_2 + c_3 \xi_3 + \cdots + c_n \xi_n
     \]
     と展開できる($c_1 \ne 0$)。この両辺に$A$を次々掛けて行くと
     \begin{align*}
-      v_2 = A v_1 &= c_1 \lambda_1 \xi_1 + c_2 \lambda_2 \xi_2 + c_3 \lambda_3 \xi_3 + \cdots + c_N \lambda_N \xi_N \\
-      v_3 = A^2 v_1 &= c_1 \lambda_1^2 \xi_1 + c_2 \lambda_2^2 \xi_2 + c_3 \lambda_3^2 \xi_3 + \cdots + c_N \lambda_N^2 \xi_N \\
+      v_2 = A v_1 &= c_1 \lambda_1 \xi_1 + c_2 \lambda_2 \xi_2 + c_3 \lambda_3 \xi_3 + \cdots + c_n \lambda_n \xi_n \\
+      v_3 = A^2 v_1 &= c_1 \lambda_1^2 \xi_1 + c_2 \lambda_2^2 \xi_2 + c_3 \lambda_3^2 \xi_3 + \cdots + c_n \lambda_n^2 \xi_n \\
       \vdots \\
-      v_{n+1} = A^n v_1 &= c_1 \lambda_1^n \xi_1 + c_2 \lambda_2^n \xi_2 + c_3 \lambda_3^n \xi_3 + \cdots + c_N \lambda_N^n \xi_N \\
-      &= c_1 \lambda_1^n \Big[ \xi_1 + \sum_{k=2}^N \frac{c_k}{c_1} \big( \frac{\lambda_k}{\lambda_1}\big)^n \xi_k \Big] \approx c_1 \lambda_1^n \xi_1 \\
+      v_{k+1} = A^k v_1 &= c_1 \lambda_1^k \xi_1 + c_2 \lambda_2^k \xi_2 + c_3 \lambda_3^k \xi_3 + \cdots + c_n \lambda_n^k \xi_n \\
+      &= c_1 \lambda_1^k \Big[ \xi_1 + \sum_{i=2}^n \frac{c_i}{c_1} \big( \frac{\lambda_i}{\lambda_1}\big)^k \xi_i \Big] \approx c_1 \lambda_1^k \xi_1 \\
     \end{align*}
   \end{itemize}
 \end{frame}

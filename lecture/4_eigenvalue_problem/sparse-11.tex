@@ -1,15 +1,15 @@
 \begin{frame}[t,fragile]{Lanczos法}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
-  \item 原理的には、$N$ステップ目で$\beta_N=0$となり、3重対角化が完了する
+  \item 原理的には、$n$ステップ目で$\beta_n=0$となり、3重対角化が完了する
   \item 実際には、数値誤差のため$v_1,v_2,v_3\cdots$の直交性が崩れる
     \begin{itemize}
-      \item $M$を大きくしすぎると、おかしな固有値が出てくる
+      \item $m$を大きくしすぎると、おかしな固有値が出てくる
       \item 全ての固有値が欲しい場合にはHouseholder法を使う
     \end{itemize}
   \item Lanczos法では、大きな固有値に対応する固有ベクトルにできるだけ近いものから部分空間を作っていく
     \begin{itemize}
-      \item 100万次元以上の行列の場合でも$M=100 \sim 200$程度で最初の数個の固有値は精度良く求まる
+      \item 100万次元以上の行列の場合でも$m=100 \sim 200$程度で最初の数個の固有値は精度良く求まる
     \end{itemize}
   \item 必要な操作は、行列とベクトルの積、ベクトルの内積・スケーリング・和のみ
     \begin{itemize}

@@ -1,14 +1,14 @@
 \begin{frame}[t,fragile]{Lanczos法}
   \begin{itemize}
     \setlength{\itemsep}{1em}
-  \item $v_1,v_2,v_3,\cdots,v_{M+1}$は正規直交
+  \item $v_1,v_2,v_3,\cdots,v_{m+1}$は正規直交
   \item 漸化式を書き換えると
     \begin{align*}
       Av_1 &= \alpha_1 v_1 + \beta_1 v_2 \\
       Av_2 &= \beta_1 v_1 + \alpha_2 v_2 + \beta_2 v_3 \\
       Av_3 &= \beta_2 v_2 + \alpha_3 v_3 + \beta_3 v_4 \\
       \vdots \\
-      Av_{M} &= \beta_{M-1} v_{M-1} + \alpha_M v_M + \beta_M v_{M+1}
+      Av_{m} &= \beta_{m-1} v_{m-1} + \alpha_m v_m + \beta_m v_{m+1}
     \end{align*}
   \end{itemize}
 \end{frame}

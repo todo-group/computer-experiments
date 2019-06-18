@@ -1,12 +1,12 @@
 \begin{frame}[t,fragile]{Rayleigh-Ritzの方法}
   \begin{itemize}
     \setlength{\itemsep}{1em}
-  \item $N \times N$行列$A$について、互いに正規直交するベクトル$v_1,v_2,\cdots,v_M$ ($M < N$)が張る部分空間の中で「最良の」固有ベクトルを求めたい
-  \item $N \times M$行列
+  \item $n \times n$行列$A$について、互いに正規直交するベクトル$v_1,v_2,\cdots,v_m$ ($m < n$)が張る部分空間の中で「最良の」固有ベクトルを求めたい
+  \item $n \times m$行列
     \[
-    V=(v_1 v_2 \cdots v_M)
+    V=(v_1 v_2 \cdots v_m)
     \]
-    を定義すると、$V^TV=I$が成り立つ(ただし$VV^T \ne I$)
+    を定義すると、$V^TV=E_m$が成り立つ(ただし$VV^T \ne E_n$)
   \item 部分空間内のベクトルを$w = \sum_i a_i v_i$と表すと、$\frac{w^TAw}{w^Tw}$が極大値を取る(本当の固有ベクトルにできるだけ平行になる)条件は、
     \[
     \frac{\partial}{\partial a_i} \frac{w^TAw}{w^Tw} \sim \sum_j H_{ij}a_j - \lambda a_i = 0
