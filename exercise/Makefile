@@ -9,7 +9,7 @@ EXAMPLE1L3 = linear_system/gauss.c linear_system/input1.dat linear_system/input2
 	linear_system/lu_decomp.c \
 	monte_carlo/mersenne_twister.h
 
-EXAMPLE1EX4 = matrix/cmatrix.h \
+EXAMPLE1L4 = matrix/cmatrix.h \
 	eigenvalue_problem/diag.c eigenvalue_problem/dsyev.h eigenvalue_problem/matrix1.dat \
 	svd/svd.c svd/full_svd.c svd/dgesvd.h svd/matrix2.dat svd/matrix3.dat svd/matrix4.dat \
 	linear_regression/measurement1.dat linear_regression/measurement2.dat
@@ -55,14 +55,14 @@ example-1-L3.zip : $(EXAMPLE1L3)
 	zip example-1-L3.zip example-1-L3/*
 	rm -rf example-1-L3
 
-example-1-EX4.zip : $(EXAMPLE1EX4)
-	rm -rf example-1-EX4
-	mkdir example-1-EX4
-	cp -p $(EXAMPLE1EX4) example-1-EX4
-	echo "CFLAGS = -O3" > example-1-EX4/Makefile
-	echo "LDLIBS = -llapack -lblas" >> example-1-EX4/Makefile
-	zip example-1-EX4.zip example-1-EX4/*
-	rm -rf example-1-EX4
+example-1-L4.zip : $(EXAMPLE1L4)
+	rm -rf example-1-L4
+	mkdir example-1-L4
+	cp -p $(EXAMPLE1L4) example-1-L4
+	echo "CFLAGS = -O3" > example-1-L4/Makefile
+	echo "LDLIBS = -llapack -lblas" >> example-1-L4/Makefile
+	zip example-1-L4.zip example-1-L4/*
+	rm -rf example-1-L4
 
 example-2-L1.zip : $(EXAMPLE2L1)
 	rm -rf example-2-L1

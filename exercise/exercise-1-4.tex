@@ -18,9 +18,8 @@
 
 \noindent
 \begin{itemize}
-\item 講義のページ: \verb+http://exa.phys.s.u-tokyo.ac.jp/ja/lectures/2018s-computer1+
 
-\item サンプルプログラム: \\ {\small \verb+https://github.com/todo-group/computer-experiments/releases/download/2018-1-EX4/example-1-EX4.zip+}
+\item サンプルプログラム: example-1-L4.zip
   
 \item 準備練習
   \begin{enumerate}
@@ -34,11 +33,11 @@
 
 \item 基本課題
   \begin{enumerate}
-  \item 成分が$v_{ij}=\min(i,j)$ ($1 \le i \le n$, $1 \le j \le n$)の$n \times n$対称行列の固有値は、
-    \[ \lambda_k = \frac{1}{2 (1 - \cos (\pi (2 k - 1) / (2 n + 1)))} \ \ (k=1,\cdots,n)\]
-    で与えられることが知られている。べき乗法を用いて、最大固有値を計算するプログラムを作成し、その結果を理論式と比較せよ。(上の式では添字は1から始まっているが、C言語では0から始まることに注意)
+  \item 対角成分は$(n,n)$成分のみが1でそれ以外は全て2、副対角成分$(i,\pm i)$は全て-1の$n \times n$の三重対角行列を考える。その固有値は、
+    \[ \lambda_k = 2 (1 - \cos (\pi (2 k - 1) / (2 n + 1))) \ \ (k=1,\cdots,n)\]
+    で与えられる。べき乗法を用いて、最大固有値を計算するプログラムを作成し、その結果を理論式と比較せよ。(上の式では添字は1から始まっているが、C言語では0から始まることに注意)
 
-    また、$n$を変えた時、最大固有値の収束の速さがどのように変わるか調べよ
+    また、$n$を変えた時、最大固有値の収束の速さがどのように変わるか調べよ。計算時間をハウスホルダー法と比較せよ
   \item ファイル{\tt measurement1.dat}に、ある実験で得られたデータが収められている。1カラム目は$x$、2カラム目は$y$、3カラム目は$y$の誤差の値である。最小二乗法によりデータを多項式でフィッティングするプログラムを作成せよ。(実習EX3で用いたLU分解、あるいは応用課題2の特異値分解を使って良い)
 
     多項式の最大次数を大きくしていくとフィッティング結果はどのように変化するか？何次の多項式を使うのが最も良いと考えられるか考察せよ
@@ -56,6 +55,10 @@
     さらに、完全SVDを行うプログラム例({\tt full\_svd.c})、$m<n$の行列({\tt matrix3.dat})、ランク落ちしている正方行列({\tt matrix4.dat})も用意されている。出力結果を確認してみよ
   \item 画像ファイルを行列形式に変換\footnote{\url{https://github.com/todo-group/computer-experiments/tree/master/misc}に、JPEGやPNGなどの形式の画像ファイルをグレイスケールに変換し、行列の形で書き出すPythonスクリプトがある}し、SVDで圧縮してみよ。どの程度まで圧縮可能か?
   \end{enumerate}  
+
+\item レポート課題No.2
+
+  レポート課題の内容、提出方法、締切については、ITC-LMSに掲示するので確認すること
 \end{itemize}
 
 \end{document}
