@@ -1,0 +1,18 @@
+\begin{frame}[t,fragile]{二分法}
+  \begin{itemize}
+    % \setlength{\itemsep}{1em}
+  \item 反復法により一次元の方程式$f(x)=0$の解を求める
+  \item 導関数を使わず関数値のみを利用 (c.f. ニュートン法)
+  \item 初期条件として、$f(a) \times f(b) < 0$を満たす2点の組($a<b$)で解をはさみ込み、領域を狭めていく
+  \item $a$と$b$の中点$x=(a+b)/2$を考える
+    \begin{itemize}
+    \item $|f(x)|$が十分小さい場合: $x$が解
+    \item $f(a) \times f(x) < 0$の場合: $[a,x]$を新しい領域にとる
+    \item $f(x) \times f(b) < 0$の場合: $[x,b]$を新しい領域にとる
+    \end{itemize}
+  \item 領域$[a,b]$の幅が十分小さくなったら終了
+  \item 反復のたびに領域の幅は半分になる
+  \item 全ての解を得られる保証はない
+  \item 二分法の例: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/basics/bisection.c}{bisection.c}
+  \end{itemize}
+\end{frame}
