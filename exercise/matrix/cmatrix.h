@@ -43,7 +43,7 @@
 /* useful macros */
 #define vec_ptr(vec) &(vec)[0]
 #define mat_ptr(mat) &(mat)[0][0]
-#define mat_elem(mat, i, j) (mat)[j][i]
+#define mat_elem(mat, i, j) (mat)[(j)][(i)]
 
 /* allocate vector of double */
 static inline double *alloc_dvector(int n) {
