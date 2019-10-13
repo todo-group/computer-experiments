@@ -51,6 +51,11 @@ int main(int argc, char** argv) {
   
   /* preparation of Mat */
   mat = alloc_dmatrix(dim, dim);
+  for (j = 0; j < dim; ++j) {
+    for (i = 0; i < dim; ++i) {
+      mat_elem(mat, i, j) = 0.0;
+    }
+  }
   for (i = 0; i < dim; ++i) {
     x = 1.0 * (i+1) / n; /* x = 0 for i = -1 and x = 1 for i = dim */
     if (i > 0) {
