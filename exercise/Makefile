@@ -77,6 +77,8 @@ example-2-L2.zip : $(EXAMPLE2L2)
 	rm -rf example-2-L2
 	mkdir example-2-L2
 	cp -p $(EXAMPLE2L2) example-2-L2
+	echo "CFLAGS = -O3" > example-2-L2/Makefile
+	echo "LDLIBS =" >> example-2-L2/Makefile
 	zip example-2-L2.zip example-2-L2/*
 	rm -rf example-2-L2
 
