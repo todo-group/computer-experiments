@@ -4,7 +4,7 @@
 \usepackage{tutorial}
 
 \title{計算機実験II (L3) --- 転送行列・分子動力学}
-\date{2018/11/30}
+\date{2019/11/29}
 
 \begin{document}
 
@@ -32,9 +32,9 @@
 \input{6_monte_carlo/transfer-03.tex}
 \input{6_monte_carlo/transfer-04.tex}
 
-\input{1_basics/lapack-10.tex}
-\input{1_basics/lapack-11.tex}
-\input{4_eigenvalue_problem/dense-07.tex}
+% \input{1_basics/lapack-10.tex}
+% \input{1_basics/lapack-11.tex}
+% \input{4_eigenvalue_problem/dense-07.tex}
 
 \input{6_monte_carlo/transfer-05.tex}
 \input{6_monte_carlo/transfer-06.tex}
@@ -136,18 +136,54 @@
 \end{frame}
 
 \input{2_ode/ode-03.tex}
-\input{2_ode/ode-06.tex}
+%\input{2_ode/ode-06.tex}
 \input{2_ode/ode-07.tex}
-\input{2_ode/ode-08.tex}
+%\input{2_ode/ode-08.tex}
 \input{2_ode/symplectic-05.tex}
+
+\begin{frame}[t,fragile]{温度の制御}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item カノニカル分布を実現するには?
+    \begin{itemize}
+    \item 巨大な環境(熱浴)を付ける必要がある?
+    \item シミュレーションで巨大な環境を用意するのは非現実的
+    \end{itemize}
+  \item 速度スケーリング(Velocity Scaling)法
+    \begin{itemize}
+    \item 平均の運動エネルギーが対応する温度に一致するように毎回速度(運動量)をスケールしなおす
+      \begin{align*}
+        p_i \Rightarrow &p'_i = \sqrt{ \frac{3mNk_BT}{\sum_i p_i^2} } p_i \\
+        & \sum_i \frac{p_i^{'2}}{2m} = \frac{3mNk_BT}{\sum_i p_i^2} \sum_i \frac{p_i^2}{2m} = \frac{3}{2} N k_B T
+      \end{align*}
+    \item 位置エネルギーも運動エネルギーに引きずられてカノニカル分布に収束? $\Rightarrow$ 理論的根拠なし
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{温度の制御}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item ランジュバン(Langevin)法
+    \begin{itemize}
+    \item 乱数を使う方法
+    \item 摩擦項と揺動項(ランダム力)を付け加える
+      \begin{align*}
+        \frac{dp_i}{dt} = - \frac{\partial H}{\partial q_i} - \gamma_i p_i + R_i(t)
+      \end{align*}
+    \item $\gamma_i$: 摩擦係数
+    \item $R_i(T)$: 平均零の白色ノイズ
+      \begin{align*}
+        \langle R_i(t) R_i(t') \rangle = 2 m \gamma_i k_B T \delta(t-t')
+      \end{align*}
+    \item 摩擦項と揺動項がつりあうところで、温度$T$のカノニカル分布が実現する
+    \end{itemize}
+  \end{itemize}
+\end{frame}
 
 \begin{frame}[t,fragile]{Nose-Hoover熱浴}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
-  \item カノニカル分布の実現
-    \begin{itemize}
-    \item 巨大な環境(熱浴)を付ける必要がある？
-    \end{itemize}
   \item Nose (能勢)-Hoover法
     \begin{itemize}
     \item 熱浴をたった1つの自由度($s$)だけで実現する!
@@ -276,19 +312,21 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}[t,fragile]{Nose-Hoover熱浴}
+\begin{frame}[t,fragile]{温度の制御}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
-  \item 熱浴をたった1つの自由度($s$)だけで実現する!
-  \item 運動方程式(実時間発展の場合)
-    \begin{align*}
-      \frac{dx_i}{dt} &= \frac{\partial H}{\partial p_i} \\
-      \frac{dp_i}{dt} &= -\frac{\partial U}{\partial x_i} -\frac{p_s}{Q} p_i \\
-      \frac{dp_s}{dt} &= 2 \big[ \sum_i \frac{{p_i}^2}{2m} - \frac{g k_B T}{2} \big]
-    \end{align*}
-  \item $\sum \frac{p_i^2}{2m}$: 現実系の全運動エネルギー
-  \item 「摩擦係数」$p_s$にネガティブフィードバックがかかる
-  \item $g=3N$ととれば、$(\mathbf{p},\mathbf{q})$の周辺分布はカノニカル分布になる
+  \item Nose-Hoover熱浴
+    \begin{itemize}
+    \item 運動方程式(実時間発展の場合)
+      \begin{align*}
+        \frac{dx_i}{dt} &= \frac{\partial H}{\partial p_i} \\
+        \frac{dp_i}{dt} &= -\frac{\partial U}{\partial x_i} -\frac{p_s}{Q} p_i \\
+        \frac{dp_s}{dt} &= 2 \big[ \sum_i \frac{{p_i}^2}{2m} - \frac{g k_B T}{2} \big]
+      \end{align*}
+    \item 「摩擦係数」$p_s$にネガティブフィードバックがかかる
+    \item $g=3N$ととれば、$(\mathbf{p},\mathbf{q})$の周辺分布はカノニカル分布になる
+    \end{itemize}
+    \item 温度圧力一定(NPTアンサンブル)も体積を表すもう1つの自由度を追加することで実現可
   \end{itemize}
 \end{frame}
 
