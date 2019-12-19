@@ -1,5 +1,5 @@
-ZIP = example-1-L2.zip example-1-L3.zip example-1-EX4.zip \
-	example-2-L1.zip example-2-L2.zip example-2-L3.zip example-2-EX3.zip example-2-L4.zip example-2-EX4.zip
+ZIP = example-1-L2.zip example-1-L3.zip example-1-L4.zip \
+	example-2-L1.zip example-2-L2.zip example-2-L3.zip example-2-L4.zip
 
 EXAMPLE1L2 = matrix/cmatrix.h matrix/pointer.c matrix/pointer-matrix.c
 
@@ -93,15 +93,10 @@ example-2-L4.zip : $(EXAMPLE2L4)
 	rm -rf example-2-L4
 	mkdir example-2-L4
 	cp -p $(EXAMPLE2L4) example-2-L4
+	echo "CFLAGS = -O3" > example-2-L4/Makefile
+	echo "LDLIBS = -llapack -lblas" >> example-2-L4/Makefile
 	zip example-2-L4.zip example-2-L4/*
 	rm -rf example-2-L4
-
-example-2-EX4.zip : $(EXAMPLE2EX4)
-	rm -rf example-2-EX4
-	mkdir example-2-EX4
-	cp -p $(EXAMPLE2EX4) example-2-EX4
-	zip example-2-EX4.zip example-2-EX4/*
-	rm -rf example-2-EX4
 
 clean:
 	rm -f *.aux *.dvi *.log *.nav *.out *.snm *.toc *.vrb

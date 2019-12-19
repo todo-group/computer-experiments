@@ -2,6 +2,7 @@ set size square
 set grid
 set log
 set yrange [0.000001:100]
+set ytics ("10^{-6}" 0.000001, "" 0.00001, "10^{-4}" 0.0001, "" 0.001, "10^{-2}" 0.01, "" 0.1, "10^{0}" 1.0, "" 10.0, "10^{2}" 100.0)
 set xlabel 'iteration'
 set ylabel 'distance'
 set nokey
