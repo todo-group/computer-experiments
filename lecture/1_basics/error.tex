@@ -54,11 +54,11 @@
     \[
     f(x+h) = f(x) + h f'(x) + h^2 f''(x)/2 + h^3 f'''(x)/6 + \cdots
     \]
-  \item 数値微分の最低次近似
+  \item 数値微分の最低次近似(前進差分)
     \[
     f_1(x,h) \equiv \frac{f(x+h)-f(x)}{h} = f'(x) + h f''(x)/2 + O(h^2)
     \]
-  \item より高次の近似
+  \item より高次の近似(中心差分)
     \[
     f_2(x,h) \equiv \frac{f(x+h)-f(x-h)}{2h} = f'(x) + h^2 f'''(x)/6 + O(h^3)
     \]

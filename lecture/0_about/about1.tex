@@ -1,5 +1,18 @@
 \section{講義・実習の概要}
 
+\begin{frame}[t]{環境整備がすでに終わっている人は…}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 「\href{https://github.com/utphys-comp/handbook/releases/download/handbook-2019/handbook.pdf}{計算機実験ハンドブック}」の第2章「C言語入門」を自習
+  \item 「\href{https://utphys-comp.github.io}{計算機実験のための環境整備}」({\small \href{https://utphys-comp.github.io}{https://utphys-comp.github.io}})で抜けているところ(特に、Windows環境でのコンパイラの利用、SSHアクセスなど)を作成
+  \item 「\href{https://github.com/utphys-comp/handbook/releases/download/handbook-2019/handbook.pdf}{計算機実験ハンドブック}」の1.3節にEmacs以外のエディタの説明(vi (vim)、nano)を追加
+  \item 「\href{https://github.com/utphys-comp/handbook/releases/download/handbook-2019/handbook.pdf}{計算機実験ハンドブック}」の第2章「C言語入門」のC++言語版を追加
+  \item Slackで困っている人をサポート
+  \item 
+  \item 
+  \end{itemize}
+\end{frame}
+
 \begin{frame}[t]{講義・実習の目的}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
@@ -21,7 +34,7 @@
   \item 刻み幅・近似度合いを変えて何度か計算を行う
   \item グラフ化して目で見てみる
   \item 計算量(コスト)のスケーリング(次数)に気をつける
-  \item 記録に残す・再現性を確保する
+  \item (計算機は指示したことを指示したようにしかやってくれないということを認識する)
   \end{itemize}
 \end{frame}
 
@@ -42,30 +55,17 @@
 \begin{frame}[t,fragile]{講義と実習}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
-  \item 講義
-    \begin{itemize}
-    \item ツールなどの基礎知識: 実習の準備
-    \item アルゴリズムの基本概念: 実習の準備
-    \item より高度なアルゴリズムの紹介
-    \end{itemize}
-  \item 実習 (2グループに分けて)
-    \begin{itemize}
-    \item 練習課題: 各自で取り組む
-    \item レポート課題: 個別レポートとして提出
-    \item 応用課題: 余裕のある人は積極的に取り組む
-    \end{itemize}
   \item スタッフ \href{mailto:computer@exa.phys.s.u-tokyo.ac.jp}{computer@exa.phys.s.u-tokyo.ac.jp}
     \begin{itemize}
     \item 講義: 藤堂
     \item 実習: 鈴木助教、斉藤助教
-    \item 実習TA: 曹(藤堂研M1)、森下(藤堂研M1)
+    \item 実習TA: 大町(古澤M2)、沓澤(藤堂研M1)
     \end{itemize}
-  \end{itemize}    
-\end{frame}
-
-\begin{frame}[t,fragile]{評価方法・レポート}
-  \begin{itemize}
-    %\setlength{\itemsep}{1em}
+  \item 講義・実習の進め方
+    \begin{itemize}
+    \item 初回〜2,3回目: 環境整備 + 講義(座学)
+    \item それ以降: 講義(座学)と実習の組み合わせ
+    \end{itemize}
   \item 評価
     \begin{itemize}
     \item 出席(講義・実習)
@@ -73,42 +73,41 @@
     \end{itemize}    
   \item レポート
     \begin{itemize}
-    \item 各自が \LaTeX で作成の上提出 (計2回)
+    \item 各自が \LaTeX で作成の上提出 (計2,3回)
     \item 提出方法・締切については、後日指示
-    \end{itemize}
+    \item レポート課題(基本課題)以外に独自に取り組んだ場合には加点    \end{itemize}
   \end{itemize}    
 \end{frame}
 
-\begin{frame}[t]{講義資料}
-  \begin{itemize}
-    \setlength{\itemsep}{1em}
-  \item 「計算機実験」ハンドブック (配布済)
-    \begin{itemize}
-    \item UNIX入門
-    \item gnuplot入門
-    \item C言語入門
-    \item \LaTeX 入門
-    \end{itemize}
-  \item 講義資料、実習資料、追加資料、参考書
-    \begin{itemize}
-    \item ITC-LMSで配布・提示 \url{https://itc-lms.ecc.u-tokyo.ac.jp/lms/course?idnumber=201905150910F01}
-    \item 公開資料については、\url{http://exa.phys.s.u-tokyo.ac.jp/ja/lectures/2019s-computer1}でも配布
-    \end{itemize}
-  \end{itemize}
-\end{frame}
+%% \begin{frame}[t]{講義資料}
+%%   \begin{itemize}
+%%     \setlength{\itemsep}{1em}
+%%   \item 「計算機実験」ハンドブック (配布済)
+%%     \begin{itemize}
+%%     \item UNIX入門
+%%     \item gnuplot入門
+%%     \item C言語入門
+%%     \item \LaTeX 入門
+%%     \end{itemize}
+%%   \item 講義資料、実習資料、追加資料、参考書
+%%     \begin{itemize}
+%%     \item ITC-LMSで配布・提示 \url{https://itc-lms.ecc.u-tokyo.ac.jp/lms/course?idnumber=201905150910F01}
+%%     \item 公開資料については、\url{http://exa.phys.s.u-tokyo.ac.jp/ja/lectures/2019s-computer1}でも配布
+%%     \end{itemize}
+%%   \end{itemize}
+%% \end{frame}
 
-\begin{frame}[t]{質問がある場合には、、、}
+\begin{frame}[t]{質問がある場合には…}
   \begin{enumerate}
     %\setlength{\itemsep}{1em}
-  \item ITC-LMS の掲示板を見る
-  \item ハンドブック、講義資料を確認
-  \item まわりの人に質問してみる
-  \item ネットで検索
-  \item 計算機実験担当者(\href{mailto:computer@exa.phys.s.u-tokyo.ac.jp}{computer@exa.phys.s.u-tokyo.ac.jp}) に相談
+  \item オンライン授業(Webex)のチャット
+  \item 計算機実験 Slack
+  \item ITC-LMS「担当教員へのメッセージ」
+  \item メール(\href{mailto:computer@exa.phys.s.u-tokyo.ac.jp}{computer@exa.phys.s.u-tokyo.ac.jp})
   \end{enumerate}
-  メールで質問するときに注意すべきこと
+  質問するときに注意すべきこと
   \begin{itemize}
-  \item (メールの)標題をきちんとつける、きちんと名乗る
+  \item (メールの場合) Subjectをきちんとつける、きちんと名乗る
   \item 実行環境を明示する
   \item 問題を再現する手順を明記する
   \item 関連するファイル(Cや \LaTeX のソースコード等)を添付する
@@ -116,28 +115,28 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}[t,fragile]{実習・自習環境}
-  \begin{itemize}
-    %\setlength{\itemsep}{1em}
-  \item 情報基盤センター大演習室 (iMac端末)
-  \item 計算機端末室
-    \begin{itemize}
-    \item 理学部4号館1215室 (iMac 16台)
-    \end{itemize}
-  \item 知の物理学研究センターワークステーション(準備中)
-    \begin{itemize}
-    \item SSHでリモートログインして使用する(ハンドブック2.2節)
-    \item あらかじめ公開鍵の登録が必要(実習EX0 準備練習4,5)
-    \end{itemize}
-  \item MateriApps LIVE! (USBメモリで配布)
-    \begin{itemize}
-    \item Mac, Windows PC上で動作する仮想UNIX環境
-    \item Cコンパイラ、gnuplot、エディタなど一式揃っている
-    \item インストール方法はUSBメモリ内の\href{https://github.com/cmsi/MateriAppsLive/wiki/MateriAppsLive-ltx}{README.html}、\href{https://github.com/cmsi/MateriAppsLive-setup/blob/master/ova/setup.pdf}{setup.pdf}を参照のこと
-    \end{itemize}
-  \item C言語・LaTeX・gnuplotのインストールに関する情報
-    \begin{itemize}
-      \item \href{https://github.com/todo-group/ComputerExperiments/wiki/InstallTeX}{https://github.com/todo-group/\ ComputerExperiments/wiki/InstallTeX}
-    \end{itemize}
-  \end{itemize}
-\end{frame}
+%% \begin{frame}[t,fragile]{実習・自習環境}
+%%   \begin{itemize}
+%%     %\setlength{\itemsep}{1em}
+%%   \item 情報基盤センター大演習室 (iMac端末)
+%%   \item 計算機端末室
+%%     \begin{itemize}
+%%     \item 理学部4号館1215室 (iMac 16台)
+%%     \end{itemize}
+%%   \item 知の物理学研究センターワークステーション(準備中)
+%%     \begin{itemize}
+%%     \item SSHでリモートログインして使用する(ハンドブック2.2節)
+%%     \item あらかじめ公開鍵の登録が必要(実習EX0 準備練習4,5)
+%%     \end{itemize}
+%%   \item MateriApps LIVE! (USBメモリで配布)
+%%     \begin{itemize}
+%%     \item Mac, Windows PC上で動作する仮想UNIX環境
+%%     \item Cコンパイラ、gnuplot、エディタなど一式揃っている
+%%     \item インストール方法はUSBメモリ内の\href{https://github.com/cmsi/MateriAppsLive/wiki/MateriAppsLive-ltx}{README.html}、\href{https://github.com/cmsi/MateriAppsLive-setup/blob/master/ova/setup.pdf}{setup.pdf}を参照のこと
+%%     \end{itemize}
+%%   \item C言語・LaTeX・gnuplotのインストールに関する情報
+%%     \begin{itemize}
+%%       \item \href{https://github.com/todo-group/ComputerExperiments/wiki/InstallTeX}{https://github.com/todo-group/\ ComputerExperiments/wiki/InstallTeX}
+%%     \end{itemize}
+%%   \end{itemize}
+%% \end{frame}

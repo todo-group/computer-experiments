@@ -2,19 +2,19 @@
 
 \usepackage{bm}
 
-% しおりの文字化けを防ぐ
-\AtBeginDvi{\special{pdf:tounicode EUC-UCS2}}
-
-% navigation が正しく動くようにする
-% https://gist.github.com/zr-tex8r/4980892
-\usepackage{bxdpx-beamer}
+\usepackage{bxdpx-beamer} % navigation が正しく動くようにする
+\usepackage{pxjahyper} % 日本語で'しおり'したい
 
 % 和文メトリックの調整（代わりに otf を読み込んでも良い）
 %\usepackage{minijs}
-\usepackage{otf}
+%\usepackage{otf}
+\usepackage[uplatex]{otf}
 
-% 和文既定をゴシックに変更
-\renewcommand{\kanjifamilydefault}{\gtdefault}
+% 英文・和文をサンセリフ、数式をセリフに
+\renewcommand\kanjifamilydefault{\gtdefault}
+\renewcommand\familydefault{\sfdefault}
+\usefonttheme[onlymath]{serif}
+%\usefonttheme{serif}
 
 \mode<presentation>
 {
@@ -27,10 +27,6 @@
 
 % ディレクトリ構造の描画に使用
 %\usepackage{dirtree}
-
-% CMSI ロゴ
-%\pgfdeclareimage[height=0.5cm]{university-logo}{cmsi}
-%\logo{\pgfuseimage{university-logo}\hspace*{2em}}
 
 % ソースコード表示用
 %\usepackage{listings,jlisting}
