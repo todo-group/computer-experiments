@@ -3,14 +3,14 @@
 \begin{frame}[t,fragile]{数値誤差の原因}
   \begin{itemize}
     \setlength{\itemsep}{1em}
-  \item 丸め誤差: 無理数や10進数を有限のビットの2進数で表現することによる誤差
-    (例: 0.1 が 0.0999999999998 になる)
   \item 打ち切り誤差: テイラー展開による近似を有限項で打ち切ることによる誤差
     (例: 数値微分)
+  \item 丸め誤差: 無理数や10進数を有限のビットの2進数で表現することによる誤差
+    (例: 0.1 が 0.100000000000000006 になる)
   \item 桁落ち: 非常に近い数の引き算により生じる
   \item 情報落ち: 非常に大きな数に小さな数を足し込む場合に生じる
     (例: 数値積分や常微分方程式の初期値問題で刻み幅を小さくしすぎると生じる)
-  \item オーバーフロー(桁あふれ): 表現できる値を超えてしまう
+  \item オーバーフロー(桁あふれ): 表現できる最大値を超えてしまう
   \end{itemize}
 \end{frame}
 
@@ -31,6 +31,27 @@
   \end{itemize}
 \end{frame}
 
+\begin{frame}[t,fragile]{MATLABでの計算}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item MATLABはシンボリック変数を含む式で小数を使うと、中で分数に直して(厳密に)計算する
+    \begin{lstlisting}
+>> syms x
+>> solve(2.718282*x^2-684.4566*x+0.3161592,x)
+ans =
+ 256876540725939712/2040342300381321 - 65985072983579570978585834230192105^(1/2)/2040342300381321
+ 65985072983579570978585834230192105^(1/2)/2040342300381321 + 256876540725939712/2040342300381321
+    \end{lstlisting}
+    \item 10桁の精度で解を評価してみる
+    \begin{lstlisting}
+>> vpa(solve(2.718282*x^2-684.4566*x+0.3161592,x),10)
+ans =
+ 0.000461913553
+    251.7970337
+    \end{lstlisting}
+  \end{itemize}
+\end{frame}
+
 \begin{frame}[t,fragile]{桁落ちを防ぐ方法}
   \begin{itemize}
     \setlength{\itemsep}{1em}
@@ -47,7 +68,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}[t,fragile]{数値微分}
+\begin{frame}[t,fragile]{数値微分(差分)}
   \begin{itemize}
     \setlength{\itemsep}{1em}
   \item 関数のテイラー展開
@@ -63,6 +84,20 @@
     f_2(x,h) \equiv \frac{f(x+h)-f(x-h)}{2h} = f'(x) + h^2 f'''(x)/6 + O(h^3)
     \]
   \item 刻み$h$を小さくすると打ち切り誤差は減少するが、小さすぎると今度は桁落ちが大きくなる
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{差分の一般式}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 関数のテイラー展開: $\displaystyle f(x+h) = \sum_{k} \frac{h^k}{k!} f^{(k)}(x)$
+  \item $f^{(m)}(x)$を$n$個の$f(x+h_j)$の線形結合で表す($n \ge m+1$)
+    \begin{align*}
+      f^{(m)}(x) &\approx \sum_j a_j f(x+h_j) = \sum_j a_j \sum_{k} \frac{h_j^k}{k!} f^{(k)}(x) \\
+      & = \sum_{k} C_k f^{(k)}(x) \qquad (C_k \equiv \sum_j a_j \frac{h_j^k}{k!})
+    \end{align*}
+  \item $C_k = \delta_{k,m}$ ($k = 0 \cdots n-1$)となるように$a_0 \cdots a_{n-1}$を決める
+  \item 行列$\displaystyle G_{kj} = \frac{h_j^k}{k!}$と列ベクトル$a_j$と$b_k = \delta_{k,m}$を導入すると、条件式は$G a = b$と書ける (連立一次方程式)
   \end{itemize}
 \end{frame}
 

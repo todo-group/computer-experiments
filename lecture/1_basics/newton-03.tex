@@ -2,13 +2,13 @@
   \begin{itemize}
     \setlength{\itemsep}{1em}
   \item $f(x)=0$: $d$次元(非線形)連立方程式
-  \item $x$は$d$次元のベクトル: $x = (x_1,x_2,\cdots,x_d)$
-  \item $f(x)$も$d$次元のベクトル: $f(x) = (f_1(x), f_2(x),\cdots,f_d(x))$
+  \item $x$は$d$次元のベクトル: $x = {}^t(x_1,x_2,\cdots,x_d)$
+  \item $f(x)$も$d$次元のベクトル: $f(x) = {}^t(f_1(x), f_2(x),\cdots,f_d(x))$
   \item 真の解のまわりでの展開 ($x_n = x_0 + \epsilon$)
     \[
     0 = f(x_0) = f(x_0+\epsilon-\epsilon) = f(x_n) - \frac{\partial f(x_n)}{\partial x} \cdot \epsilon + O(|\epsilon|^2)
     \]
-  \item ヤコビ行列($d\times d$): $\displaystyle \Big(\frac{\partial f(x_n)}{\partial x}\Big)_{ij} = \frac{\partial f_i(x_n)}{\partial x_j}$
-  \item 次の解の候補: $\displaystyle x_{n+1} = x_n - \Big(\frac{\partial f(x_n)}{\partial x}\Big)^{-1} f(x_n)$
+  \item ヤコビ行列($d\times d$): $\displaystyle \Big[\frac{\partial f(x_n)}{\partial x}\Big]_{ij} = \frac{\partial f_i(x_n)}{\partial x_j}$
+  \item 次の解の候補: $\displaystyle x_{n+1} = x_n - \Big[\frac{\partial f(x_n)}{\partial x}\Big]^{-1} f(x_n)$
   \end{itemize}
 \end{frame}

@@ -3,6 +3,7 @@
 \begin{frame}[t,fragile]{囲い込み法(一次元の最適化)}
   \begin{itemize}
     \setlength{\itemsep}{1em}
+  \item 関数$f(x)$の極小(あるいは極大)点を求める
   \item $f(a) > f(b) < f(c)$を満たす3点の組$a < b < c$の領域を狭めていく
   \item $[a,b]$、$[b,c]$の広い方(例えば後者)を$b$から見て、黄金比
     [$1:(1+\sqrt{5})/2 \approx 0.382:0.618$]に内分する点を$x$とする
@@ -29,19 +30,19 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}[t,fragile]{極小値をとる$x$の精度}
-  \begin{itemize}
-    \setlength{\itemsep}{1em}
-  \item 実数の有効桁数を16桁($\epsilon \approx 10^{-16}$)とする(倍精度)
-  \item 真の極小($x_0$)のまわりでテイラー展開
-    \[
-    f(x) \approx f(x_0) + \frac{1}{2} f''(x_0) (x-x_0)^2
-    \]
-  \item $f''(x_0) / f(x_0)$が$O(1)$だとすると
-    \[
-    |x-x_0| \sim \sqrt{\epsilon} \sim 10^{-8}
-    \]
-    以下になると、第二項の第一項に対する比が$\epsilon$よりも小さくなる
-  \item それ以上領域を狭めても、関数値は変化しない
-  \end{itemize}
-\end{frame}
+%% \begin{frame}[t,fragile]{極小値をとる$x$の精度}
+%%   \begin{itemize}
+%%     \setlength{\itemsep}{1em}
+%%   \item 実数の有効桁数を16桁($\epsilon \approx 10^{-16}$)とする(倍精度)
+%%   \item 真の極小($x_0$)のまわりでテイラー展開
+%%     \[
+%%     f(x) \approx f(x_0) + \frac{1}{2} f''(x_0) (x-x_0)^2
+%%     \]
+%%   \item $f''(x_0) / f(x_0)$が$O(1)$だとすると
+%%     \[
+%%     |x-x_0| \sim \sqrt{\epsilon} \sim 10^{-8}
+%%     \]
+%%     以下になると、第二項の第一項に対する比が$\epsilon$よりも小さくなる
+%%   \item それ以上領域を狭めても、関数値は変化しない
+%%   \end{itemize}
+%% \end{frame}

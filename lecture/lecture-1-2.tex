@@ -1,10 +1,10 @@
 % -*- coding: utf-8 -*-
 
-\documentclass[dvipdfmx]{beamer}
+\documentclass[10pt,dvipdfmx]{beamer}
 \usepackage{tutorial}
 
-\title{計算機実験I (L2) --- 常微分方程式の解法}
-\date{2019/05/08}
+\title{計算機実験I (第2回)}
+\date{2020/05/07}
 
 \begin{document}
 
@@ -12,6 +12,26 @@
   \titlepage
   \tableofcontents
 \end{frame}
+
+\begin{frame}[t]{本日の課題}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 「\href{https://utphys-comp.github.io}{計算機実験のための環境整備}」({\small \href{https://utphys-comp.github.io}{https://utphys-comp.github.io}})を参考に、各自必要な環境を引き続き整備する
+  \item 5月5日までに「計算機実験SSH公開鍵登録フォーム」から登録を行った人にはアカウント・公開鍵の登録が完了済
+    \begin{itemize}
+    \item ユーザ名: 「ce」の後に学籍番号8桁の数字(ハイフンなし) \\ 例: ce05201500
+    \item aiのホームディレクトリに{\tt random}という名前のファイルが作成されている。その中の6桁の数字を「作業レポート」で報告
+    \end{itemize}
+  \item 「\href{https://github.com/utphys-comp/handbook/releases/download/handbook-2019/handbook.pdf}{計算機実験ハンドブック}」の第2章 例2.1.4・例2.2.2を作成・コンパイル・実行
+  \item {\color{red} 講義終了後(18:00まで)にITC-LMSで「作業レポート(2020/05/07)」を提出}
+  \item その他…
+  \end{itemize}
+\end{frame}
+
+\input{1_basics/error.tex}
+\input{1_basics/newton.tex}
+\input{1_basics/bisection.tex}
+\input{7_optimization/enclosure.tex}
 
 \input{2_ode/ode.tex}
 
@@ -23,18 +43,18 @@
 
 \input{2_ode/symplectic.tex}
 
-\section{固有値問題}
-\input{2_ode/numerov-01.tex}
-\input{2_ode/numerov-05.tex}
+%% \section{固有値問題}
+%% \input{2_ode/numerov-01.tex}
+%% \input{2_ode/numerov-05.tex}
 
-\section{ポインタと配列}
+%% \section{ポインタと配列}
 
-\input{1_basics/lapack-01.tex}
-\input{1_basics/lapack-02.tex}
-\input{1_basics/lapack-03.tex}
-\input{1_basics/lapack-04.tex}
-\input{1_basics/lapack-05.tex}
-\input{1_basics/lapack-07.tex}
-\input{1_basics/lapack-06.tex}
+%% \input{1_basics/lapack-01.tex}
+%% \input{1_basics/lapack-02.tex}
+%% \input{1_basics/lapack-03.tex}
+%% \input{1_basics/lapack-04.tex}
+%% \input{1_basics/lapack-05.tex}
+%% \input{1_basics/lapack-07.tex}
+%% \input{1_basics/lapack-06.tex}
 
 \end{document}
