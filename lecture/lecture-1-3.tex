@@ -1,10 +1,10 @@
 % -*- coding: utf-8 -*-
 
-\documentclass[dvipdfmx]{beamer}
+\documentclass[10pt,dvipdfmx]{beamer}
 \usepackage{tutorial}
 
-\title{計算機実験I (L3) --- 連立一次方程式の解法}
-\date{2019/05/29}
+\title{計算機実験I (第3回)}
+\date{2020/05/13}
 
 \begin{document}
 
@@ -13,22 +13,82 @@
   \tableofcontents
 \end{frame}
 
-\input{3_linear_system/intro.tex}
-\input{3_linear_system/direct.tex}
+\begin{frame}[t]{講義のオンライン公開について}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 本講義「計算機実験I」の講義映像および講義資料が後日、数理・情報教育研究センターWeb \\
+    \hspace*{1em} \url{http://www.mi.u-tokyo.ac.jp/teaching_material.html} \\
+    から公開されます
+  \item プライバシーに配慮し、編集を行った上で公開するため、学生のみなさんの顔や個人情報が公開されることはありません
 
-\section{LAPACKの利用}
-\input{1_basics/lapack-08.tex}
-\input{1_basics/lapack-09.tex}
-\input{1_basics/lapack-10.tex}
-\input{1_basics/lapack-11.tex}
-\input{1_basics/lapack-12.tex}
-\input{1_basics/lapack-13.tex}
-\input{1_basics/lapack-14.tex}
-\input{1_basics/lapack-15.tex}
-\input{1_basics/lapack-16.tex}
-\input{1_basics/lapack-17.tex}
+    \vspace*{4em}
+  \item なお、編集前の講義映像がITC-LMSから閲覧可能となっています。復習に活用してください。閲覧には、ECCSクラウドメールのアカウント・パスワードが必要です
+  \end{itemize}
+\end{frame}
 
-\input{3_linear_system/iterative.tex}
-\input{7_optimization/cg-07.tex}
+\begin{frame}[t]{本日の課題}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item まだ完了していない人は「\href{https://utphys-comp.github.io}{計算機実験のための環境整備}」({\small \href{https://utphys-comp.github.io}{https://utphys-comp.github.io}})を参考に、必要な環境を引き続き整備する
+  \item 実習
+    
+    \url{https://github.com/todo-group/ComputerExperiments/releases/tag/2020s-computer1}の実習課題一覧の課題1〜10の中から適宜選んで
+    
+  \item 講義終了後(18:00まで)にITC-LMSで「作業レポート(2020/05/13)」を提出
+  \item レポートNo.1: 提出締切2020/5/27 18:00 (レポート内容・提出方法についてはITC-LMSを参照のこと)
+  \item 質問は、Slackの「\#2 数値誤差」あるいは「\#3 常微分方程式」チャンネルで
+  \end{itemize}
+\end{frame}
+
+\section{常微分方程式の解法}
+
+\input{2_ode/ode-03.tex}
+\input{2_ode/ode-07.tex}
+\input{2_ode/ode-09.tex}
+
+\section{Numerov法}
+
+\input{2_ode/numerov-02.tex}
+\input{2_ode/numerov-03.tex}
+\input{2_ode/numerov-04.tex}
+
+\input{2_ode/symplectic.tex}
+
+\section{固有値問題}
+\input{2_ode/numerov-01.tex}
+\input{2_ode/numerov-05.tex}
+
+\section{実習: 数値誤差・常微分方程式の解法}
+
+\begin{frame}[t]{本日の課題}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 実習
+    
+    \url{https://github.com/todo-group/ComputerExperiments/releases/tag/2020s-computer1}の実習課題一覧の課題1〜10の中から適宜選んで
+    
+  \item 講義終了後(18:00まで)にITC-LMSで「作業レポート(2020/05/13)」を提出
+  \item レポートNo.1: 提出締切2020/5/27 18:00 (レポート内容・提出方法についてはITC-LMSを参照のこと)
+  \item 質問は、Slackの「\#2 数値誤差」あるいは「\#3 常微分方程式」チャンネルで
+  \end{itemize}
+\end{frame}
+
+%% \input{3_linear_system/intro.tex}
+%% \input{3_linear_system/direct.tex}
+
+%% \section{LAPACKの利用}
+%% \input{1_basics/lapack-08.tex}
+%% \input{1_basics/lapack-09.tex}
+%% \input{1_basics/lapack-10.tex}
+%% \input{1_basics/lapack-11.tex}
+%% \input{1_basics/lapack-12.tex}
+%% \input{1_basics/lapack-13.tex}
+%% \input{1_basics/lapack-14.tex}
+%% \input{1_basics/lapack-15.tex}
+%% \input{1_basics/lapack-16.tex}
+%% \input{1_basics/lapack-17.tex}
+
+%% \input{3_linear_system/iterative.tex}
+%% \input{7_optimization/cg-07.tex}
 
 \end{document}
