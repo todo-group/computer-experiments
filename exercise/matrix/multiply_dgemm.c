@@ -1,7 +1,7 @@
-#include "cmatrix.h"
-#include "mersenne_twister.h"
-#include "dgemm.h"
 #include <stdio.h>
+#include "cmatrix.h"
+#include "dgemm.h"
+#include "mersenne_twister.h"
 
 int main() {
   int n = 1000;
@@ -27,8 +27,7 @@ int main() {
 
   /* calculate C = A * B */
   matC = alloc_dmatrix(n, n);
-  dgemm_(&trans, &trans, &n, &n, &n, &alpha, mat_ptr(matA), &n, mat_ptr(matB), &n,
-         &beta, mat_ptr(matC), &n);
+  dgemm_(&trans, &trans, &n, &n, &n, &alpha, mat_ptr(matA), &n, mat_ptr(matB), &n, &beta, mat_ptr(matC), &n);
 
   printf("n = %d\n", n);
   printf("matC[0][0] = %15.10f\n", mat_elem(matC, 0, 0));

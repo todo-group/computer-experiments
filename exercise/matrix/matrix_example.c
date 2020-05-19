@@ -1,62 +1,49 @@
-#include "cmatrix.h"
 #include <stdio.h>
+#include "cmatrix.h"
 
 int main() {
-  int m, n;
-  double *v;
+  int m = 2;
+  int n = 3;
+  int i, j;
+  double *v1, *v2;
   double **mat;
-  FILE *fp;
 
-  m = 3;
-  n = 5;
-
-  /*
-   * 倍精度行列
-   */
-
-  /* メモリ領域を動的に確保 */
+  /* 倍精度行列を動的に確保 */
   mat = alloc_dmatrix(m, n);
+  mat_elem(mat, 0, 0) = 2;
+  mat_elem(mat, 0, 1) = 2.5;
+  mat_elem(mat, 0, 2) = 1.5;
+  mat_elem(mat, 1, 0) = 1;
+  mat_elem(mat, 1, 1) = 2;
+  mat_elem(mat, 1, 2) = 0.5;
+  
+  /* 長さnの倍精度ベクトルを動的に確保 */
+  v1 = alloc_dvector(n);
+  v1[0] = 0.5;
+  v1[1] = 1.5;
+  v1[2] = 1;
 
-  /* 行列を開放 */
-  free_dmatrix(mat);
+  /* 長さmの倍精度ベクトルを動的に確保 */
+  v2 = alloc_dvector(m);
 
-  /* 行列をファイルから読み込み (同時にメモリが確保されることに注意) */
-  fp = fopen("matrix.dat", "r");
-  if (fp == NULL) {
-    fprintf(stderr, "Error: file can not be opened\n");
-    exit(1);
+  /* v2 = mat * v1 を計算 */
+  for (i = 0; i < m; ++i) {
+    v2[i] = 0;
+    for (j = 0; j < m; ++j) {
+      v2[i] += mat_elem(mat, i, j) * v1[j];
+    }
   }
-  read_dmatrix(fp, &m, &n, &mat);
-  fclose(fp);
 
-  /* 行列を出力 */
+  /* 結果を出力 */
+  printf("mat = ");
   fprint_dmatrix(stdout, m, n, mat);
-
-  /* 行列を開放 */
+  printf("v1 = ");
+  fprint_dvector(stdout, n, v1);
+  printf("v2 = ");
+  fprint_dvector(stdout, m, v2);
+  
+  /* 確保したメモリを開放 */
   free_dmatrix(mat);
-
-  /*
-   * 倍精度ベクトル
-   */
-
-  /* メモリ領域を動的に確保 */
-  v = alloc_dvector(n);
-
-  /* ベクトルを開放 */
-  free_dvector(v);
-
-  /* ベクトルをファイルから読み込み (同時にメモリが確保されることに注意) */
-  fp = fopen("vector.dat", "r");
-  if (fp == NULL) {
-    fprintf(stderr, "Error: file can not be opened\n");
-    exit(1);
-  }
-  read_dvector(fp, &n, &v);
-  fclose(fp);
-
-  /* ベクトルを出力 */
-  fprint_dvector(stdout, n, v);
-
-  /* ベクトルを開放 */
-  free_dvector(v);
+  free_dvector(v1);
+  free_dvector(v2);
 }

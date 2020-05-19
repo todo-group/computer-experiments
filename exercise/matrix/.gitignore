@@ -2,4 +2,7 @@ matrix_example
 multiply
 multiply_dgemm
 pointer
+pointer-matrix
 random_matrix
+dlange
+zlange

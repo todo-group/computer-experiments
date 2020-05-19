@@ -1,6 +1,6 @@
+#include <stdio.h>
 #include "cmatrix.h"
 #include "mersenne_twister.h"
-#include <stdio.h>
 
 int main() {
   int n = 1000;
