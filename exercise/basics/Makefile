@@ -1,4 +1,4 @@
-OBJ = bisection hello hello_cxx hello_f fibonacci fibonacci_cxx fibonacci_f differential differential_cxx differential_f
+OBJ = bisection complex differential differential_cxx differential_f fibonacci fibonacci_cxx fibonacci_f hello hello_cxx hello_f 
 
 .SUFFIXES:
 .SUFFIXES: .c .C .f90

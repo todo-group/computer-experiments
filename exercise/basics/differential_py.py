@@ -12,4 +12,4 @@ x = 0.3 * pi
 h = 0.1
 exact = df(x)
 diff = (f(x+h) - f(x)) / h
-print h, diff, abs(diff - exact)
+print(h, diff, abs(diff - exact))
