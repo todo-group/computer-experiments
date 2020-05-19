@@ -1,28 +1,39 @@
-ZIP = example-1-L2.zip example-1-L3.zip example-1-L4.zip \
+# ZIP = example-1-L2.zip example-1-L3.zip example-1-L4.zip \
 	example-2-L1.zip example-2-L2.zip example-2-L3.zip example-2-L4.zip
+ZIP = example-1-4.zip
 
-EXAMPLE1L2 = matrix/cmatrix.h matrix/pointer.c matrix/pointer-matrix.c
-
-EXAMPLE1L3 = linear_system/gauss.c linear_system/input1.dat linear_system/input2.dat linear_system/input3.dat \
-	matrix/cmatrix.h matrix/pointer-matrix.c matrix/matrix_example.c matrix/vector.dat matrix/matrix.dat \
+EXAMPLE14 = \
+	monte_carlo/mersenne_twister.h monte_carlo/random.c \
+	basics/complex.c \
+	matrix/cmatrix.h matrix/pointer.c matrix/pointer-matrix.c \
 	matrix/dgemm.h matrix/multiply.c matrix/multiply_dgemm.c \
-	linear_system/lu_decomp.c \
-	monte_carlo/mersenne_twister.h
+	matrix/matrix_example.c \
+	matrix/dlange.h matrix/dlange.c \
+	matrix/zlange.h matrix/zlange.c \
+	linear_system/dgesv.h linear_system/dgesv.c
 
-EXAMPLE1L4 = matrix/cmatrix.h \
-	eigenvalue_problem/diag.c eigenvalue_problem/dsyev.h eigenvalue_problem/matrix1.dat \
-	svd/svd.c svd/full_svd.c svd/dgesvd.h svd/matrix2.dat svd/matrix3.dat svd/matrix4.dat \
-	linear_regression/measurement1.dat linear_regression/measurement2.dat
+# EXAMPLE1L2 = matrix/cmatrix.h matrix/pointer.c matrix/pointer-matrix.c
 
-EXAMPLE2L1 = basics/bisection.c eigenvalue_problem/double_well.c eigenvalue_problem/dsyev.h eigenvalue_problem/diag.c matrix/cmatrix.h matrix/matrix_example.c matrix/matrix.dat matrix/vector.dat eigenvalue_problem/matrix1.dat linear_system/determinant.c linear_system/lu_decomp.c linear_system/input1.dat linear_system/input2.dat
+# EXAMPLE1L3 = linear_system/gauss.c linear_system/input1.dat linear_system/input2.dat linear_system/input3.dat \
+# 	matrix/cmatrix.h matrix/pointer-matrix.c matrix/matrix_example.c matrix/vector.dat matrix/matrix.dat \
+# 	matrix/dgemm.h matrix/multiply.c matrix/multiply_dgemm.c \
+# 	linear_system/lu_decomp.c \
+# 	monte_carlo/mersenne_twister.h
 
-EXAMPLE2L2 = monte_carlo/random.c monte_carlo/histogram.c \
-	monte_carlo/harmonic.c monte_carlo/square_lattice.c \
-	matrix/cmatrix.h monte_carlo/mersenne_twister.h
+# EXAMPLE1L4 = matrix/cmatrix.h \
+# 	eigenvalue_problem/diag.c eigenvalue_problem/dsyev.h eigenvalue_problem/matrix1.dat \
+# 	svd/svd.c svd/full_svd.c svd/dgesvd.h svd/matrix2.dat svd/matrix3.dat svd/matrix4.dat \
+# 	linear_regression/measurement1.dat linear_regression/measurement2.dat
 
-EXAMPLE2L3 = monte_carlo/bond_table.h monte_carlo/mersenne_twister.h monte_carlo/exact_counting.c matrix/cmatrix.h matrix/multiply.c matrix/multiply_dgemm.c matrix/dgemm.h eigenvalue_problem/dsyev.h eigenvalue_problem/diag.c eigenvalue_problem/matrix1.dat monte_carlo/transfer_matrix.c
+# EXAMPLE2L1 = basics/bisection.c eigenvalue_problem/double_well.c eigenvalue_problem/dsyev.h eigenvalue_problem/diag.c matrix/cmatrix.h matrix/matrix_example.c matrix/matrix.dat matrix/vector.dat eigenvalue_problem/matrix1.dat linear_system/determinant.c linear_system/lu_decomp.c linear_system/input1.dat linear_system/input2.dat
 
-EXAMPLE2L4 = optimization/func_1d.h optimization/func_2d.h optimization/golden_section.c optimization/mc_steepest_descent_1d.c optimization/mc_steepest_descent_2d.c optimization/simulated_annealing_1d.c optimization/simulated_annealing_2d.c monte_carlo/mersenne_twister.h optimization/nelder_mead_2d.c linear_system/steepest_descent.c matrix/cmatrix.h linear_system/input3.dat optimization/measurement-3.dat linear_system/poisson.h linear_system/poisson_dense.c linear_system/poisson_lu.c linear_system/poisson_sparse.c linear_system/lu_decomp.c
+# EXAMPLE2L2 = monte_carlo/random.c monte_carlo/histogram.c \
+# 	monte_carlo/harmonic.c monte_carlo/square_lattice.c \
+# 	matrix/cmatrix.h monte_carlo/mersenne_twister.h
+
+# EXAMPLE2L3 = monte_carlo/bond_table.h monte_carlo/mersenne_twister.h monte_carlo/exact_counting.c matrix/cmatrix.h matrix/multiply.c matrix/multiply_dgemm.c matrix/dgemm.h eigenvalue_problem/dsyev.h eigenvalue_problem/diag.c eigenvalue_problem/matrix1.dat monte_carlo/transfer_matrix.c
+
+# EXAMPLE2L4 = optimization/func_1d.h optimization/func_2d.h optimization/golden_section.c optimization/mc_steepest_descent_1d.c optimization/mc_steepest_descent_2d.c optimization/simulated_annealing_1d.c optimization/simulated_annealing_2d.c monte_carlo/mersenne_twister.h optimization/nelder_mead_2d.c linear_system/steepest_descent.c matrix/cmatrix.h linear_system/input3.dat optimization/measurement-3.dat linear_system/poisson.h linear_system/poisson_dense.c linear_system/poisson_lu.c linear_system/poisson_sparse.c linear_system/lu_decomp.c
 
 .SUFFIXES: .pdf .dvi .tex
 
@@ -34,6 +45,14 @@ default: $(PDF) $(ZIP)
 	TEXINPUTS=.:./style//: platex $< > /dev/null
 .dvi.pdf:
 	TEXINPUTS=.:./style//: dvipdfmx -I 24 $< > /dev/null
+
+example-1-4.zip : $(EXAMPLE14)
+	rm -rf example-1-4
+	mkdir example-1-4
+	cp -p $(EXAMPLE14) example-1-4
+	echo "CFLAGS = -Wall -O3 -I." > example-1-4/Makefile
+	echo "LDLIBS = -llapack -lblas" >> example-1-4/Makefile
+	zip example-1-4.zip example-1-4/*
 
 example-1-L2.zip : $(EXAMPLE1L2)
 	rm -rf example-1-L2

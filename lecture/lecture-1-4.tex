@@ -1,8 +1,10 @@
-\documentclass[dvipdfmx]{beamer}
+% -*- coding: utf-8 -*-
+
+\documentclass[10pt,dvipdfmx]{beamer}
 \usepackage{tutorial}
 
-\title{計算機実験I (L4) \\ 行列の対角化・特異値分解・回帰分析}
-\date{2019/06/19}
+\title{計算機実験I (第4回)}
+\date{2020/05/20}
 
 \begin{document}
 
@@ -11,47 +13,65 @@
   \tableofcontents
 \end{frame}
 
-\section{行列の対角化}
-\input{4_eigenvalue_problem/intro-03.tex}
-\input{4_eigenvalue_problem/intro-04.tex}
-\input{4_eigenvalue_problem/intro-05.tex}
-\input{4_eigenvalue_problem/intro-06.tex}
-\input{4_eigenvalue_problem/intro-07.tex}
-
-\input{4_eigenvalue_problem/dense.tex}
-
-\input{4_eigenvalue_problem/sparse.tex}
-
-\input{4_eigenvalue_problem/svd.tex}
-
-\input{5_linear_regression/least-square.tex}
-
-\section{今後について}
-
-\begin{frame}[t,fragile]{計算機環境}
+\begin{frame}[t]{本日の課題}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
-  \item 教育用計算機システム
-  \item 知の物理学クラスタ(ai)
+    %\setlength{\itemsep}{1em}
+  \item まだ完了していない人は「\href{https://utphys-comp.github.io}{計算機実験のための環境整備}」({\small \href{https://utphys-comp.github.io}{https://utphys-comp.github.io}})を参考に、必要な環境を引き続き整備
+  \item 実習
     \begin{itemize}
-    \item 卒業まで利用可 (希望すれば大学院でも)
-    \item バッチシステムを使えば、かなり大規模な計算も可能
+    \item 講義資料の中の {\tt random.c}, {\tt complex.c}, {\tt pointer.c}, {\tt pointer-matrix.c}, {\tt matrix-example.c}, {\tt dlange.c}, {\tt dgesv.c}をコンパイル・実行。ソースコードの中身を確認 \\
+      サンプルコード一式: \href{https://github.com/todo-group/ComputerExperiments/releases/tag/2020s-computer1}{example-1-4.zip}
+    \item 実習課題一覧\href{https://github.com/todo-group/ComputerExperiments/releases/tag/2020s-computer1}{exercise-1.pdf}の課題1〜10, 16, 17, 23-25の中から適宜選び実習
     \end{itemize}
-  \item 計算機利用・シミュレーションに関する質問は今後も歓迎 {\tt computer@exa.phys.s.u-tokyo.ac.jp}
+  \item レポートNo.1: 提出締切2020/5/29(金) 18:00 (レポート内容・提出方法についてはITC-LMSを参照のこと)
+  \item 質問は、Slackの「\#5 対角化」あるいは他の適当と思われるチャンネルで
   \end{itemize}
 \end{frame}
 
-\begin{frame}[t,fragile]{計算機実験II}
+\section{行列演算}
+\input{1_basics/matrix.tex}
+
+\section{疑似乱数}
+\input{6_monte_carlo/rng-06.tex}
+
+\section{複素数}
+\input{1_basics/complex.tex}
+
+\section{C言語における行列・LAPACKの利用}
+
+\input{1_basics/lapack-01.tex}
+\input{1_basics/lapack-02.tex}
+\input{1_basics/lapack-03.tex}
+\input{1_basics/lapack-04.tex}
+\input{1_basics/lapack-05.tex}
+\input{1_basics/lapack-06.tex}
+\input{1_basics/lapack-07.tex}
+\input{1_basics/lapack-08.tex}
+\input{1_basics/lapack-09.tex}
+\input{1_basics/lapack-10.tex}
+\input{1_basics/lapack-11.tex}
+%\input{1_basics/lapack-12.tex}
+\input{1_basics/lapack-13.tex}
+\input{1_basics/lapack-14.tex}
+\input{1_basics/lapack-15.tex}
+\input{1_basics/lapack-16.tex}
+%\input{1_basics/lapack-17.tex}
+\input{1_basics/lapack-18.tex}
+\input{1_basics/lapack-19.tex}
+\input{1_basics/lapack-20.tex}
+
+\begin{frame}[t]{本日の課題}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
-  \item 3年冬学期、金曜5限
-  \item 全8回程度
-  \item 計算機実験Iで身に付けた知識をもとに、より高度な数値計算手法・アルゴリズムを学び、物理学における具体的な問題への応用を通して実践的な知識と経験を身につける。
+    %\setlength{\itemsep}{1em}
+  \item まだ完了していない人は「\href{https://utphys-comp.github.io}{計算機実験のための環境整備}」({\small \href{https://utphys-comp.github.io}{https://utphys-comp.github.io}})を参考に、必要な環境を引き続き整備
+  \item 実習
     \begin{itemize}
-      \item 数値対角化と量子力学 (講義と実習)
-      \item モンテカルロ法・分子動力学と統計物理 (講義と実習)
-      \item 最適化問題とその応用 (講義と実習)
+    \item 講義資料の中の {\tt random.c}, {\tt complex.c}, {\tt pointer.c}, {\tt pointer-matrix.c}, {\tt matrix-example.c}, {\tt dlange.c}, {\tt dgesv.c}をコンパイル・実行。ソースコードの中身を確認 \\
+      サンプルコード一式: \href{https://github.com/todo-group/ComputerExperiments/releases/tag/2020s-computer1}{example-1-4.zip}
+    \item 実習課題一覧\href{https://github.com/todo-group/ComputerExperiments/releases/tag/2020s-computer1}{exercise-1.pdf}の課題1〜10, 16, 17, 23-25の中から適宜選び実習
     \end{itemize}
+  \item レポートNo.1: 提出締切2020/5/29(金) 18:00 (レポート内容・提出方法についてはITC-LMSを参照のこと)
+  \item 質問は、Slackの「\#5 対角化」あるいは他の適当と思われるチャンネルで
   \end{itemize}
 \end{frame}
 
