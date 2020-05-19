@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 int main(int argc, char** argv) {
-  int seed = 12345;
+  int seed = 12345; /* 乱数の種。種が同じ場合には同じ乱数列が生成される */
   int n = 100;
   int i;
 
