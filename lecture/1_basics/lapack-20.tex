@@ -1,0 +1,20 @@
+\begin{frame}[t,fragile]{LAPACKによる連立一次方程式の求解}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 連立一次方程式: $Ax=b$
+  \item C言語から呼び出すための関数宣言: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/linear_system/dgesv.h}{dgesv.h}
+\begin{lstlisting}
+void dgesv_(int *N, int *NRHS, double *A, int *LDA, int *IPIV, double *B, int *LDB, int *INFO);
+\end{lstlisting}
+  \item {\tt dgesv}の利用例: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/linear_system/dgesv.c}{dgesv.c}
+\begin{lstlisting}
+n = 3;
+a = alloc_dmatrix(n, n);
+b = alloc_dvector(n);
+...
+dgesv_(&n, &nrhs, mat_ptr(a), &n, vec_ptr(ipiv), vec_ptr(b), &n, &info);
+\end{lstlisting}
+配列{\tt b}は解で上書きされる
+  \item {\tt dgesv}の中ではまず行列をLU分解し、その結果を利用して解を求めている
+  \end{itemize}
+\end{frame}

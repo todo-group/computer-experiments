@@ -1,0 +1,20 @@
+\begin{frame}[t,fragile]{LAPACKによる行列のノルムの計算}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 倍精度(単精度)実行列の場合{\tt dlange} ({\tt flange})関数、倍精度(単精度)複素行列の場合{\tt zlange} ({\tt clange})関数を使う \\
+    \url{http://www.netlib.org/lapack/explore-html/dc/d09/dlange_8f.html}
+  \item C言語から呼び出すための関数宣言: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/matrix/dlange.h}{dlange.h}
+\begin{lstlisting}
+double dlange_(char *NORM, int *M, int *N, double *A, int *LDA, double *WORK);
+\end{lstlisting}
+\item {\tt dlange}関数の利用例: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/matrix/dlange.c}{dlange.c}
+\begin{lstlisting}
+norm = 'F';
+m = 10;
+n = 10;
+a = alloc_dmatrix(m, n);
+...
+res = dlange_(&norm, &m, &n, mat_ptr(a), &m, vec_ptr(work));
+\end{lstlisting}
+  \end{itemize}
+\end{frame}

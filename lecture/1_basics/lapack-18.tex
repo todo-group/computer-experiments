@@ -1,0 +1,21 @@
+\begin{frame}[t,fragile]{行列のノルム}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 行列のノルム: $\| A \|$
+    \begin{itemize}
+    \item 正定値性: $\| A \| \ge 0$. $\| A \| = 0$となるのは$A=O$のときのみ
+    \item 斉次性: $\| \alpha A \| = |\alpha| \| A \|$
+    \item 劣加法性: $\| A+B \| \le \| A \| + \| B \|$
+      % \\ (加えて、正方行列に対して、劣乗法性、*-性)
+    \end{itemize}
+  \item さまざまなノルム
+    \begin{itemize}
+    \item 1-ノルム: $\displaystyle \| A \|_1 = \max_{1 \le j \le n} \sum_{i=1}^m | a_{ij} |$
+    \item $\infty$-ノルム: $\displaystyle \| A \|_\infty = \max_{1 \le j \le m} \sum_{j=1}^n | a_{ij} |$
+    \item スペクトルノルム: $A^* A$の最大固有値の平方根 (固有値分解が必要)
+    \item フロベニウスノルム: $\displaystyle \| A \|_{\rm F} = \Big[ \sum_{i=1}^m \sum_{j=1}^n |a_{ij}|^2 \Big]^{1/2}$
+    \item 最大ノルム: $\displaystyle \| A \|_{\rm max} = \max \{ | a_{ij} | \}$ \\ (劣乗法性$\| AB \| \le \| A \| \| B \|$を満たさない)
+    \end{itemize}
+  \item 例題: 適当な$m \times n$行列についてノルムを計算するプログラムを作成せよ
+  \end{itemize}
+\end{frame}

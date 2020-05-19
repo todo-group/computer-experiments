@@ -1,0 +1,21 @@
+\begin{frame}[t,fragile]{様々な分布}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 乱数発生器は通常、一様な整数乱数あるいは実数乱数を生成
+  \item 一様分布以外の分布にしたがう乱数の発生方法の代表例
+  \item 逆関数法
+    \begin{itemize}
+      \item 確率分布関数$F(x)$の逆関数$F^{-1}(y)$ と(0,1)の一様乱数$u$から $v=F^{-1}(u)$
+      \item 例: 指数分布 $p(x) = \frac{1}{\mu} e^{-x/\mu}$
+
+      $F(x) = 1 - e^{-x/\mu}$ \ \ \ $F^{-1}(y) = - \mu \log(1-y)$
+      \item 一般の確率分布関数について逆関数を求めるのは困難
+    \end{itemize}
+  \item 棄却法
+    \begin{itemize}
+      \item 確率密度関数を完全に囲むような箱を用意し、その箱の中で一様乱数を生成
+      \item 確率密度関数の下側の点が生成されたら、その$x$座標を乱数として採用。上側の点の場合には再度生成
+      \item もとの確率密度関数よりも箱が大きくなりすぎると非効率
+    \end{itemize}
+  \end{itemize}
+\end{frame}
