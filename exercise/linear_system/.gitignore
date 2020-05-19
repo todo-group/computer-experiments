@@ -1,4 +1,5 @@
 determinant
+dgesv
 gauss
 lu_decomp
 poisson_dense
