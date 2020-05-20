@@ -29,7 +29,7 @@ int main() {
   /* v2 = mat * v1 を計算 */
   for (i = 0; i < m; ++i) {
     v2[i] = 0;
-    for (j = 0; j < m; ++j) {
+    for (j = 0; j < n; ++j) {
       v2[i] += mat_elem(mat, i, j) * v1[j];
     }
   }
