@@ -1,0 +1,16 @@
+\begin{frame}[t,fragile]{ポアソン方程式の境界値問題}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item ノイマン型境界条件の場合
+    \begin{itemize}
+    \item 境界上で$u(x,y)$の微分が定義される。
+    \item 例) $\partial u(0,y) / \partial x = h(0,y)$
+    \end{itemize}
+  \item 境界条件を差分近似で表す
+    \[
+    \frac{u_{1j} - u_{0j}}{h} = h_{0j} \qquad j=1 \cdots (n-1)
+    \]
+    $(n+1)^2-4$個の未知数に対して、ポアソン方程式の差分近似とあわせて、合計$(n-1)^2+4(n-1)=(n+1)^2-4$個の連立一次方程式 \\[2em]
+  \item 二次元グリッド上の点$(i,j)$と長さ$(n+1)^2$のベクトルの要素との対応関係をきちんと定義することが大事
+  \end{itemize}
+\end{frame}

@@ -1,6 +1,6 @@
 # ZIP = example-1-L2.zip example-1-L3.zip example-1-L4.zip \
 	example-2-L1.zip example-2-L2.zip example-2-L3.zip example-2-L4.zip
-ZIP = example-1-4.zip
+ZIP = example-1-4.zip example-1-5.zip
 
 EXAMPLE14 = \
 	monte_carlo/mersenne_twister.h monte_carlo/random.c \
@@ -11,6 +11,11 @@ EXAMPLE14 = \
 	matrix/dlange.h matrix/dlange.c \
 	matrix/zlange.h matrix/zlange.c \
 	linear_system/dgesv.h linear_system/dgesv.c
+
+EXAMPLE15 = $(EXAMPLE14) \
+	linear_system/gauss.c \
+	linear_system/dgetrf.h linear_system/dgetrs.h linear_system/lu_decomp.c \
+	linear_system/input1.dat linear_system/input2.dat
 
 # EXAMPLE1L2 = matrix/cmatrix.h matrix/pointer.c matrix/pointer-matrix.c
 
@@ -53,6 +58,14 @@ example-1-4.zip : $(EXAMPLE14)
 	echo "CFLAGS = -Wall -O3 -I." > example-1-4/Makefile
 	echo "LDLIBS = -llapack -lblas" >> example-1-4/Makefile
 	zip example-1-4.zip example-1-4/*
+
+example-1-5.zip : $(EXAMPLE15)
+	rm -rf example-1-5
+	mkdir example-1-5
+	cp -p $(EXAMPLE15) example-1-5
+	echo "CFLAGS = -Wall -O3 -I." > example-1-5/Makefile
+	echo "LDLIBS = -llapack -lblas" >> example-1-5/Makefile
+	zip example-1-5.zip example-1-5/*
 
 example-1-L2.zip : $(EXAMPLE1L2)
 	rm -rf example-1-L2

@@ -1,6 +1,6 @@
 \begin{frame}[t,fragile]{LU分解}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
+    %\setlength{\itemsep}{1em}
   \item LU分解による連立一次方程式の解法
     \begin{itemize}
     \item 方程式は$A{\bf x} = LU{\bf x} = {\bf b}$と書ける
@@ -8,7 +8,7 @@
     \item 次に、$U{\bf x} = {\bf y}$を解いて、${\bf x}$を求める(後退代入)
     \end{itemize}
   \item 計算量はガウスの消去法と変わらない
-  \item 一度LU分解をしておけば、異なる${\bf b}$に対する解も簡単に求められる
-  \item 行列式は$U$の対角成分の積で与えられる (ピボット選択により符号が変わることに注意)
+  \item 一度LU分解をしておけば、異なる${\bf b}$に対する解も簡単に求められる \\[2em]
+  \item 行列式は$U$の対角成分の積で与えられる (ピボット選択する場合は、行の入れ替えにより符号が変わることに注意)
   \end{itemize}
 \end{frame}

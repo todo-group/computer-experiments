@@ -1,10 +1,10 @@
 \begin{frame}[t,fragile]{ガウスの消去法の行列表示}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
-  \item $a_{kk}^{(k)}$を用いた$a_{ik}^{(k)}$ ($i>k$)の消去は、方程式の両辺に
+    %\setlength{\itemsep}{1em}
+  \item $a_{kk}^{(k)}$を用いた$a_{ik}^{(k)}$ ($i>k$)の消去は、方程式の両辺に左から
     \begin{align*}
       M_k = 
-      \begin{pmatrix}
+      \begin{bmatrix}
         1 & \\
         0 & 1 \\
         0 & 0 & \ddots \\
@@ -13,7 +13,7 @@
         \vdots & \vdots & & -m_{k+2,k} & 0 & \ddots \\
         \vdots & \vdots & & \vdots & \vdots & & 1 & \\
         0 & 0 & \hdots & -m_{nk} & 0 & \hdots & 0 & 1
-      \end{pmatrix}
+      \end{bmatrix}
     \end{align*}
     を掛けるのと等価: $M_k A^{(k)} = A^{(k+1)}$、$M_k {\bf b}^{(k)} = {\bf b}^{(k+1)}$
   \end{itemize}

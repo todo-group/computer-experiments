@@ -1,0 +1,19 @@
+\begin{frame}[t,fragile]{ピボット選択と置換行列}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 配列IPIVの第$i$要素には、$i$行目を使ってガウス消去する際に何行目と入れ替えられたかが保存される。($i$は1から数えることに注意)
+  \item $i$行目と$j$行目の入れ替えは、行列に左から置換行列$P_{ij}$を掛ければよい
+    \begin{itemize}
+    \item $P_{ij}$は$(i,i)$, $(j,j)$成分が0、$(i,j)$, $(j,i)$成分が1、それ以外は対角成分が1の行列。($i \ne j$なら$\det P_{ij} = -1$、$i = j$なら$\det P_{ij} = 1$)
+    \item $[P_{ij}]^2=E$、ゆえに$[P_{ij}]^{-1}=P_{ij}$ (直交かつ対称)
+    \end{itemize}
+  \item 例えば$3 \times 3$行列$A$をLU分解して、IPIVが$(3,3,3)$の場合
+    \begin{itemize}
+    \item $A$に左から$P=P_{33}P_{23}P_{13}$を掛けた行列が(ピボット選択なしの) LU分解されていることになる
+      \[
+      P = E \begin{bmatrix} 1 & 0 & 0 \\ 0 & 0 & 1 \\ 0 & 1 & 0 \end{bmatrix} \begin{bmatrix} 0 & 0 & 1 \\ 0 & 1 & 0 \\ 1 & 0 & 0 \end{bmatrix} = \begin{bmatrix} 0 & 0 & 1 \\ 1 & 0 & 0 \\ 0 & 1 & 0 \end{bmatrix}
+      \]
+    \end{itemize}
+  \item $A = P^{-1}LU = P^{t} LU$が成り立つ
+  \end{itemize}
+\end{frame}

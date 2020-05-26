@@ -1,0 +1,74 @@
+% -*- coding: utf-8 -*-
+
+\documentclass[10pt,dvipdfmx]{beamer}
+\usepackage{tutorial}
+
+\title{計算機実験I (第5回)}
+\date{2020/05/27}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+  \tableofcontents
+\end{frame}
+
+\begin{frame}[t]{講義予定}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  {\color{gray} \item 2020-04-22: 第1回 環境整備}
+  {\color{gray} \item 2020-05-07: 第2回 計算機実験の基礎}
+  {\color{gray} \item 2020-05-13: 第3回 常微分方程式の解法 \\
+    \hspace*{5em} (レポートNo.1出題 5/29締切)}
+  {\color{gray} \item 2020-05-20: 第4回 行列演算とライブラリ}
+\item 2020-05-27: 第5回 連立一次方程式の解法 \\
+  \hspace*{5em} (レポートNo.2出題 6/12締切)
+\item 2020-06-03: 第6回 行列の対角化
+\item 2020-06-10: 第7回 疎行列に対する反復解法
+\item 2020-06-17: 第8回 特異値分解と最小二乗法 \\
+  \hspace*{5em} (レポートNo.3出題 7/3締切)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t]{本日の課題}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 「\href{https://utphys-comp.github.io}{計算機実験のための環境整備}」({\small \href{https://utphys-comp.github.io}{https://utphys-comp.github.io}})が完了していない人は至急連絡を！
+  \item 実習
+    \begin{itemize}
+    \item 講義資料の中の{\tt gauss.c}, {\tt lu\_decomp.c}をコンパイル・実行。ソースコードの中身を確認 \\
+      サンプルコード一式: \href{https://github.com/todo-group/ComputerExperiments/releases/tag/2020s-computer1}{example-1-5.zip} (前回のものも含む)
+    \item 実習課題一覧\href{https://github.com/todo-group/ComputerExperiments/releases/tag/2020s-computer1}{exercise-1.pdf}の課題11〜15 (あるいはそれ以外)から適宜選び実習
+    \end{itemize}
+  \item 質問はSlackの「\#4 連立方程式」あるいは他の適当と思われるチャンネルで \\[2em]
+    
+  \item レポートNo.2: 提出締切2020/6/12(金) 18:00 (レポート内容・提出方法についてはITC-LMSを参照のこと)
+  \end{itemize}
+\end{frame}
+
+\section{物理にあらわれる連立一次方程式}
+\input{1_basics/matrix.tex}
+\input{3_linear_system/intro-02.tex}
+\input{3_linear_system/intro-03.tex}
+
+\input{3_linear_system/direct.tex}
+
+\input{3_linear_system/iterative.tex}
+
+\begin{frame}[t]{本日の課題}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 「\href{https://utphys-comp.github.io}{計算機実験のための環境整備}」({\small \href{https://utphys-comp.github.io}{https://utphys-comp.github.io}})が完了していない人は至急連絡を！
+  \item 実習
+    \begin{itemize}
+    \item 講義資料の中の{\tt gauss.c}, {\tt lu\_decomp.c}をコンパイル・実行。ソースコードの中身を確認 \\
+      サンプルコード一式: \href{https://github.com/todo-group/ComputerExperiments/releases/tag/2020s-computer1}{example-1-5.zip} (前回のものも含む)
+    \item 実習課題一覧\href{https://github.com/todo-group/ComputerExperiments/releases/tag/2020s-computer1}{exercise-1.pdf}の課題11〜15 (あるいはそれ以外)から適宜選び実習
+    \end{itemize}
+  \item 質問はSlackの「\#4 連立方程式」あるいは他の適当と思われるチャンネルで \\[2em]
+    
+  \item レポートNo.2: 提出締切2020/6/12(金) 18:00 (レポート内容・提出方法についてはITC-LMSを参照のこと)
+  \end{itemize}
+\end{frame}
+
+\end{document}

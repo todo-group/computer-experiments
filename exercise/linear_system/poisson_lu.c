@@ -1,13 +1,8 @@
-#include "poisson.h"
 #include <stdio.h>
 #include <stdlib.h>
-
-/* http://www.netlib.org/lapack/explore-html/d3/d6a/dgetrf_8f.html */
-extern void dgetrf_(int *M, int *N, double *A, int *LDA, int*IPIV, int *INFO);
-
-/* http://www.netlib.org/lapack/explore-html/d6/d49/dgetrs_8f.html */
-extern void dgetrs_(char *TRANS, int *N, int *NRHS, double *A, int *LDA, int *IPIV,
-                    double *B, int *LDB, int *INFO);
+#include "dgetrf.h"
+#include "dgetrs.h"
+#include "poisson.h"
 
 int main(int argc, char** argv) {
   int n, dim, x, y;

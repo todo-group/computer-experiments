@@ -1,12 +1,12 @@
 \begin{frame}[t,fragile]{逆行列の「間違った」求め方}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
+    %\setlength{\itemsep}{1em}
   \item 線形代数の教科書に載っている公式
     \[
     A^{-1} = \frac{\tilde{A}}{|A|}
     \]
     $|A|$: $A$の行列式、$\tilde{A}$: $A$の余因子行列
-  \item $n \times n$行列の行列式を定義通り計算すると、計算量〜$O(n!)$
+  \item $n \times n$行列の行列式や余因子を定義通り計算すると、計算量〜$O(n!)$
   \item したがって、上の方法で逆行列を計算すると、計算量〜$O(n!)$
   \item $n=100$の場合: $n! \approx 9.3 \times 10^{157}$
   \end{itemize}
