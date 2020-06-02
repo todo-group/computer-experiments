@@ -11,7 +11,8 @@
       e^{xA} &= \sum_{k=0}^{\infty} \frac{1}{k!}(xA)^k = U \Big[ \sum_{k=0}^{\infty} \frac{1}{k!}(x\Lambda)^k \Big] U^T \\
       &= U e^{x \Lambda} U^T \qquad e^{x \Lambda} = \text{diag}(e^{x\lambda_1},\cdots,e^{x\lambda_n})
     \end{align*}
-  \item 逆行列 $A^{-1} = U \Lambda^{-1} U^T$
-  \item 行列式 $|A| = \prod_i \lambda_i$、対角和(トレース) ${\rm tr} A = \sum_i \lambda_i$
+  \item \mbox{} [逆行列 $A^{-1} = U \Lambda^{-1} U^T$] → 逆行列をあらわに求めるかわりに連立方程式を解く
+  \item \mbox{} [行列式 $|A| = \prod_i \lambda_i$] → 対角化ではなくLU分解を使う
+  \item \mbox{} [対角和(トレース) ${\rm tr} A = \sum_i \lambda_i$] → 対角化不要
   \end{itemize}
 \end{frame}

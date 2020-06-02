@@ -1,7 +1,7 @@
-#include "cmatrix.h"
-#include "dsyev.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "cmatrix.h"
+#include "dsyev.h"
 
 int main(int argc, char** argv) {
   char* filename;

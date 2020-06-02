@@ -2,7 +2,9 @@
   \begin{itemize}
     %\setlength{\itemsep}{1em}
   \item 一般的に次元が5以上の行列の固有値は、あらかじめ定まる有限回の手続きでは求まらない
-  \item 必ず何らかの反復法(+収束判定)が必要となる
+    \begin{itemize}
+    \item 必ず何らかの反復法(+収束判定)が必要となる
+    \end{itemize}
   \item 密行列向きの方法
     \begin{itemize}
     \item Jacobi法
@@ -15,7 +17,8 @@
     \end{itemize}
   \item 固有ベクトル
     \begin{itemize}
-    \item 逆反復法
+    \item QR法で求めたものを逆変換
+    \item 逆反復法で精度改善
     \end{itemize}
   \end{itemize}
 \end{frame}

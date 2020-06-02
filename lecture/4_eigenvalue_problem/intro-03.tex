@@ -7,28 +7,28 @@
     \]
   \item 連立差分方程式を行列の形で表す($\psi(x_0)=\psi(x_n)=0$)
     \[\begin{small}\hspace*{-4em}
-    \begin{pmatrix}
+    \begin{bmatrix}
       \frac{2}{h^2}+V(x_1) & -\frac{1}{h^2} \\
       -\frac{1}{h^2} & \frac{2}{h^2}+V(x_2) & -\frac{1}{h^2} \\
       & -\frac{1}{h^2} & \frac{2}{h^2}+V(x_3) & -\frac{1}{h^2} \\
       & & \ddots & \ddots \\
       & & & -\frac{1}{h^2} & \frac{2}{h^2}+V(x_{n-1}) \\
-    \end{pmatrix}
-    \begin{pmatrix}
+    \end{bmatrix}
+    \begin{bmatrix}
       \psi(x_1) \\
       \psi(x_2) \\
       \psi(x_3) \\
       \vdots \\
       \psi(x_{n-1}) \\
-    \end{pmatrix}
-    = \cdots % E
-    %% \begin{pmatrix}
+    \end{bmatrix}
+    = E\cdots % E
+    %% \begin{bmatrix}
     %%   \psi(x_1) \\
     %%   \psi(x_2) \\
     %%   \psi(x_3) \\
     %%   \vdots \\
     %%   \psi(x_{n-1}) \\
-    %% \end{pmatrix}
+    %% \end{bmatrix}
     \end{small}
     \]
   \item $(n-1) \times (n-1)$の疎行列の固有値問題

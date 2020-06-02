@@ -1,0 +1,22 @@
+\begin{frame}[t,fragile]{QR法}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item QR分解
+    \begin{itemize}
+    \item 行列$A$を直交(エルミート)行列$Q$と上三角行列$R$の積に分解: $A=QR$
+    \item Gram-Schmitの直交化と等価
+    \end{itemize}
+  \item QR法による固有値と固有ベクトルの計算
+    \begin{itemize}
+    \item 行列$A_1$をQR分解($A_1=Q_1R_1$) → $A_2 = R_1Q_1$ 
+    \item 行列$A_2$をQR分解($A_2=Q_2R_2$) → $A_3 = R_2Q_2$ 
+    \item 行列$A_k$をQR分解($A_k=Q_kR_k$) → $A_{k+1} = R_kQ_k$
+    \item 繰り返していくと対角より下の全ての成分は零に収束し、対角成分は固有値に収束する(証明略)
+    \end{itemize}
+  \item 連続した直交変換: $A_{k+1} = R_kQ_k = Q_k^{-1}Q_kR_kQ_k = Q_k^{-1}A_kQ_k$
+    \begin{itemize}
+    \item $A_1$が対称(エルミート)三重対角行列の場合、$A_k$も対称(エルミート)三重対角
+    \item 密行列に対して最初からQR法を適用するより、Householder法で三重対角化した後で使う法が効率がよい
+    \end{itemize}
+  \end{itemize}
+\end{frame}

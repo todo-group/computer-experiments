@@ -11,12 +11,16 @@ subroutine dsyev(character JOBZ, character UPLO,
   integer N, double precision, dimension(lda, *) A,
   integer LDA, double precision, dimension(*) W,
   double precision, dimension(*) WORK,
-  integer LWORK, integer INFO)		
+  integer LWORK, integer INFO)
 \end{lstlisting}
     \end{itemize}
   \item 他にも{\tt dsyevd}、{\tt dsyevr}、{\tt dsyevx}などがある \\
     3重対角化までは同じ。3重対角行列の対角化が異なる
   \item 単精度版の{\tt ssyev}、複素(エルミート行列)版の{\tt zheev}など
   \item {\tt dsyev}の使用例: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/eigenvalue_problem/diag.c}{diag.c}
+    \begin{itemize}
+    \item コンパイル方法: {\tt cc -o diag diag.c -llapack -lblas -lm}
+    \item 実行方法: {\tt ./diag matrix1.dat}
+    \end{itemize}
   \end{itemize}
 \end{frame}

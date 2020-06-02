@@ -17,6 +17,9 @@ EXAMPLE15 = $(EXAMPLE14) \
 	linear_system/dgetrf.h linear_system/dgetrs.h linear_system/lu_decomp.c \
 	linear_system/input1.dat linear_system/input2.dat
 
+EXAMPLE16 = $(EXAMPLE15) \
+	eigenvalue_problem/diag.c eigenvalue_problem/dsyev.h eigenvalue_problem/matrix1.dat
+
 # EXAMPLE1L2 = matrix/cmatrix.h matrix/pointer.c matrix/pointer-matrix.c
 
 # EXAMPLE1L3 = linear_system/gauss.c linear_system/input1.dat linear_system/input2.dat linear_system/input3.dat \
@@ -66,6 +69,14 @@ example-1-5.zip : $(EXAMPLE15)
 	echo "CFLAGS = -Wall -O3 -I." > example-1-5/Makefile
 	echo "LDLIBS = -llapack -lblas" >> example-1-5/Makefile
 	zip example-1-5.zip example-1-5/*
+
+example-1-6.zip : $(EXAMPLE16)
+	rm -rf example-1-6
+	mkdir example-1-6
+	cp -p $(EXAMPLE16) example-1-6
+	echo "CFLAGS = -Wall -O3 -I." > example-1-6/Makefile
+	echo "LDLIBS = -llapack -lblas" >> example-1-6/Makefile
+	zip example-1-6.zip example-1-6/*
 
 example-1-L2.zip : $(EXAMPLE1L2)
 	rm -rf example-1-L2
