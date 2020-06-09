@@ -1,14 +1,14 @@
 \begin{frame}[t,fragile]{Lanczos法}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
+    % \setlength{\itemsep}{1em}
   \item 行列で表現すると
     \begin{align*}
       \hspace*{-2em}
       A
-      (v_1v_2\cdots v_m)
+      \big[ v_1v_2\cdots v_m \big]
       &=
-      (v_1v_2\cdots v_m v_{m+1})
-      \begin{pmatrix}
+      \big[ v_1v_2\cdots v_m v_{m+1} \big]
+      \begin{bmatrix}
         \alpha_1 & \beta_1\\
         \beta_1 & \alpha_2 & \beta_2 \\
         & \beta_2 & \alpha_3 & \beta_3 \\
@@ -16,11 +16,11 @@
         & & & \ddots & \ddots & \ddots \\
         & & & & \beta_{m-1} & \alpha_m \\
         & & & & & \beta_m \\
-      \end{pmatrix}
+      \end{bmatrix}
     \end{align*}
-    両辺に左から$(v_1v_2\cdots v_m)^T$をかけると
+    両辺に左から$\big[ v_1v_2\cdots v_m \big]^T$をかけると
     \[
-    (v_1v_2\cdots v_m)^T A (v_1v_2\cdots v_m)
+    \big[ v_1v_2\cdots v_m \big]^T A \big[ v_1v_2\cdots v_m \big]
     \]
     は3重対角行列となることがわかる
   \end{itemize}

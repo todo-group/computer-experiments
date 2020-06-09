@@ -5,7 +5,7 @@
     %\setlength{\itemsep}{1em}
   \item 波動関数を互いに直交する正規化された波動関数(基底関数)の線形結合で近似する (変分波動関数、試行関数)
     \begin{align*}
-      | \psi \rangle = \sum_{p=1}^N C_p | \phi_p \rangle \qquad (\langle \phi_p | \phi_q \rangle = \delta_{pq})
+      | \psi \rangle = \sum_{p=1}^m C_p | \phi_p \rangle \qquad (\langle \phi_p | \phi_q \rangle = \delta_{pq})
     \end{align*}
   \item エネルギーの期待値
     \begin{align*}
@@ -23,7 +23,7 @@
     \begin{align*}
       \sum_{q} (H_{pq} - E \delta_{pq} ) C_q = 0 \qquad \text{for $^\forall p$}
     \end{align*}
-  \item $H_{pq}$, $\delta_{pq}$を$N \times N$行列と考えると、固有値問題とみなせる
+  \item $H_{pq}$, $\delta_{pq}$を$m \times m$行列と考えると、固有値問題とみなせる
     \begin{align*}
       H C = E C
     \end{align*}
@@ -66,7 +66,7 @@
           x^\dagger S x = \sum_{pq} \langle \phi_p | \phi_q \rangle x_p^* x_q = || \sum_p x_p | \phi_p \rangle ||^2 > 0
         \end{align*}
     \end{itemize}
-  \item 一般化固有値問題 $\Rightarrow$ 2回の対角化
+  \item 一般化固有値問題 $\Rightarrow$ 2回の固有値分解により解くことができる
     \begin{itemize}
       \item $S$を固有値分解: $S = U D U^\dagger$
       \item $S$固有値は全て正 $\Rightarrow$ $D^{-1/2}$を定義可
@@ -75,6 +75,7 @@
         \begin{align*}
           H'C' = EC' \qquad \text{(通常の)固有値問題}
         \end{align*}
+      \item (1回目の固有値分解はコレスキー分解$A=L L^\dagger$ ($L$は下三角行列)を用いてもよい)
     \end{itemize}
   \end{itemize}
 \end{frame}

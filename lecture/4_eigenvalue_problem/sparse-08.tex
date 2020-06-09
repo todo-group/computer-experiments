@@ -6,13 +6,13 @@
     \begin{align*}
       v_2 &= (Av_1 - \alpha_1 v_1)/\beta_1 \\
       v_3 &= (Av_2 - \beta_1 v_1 - \alpha_2 v_2)/\beta_2 \\
-      \vdots
+      \vdots \\
+      v_{m+1} &= (Av_m - \beta_{m-1} v_{m-1} - \alpha_m v_m)/\beta_m \\
     \end{align*}
-    ここで
+    ここで、$\alpha_i$と$\beta_i$は以下のように選ぶ
     \begin{align*}
       \alpha_i &= v_i^T A v_i \\
-      \beta_i &= | A v_i - \beta_{i-1} v_{i-1} - \alpha_i v_i |, \ \beta_0 = 0
+      \beta_i &= || A v_i - \beta_{i-1} v_{i-1} - \alpha_i v_i ||, \ \beta_0 = 0
     \end{align*}
-    と選ぶ
   \end{itemize}
 \end{frame}

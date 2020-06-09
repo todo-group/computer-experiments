@@ -2,10 +2,10 @@
   \begin{itemize}
     %\setlength{\itemsep}{1em}
   \item 原理的には、$n$ステップ目で$\beta_n=0$となり、3重対角化が完了する
-  \item 実際には、数値誤差のため$v_1,v_2,v_3\cdots$の直交性が崩れる
+  \item 実際には、数値誤差のため$v_1,v_2,v_3\cdots$の直交性が崩れていく
     \begin{itemize}
       \item $m$を大きくしすぎると、おかしな固有値が出てくる
-      \item 全ての固有値が欲しい場合にはHouseholder法を使う
+      \item 多くの固有値・固有ベクトルが欲しい場合にはHouseholder法を使うべき
     \end{itemize}
   \item Lanczos法では、大きな固有値に対応する固有ベクトルにできるだけ近いものから部分空間を作っていく
     \begin{itemize}
