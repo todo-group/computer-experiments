@@ -81,13 +81,13 @@
   \begin{itemize}
     % \setlength{\itemsep}{1em}
   \item $U$, $V$が直交行列になるように、足りない基底ベクトルを追加
-  \item こちらを「SVD」、もともとの分解を「thin SVD」と呼ぶ場合も多い
+  \item こちらを「SVD」、もともとの分解を「thin SVD」と呼ぶこともある
   \end{itemize}
 \end{frame}
 
 \begin{frame}[t,fragile]{LAPACKによる特異値分解}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
+    %\setlength{\itemsep}{1em}
   \item 倍精度実行列の特異値分解 {\tt dgesvd}
     \url{http://www.netlib.org/lapack/explore-html/d8/d2d/dgesvd_8f.html}
   \item Fortranによる関数宣言
@@ -99,21 +99,26 @@ subroutine dgesvd(character JOBU, character JOBVT,
   double precision, dimension(ldu, *) U, integer LDU,
   double precision, dimension(ldvt, *) VT,
   integer LDVT,
-  double precision, dimension( * ) WORK, integer LWORK,
-  integer INFO )
+  double precision, dimension(*) WORK, integer LWORK,
+  integer INFO)
 \end{lstlisting}
+  \item {\tt dgesvd}の使用例: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/svd/svd.c}{svd.c} (SVD), \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/svd/full_svd.c}{full\_svd.c} (完全SVD)
+    \begin{itemize}
+    \item コンパイル方法: {\tt cc -o svd svd.c -llapack -lblas -lm}
+    \item 実行方法: {\tt ./svd matrix2.dat}
+    \end{itemize}
   \end{itemize}
 \end{frame}
 
 \begin{frame}[t,fragile]{固有値分解との関係}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
+    %\setlength{\itemsep}{1em}
   \item 半正定値実対称行列の場合
 
     「固有値分解」と「特異値分解」は等価
   \item 一般の(非正方)実行列$A$の場合
     \begin{itemize}
-      \setlength{\itemsep}{1em}
+      %\setlength{\itemsep}{1em}
     \item 完全SVD  $A=U \Lambda V^T$を考えると
     \item $B=A^T A = V \Lambda U^T U \Lambda V^T = V \Lambda^2 V^T$は実対称行列
 
@@ -127,7 +132,7 @@ subroutine dgesvd(character JOBU, character JOBVT,
 
 \begin{frame}[t,fragile]{特異値分解が役に立つ例}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
+    %\setlength{\itemsep}{1em}
   \item 連立一次方程式の最小二乗解
   \item 行列の低ランク近似
   \item 画像圧縮
@@ -153,7 +158,7 @@ subroutine dgesvd(character JOBU, character JOBVT,
 
 \begin{frame}[t,fragile]{一般化逆行列と最小二乗解}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
+    %\setlength{\itemsep}{1em}
   \item $V_1$と$V_2$の列ベクトルは全て直交する。一般解のうちノルム$|x|^2$が最小となるのは$z=0$のとき
     \[
     x = A^\dagger b \ \ \ \ A^\dagger = V \begin{pmatrix} \Lambda^{-1} & 0 \\ 0 & 0 \end{pmatrix} U^T
@@ -222,7 +227,7 @@ subroutine dgesvd(character JOBU, character JOBVT,
 
 \begin{frame}[t,fragile]{Eckart-Youngの定理の証明}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
+    %\setlength{\itemsep}{1em}
   %\item $A=U \Lambda V^T$のように(完全)SVDされているとする
   \item $A$を近似する行列$X$ (ランク$\le r$)を考えると
     \[
@@ -242,9 +247,40 @@ subroutine dgesvd(character JOBU, character JOBVT,
 \end{frame}
 
 \begin{frame}[t,fragile]{特異値分解による画像圧縮}
-  \noindent%
-  \resizebox{0.63\textwidth}{!}{\includegraphics{image/svd-2.pdf}}%
-  \resizebox{0.35\textwidth}{!}{\includegraphics{image/svd-1.pdf}}
+  \begin{itemize}
+  \item 特異値の分布とランク$r$近似 ($1614 \times 2178$グレイスケール写真)
+    
+    \hspace*{-3em}\resizebox{0.27\textwidth}{!}{\includegraphics{image/singular_values.pdf}}
 
-  \hfill{\fontsize{5.5pt}{0pt}\selectfont \url{http://www.na.scitec.kobe-u.ac.jp/~yamamoto/lectures/cse-introduction2009/cse-introduction2009.html}}
+    \vspace*{-11em}\hfill
+    \begin{tabular}{cccc}
+      $r=1$ & $r=2$ & $r=3$ & $r=4$ \\
+      \resizebox{0.15\textwidth}{!}{\includegraphics{image/gray_picture_r1.pdf}} &
+      \resizebox{0.15\textwidth}{!}{\includegraphics{image/gray_picture_r2.pdf}} &
+      \resizebox{0.15\textwidth}{!}{\includegraphics{image/gray_picture_r3.pdf}} &
+      \resizebox{0.15\textwidth}{!}{\includegraphics{image/gray_picture_r4.pdf}} \\
+    \end{tabular}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{特異値分解による画像圧縮}
+  \begin{itemize}
+  \item 特異値の分布とランク$r$近似 ($1614 \times 2178$グレイスケール写真)
+    
+    \hspace*{-3em}\resizebox{0.27\textwidth}{!}{\includegraphics{image/singular_values.pdf}}
+
+    \vspace*{-11em}\hfill
+    \begin{tabular}{cccc}
+      $r=1$ & $r=2$ & $r=3$ & $r=4$ \\
+      \resizebox{0.15\textwidth}{!}{\includegraphics{image/gray_picture_r1.pdf}} &
+      \resizebox{0.15\textwidth}{!}{\includegraphics{image/gray_picture_r2.pdf}} &
+      \resizebox{0.15\textwidth}{!}{\includegraphics{image/gray_picture_r3.pdf}} &
+      \resizebox{0.15\textwidth}{!}{\includegraphics{image/gray_picture_r4.pdf}} \\
+      $r=5$ & $r=10$ & $r=20$ & $r=50$ \\
+      \resizebox{0.15\textwidth}{!}{\includegraphics{image/gray_picture_r5.pdf}} &
+      \resizebox{0.15\textwidth}{!}{\includegraphics{image/gray_picture_r10.pdf}} &
+      \resizebox{0.15\textwidth}{!}{\includegraphics{image/gray_picture_r20.pdf}} &
+      \resizebox{0.15\textwidth}{!}{\includegraphics{image/gray_picture_r50.pdf}} \\
+    \end{tabular}
+  \end{itemize}
 \end{frame}

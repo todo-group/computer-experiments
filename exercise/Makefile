@@ -20,6 +20,10 @@ EXAMPLE15 = $(EXAMPLE14) \
 EXAMPLE16 = $(EXAMPLE15) \
 	eigenvalue_problem/diag.c eigenvalue_problem/dsyev.h eigenvalue_problem/matrix1.dat
 
+EXAMPLE18 = $(EXAMPLE16) \
+	svd/dgesvd.h svd/svd.c svd/full_svd.c svd/matrix2.dat svd/matrix3.dat linear_regression/measurement1.dat linear_regression/measurement2.dat \
+	../misc/convert2matrix.py
+
 # EXAMPLE1L2 = matrix/cmatrix.h matrix/pointer.c matrix/pointer-matrix.c
 
 # EXAMPLE1L3 = linear_system/gauss.c linear_system/input1.dat linear_system/input2.dat linear_system/input3.dat \
@@ -77,6 +81,14 @@ example-1-6.zip : $(EXAMPLE16)
 	echo "CFLAGS = -Wall -O3 -I." > example-1-6/Makefile
 	echo "LDLIBS = -llapack -lblas" >> example-1-6/Makefile
 	zip example-1-6.zip example-1-6/*
+
+example-1-8.zip : $(EXAMPLE18)
+	rm -rf example-1-8
+	mkdir example-1-8
+	cp -p $(EXAMPLE18) example-1-8
+	echo "CFLAGS = -Wall -O3 -I." > example-1-8/Makefile
+	echo "LDLIBS = -llapack -lblas" >> example-1-8/Makefile
+	zip example-1-8.zip example-1-8/*
 
 example-1-L2.zip : $(EXAMPLE1L2)
 	rm -rf example-1-L2

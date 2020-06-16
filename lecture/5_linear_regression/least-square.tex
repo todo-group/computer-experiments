@@ -39,6 +39,7 @@
 \begin{frame}[t,fragile]{リッジ回帰(Ridge Regression)}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
+  \item 基底関数が線形独立でない(例: $\phi_1(x)=1$, $\phi_2(x)=x$, $\phi_3(x)=1+x$)と、Gram行列($\Phi^{\rm t} \Phi$)が特異になる
   \item 基底関数の数(例: 多項式の次数)を増やしすぎると過学習 (over-fitting)」が生じる
   \item 正則化最小二乗法 ($\lambda$は非負の定数)
     \begin{align*}
