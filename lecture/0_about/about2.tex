@@ -22,7 +22,7 @@
   \item 刻み幅・近似度合いを変えて何度か計算を行う
   \item グラフ化して目で見てみる
   \item 計算量(コスト)のスケーリング(次数)に気をつける
-  \item 記録に残す・再現性を確保する
+  \item (計算機は指示したことを指示したようにしかやってくれないということを認識する)
   \item {\color{red}問題の解き方は一通りではない}
   \item {\color{red}いろいろな手法を組み合わせて使う}
   \end{itemize}
@@ -33,34 +33,65 @@
     \setlength{\itemsep}{1em}
   \item 問題解決型: 計算機実験Iで身に付けた知識をもとに、より高度な数値計算手法・アルゴリズムを学び、物理学における具体的な問題への応用を通して実践的な知識と経験を身につける
     \begin{itemize}
-    \item 数値対角化と量子力学
-    \item モンテカルロ法・分子動力学と統計物理
-    \item 最適化問題
+    \item 統計力学 $\times$ モンテカルロ法・行列の方法
+    \item 量子力学 $\times$ 対角化・偏微分方程式の解法
+    \item 力学系・粒子系 $\times$ 常微分方程式の解法・分子動力学法
+    \item 非線形回帰・機械学習 $\times$ 連続最適化・離散最適化
     \end{itemize}
-  \item スタッフ \href{mailto:computer@exa.phys.s.u-tokyo.ac.jp}{computer@exa.phys.s.u-tokyo.ac.jp}
-    \begin{itemize}
-    \item 講義: 藤堂
-    \item 実習: 鈴木助教、斉藤助教
-    \item 実習TA: 曹(藤堂研M2)、森下(藤堂研M1)
-    \end{itemize}
-  \end{itemize}    
+    などを予定
+  \end{itemize}
 \end{frame}
 
-%% \begin{frame}[t]{質問がある場合には、、、}
-%%   \begin{enumerate}
-%%     %\setlength{\itemsep}{1em}
-%%   \item ITC-LMS の掲示板を見る
-%%   \item ハンドブック、講義資料を確認
-%%   \item まわりの人に質問してみる
-%%   \item ネットで検索
-%%   \item 計算機実験担当者(\href{mailto:computer@exa.phys.s.u-tokyo.ac.jp}{computer@exa.phys.s.u-tokyo.ac.jp}) に相談
-%%   \end{enumerate}
-%%   メールで質問するときに注意すべきこと
-%%   \begin{itemize}
-%%   \item (メールの)標題をきちんとつける、きちんと名乗る
-%%   \item 実行環境を明示する
-%%   \item 問題を再現する手順を明記する
-%%   \item 関連するファイル(Cや \LaTeX のソースコード等)を添付する
-%%   \item エラーメッセージを添付する
-%%   \end{itemize}
-%% \end{frame}
+\begin{frame}[t]{講義日程}
+  \begin{itemize}
+    % \setlength{\itemsep}{1em}
+  \item 全8回 (金曜5限 {\color{red}17:05}-18:35)
+    \begin{itemize}
+    \item 9月25日
+    \item {\color{gray} 10月2日}
+    \item {\color{gray} 10月9日}
+    \item {\color{gray} 10月16日}
+    \item {\color{gray} 10月23日}
+    \item {\color{gray} 10月30日}
+    \item {\color{gray} 11月6日}
+    \item {\color{gray} 11月13日}
+    \item {\color{gray} 11月20日}
+    \item {\color{gray} 11月27日}
+    \item {\color{gray} 12月4日}
+    \item {\color{gray} 12月11日}
+    \item {\color{gray} 12月18日}
+    \item {\color{gray} 12月25日}
+    \end{itemize}
+  \item 10月2日以降は未定。物理学教室コロキウムの開催日は休講
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{講義と実習}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item スタッフ \href{mailto:computer@phys.s.u-tokyo.ac.jp}{computer@phys.s.u-tokyo.ac.jp}
+    \begin{itemize}
+    \item 講義: 藤堂
+    \item 実習: 鈴木助教、樫山助教、堤(古澤研D1)、沓澤(藤堂研M1)
+    \end{itemize}
+  \item 講義・実習の進め方
+    \begin{itemize}
+    \item 初回: 導入 + 講義(座学) + 実習
+    \item それ以降: 実習 + 講義(座学)
+    \item 質問: Slack (計算機実験Iと同じワークスペース)、ITC-LMS、上記メールアドレスで随時受け付け
+    \end{itemize}
+  \item 評価
+    \begin{itemize}
+    \item 出席(講義・実習)
+      \begin{itemize}
+      \item ITC-LMSでのアンケート
+      \item 次の講義の前日までに回答
+      \end{itemize}    
+    \item レポート
+      \begin{itemize}
+      \item 各自が \LaTeX で作成の上提出 (計2回)
+      \item 提出方法・締切については、後日指示
+      \end{itemize}
+    \end{itemize}    
+  \end{itemize}    
+\end{frame}
