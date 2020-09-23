@@ -1,6 +1,4 @@
-# ZIP = example-1-L2.zip example-1-L3.zip example-1-L4.zip \
-	example-2-L1.zip example-2-L2.zip example-2-L3.zip example-2-L4.zip
-ZIP = example-1-4.zip example-1-5.zip
+ZIP = example-1-8.zip example-2-1.zip
 
 EXAMPLE14 = \
 	monte_carlo/mersenne_twister.h monte_carlo/random.c \
@@ -24,28 +22,9 @@ EXAMPLE18 = $(EXAMPLE16) \
 	svd/dgesvd.h svd/svd.c svd/full_svd.c svd/matrix2.dat svd/matrix3.dat linear_regression/measurement1.dat linear_regression/measurement2.dat \
 	../misc/convert2matrix.py
 
-# EXAMPLE1L2 = matrix/cmatrix.h matrix/pointer.c matrix/pointer-matrix.c
-
-# EXAMPLE1L3 = linear_system/gauss.c linear_system/input1.dat linear_system/input2.dat linear_system/input3.dat \
-# 	matrix/cmatrix.h matrix/pointer-matrix.c matrix/matrix_example.c matrix/vector.dat matrix/matrix.dat \
-# 	matrix/dgemm.h matrix/multiply.c matrix/multiply_dgemm.c \
-# 	linear_system/lu_decomp.c \
-# 	monte_carlo/mersenne_twister.h
-
-# EXAMPLE1L4 = matrix/cmatrix.h \
-# 	eigenvalue_problem/diag.c eigenvalue_problem/dsyev.h eigenvalue_problem/matrix1.dat \
-# 	svd/svd.c svd/full_svd.c svd/dgesvd.h svd/matrix2.dat svd/matrix3.dat svd/matrix4.dat \
-# 	linear_regression/measurement1.dat linear_regression/measurement2.dat
-
-# EXAMPLE2L1 = basics/bisection.c eigenvalue_problem/double_well.c eigenvalue_problem/dsyev.h eigenvalue_problem/diag.c matrix/cmatrix.h matrix/matrix_example.c matrix/matrix.dat matrix/vector.dat eigenvalue_problem/matrix1.dat linear_system/determinant.c linear_system/lu_decomp.c linear_system/input1.dat linear_system/input2.dat
-
-# EXAMPLE2L2 = monte_carlo/random.c monte_carlo/histogram.c \
-# 	monte_carlo/harmonic.c monte_carlo/square_lattice.c \
-# 	matrix/cmatrix.h monte_carlo/mersenne_twister.h
-
-# EXAMPLE2L3 = monte_carlo/bond_table.h monte_carlo/mersenne_twister.h monte_carlo/exact_counting.c matrix/cmatrix.h matrix/multiply.c matrix/multiply_dgemm.c matrix/dgemm.h eigenvalue_problem/dsyev.h eigenvalue_problem/diag.c eigenvalue_problem/matrix1.dat monte_carlo/transfer_matrix.c
-
-# EXAMPLE2L4 = optimization/func_1d.h optimization/func_2d.h optimization/golden_section.c optimization/mc_steepest_descent_1d.c optimization/mc_steepest_descent_2d.c optimization/simulated_annealing_1d.c optimization/simulated_annealing_2d.c monte_carlo/mersenne_twister.h optimization/nelder_mead_2d.c linear_system/steepest_descent.c matrix/cmatrix.h linear_system/input3.dat optimization/measurement-3.dat linear_system/poisson.h linear_system/poisson_dense.c linear_system/poisson_lu.c linear_system/poisson_sparse.c linear_system/lu_decomp.c
+EXAMPLE21 = matrix/cmatrix.h \
+	monte_carlo/mersenne_twister.h monte_carlo/random.c \
+	monte_carlo/histogram.c
 
 .SUFFIXES: .pdf .dvi .tex
 
@@ -89,6 +68,14 @@ example-1-8.zip : $(EXAMPLE18)
 	echo "CFLAGS = -Wall -O3 -I." > example-1-8/Makefile
 	echo "LDLIBS = -llapack -lblas" >> example-1-8/Makefile
 	zip example-1-8.zip example-1-8/*
+
+example-2-1.zip : $(EXAMPLE21)
+	rm -rf example-2-1
+	mkdir example-2-1
+	cp -p $(EXAMPLE21) example-2-1
+	echo "CFLAGS = -Wall -O3 -I." > example-2-1/Makefile
+	echo "LDLIBS = -llapack -lblas" >> example-2-1/Makefile
+	zip example-2-1.zip example-2-1/*
 
 example-1-L2.zip : $(EXAMPLE1L2)
 	rm -rf example-1-L2

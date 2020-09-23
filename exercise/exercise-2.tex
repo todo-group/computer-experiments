@@ -1,0 +1,53 @@
+\documentclass[11pt]{jarticle}
+
+\usepackage{amsmath}
+\usepackage{hyperref}
+
+\setlength{\oddsidemargin}{-0.7cm}
+\setlength{\topmargin}{-1.5cm}
+\setlength{\textwidth}{16.5cm}
+\setlength{\textheight}{26cm}
+\pagestyle{empty}
+
+\begin{document}
+
+\noindent
+{\bf\large 「計算機実験II」実習課題 (2020/09/25更新)}
+\\[-0.5em]
+
+\noindent
+課題は順次追加\\[-0.5em]
+
+%\noindent
+%課題番号のあとに[応用]とあるのは少し高度な課題\\[-0.5em]
+
+{\bf [モンテカルロ法]}
+\begin{enumerate}
+
+\item $X$と$Y$を$(0,1)$で一様分布するそれぞれ独立な(実数)確率変数とする。このとき$X^2$, $-\log X$, $XY$のそれぞれの確率密度関数と期待値を(解析的に)求めよ。また、実際に乱数を生成させてヒストグラムと期待値を計算し、解析的な結果と比較せよ。また、棄却法により、確率密度関数
+  \begin{equation}
+    P(x) = \begin{cases} 4x & 0 < x < 1/2 \\
+      4(1-x) & 1/2 < x < 1 \\
+      0 & \text{otherwise}
+    \end{cases}
+    \label{eqn:triangle}
+  \end{equation}
+  にしたがう一様乱数を生成せよ。ヒストグラムを作り、結果を確認せよ。さらに、確率密度関数(\ref{eqn:triangle})にしたがう$m=10$個の独立な確率変数の平均$Y=(1/m) \sum_{i=1}^m X_i$のヒストグラムを調べよ。$m$を増やしていくと分布はどのような形に近づくか予測し比較せよ。
+  
+\item 正規分布にしたがう乱数の生成方法について調べよ。また、平均値$\mu_i$と共分散行列$\Sigma_{ij}$をもつ多次元正規分布にしたがう乱数の生成方法を考え実装し、平均値と共分散が正しく得られるかどうか確認せよ
+
+\item 板状の物質による中性子の吸収/透過/反射をモンテカルロ法により計算するプログラムを作成せよ。吸収率$p_{\rm c}$、平均自由行程$\lambda^{-1}$を適当な値に仮定した上で、板の厚さ$D$を増やしたときに、吸収率・透過率・反射率がどのように変化するか調べよ。エラーバー(統計誤差)についても評価すること
+
+\item マルコフ連鎖モンテカルロ法により、二次元正方格子イジング模型のエネルギーと比熱、磁化の二乗の期待値を計算せよ。システムサイズを$L=4, 6,8\cdots$と増やすと、これらの物理量の振る舞いがどのように変化するか調べよ。また、有限系のシミュレーション結果から、熱力学的極限における二次相転移の臨界温度と臨界指数を求める方法について調べよ
+
+\item 一次元イジング模型の物理量は、転送行列法を用いて厳密に計算可能である。マルコフ連鎖モンテカルロ法により計算した物理量と厳密解を比較し、一致するかどうか確認してみよ。システムサイズ依存性はどのようになっているか調べよ
+
+  \hspace*{-2em} {\bf [その他]}
+
+\item 「\href{https://github.com/utphys-comp/handbook/releases/download/handbook-2019/handbook.pdf}{計算機実験ハンドブック}」の1.3節にEmacs以外のエディタの説明(vi (vim)、nano)を追加
+
+\item 「\href{https://github.com/utphys-comp/handbook/releases/download/handbook-2019/handbook.pdf}{計算機実験ハンドブック}」の第2章「C言語入門」のC++言語版を追加
+
+\end{enumerate}  
+
+\end{document}
