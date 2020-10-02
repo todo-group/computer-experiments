@@ -1,4 +1,4 @@
-ZIP = example-1-8.zip example-2-1.zip
+ZIP = example-1-8.zip example-2-2.zip
 
 EXAMPLE14 = \
 	monte_carlo/mersenne_twister.h monte_carlo/random.c \
@@ -25,6 +25,8 @@ EXAMPLE18 = $(EXAMPLE16) \
 EXAMPLE21 = matrix/cmatrix.h \
 	monte_carlo/mersenne_twister.h monte_carlo/random.c \
 	monte_carlo/histogram.c
+EXAMPLE22 = $(EXAMPLE21) \
+	monte_carlo/square_lattice.c monte_carlo/harmonic.c
 
 .SUFFIXES: .pdf .dvi .tex
 
@@ -69,13 +71,13 @@ example-1-8.zip : $(EXAMPLE18)
 	echo "LDLIBS = -llapack -lblas" >> example-1-8/Makefile
 	zip example-1-8.zip example-1-8/*
 
-example-2-1.zip : $(EXAMPLE21)
-	rm -rf example-2-1
-	mkdir example-2-1
-	cp -p $(EXAMPLE21) example-2-1
-	echo "CFLAGS = -Wall -O3 -I." > example-2-1/Makefile
-	echo "LDLIBS = -llapack -lblas" >> example-2-1/Makefile
-	zip example-2-1.zip example-2-1/*
+example-2-2.zip : $(EXAMPLE22)
+	rm -rf example-2-2
+	mkdir example-2-2
+	cp -p $(EXAMPLE22) example-2-2
+	echo "CFLAGS = -Wall -O3 -I." > example-2-2/Makefile
+	echo "LDLIBS = -llapack -lblas" >> example-2-2/Makefile
+	zip example-2-2.zip example-2-2/*
 
 example-1-L2.zip : $(EXAMPLE1L2)
 	rm -rf example-1-L2

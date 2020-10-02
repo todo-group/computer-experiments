@@ -16,6 +16,8 @@
 \usefonttheme[onlymath]{serif}
 %\usefonttheme{serif}
 
+\usepackage{ulem}
+
 \mode<presentation>
 {
   \usetheme{Antibes}
@@ -51,12 +53,28 @@
 % 箇条書きの２階層目のマーカを三角にする
 \setbeamertemplate{itemize subitem}[triangle]
 
-% ページ番号の挿入
-\setbeamertemplate{footline}[frame number]
+% hyperref setting
+\definecolor{links}{HTML}{2A1B81}
+\hypersetup{colorlinks,linkcolor=,urlcolor=links}
+
+%% フッター
 
 % スライド下部にある不要な画像を消す
 %\setbeamertemplate{navigation symbols}{}
 
-% hyperref setting
-\definecolor{links}{HTML}{2A1B81}
-\hypersetup{colorlinks,linkcolor=,urlcolor=links}
+% ページ番号の挿入
+% \setbeamertemplate{footline}[frame number]
+
+% ファイル名の表示 (\currfilename)
+\usepackage{currfile}
+%\setbeamertemplate{footline}{\currfilename}
+
+% ファイル名とページ番号の挿入
+\addtobeamertemplate{navigation symbols}{}{%
+  \usebeamerfont{footline}%
+  \usebeamercolor[fg]{footline}%
+  \hspace{1em}%
+  [\currfilename]%
+  \hspace{.5em}%
+  \insertframenumber/\inserttotalframenumber
+}

@@ -1,15 +1,16 @@
+%-*- coding:utf-8 -*-
+
 \begin{frame}[t,fragile]{統計物理における平衡状態}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
-  \item Boltzmann分布 ($\beta \equiv 1/k_B T$)
-    \[
-    \pi(s) = \exp[-\beta {\cal H}(s)] \Big / \sum_s \exp[-\beta {\cal H}(s)]
-    \]
-  \item 物理量の期待値
-    \[
-    \langle A \rangle = \sum_s A(s) \exp[-\beta {\cal H}(s)] \Big/ \sum_s \exp[-\beta {\cal H}(s)]
-    \]
+    %\setlength{\itemsep}{1em}
+  \item カノニカル分布: $\pi(s) = \exp[-\beta {\cal H}(s)] \Big / \sum_s \exp[-\beta {\cal H}(s)]$
+  \item 物理量の期待値: $\langle A \rangle = \sum_s A(s) \exp[-\beta {\cal H}(s)] \Big/ \sum_s \exp[-\beta {\cal H}(s)]$
   \item $\sum_s$は全ての状態に関する和 (系の体積に対して指数関数的に増加)
-  \item 全ての状態について和をとるかわりに、Boltzmann重みが大きい(=$\cal H$が小さい)ところだけをモンテカルロ・サンプリング
+
+    $\Rightarrow$ {\color{red}次元の呪い}
+    
+  \item 全ての状態について和をとるかわりに、ボルツマン重みが大きい(=$\cal H$が小さい)ところだけを重点的にサンプリング
+
+    低温では$\exp[-\beta {\cal H}(s)]$の{\color{red}分散が指数関数的に大きく}なる $\Rightarrow$ 配位$s$をカノニカル分布にしたがって生成することで分散を小さく
   \end{itemize}
 \end{frame}

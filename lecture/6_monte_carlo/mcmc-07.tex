@@ -1,6 +1,8 @@
+%-*- coding:utf-8 -*-
+
 \begin{frame}[t,fragile]{Metropolis法}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
+    %\setlength{\itemsep}{1em}
   \item 現在の配位$x$から、試行配位(trial configuration) $x'$を$x - \Delta \sim x + \Delta$の一様分布より選ぶ
   \item 確率$\min \Big( 1, \frac{e^{-\beta V(x')}}{e^{-\beta V(x)}} \Big)$で$x'$を採択(accept)。棄却(reject)された場合にはもとの$x$のまま
   \item 物理量の測定 (reject された場合にもカウントする)

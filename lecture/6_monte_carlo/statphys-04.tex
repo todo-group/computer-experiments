@@ -1,23 +1,25 @@
-\begin{frame}[t,fragile]{代表的な数値計算手法}
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{様々な数値計算手法}
   \begin{itemize}
     % \setlength{\itemsep}{1em}
-  \item 数え上げ
+  \item 数え上げ (離散変数)
     \begin{itemize}
       \item 計算コスト × (指数関数的)
       \item メモリコスト ○ (${\cal O}(1)$)
     \end{itemize}
-  \item 転送行列法
+  \item 転送行列法 (離散変数)
     \begin{itemize}
       \item 計算コスト △ (指数関数的)
       \item メモリコスト △ (指数関数的)
     \end{itemize}
-  \item 分子動力学法
+  \item 分子動力学法 (連続変数)
     \begin{itemize}
       \item 計算コスト ○ (${\cal O}(N)$)
       \item メモリコスト ○ (${\cal O}(N)$)
       \item 統計誤差あり
     \end{itemize}
-  \item {\color{red}マルコフ連鎖モンテカルロ法}
+  \item マルコフ連鎖モンテカルロ法 (離散変数・連続変数)
     \begin{itemize}
       \item 計算コスト ○ (${\cal O}(N)$)
       \item メモリコスト ○ (${\cal O}(N)$)

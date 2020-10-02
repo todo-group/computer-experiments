@@ -1,16 +1,26 @@
+%-*- coding:utf-8 -*-
+
 \begin{frame}[t,fragile]{厳密な数え上げ}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
+    %\setlength{\itemsep}{1em}
   \item 全ての状態についてボルツマン重みを計算し足し合わせる
     \begin{itemize}
     \item 状態数 $= 2^N$ \ ($N$スピン数)
     \end{itemize}
-  \item 状態を$N$ビットの整数で表す (0から$2^N-1$)
+  \item $N$重のforループを書く代わりに、状態を{\color{red}$N$ビットの整数}($s=0,\cdots,2^N-1$)で表し一つのループに
     \begin{itemize}
-    \item $i$番目の格子点のスピンの状態を$i$ビット目に保存
+    \item $i$番目($i=0,\cdots,N-1$)の格子点のスピンの状態を$i$ビット目に保存
     \item $\sigma = \pm 1$をビットの 1 or 0で表現
     \item シフト演算(\verb+>>+)とAND演算(\verb+&+)でスピン状態を取り出す
+
+      例: 4番目($i=3$)のビットを取り出す: \verb+(s>>3)&1+
+
+      例: $\sigma_i \sigma_j$の計算: \verb+(2.0*((s>>i)&1)-1)*(2.0*((s>>j)&1)-1)+
+
+    \item 論理AND (\verb+&&+)とビットAND (\verb+&+)の違いに注意
     \end{itemize}
-  \item 例: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/monte_carlo/exact_counting.c}{exact\_counting.c}
+  \item 格子構造(一次元鎖、二次元正方格子等)を表す関数を用意する必要あり
+
+    例:  \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/monte_carlo/square_lattice.c}{square\_lattice.c}
   \end{itemize}
 \end{frame}

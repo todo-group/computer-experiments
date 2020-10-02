@@ -1,10 +1,10 @@
 %-*- coding:utf-8 -*-
 
-\documentclass[dvipdfmx]{beamer}
+\documentclass[10pt,dvipdfmx]{beamer}
 \usepackage{tutorial}
 
-\title{計算機実験II (L2) --- モンテカルロと統計力学}
-\date{2019/10/18}
+\title{計算機実験II (L2) \\ マルコフ連鎖モンテカルロ}
+\date{2020/10/02}
 
 \begin{document}
 
@@ -13,6 +13,8 @@
   \tableofcontents
 \end{frame}
 
+\input{0_about/about2-2.tex}
+
 \section{多体系の統計力学}
 
 \input{6_monte_carlo/statphys-01.tex}
@@ -20,15 +22,44 @@
 \input{6_monte_carlo/statphys-03.tex}
 \input{6_monte_carlo/statphys-04.tex}
 
-\section{乱択アルゴリズム}
-\input{6_monte_carlo/randomized-01.tex}
-\input{6_monte_carlo/randomized-02.tex}
-\input{6_monte_carlo/randomized-03.tex}
+\section{数え上げ}
 
-\input{6_monte_carlo/process.tex}
-\input{6_monte_carlo/rng.tex}
-\input{6_monte_carlo/histogram.tex}
-\input{6_monte_carlo/integration.tex}
-\input{6_monte_carlo/mcmc.tex}
+\input{6_monte_carlo/counting-01.tex}
+\input{6_monte_carlo/counting-02.tex}
+
+\section{マルコフ連鎖モンテカルロ}
+
+\input{6_monte_carlo/mcmc-01.tex}
+\input{6_monte_carlo/mcmc-02.tex}
+\input{6_monte_carlo/mcmc-03.tex}
+\input{6_monte_carlo/mcmc-04.tex}
+\input{6_monte_carlo/mcmc-05.tex}
+\input{6_monte_carlo/mcmc-06.tex}
+\input{6_monte_carlo/mcmc-07.tex}
+\input{6_monte_carlo/mcmc-08.tex}
+\input{6_monte_carlo/mcmc-09.tex}
+\input{6_monte_carlo/mcmc-10.tex}
+\input{6_monte_carlo/mcmc-11.tex}
+\input{6_monte_carlo/mcmc-12.tex}
+\input{6_monte_carlo/mcmc-13.tex}
+\input{6_monte_carlo/mcmc-14.tex}
+
+\section{}
+\begin{frame}[t]{本日の課題}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 実習
+    \begin{itemize}
+    \item 講義資料の中の {\tt square\_lattice.c}, {\tt harmonic.c}をコンパイル・実行。ソースコードの中身を確認 \\
+
+      {\tt harmonic.c}中のパラメータ{\tt delta} (講義資料中の$\Delta$)を変えて、位置$x$の時系列の振る舞いがどう変わるか確認 \\
+      
+      サンプルコード一式: \href{https://github.com/todo-group/ComputerExperiments/releases/tag/2020a-computer2}{example-2-2.zip}
+    \item 実習課題一覧\href{https://github.com/todo-group/ComputerExperiments/releases/tag/2020a-computer2}{exercise-2.pdf}から適宜選び実習
+    \end{itemize}
+  \item 質問はSlackの「\# 6\_モンテカルロ法」あるいは他の適当と思われるチャンネルで
+  \item 次回講義(10/16)の前日までにITC-LMSのアンケート「作業レポートNo.2」に回答
+  \end{itemize}
+\end{frame}
 
 \end{document}

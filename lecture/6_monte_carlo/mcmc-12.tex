@@ -1,3 +1,5 @@
+%-*- coding:utf-8 -*-
+
 \begin{frame}[t,fragile]{イジング模型に対するモンテカルロ法}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
@@ -7,7 +9,7 @@
 for (s = 0; s < num_sites; ++s) {
   delta = 0.0;
   for (j = 0; j < num_neighbors; ++j) {
-    v = neighbor(s, j);
+    v = mat_elem(neighbor, s, j);
     delta += 2 * J * spin[s] * spin[v];
   }
   if (random() < exp(-beta * delta))

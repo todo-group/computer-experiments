@@ -1,7 +1,9 @@
+%-*- coding:utf-8 -*-
+
 \begin{frame}[t,fragile]{マルコフ連鎖モンテカルロ}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
-  \item 直接Boltzmann分布から独立したサンプリングをおこなうことは難しい
+    %\setlength{\itemsep}{1em}
+  \item 直接カノニカル分布から独立したサンプリングをおこなうことは難しい
   \item 直前の状態からある確率にしたがって、次の状態を生成(マルコフ連鎖、Markov chain)
     \[
     \begin{split}
@@ -9,7 +11,7 @@
       & \qquad = {\rm Pr}(X_{n+1}=s_j \,|\, X_n = s_{i}) = P_{i,j}
       \end{split}
     \]
-    \item 長時間極限でBoltzmann分布が達成されるように遷移確率(行列)$P_{i,j}$を選ぶ
+    \item 長時間極限でカノニカル分布が達成されるように遷移確率(行列)$P_{i,j}$を選ぶ
       \[
       \lim_{n\rightarrow\infty}{\rm Pr}(X_n=s_j) \sim \pi_j = \exp[-\beta {\cal H}(s_j)]
       \]
