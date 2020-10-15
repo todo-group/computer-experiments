@@ -1,0 +1,17 @@
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{変分法}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 波動関数を互いに直交する正規化された波動関数(基底関数)の線形結合で近似する (変分波動関数、試行関数)
+    \begin{align*}
+      | \psi \rangle = \sum_{p=1}^m C_p | \phi_p \rangle \qquad (\langle \phi_p | \phi_q \rangle = \delta_{pq})
+    \end{align*}
+  \item エネルギーの期待値
+    \begin{align*}
+      E &= \frac{\langle \psi | H | \psi \rangle}{\langle \psi | \psi \rangle} = \frac{\sum_{p,q} C_p^* H_{pq} C_q}{\sum_{p,q} C_p^* \delta_{pq} C_q} \\
+      H_{pq} &= \langle \phi_p | H | \phi_q \rangle
+    \end{align*}
+  \item $E$ができるだけ小さくなるよう係数$C_p$を最適化 (変分原理)
+  \end{itemize}
+\end{frame}

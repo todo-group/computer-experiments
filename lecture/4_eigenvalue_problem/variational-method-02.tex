@@ -1,0 +1,18 @@
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{変分法}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item $\delta E = 0$から
+    \begin{align*}
+      \sum_{q} (H_{pq} - E \delta_{pq} ) C_q = 0 \qquad \text{for $^\forall p$}
+    \end{align*}
+  \item $H_{pq}$, $\delta_{pq}$を$m \times m$行列と考えると、固有値問題とみなせる
+    \begin{align*}
+      H C = E C
+    \end{align*}
+  \item $H$はエルミート行列
+  \item $\{ \phi_p \}$の張る部分空間での最適化 (= Rayleigh-Ritzの方法)
+  \item 変分波動関数と真の波動関数の差が$\epsilon$程度の時、$E$と真の固有エネルギーの差は$\epsilon^2$程度
+  \end{itemize}
+\end{frame}

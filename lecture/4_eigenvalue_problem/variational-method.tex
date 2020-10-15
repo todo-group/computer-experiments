@@ -1,81 +1,8 @@
+%-*- coding:utf-8 -*-
+
 \section{変分法}
 
-\begin{frame}[t,fragile]{変分法}
-  \begin{itemize}
-    %\setlength{\itemsep}{1em}
-  \item 波動関数を互いに直交する正規化された波動関数(基底関数)の線形結合で近似する (変分波動関数、試行関数)
-    \begin{align*}
-      | \psi \rangle = \sum_{p=1}^m C_p | \phi_p \rangle \qquad (\langle \phi_p | \phi_q \rangle = \delta_{pq})
-    \end{align*}
-  \item エネルギーの期待値
-    \begin{align*}
-      E &= \frac{\langle \psi | H | \psi \rangle}{\langle \psi | \psi \rangle} = \frac{\sum_{p,q} C_p^* H_{pq} C_q}{\sum_{p,q} C_p^* \delta_{pq} C_q} \\
-      H_{pq} &= \langle \phi_p | H | \phi_q \rangle
-    \end{align*}
-  \item $E$ができるだけ小さくなるよう係数$C_p$を最適化 (変分原理)
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[t,fragile]{変分法}
-  \begin{itemize}
-    %\setlength{\itemsep}{1em}
-  \item $\delta E = 0$から
-    \begin{align*}
-      \sum_{q} (H_{pq} - E \delta_{pq} ) C_q = 0 \qquad \text{for $^\forall p$}
-    \end{align*}
-  \item $H_{pq}$, $\delta_{pq}$を$m \times m$行列と考えると、固有値問題とみなせる
-    \begin{align*}
-      H C = E C
-    \end{align*}
-  \item $H$はエルミート行列
-  \item $\{ \phi_p \}$の張る部分空間での最適化 (= Rayleigh-Ritzの方法)
-  \item 変分波動関数と真の波動関数の差が$\epsilon$程度の時、$E$と真の固有エネルギーの差は$\epsilon^2$程度
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[t,fragile]{非直交基底関数による変分法}
-  \begin{itemize}
-    %\setlength{\itemsep}{1em}
-  \item 重なり積分
-    \begin{align*}
-      S_{pq} = \langle \phi_p | \phi_q \rangle \ne \delta_{pq}
-    \end{align*}
-  \item 変分波動関数の正規化条件
-    \begin{align*}
-      \langle \psi | \psi \rangle = \sum_{p,q} C_p^* \langle \phi_p | \phi_q \rangle C_q = \sum_{p,q} C_p^* S_{pq} C_q = 1
-    \end{align*}
-  \item エネルギー期待値
-    \begin{align*}
-      E = \frac{\sum_{p,q} C_p^* H_{pq} C_q}{\sum_{p,q} C_p^* S_{pq} C_q}
-    \end{align*}
-  \item $\delta E = 0$から
-    \begin{align*}
-      \sum_q (H_{pq} - E S_{pq}) C_q = 0 \ \Rightarrow \ HC = ESC \ \text{(一般化固有値問題)}
-    \end{align*}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[t,fragile]{一般化固有値問題}
-  \begin{itemize}
-    %\setlength{\itemsep}{1em}
-  \item 重なり行列 $S_{pq} = \langle \phi_p | \phi_q \rangle$
-    \begin{itemize}
-      \item エルミート行列: $S_{pq} = S_{qp}^*$
-      \item 正定値 ($\{\phi_p\}$が線形独立の場合):
-        \begin{align*}
-          x^\dagger S x = \sum_{pq} \langle \phi_p | \phi_q \rangle x_p^* x_q = || \sum_p x_p | \phi_p \rangle ||^2 > 0
-        \end{align*}
-    \end{itemize}
-  \item 一般化固有値問題 $\Rightarrow$ 2回の固有値分解により解くことができる
-    \begin{itemize}
-      \item $S$を固有値分解: $S = U D U^\dagger$
-      \item $S$固有値は全て正 $\Rightarrow$ $D^{-1/2}$を定義可
-      \item $HC=ESC$ $\Rightarrow$ $D^{-1/2} U^\dagger H U D^{-1/2} D^{1/2} U^\dagger C = E D^{1/2} U^\dagger C$
-      \item $H' = D^{-1/2} U^\dagger H U D^{-1/2}$、$C'D^{1/2} U^\dagger C$とおくと
-        \begin{align*}
-          H'C' = EC' \qquad \text{(通常の)固有値問題}
-        \end{align*}
-      \item (1回目の固有値分解はコレスキー分解$A=L L^\dagger$ ($L$は下三角行列)を用いてもよい)
-    \end{itemize}
-  \end{itemize}
-\end{frame}
+\input{variational-method-01.tex}
+\input{variational-method-02.tex}
+\input{variational-method-03.tex}
+\input{variational-method-04.tex}

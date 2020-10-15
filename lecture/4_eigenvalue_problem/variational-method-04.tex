@@ -1,0 +1,26 @@
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{一般化固有値問題}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 重なり行列 $S_{pq} = \langle \phi_p | \phi_q \rangle$
+    \begin{itemize}
+      \item エルミート行列: $S_{pq} = S_{qp}^*$
+      \item 正定値 ($\{\phi_p\}$が線形独立の場合):
+        \begin{align*}
+          x^\dagger S x = \sum_{pq} \langle \phi_p | \phi_q \rangle x_p^* x_q = || \sum_p x_p | \phi_p \rangle ||^2 > 0
+        \end{align*}
+    \end{itemize}
+  \item 一般化固有値問題 $\Rightarrow$ 2回の固有値分解により解くことができる
+    \begin{itemize}
+      \item $S$を固有値分解: $S = U D U^\dagger$
+      \item $S$固有値は全て正 $\Rightarrow$ $D^{-1/2}$を定義可
+      \item $HC=ESC$ $\Rightarrow$ $D^{-1/2} U^\dagger H U D^{-1/2} D^{1/2} U^\dagger C = E D^{1/2} U^\dagger C$
+      \item $H' = D^{-1/2} U^\dagger H U D^{-1/2}$、$C'D^{1/2} U^\dagger C$とおくと
+        \begin{align*}
+          H'C' = EC' \qquad \text{(通常の)固有値問題}
+        \end{align*}
+      \item (1回目の固有値分解はコレスキー分解$A=L L^\dagger$ ($L$は下三角行列)を用いてもよい)
+    \end{itemize}
+  \end{itemize}
+\end{frame}

@@ -1,0 +1,23 @@
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{非直交基底関数による変分法}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 重なり積分
+    \begin{align*}
+      S_{pq} = \langle \phi_p | \phi_q \rangle \ne \delta_{pq}
+    \end{align*}
+  \item 変分波動関数の正規化条件
+    \begin{align*}
+      \langle \psi | \psi \rangle = \sum_{p,q} C_p^* \langle \phi_p | \phi_q \rangle C_q = \sum_{p,q} C_p^* S_{pq} C_q = 1
+    \end{align*}
+  \item エネルギー期待値
+    \begin{align*}
+      E = \frac{\sum_{p,q} C_p^* H_{pq} C_q}{\sum_{p,q} C_p^* S_{pq} C_q}
+    \end{align*}
+  \item $\delta E = 0$から
+    \begin{align*}
+      \sum_q (H_{pq} - E S_{pq}) C_q = 0 \ \Rightarrow \ HC = ESC \ \text{(一般化固有値問題)}
+    \end{align*}
+  \end{itemize}
+\end{frame}
