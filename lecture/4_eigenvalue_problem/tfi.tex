@@ -1,0 +1,116 @@
+\section{横磁場イジング模型}
+
+\begin{frame}[t,fragile]{横磁場イジング模型}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item ハミルトニアン
+    \[
+      H = - J \sum_{\langle i,j \rangle} \sigma_i^z \sigma_j^z - h \sum_i \sigma_i^z - \Gamma \sum_i \sigma_i^x
+    \]
+  \item $\sigma_i^x$、$\sigma_i^z$: パウリ行列
+    \begin{align*}
+      \big(\sigma_i^z\big)^2 &= \big(\sigma_i^x\big)^2 = I \\
+      [ \sigma_i^z, \sigma_i^x ] &\ne 0
+    \end{align*}
+  \item $h$: 縦磁場(準位間のエネルギー差$=2h$)
+  \item $\Gamma$: 横磁場(トンネリング)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{横磁場イジング模型}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 2サイト系
+    \[
+      H = -J \sigma_1^z \sigma_2^z - h (\sigma_1^z + \sigma_2^z) - \Gamma (\sigma_1^x + \sigma_2^x)
+    \]
+  \item 行列要素
+    \begin{align*}
+      \langle \uparrow \uparrow | H | \uparrow \uparrow \rangle &= -J - 2h \\
+      \langle \uparrow \uparrow | H | \uparrow \downarrow \rangle &= -\Gamma \\
+      \langle \uparrow \uparrow | H | \downarrow \downarrow \rangle &= 0 \\
+      &\vdots
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{量子相転移}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item $h=0$の場合
+    \begin{itemize}
+    \item $\Gamma \rightarrow 0$: $|\uparrow\uparrow\cdots\uparrow\rangle$、あるいは$|\downarrow\downarrow\cdots\downarrow\rangle$が基底状態(二重縮退)
+    \item $J \rightarrow 0$: $\sigma_i^x$の固有状態($|\uparrow\rangle_i + |\downarrow\rangle_i$)の積が基底状態(全ての状態の重ね合わせ)
+    \end{itemize}
+  \item 一次元系
+    \[
+      H = - J \sum_{i} \sigma_i^z \sigma_{i+1}^z - \Gamma \sum_i \sigma_i^x
+    \]
+    $\Gamma = J$で量子相転移 (熱ゆらぎではなく量子ゆらぎによる連続相転移)  
+  \end{itemize}
+\end{frame}
+
+\section{多体量子系の時間発展}
+
+\begin{frame}[t,fragile]{横磁場イジング模型の時間発展}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 時間依存シュレディンガー方程式の形式解
+    \[
+    \Psi(t) = e^{-iHt} \Psi(0)
+    \]
+    \begin{itemize}
+    \item 有限差分法、クランク・ニコルソン法
+    \end{itemize}
+  \item 鈴木・トロッター分解 ($\Delta t = t / M$)
+    \begin{align*}
+      e^{-iHt} &= \big[ e^{-iH\Delta t} \big]^M \approx \big[ e^{-iH_z\Delta t} e^{-iH_x\Delta t} \big]^M \\
+      &= \big[ e^{i\Delta t J \sum_{i,j} \sigma_i^z \sigma_j^z} e^{i\Gamma \sigma_1^x\Delta t} e^{i\Gamma \sigma_2^x\Delta t} \cdots e^{i\Gamma \sigma_N^x\Delta t} \big]^M
+    \end{align*}
+  \item $[\sigma_i^x]^2 = I$より
+    \[
+    e^{i\Gamma \sigma_i^x\Delta t} = \cos (\Gamma\Delta t) + i \sigma_i^x \sin (\Gamma\Delta t)
+    \]
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{量子アニーリング}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 離散最適化問題
+    \[
+    H = -J \sum_{i<j} \epsilon_{ij} \sigma_i^z \sigma_j^z
+    \]
+    の基底状態配位と基底状態エネルギーを求めたい
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{量子アニーリング}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 横磁場を導入
+    \[
+    H = -J \sum_{i<j} \epsilon_{ij} \sigma_i^z \sigma_j^z - \Gamma \sum_i \sigma_i^x
+    \]
+  \item 古典極限 ($J=1$, $\Gamma=0$)
+    \begin{itemize}
+    \item 求めたい基底状態
+    \end{itemize}
+  \item 量子極限 ($J=0$, $\Gamma=1$)
+    \begin{itemize}
+    \item $2^N$個の全ての状態の重ね合わせ
+    \end{itemize}
+  \item 量子アニーリング
+    \begin{itemize}
+    \item $J+\Gamma=1$を保ったままで、$\Gamma=1$から$\Gamma=0$まで「ゆっくり」と減少させる
+    \end{itemize}
+    
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{A}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item B
+  \end{itemize}
+\end{frame}
