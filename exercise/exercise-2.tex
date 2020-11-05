@@ -1,6 +1,7 @@
 \documentclass[11pt]{jarticle}
 
 \usepackage{amsmath}
+\usepackage[dvipdfmx]{graphicx}
 \usepackage{hyperref}
 
 \setlength{\oddsidemargin}{-0.7cm}
@@ -12,7 +13,7 @@
 \begin{document}
 
 \noindent
-{\bf\large 「計算機実験II」実習課題 (2020/10/23更新)}
+{\bf\large 「計算機実験II」実習課題 (2020/11/05更新)}
 \\[-0.5em]
 
 \noindent
@@ -76,6 +77,35 @@
 
 \item 3量子ビット加算器を講義資料(lecture-2-4.pdf, p.15)を参考に作成し、$2^3 \times 2^3$通りの入力に対して、正しい結果が得られることを確認せよ。さらに、状態の線形結合を入力とした場合に加算結果の線形結合が出力されることを確認せよ
 
+\hspace*{-2em} {\bf [少数多体系・分子動力学]}
+
+\item 重力相互作用する$N$質点系の運動方程式
+  \[
+  m_i \frac{d^2 \mathbf{r}_i}{dt^2} = - \sum_{j \ne i} G m_i m_j \frac{\mathbf{r}_i - \mathbf{r}_j}{|\mathbf{r}_i - \mathbf{r}_j|^3} \qquad i = 1,\ldots,N
+  \]
+  は、$N \ge 3$の場合には求積可能ではないが、これまで様々な特殊解が得られている。3体問題($N=3$)においては、オイラーの直線解、ラグランジュの三角解に加え、3体が単一の閉曲線上を運動する「8の字解」が知られている。3体は等しい質量$m_i=1$を持ち、$z=0$の平面上を運動しているとする。また、重力定数$G=1$とする。初期条件として$(x_1,y_1)=(0,0)$, $(x_2,y_2)=-(x_3,y_3)$, $(\dot{x}_1,\dot{y}_1)=(0.695804,1.67860)$, $(\dot{x}_2,\dot{y}_2)=(\dot{x}_3,\dot{y}_3)$, また重心と全運動量はゼロとする。初期条件$(\dot{x}_2,\dot{y}_2)$を変えて、「8の字解」となる条件を探せ。またその時の周期を見積もってみよ
+  \begin{center}
+    \resizebox{.4\textwidth}{!}{\includegraphics{figure-8.pdf}}
+  \end{center}
+  
+\item 蔵本模型は同期現象を記述する数学モデルである。蔵本模型では、それぞれ異なる固有振動数$\omega_i$を持つ$N$個の振動子の間に非線形相互作用が働いている。支配方程式は以下の形で表される
+  \[
+  \frac{d\theta_i}{dt} = \omega_i + \frac{K}{N} \sum_{j=1}^N \sin(\theta_j - \theta_i) \qquad i=1,2,\ldots,N
+  \]
+  ここで、$\theta_i$は$i$番目の振動子の位相、$K$は結合定数である。結合定数$K$が小さいとき、振動子はインコヒーレントに振動するが、$K$がある臨界値$K^*$を超えると同期して振動するようになる。同期の度合いは複素秩序変数
+  \[
+  r(t) e^{i\Psi(t)} = \frac{1}{N} \sum_j e^{i\theta_j(t)}
+  \]
+  の絶対値$r(t)$により測ることができる。固有振動数$\omega_i$は平均0、分散1の正規分布に従いランダムに分布、また$t=0$において$\theta_i$は$[0,2\pi]$に一様分布しているとして、常微分方程式を数値的に解き、$r(t)$の時間依存性をプロットせよ。$N=64,128,256,\cdots$について、$r(t)$の長時間平均値の結合定数$K$の依存性を観察し、臨界点$K^*$を見積もってみよ。(高速化のヒント: 複素秩序変数$(r(t),\Psi(t))$を用いると、支配方程式の相互作用項は$K r \sin(\Psi-\theta_i)$と変形できる)
+
+\item ローレンツ方程式は、カオス的な振る舞いを示す非線形方程式の代表例である
+  \begin{align*}
+    \dot{x} &= -\sigma x + \sigma y \\
+    \dot{y} &= -xz + rx - y \\
+    \dot{z} &= xy - bz
+  \end{align*}
+  パラメータを$\sigma=10$, $b=8/3$, $r=28$、初期条件を$(x,y,z)=(0,1,0)$として、4次のRunge-Kutta法を用いてローレンツ方程式を数値的に解き、軌道を3次元プロットせよ。また、わずかにずらした初期値(例: $y=1 \rightarrow 1+\epsilon$)を考え、もとの軌道からのずれがどのように拡大していくかプロットせよ
+  
 \hspace*{-2em} {\bf [その他]}
 
 \item 「\href{https://github.com/utphys-comp/handbook/releases/download/handbook-2019/handbook.pdf}{計算機実験ハンドブック}」の1.3節にEmacs以外のエディタの説明(vi (vim)、nano)を追加
