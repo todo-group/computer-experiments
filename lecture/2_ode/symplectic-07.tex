@@ -1,0 +1,23 @@
+\begin{frame}[t,fragile]{ベルレ法の変形}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 半整数ステップにおける運動量
+    \[
+    p(t + h/2) = \frac{q(t+h)-q(t)}{h}
+    \]
+    を導入すると
+    \begin{align*}
+      \begin{split}
+        p(t + h/2) &= p(t - h/2) + \frac{q(t+h)-2q(t)+q(t-h)}{h} \\
+        &= p(t - h/2) + h f[t,q(t)]
+      \end{split}
+    \end{align*}
+    一方
+    \[
+    q(t+h) = q(t) + hp(t+h/2)
+    \]
+  \item $\Rightarrow$ リープ・フロッグ法
+
+    座標についてはベルレ法と数学的に等価だが、運動量の精度が高く、丸め誤差に強い
+  \end{itemize}
+\end{frame}

@@ -1,0 +1,17 @@
+\begin{frame}[t,fragile]{シンプレクティック法の一般論}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item $H=T(p)$の時
+    \begin{align*}
+      \hat{D}(T)z &= \frac{\partial z}{\partial q} \frac{\partial T}{\partial p} - \frac{\partial T}{\partial q} \frac{\partial z}{\partial p} = \begin{bmatrix} \frac{dT}{dp} \\ 0 \end{bmatrix} \\
+      \hat{D}(T)^n z &= 0 \qquad n \ge 2 \\
+      \therefore e^{h\hat{D}(T)} z &= [ 1+h\hat{D}(T) ] z = \begin{bmatrix} q + h \frac{dT}{dp} \\ p \end{bmatrix}
+    \end{align*}
+  \item $H=V(q)$の時も同様に
+    \begin{align*}
+      e^{h\hat{D}(V)} z &= [ 1+h\hat{D}(V) ] z = \begin{bmatrix} q \\ p - h \frac{dV}{dq} \end{bmatrix}
+    \end{align*}
+  \item $e^{h\hat{D}(T)}$, $e^{h\hat{D}(V)}$とも正準変換
+  \item 一般的には、$e^{h\hat{D}(T+V)} z$は厳密には計算できない
+  \end{itemize}
+\end{frame}

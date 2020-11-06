@@ -1,0 +1,22 @@
+\begin{frame}[t,fragile]{ベルレ(Verlet)法}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 微分方程式が$\ddot{q}(t) = f[t,q(t)]$の形で書かれる場合を考える
+  \item $q(t)$のテイラー展開
+    \[
+    q(t \pm h) = q(t) \pm h \dot{q}(t) + \frac{h^2}{2} \ddot{q}(t) \pm \cdots
+    \]
+    から、$q(t + h)$と$q(t - h)$の表式を足し合わせて整理
+    \[
+    q(t+h) = 2q(t) - q(t-h)+h^2 f[t,q(t)] + O(h^4)
+    \]
+  \item 運動量の計算
+    \[
+    p(t) = \frac{q(t+h) - q(t-h)}{2h}
+    \]
+  \item 初期条件: $q(0)$と$p(0)$から$q(h)$を以下のように求める
+    \[
+    q(h) = q(0) + h p(0) + \frac{h^2}{2} f[0, q(0)]
+    \]
+  \end{itemize}
+\end{frame}

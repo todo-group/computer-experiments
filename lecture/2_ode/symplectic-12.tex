@@ -1,0 +1,20 @@
+\begin{frame}[t,fragile]{シンプレクティック法の一般論}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 二次のシンプレクティック法
+    \[
+    e^{h (A+B)} = e^{\frac{h}{2}B} e^{hA} e^{\frac{h}{2}B} + O(h^3)
+    \]
+    から
+    \begin{align*}
+      \hat{S}_2 &= e^{\frac{h}{2}\hat{D}(T)} e^{h\hat{D}(V)} e^{\frac{h}{2}\hat{D}(T)}
+    \end{align*}
+    $\Rightarrow$ リープ・フロッグ法
+  \item 四次のシンプレクティック法 (吉田の方法)
+    \begin{align*}
+      \hat{S}_4 &= e^{c_1h\hat{D}(T)} e^{d_1 h\hat{D}(V)} e^{c_2 h\hat{D}(T)} e^{d_2 h\hat{D}(V)} e^{c_3h\hat{D}(T)} e^{d_3 h\hat{D}(V)} e^{c_4h\hat{D}(T)} \\
+      & c_1 = c_4 = \frac{1}{2(2-2^{1/3})}, \ c_2 = c_3 = \frac{1-2^{1/3}}{2(2-2^{1/3})}, \\
+      & d_1 = d_3 = \frac{1}{2-2^{1/3}}, \ d_2 = \frac{2^{1/3}}{2-2^{1/3}}
+    \end{align*}
+  \end{itemize}
+\end{frame}

@@ -1,0 +1,21 @@
+\begin{frame}[t,fragile]{速度ベルレ法(Velocity Verlet)}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 運動量に対する中心差分
+    \[
+    p(t) = \frac{q(t+h)-q(t-h)}{2h}
+    \]
+    から
+    \[
+    q(t+h) = 2hp(t) + q(t-h)
+    \]
+    ベルレ法の式と和をとると
+    \begin{align*}
+      q(t + h) &= q(t) + hp(t) + h^2 f[t,q(t)] / 2 \\
+      p(t + h) &= p(t) + h \Big( f[t+h,q(t+h)]  + f[t,q(t)] \Big) / 2
+    \end{align*}
+  \item $\Rightarrow$ 速度ベルレ法
+
+    2次のシンプレクティック積分法、丸め誤差にも安定
+  \end{itemize}
+\end{frame}

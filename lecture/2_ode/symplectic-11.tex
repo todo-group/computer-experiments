@@ -1,0 +1,17 @@
+\begin{frame}[t,fragile]{シンプレクティック法の一般論}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item $e^{h\hat{D}(T+V)}$を$e^{a_i h\hat{D}(T)}$, $e^{b_i h\hat{D}(V)}$の積で近似する
+  \item 演算子(行列) $A,B$について
+    \[
+    e^{h (A+B)} = e^{hA} e^{hB} + O(h^2)
+    \]
+  \item 一次のシンプレクティック法
+    \begin{align*}
+      \hat{S}_1 &= e^{h\hat{D}(V)} e^{h\hat{D}(T)} \\
+      q(t+h) &= q(t) + h \frac{dT(p(t))}{dp} \\
+      p(t+h) &= p(t) - h \frac{dV(q({\color{red}t+h}))}{dq}
+    \end{align*}
+    $\Rightarrow$ オイラー法+逆オイラー法
+  \end{itemize}
+\end{frame}

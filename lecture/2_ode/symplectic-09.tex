@@ -1,0 +1,18 @@
+\begin{frame}[t,fragile]{シンプレクティック法の一般論}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item $z=\begin{bmatrix} q \\ p \end{bmatrix}$と書き、$f(z)$に作用する演算子$\hat{D}(h)$をポアソン括弧を用いて定義($h=h(z)$はパラメータ)
+    \[
+    \hat{D}(h)f = \{ f, h \} = \frac{\partial f}{\partial q} \frac{\partial h}{\partial p} - \frac{\partial h}{\partial q} \frac{\partial f}{\partial p}
+    \]
+  \item ハミルトニアン$H=T(p)+V(q)$に対する正準方程式
+    \[
+    \dot{z} = \hat{D}(H) z
+    \]
+    に対する形式解
+    \[
+    z(t+h) = e^{h \hat{D}(H)} z(t)
+    \]
+  \item $e^{h \hat{D}(H)}$: 時間発展演算子 (正準変換)
+  \end{itemize}
+\end{frame}
