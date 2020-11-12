@@ -1,0 +1,21 @@
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{分子動力学法}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 適当な初期条件から、運動方程式に従って位置と運動量を時間発展させる
+    \begin{itemize}
+    \item Euler法、Runge-Kutta法、リープ・フロッグ法、速度ベルレ法など
+    \item $6N$次元の連立微分方程式
+    \end{itemize}
+  \item 時間発展に関する物理量の時間平均から平均を評価
+    \begin{align*}
+      \langle A(p,x) \rangle &= \frac{1}{Z(E)} \int A(p,x) \, \delta(H(p,x)-E) \, dp \, dx \\
+      &\simeq \frac{1}{t_{\rm max}} \int_0^{t_{\rm max}} A(p(t),x(t)) \, dt
+    \end{align*}
+    \begin{itemize}
+    \item 運動方程式では全エネルギーが保存する→ミクロカノニカル分布
+    \end{itemize}
+  \item 平衡状態における平均値だけでなく、熱や電荷の輸送などの動的現象、非平衡状態からの緩和現象などもシミュレーションできる
+  \end{itemize}
+\end{frame}

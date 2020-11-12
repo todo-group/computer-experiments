@@ -1,0 +1,17 @@
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{補足(*)}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item $f(s)=0$の解を$s_0$とすると、$\displaystyle \delta [f(s)] = \frac{\delta(s-s_0)}{|f'(s_0)|}$が成り立つ
+
+    証明: $u=f(s)$とおくと、$du = f'(s)ds$から
+    \begin{align*}
+      \int h(s) {\color{red}\delta [f(s)]} \, ds= \int h(f^{-1}(u)) \delta(u) \frac{du}{|f'(f^{-1}(u))|}
+    \end{align*}
+    $f^{-1}(0)=s_0$なので
+    \begin{align*}
+      = \frac{h(s_0)}{|f'(s_0)|} = \int h(s) {\color{red}\frac{\delta(s-s_0)}{|f'(s_0)|}} ds
+    \end{align*}
+  \end{itemize}
+\end{frame}

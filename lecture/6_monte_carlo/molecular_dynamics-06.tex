@@ -1,0 +1,21 @@
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{Nose-Hoover熱浴}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item Nose (能勢)-Hoover法
+    \begin{itemize}
+    \item 熱浴をたった1つの自由度($s$)だけで実現する!
+    \item 現実系のハミルトニアン
+      \begin{align*}
+        H(\mathbf{p},\mathbf{x}) &= \sum_i \frac{p_i^2}{2m} + U(\mathbf{x})
+      \end{align*}
+    \item 仮想系のハミルトニアン (温度$T$をパラメータとして含む)
+      \begin{align*}
+        H'(\mathbf{p}',\mathbf{x}',{\color{red}p_s},{\color{red}s}) &= \sum_i \frac{{p'_i}^2}{2m{\color{red}s^2}} + U(\mathbf{x}') + {\color{red}\frac{p_s^2}{2Q} + g k_B T\log s}
+      \end{align*}
+      $s$: 熱浴の自由度、$p_s$: $s$に共役な運動量、$Q$: 熱浴の「質量」、$g$: 系の自由度($3N+1$または$3N$)
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+

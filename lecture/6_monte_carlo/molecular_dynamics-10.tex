@@ -1,0 +1,19 @@
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{カノニカル分布の実現}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item $s$について積分(*)
+    \begin{align*}
+      \int ds \, s^{3N} \delta[f(s)] = s_0^{3N} / | f'(s_0) | = s_0^{3N+1} / g k_B T
+    \end{align*}
+    $f(s) \equiv H(\mathbf{p},\mathbf{x}) + \frac{p_s^2}{2Q} + g k_B T \log s - E'$、$s_0$は$f(s)=0$の解
+    \begin{align*}
+      s_0 = \exp \Big[ -\frac{1}{gk_BT} \Big( H(p,x) + \frac{p_s^2}{2Q} - E' \Big) \Big]
+    \end{align*}
+  \item さらに$p_s$についてガウス積分を行い、$g=3N+1$とすると
+    \begin{align*}
+      Z' = \frac{1}{3N+1} \sqrt{\frac{2Q\pi}{k_BT}} e^{E'/k_BT} \int d\mathbf{p}d\mathbf{x} \, {\color{red}\exp [- H(p,x)/k_BT ]}
+    \end{align*}
+  \end{itemize}
+\end{frame}

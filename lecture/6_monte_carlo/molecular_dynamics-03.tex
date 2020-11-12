@@ -1,0 +1,26 @@
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{境界条件と力の計算}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 気体・液体・固体などの熱力学的極限を調べたい場合
+    \begin{itemize}
+    \item 端の効果を取り除くために周期境界条件を採用
+    \item 周期的に同じパターンが続く
+    \end{itemize}
+  \item ポテンシャルの計算
+    \begin{align*}
+      U = \frac{1}{2} \sum_i \sum_{j \ne i} \sum_{n_x=-\infty}^{\infty} \sum_{n_y=-\infty}^{\infty} \sum_{n_z=-\infty}^{\infty} U[\mathbf{r}_i - \mathbf{r}_j + L(n_x,n_y,n_z)]
+    \end{align*}
+  \item 短距離力
+    \begin{itemize}
+    \item カットオフを入れる
+    \item 最も近いイメージだけ考慮(minimum image convention)
+    \end{itemize}
+  \item 長距離力
+    \begin{itemize}
+    \item カットオフを入れると物理が変わる
+    \item エバルト法、ツリー法、高速多重極展開
+    \end{itemize}
+  \end{itemize}
+\end{frame}

@@ -1,0 +1,19 @@
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{カノニカル分布の実現}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item $H'(\mathbf{p}',\mathbf{x}',p_s,s)$による仮想時間発展によりエネルギー$E'$のミクロカノニカルアンサンブルが実現しているとする
+
+    $\Leftrightarrow$ 仮想時間$t'$でサンプルすると$2(3N+1)$次元の位相空間上で$H'=E$の曲面上に均等に分布(エルゴード性)
+    
+    $\Leftrightarrow$ 分布関数: $\delta [ H'(\mathbf{p}',\mathbf{x}',p_s,s) - E']$
+    
+    $\Rightarrow$ 現実系の変数$(p,q)$に関する周辺分布を考える
+  \item 仮想系のミクロカノニカル分配関数
+    \begin{align*}
+      Z'&=\int d\mathbf{p}' d\mathbf{x}' dp_s ds \, \delta [ H'(\mathbf{p}',\mathbf{x}',p_s,s) - E'] \\
+      &=\int d\mathbf{{\color{red}p}} d\mathbf{{\color{red}x}} dp_s ds \, {\color{red}s^{3N}} \delta [ {\color{red}H(\mathbf{p},\mathbf{x})} + \frac{p_s^2}{2Q} + g k_B T \log s - E']
+    \end{align*}
+  \end{itemize}
+\end{frame}

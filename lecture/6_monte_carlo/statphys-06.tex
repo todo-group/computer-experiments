@@ -1,0 +1,17 @@
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{数値積分}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 一次元の場合
+    \begin{itemize}
+    \item 台形公式: 積分区間$(a,b)$を$M$個の幅$\Delta=(b-a)/M$の区間に分けて線形関数で近似
+      \begin{align*}
+        \int_a^b f(x) \, dx &= \sum_{i=1}^M \int_{a+\Delta (i-1)}^{a+\Delta i} f(x) \, dx \\
+        &\simeq \sum_{i=1}^M \Delta \frac{f({a+\Delta (i-1)}) + f({a+\Delta i})}{2}
+      \end{align*}
+    \item より高次の公式: シンプソンの公式(区間を二次式で近似)など
+    \end{itemize}
+    \item 高次元になると区間の数が指数関数的に増える (次元の呪い)
+  \end{itemize}
+\end{frame}

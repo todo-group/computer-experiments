@@ -1,0 +1,17 @@
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{実時間発展の場合}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 実時間に直した方程式の時間発展を計算した場合、物理量$A(\mathbf{p},\mathbf{x})$の実時間平均は
+    \begin{align*}
+      \langle A \rangle_t &= \lim_{\tau\rightarrow\infty} \frac{1}{\tau} \int_0^\tau dt \, A(\mathbf{p}(t),\mathbf{x}(t)) \\
+      &= \lim_{\tau\rightarrow\infty} \frac{\tau'}{\tau} \frac{1}{\tau'} \int_0^{\tau'} dt' \, A(\mathbf{p}'(t')/s(t'),\mathbf{x}'(t')) / s(t')
+    \end{align*}
+  \item $\tau = \int_0^{\tau} dt = \int_0^{\tau'} dt'/s(t')$なので
+    \begin{align*}
+      \langle A \rangle_t &= \frac{\lim_{\tau'\rightarrow\infty} \frac{1}{\tau'} \int_0^{\tau'} dt' \, A(\mathbf{p}'(t')/s(t'),\mathbf{x}'(t')) / s(t')}{\lim_{\tau'\rightarrow\infty} \frac{1}{\tau'} \int_0^{\tau'} dt' \, 1/ s(t')} \\
+      &= \langle A(\mathbf{p},\mathbf{x}) / s \rangle_{t'} / \langle 1 / s \rangle_{t'}
+    \end{align*}
+  \end{itemize}
+\end{frame}

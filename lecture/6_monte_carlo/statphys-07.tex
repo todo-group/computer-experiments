@@ -1,0 +1,19 @@
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{マルコフ連鎖モンテカルロ法}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item メトロポリス法
+    \begin{itemize}
+    \item 一つの粒子を選ぶ(位置$x$)
+    \item 新しい位置の候補をある確率分布に従って選ぶ($x'$)
+    \item ポテンシャルエネルギーの変化量($\Delta E$)を計算し、確率$P=\min(1,exp[-\beta\Delta E])$で新しい位置を採択
+    \end{itemize}
+  \item 新しい位置の選び方
+    \begin{itemize}
+    \item 大きく変えすぎると棄却率が増加
+    \item もとの位置を中心とする局所的な分布
+    \item $\sigma={\cal O}(1)$の標準偏差をもつ正規分布など: $N(x, \sigma^2)$
+    \end{itemize}
+  \end{itemize}
+\end{frame}

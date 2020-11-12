@@ -1,0 +1,19 @@
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{Nose-Hoover熱浴}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 現実系の変数による書き換え
+    \begin{align*}
+      \frac{dx_i}{dt} &= \frac{\partial H}{\partial p_i} \\
+      \frac{dp_i}{dt} &= -\frac{\partial U}{\partial x_i} -\frac{p_s}{Q} p_i \\
+      \frac{dp_s}{dt} &= 2 \big[ \sum_i \frac{{p_i}^2}{2m} - \frac{g k_B T}{2} \big]
+    \end{align*}
+  \item あるいは、$x_s = \log s$を導入すると、最後の2つの式は
+    \begin{align*}
+      % \frac{dx_i}{dt} &= \frac{\partial H}{\partial p_i} \\
+      \frac{dp_i}{dt} &= -\frac{\partial U}{\partial x_i} -\frac{dx_s}{dt} p_i \\
+      \frac{d^2x_s}{dt^2} &= \frac{2}{Q} \big[ \sum_i \frac{{p_i}^2}{2m} - \frac{g k_B T}{2} \big]
+    \end{align*}
+  \end{itemize}
+\end{frame}

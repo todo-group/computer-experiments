@@ -1,0 +1,67 @@
+%-*- coding:utf-8 -*-
+
+\documentclass[10pt,dvipdfmx]{beamer}
+\usepackage{tutorial}
+
+\title{計算機実験II (L6) --- 分子動力学}
+\date{2020/11/13}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+  \tableofcontents
+\end{frame}
+
+\input{0_about/about2-2.tex}
+
+\input{6_monte_carlo/rng-07.tex}
+
+\section{多体系の統計力学(復習)}
+
+\input{6_monte_carlo/statphys-05.tex}
+\input{6_monte_carlo/statphys-04.tex}
+\input{6_monte_carlo/statphys-06.tex}
+\input{6_monte_carlo/statphys-07.tex}
+
+\section{分子動力学法}
+
+\include{6_monte_carlo/molecular_dynamics-01.tex}
+\include{6_monte_carlo/molecular_dynamics-02.tex}
+\include{6_monte_carlo/molecular_dynamics-03.tex}
+
+\section{ビリアル定理}
+
+\input{6_monte_carlo/virial-01.tex}
+\input{6_monte_carlo/virial-02.tex}
+\input{6_monte_carlo/virial-03.tex}
+
+\section{温度の制御}
+
+\input{6_monte_carlo/molecular_dynamics-04.tex}
+\input{6_monte_carlo/molecular_dynamics-05.tex}
+\input{6_monte_carlo/molecular_dynamics-06.tex}
+\input{6_monte_carlo/molecular_dynamics-07.tex}
+\input{6_monte_carlo/molecular_dynamics-08.tex}
+\input{6_monte_carlo/molecular_dynamics-09.tex}
+\input{6_monte_carlo/molecular_dynamics-10.tex}
+%\input{6_monte_carlo/molecular_dynamics-11.tex}
+\input{6_monte_carlo/molecular_dynamics-12.tex}
+\input{6_monte_carlo/molecular_dynamics-13.tex}
+\input{6_monte_carlo/molecular_dynamics-14.tex}
+
+\section{}
+\begin{frame}[t]{本日の課題}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 実習
+    \begin{itemize}
+    \item 正規分布にしたがう乱数の生成法
+    \item 実習課題一覧\href{https://github.com/todo-group/ComputerExperiments/releases/tag/2020a-computer2}{exercise-2.pdf}から常微分方程式(あるいは別の)課題を選び実習
+    \end{itemize}
+  \item 質問はSlackの「\# 3\_常微分方程式」あるいは他の適当と思われるチャンネルで
+  \item 次回講義(12/4)の前日までにITC-LMSのアンケート「作業レポートNo.6」に回答
+  \end{itemize}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,19 @@
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{古典多粒子系}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item ハミルトニアン
+    \[
+    H = \sum \frac{p_i^2}{2m} + \sum_{ij} V(x_i, x_j)
+    \]
+  \item 分配関数
+    \[
+    Z(T) = \int \exp [- \beta H(p,x) ] \, dp \, dx
+    \]
+    \begin{itemize}
+    \item 運動量$p$に関する積分は簡単に実行できる(ガウス積分)
+    \item 位置$x$に関する積分: 数値積分、マルコフ連鎖モンテカルロ法、分子動力学法
+    \end{itemize}
+  \end{itemize}
+\end{frame}

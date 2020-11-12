@@ -1,0 +1,12 @@
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{実時間発展の場合}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 分子・分母の$t'$に関する期待値を計算すると、$s_0$が1つキャンセルするので
+    \begin{align*}
+      \langle A \rangle_t &= \frac{\int d\mathbf{p} d\mathbf{x} \, A(\mathbf{p},\mathbf{x}) \exp [ -\frac{3N}{gk_BT} H(\mathbf{p}, \mathbf{x})]}{\int d\mathbf{p} d\mathbf{x} \, \exp [ -\frac{3N}{gk_BT} H(\mathbf{p}, \mathbf{x})]}
+    \end{align*}
+    \item {\color{red}$g=3N$}とすると、実時間発展の長時間平均とカノニカル分布における位相平均が一致
+  \end{itemize}
+\end{frame}

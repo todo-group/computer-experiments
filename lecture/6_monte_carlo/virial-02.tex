@@ -1,0 +1,20 @@
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{ビリアル定理}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item ベキ的な相互作用の場合: $U = \sum_{i<j} a_{ij} | \mathbf{r}_i - \mathbf{r}_j |^{n+1}$
+    \[
+    \mathbf{f}_i = -\nabla_i U = - \sum_{j \ne i} a_{ij} (n+1) (\mathbf{r}_i - \mathbf{r}_j) | \mathbf{r}_i - \mathbf{r}_j |^{n-1} \equiv \sum_{j \ne i} \mathbf{f}_{ij}
+    \]
+    \begin{align*}
+      -\frac{1}{2} \sum_i \mathbf{f}_i \cdot \mathbf{r}_i &= -\frac{1}{2} \sum_i \sum_{j \ne i} \mathbf{f}_{ij} \cdot \mathbf{r}_i = -\frac{1}{2} \sum_{i < j} (\mathbf{f}_{ij} \cdot \mathbf{r}_i + \mathbf{f}_{ji} \cdot \mathbf{r}_j) \\
+      &= -\frac{1}{2} \sum_{i < j} \mathbf{f}_{ij} \cdot (\mathbf{r}_i - \mathbf{r}_j) = \frac{1}{2} (n+1) U
+    \end{align*}
+    $\Rightarrow$ $\displaystyle \langle T \rangle = \frac{n+1}{2} \langle U \rangle$
+  \item 特に重力、静電気力の場合($n=-2$)
+    \[
+     \langle T \rangle = -\frac{1}{2} \langle U \rangle \qquad \text{ビリアル比: $\displaystyle r_{\rm v} \equiv \frac{\langle T \rangle}{| \langle U \rangle |} = \frac{1}{2}$}
+    \]
+  \end{itemize}
+\end{frame}

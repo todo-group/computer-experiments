@@ -1,0 +1,21 @@
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{温度の制御}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item ランジュバン(Langevin)法
+    \begin{itemize}
+    \item 乱数を使う方法
+    \item 摩擦項と揺動項(ランダム力)を付け加える
+      \begin{align*}
+        \frac{dp_i}{dt} = - \frac{\partial H}{\partial q_i} - \gamma_i p_i + R_i(t)
+      \end{align*}
+    \item $\gamma_i$: 摩擦係数
+    \item $R_i(T)$: 平均零の白色ノイズ
+      \begin{align*}
+        \langle R_i(t) R_i(t') \rangle = 2 m \gamma_i k_B T \delta(t-t')
+      \end{align*}
+    \item 摩擦項と揺動項がつりあうところで、温度$T$のカノニカル分布が実現する
+    \end{itemize}
+  \end{itemize}
+\end{frame}

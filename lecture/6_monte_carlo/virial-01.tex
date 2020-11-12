@@ -1,0 +1,23 @@
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{ビリアル定理}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item ビリアル定理
+    \[
+    \langle T \rangle = -\frac{1}{2} \sum_i^N \langle \mathbf{f}_i \cdot \mathbf{r}_i \rangle
+    \]
+    $T$: 運動エネルギー、$\mathbf{f}_i$: 粒子$i$に働く力、$\mathbf{r}_i$: 粒子$i$の位置
+  \item ビリアル
+    \[
+    G = \sum_i^N \mathbf{p}_i \cdot \mathbf{r}_i
+    \]
+    \begin{itemize}
+    \item $G$の時間微分
+      \[
+      \frac{dG}{dt} = \sum_i \mathbf{p}_i \cdot \frac{d\mathbf{r}_i}{dt} + \sum_i \frac{d\mathbf{p}_i}{dt} \cdot \mathbf{r}_i = 2 T + \sum_i \mathbf{f}_i \cdot \mathbf{r}_i
+      \]
+    \item 長時間平均をとると左辺は0 $\Rightarrow$ ビリアル定理
+    \end{itemize}
+  \end{itemize}
+\end{frame}

@@ -1,0 +1,24 @@
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{圧力・温度の計算}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 壁から受ける力を考えると
+    \begin{align*}
+    \mathbf{f}_i &= \mathbf{f}_i^\text{int} + \mathbf{f}_i^\text{ext} = -\nabla_i U + \mathbf{f}_i^\text{ext} \\
+      \mathbf{f}_i^\text{ext} &= - \int_{\partial V} (P \mathbf{n}) \cdot \mathbf{r} \, dS = - P \int \nabla \cdot \mathbf{r} \, dV = -3PV
+    \end{align*}
+  \item ビリアル定理と組み合わせて
+    \[
+    PV = \frac{2}{3} \langle T \rangle -\frac{1}{3} \langle \sum_i \nabla_i U \cdot \mathbf{r}_i \rangle
+    \]
+  \item 温度の計算: エネルギー等分配則より
+    \[
+    \langle T \rangle = \frac{3}{2} k_B T N
+    \]
+    %\begin{itemize}
+    %\item
+    (全運動量を0に固定している場合は$\langle T \rangle = \frac{3}{2} k_B T (N-1)$)
+    %\end{itemize}
+  \end{itemize}
+\end{frame}

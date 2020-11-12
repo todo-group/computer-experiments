@@ -1,0 +1,16 @@
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{Nose-Hoover熱浴}
+  \begin{itemize}
+  \item 仮想系の運動方程式
+    \begin{align*}
+      \frac{dx_i'}{dt'} &= \frac{\partial H'}{\partial p_i'} = \frac{p_i'}{ms^2} \\
+      \frac{dp_i'}{dt'} &= -\frac{\partial H'}{\partial x_i'} = -\frac{\partial U}{\partial x_i'} \\
+      \frac{ds}{dt'} &= \frac{\partial H'}{\partial p_s} = \frac{p_s}{Q} \\
+      \frac{dp_s}{dt'} &= -\frac{\partial H'}{\partial s} = \sum_i \frac{{p'_i}^2}{ms^3} - \frac{g k_B T}{s}
+    \end{align*}
+  \item 現実系と仮想系との間に以下の関係を仮定する
+
+    $x_i=x_i'$、$p_i=p_i'/{\color{red}s}$、$t=\int^t s^{-1} dt'$、$dt=dt'/{\color{red}s}$
+  \end{itemize}
+\end{frame}

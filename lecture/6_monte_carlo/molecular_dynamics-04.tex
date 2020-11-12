@@ -1,0 +1,21 @@
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{温度の制御}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item カノニカル分布を実現するには?
+    \begin{itemize}
+    \item 巨大な環境(熱浴)を付ける必要がある?
+    \item シミュレーションで巨大な環境を用意するのは非現実的
+    \end{itemize}
+  \item 速度スケーリング(Velocity Scaling)法
+    \begin{itemize}
+    \item 平均の運動エネルギーが対応する温度に一致するように毎回速度(運動量)をスケールしなおす
+      \begin{align*}
+        p_i \Rightarrow &p'_i = \sqrt{ \frac{3mNk_BT}{\sum_i p_i^2} } p_i \\
+        & \sum_i \frac{p_i^{'2}}{2m} = \frac{3mNk_BT}{\sum_i p_i^2} \sum_i \frac{p_i^2}{2m} = \frac{3}{2} N k_B T
+      \end{align*}
+    \item 位置エネルギーも運動エネルギーに引きずられてカノニカル分布に収束? $\Rightarrow$ 理論的根拠なし
+    \end{itemize}
+  \end{itemize}
+\end{frame}
