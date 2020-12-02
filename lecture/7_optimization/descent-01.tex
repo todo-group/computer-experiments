@@ -1,0 +1,13 @@
+\begin{frame}[t,fragile]{最急降下法(steepest descent)}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 関数の微分の情報を使う
+  \item 現在の点$x$における勾配を計算
+    \[
+    -\nabla f|_i = -\frac{\partial f}{\partial x_i}
+    \]
+  \item 坂を下る方向にそって、一次元最適化 (ニュートン法、囲い込み法)
+  \item 動いた先の勾配の方向でさらに最適化を繰り返す
+  \item 関数値は単調減少 $\Rightarrow$ 極小値に収束
+  \end{itemize}
+\end{frame}

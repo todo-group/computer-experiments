@@ -1,0 +1,11 @@
+\begin{frame}[t,fragile]{最初の囲い込み}
+  \begin{itemize}
+    % \setlength{\itemsep}{1em}
+  \item 1点を選び、適当な$\Delta x$を取る
+  \item 左右に$\Delta x$動かしてみて、関数値が小さくなる方へ動く
+  \item どちらに進んでも関数値が大きくなる場合には、囲い込み完了
+  \item 小さくなった場合、その方向へ再び増えるまで$\Delta x$を倍々に増やしながら進む
+  \item 最後の3点で極小値を囲い込むことができる
+  \item 囲い込み法のプログラムの例: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/optimization/golden_section.c}{golden\_section.c}
+  \end{itemize}
+\end{frame}

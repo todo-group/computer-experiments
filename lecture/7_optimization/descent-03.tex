@@ -1,0 +1,17 @@
+\begin{frame}[t,fragile]{制約条件付きの場合}
+  \begin{itemize}
+    % \setlength{\itemsep}{1em}
+  \item 目的関数: $f(x)$
+  \item 制約条件:
+    \begin{itemize}
+    \item $g_i(x) = 0$ \ ($i=1,\cdots,m$) \ (等式制約条件)
+    \item $h_j(x) \ge 0$ \ ($j=1,\cdots,n$) \ (不等式制約条件)
+    \end{itemize}
+  \item 等式制約条件の付いている場合: Lagrangeの未定乗数法
+    \[
+    L(x,\lambda_1,\cdots,\lambda_m)=f(x)+\sum_i \lambda_i g_i(x)
+    \]
+    を考え、$x,\lambda_1,\cdots,\lambda_m$に関する微分が零となる点を探す
+  \item 不等式制約条件の付いている場合: 線形計画法, ペナルティ関数法
+  \end{itemize}
+\end{frame}

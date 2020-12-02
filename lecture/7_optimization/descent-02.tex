@@ -1,0 +1,13 @@
+\begin{frame}[t,fragile]{勾配降下法(gradient descent)}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 勾配方向に一次元最適化を行うかわりに、あらかじめ決めた一定量($\epsilon$)だけ坂を下る
+    \[
+    x_{n+1} = x_n - \epsilon \, \nabla f
+    \]
+  \item あらかじめ最適な$\epsilon$を知るのは困難
+  \item 機械学習の分野では、(なぜか) $\epsilon=0.1$が良いとされている
+  \item この方法を「最急降下法」、一次元最適化を行う勾配法を「最適降下法(optimum descent)」と呼ぶ場合も
+  % \item c.f.) 確率的勾配降下法(stochastic gradient descent)
+  \end{itemize}
+\end{frame}
