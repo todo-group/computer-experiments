@@ -8,7 +8,7 @@
     \[
     0 = f(x_0) = f(x_0+\epsilon-\epsilon) = f(x_n) - \frac{\partial f(x_n)}{\partial x} \cdot \epsilon + O(|\epsilon|^2)
     \]
-  \item ヤコビ行列($d\times d$): $\displaystyle \Big[\frac{\partial f(x_n)}{\partial x}\Big]_{ij} = \frac{\partial f_i(x_n)}{\partial x_j}$
+  \item ヤコビ行列($d\times d$): $\displaystyle \Big[\frac{\partial f(x)}{\partial x}\Big]_{ij} = \frac{\partial f_i(x)}{\partial x_j}$
   \item 次の解の候補: $\displaystyle x_{n+1} = x_n - \Big[\frac{\partial f(x_n)}{\partial x}\Big]^{-1} f(x_n)$
   \end{itemize}
 \end{frame}

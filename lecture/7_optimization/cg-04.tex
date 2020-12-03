@@ -4,9 +4,11 @@
   \item 直線${\bf x} = {\bf x}_n + \alpha {\bf p}_n$上での最適化
   \item 点${\bf x}$で$f({\bf x})$が最小値をとるためには、${\bf x}$における勾配と直線の方向ベクトル${\bf p_n}$が垂直にならなければならない
     \begin{align*}
-      -[\nabla f({\bf x})]^T {\bf p}_n &= ({\bf b} - A {\bf x})^T {\bf p}_n = {\bf r}^T {\bf p}_n = ({\bf b} - A ({\bf x}_n+\alpha {\bf p}_n))^T {\bf p}_n \\ &= ({\bf r}_n - \alpha A {\bf p}_n)^T {\bf p}_n = 0
+      -[\nabla f({\bf x})]^T {\bf p}_n &= ({\bf b} - A {\bf x})^T {\bf p}_n
+      % = {\bf r}^T {\bf p}_n
+      = ({\bf b} - A ({\bf x}_n+\alpha {\bf p}_n))^T {\bf p}_n \\ &= ({\bf r}_n - \alpha A {\bf p}_n)^T {\bf p}_n = 0
     \end{align*}
-    (${\bf r}_n \equiv {\bf b} - A{\bf x}_ n$)
-  \item 最適解: $\displaystyle \alpha = \frac{{\bf r}_n^T {\bf p}_n}{{\bf p}_n^T A {\bf p}_n}$
+    %(${\bf r}_n \equiv {\bf b} - A{\bf x}_ n$)
+  \item 最適解: $\displaystyle \alpha_n = \frac{{\bf r}_n^T {\bf p}_n}{{\bf p}_n^T A {\bf p}_n}$
   \end{itemize}
 \end{frame}

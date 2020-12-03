@@ -13,7 +13,7 @@
 \begin{document}
 
 \noindent
-{\bf\large 「計算機実験II」実習課題 (2020/11/12更新)}
+{\bf\large 「計算機実験II」実習課題 (2020/12/04更新)}
 \\[-0.5em]
 
 \noindent
@@ -128,7 +128,26 @@
     \frac{dp_r}{dt} &= \frac{p_s^2}{Q} - k_B T
   \end{align*}
   $m=1$, $Q=1$, $k_BT=1$として、4次のRunge-Kutta法で運動方程式を解き、その位相空間上での軌道を確認せよ(時間刻み$\Delta=0.01$で$t=10^4$程度まで計算せよ)。また、座標$x$と運動量$p$のヒストグラムを作成し、カノニカル分布となっていることを確認せよ。一方、自由度1のNose-Hoover熱浴(上の式で$p_r$のないもの)の場合には、熱平衡状態とはならないことを示せ
+
+\clearpage
   
+\hspace*{-2em} {\bf [最適化]}
+
+\item Rosenbrock関数
+  \begin{align*}
+    f(x,y) = (a - x)^2 + b(y-x^2)^2 \qquad (a=1, b=5)
+  \end{align*}
+  は、細長い曲がった谷の中に最小点$(x,y)=(a,a^2)$をもつ。Gnuplotにより等高線を描き、全体の形を確認せよ。次に、最急降下法、勾配降下法、共役勾配法により最小点を求めるプログラムを作成し、収束の様子($xy$平面上での軌跡や真の最小点からの距離のステップ数依存性)を調べよ。初期位置は$(x,y)=(-1,-1)$とする
+
+\item 共役勾配法を用いて、Dirichlet型の境界条件のもとでの二次元Poisson方程式(あるいはLaplace方程式)の解を求めるプログラムを作成せよ。実行時間のメッシュ数依存性をLU分解を用いた場合と比較せよ(参考: 計算機実験I 講義資料{\tt lecture-1-5.pdf} p.5)。Poisson方程式を行列形式に書き直すことが難しい場合には、{\tt poisson.h}を参考にしてもよい(行列生成{\tt poisson\_dense.c}、行列ベクトル積{\tt poisson\_sparse.c}、LU分解による求解{\tt poisson\_lu.c}のテストプログラムもあり)
+
+\item 測定データ{\tt measurement3.dat}を関数$y=f(x)=ax+be^{−(x−c)^2}$で最小二乗フィッティングしよう。パラメータ$a, b, c$を、勾配降下法、Nelder-Mead法などを用いて残差を最小化することにより推定せよ
+  \begin{center}
+    \resizebox{.4\textwidth}{!}{\includegraphics{optimization/measurement3.pdf}}
+  \end{center}
+  
+% \item Nelder-Mead法、Rosenbrock関数の最小点を
+
 \hspace*{-2em} {\bf [その他]}
 
 \item 「\href{https://github.com/utphys-comp/handbook/releases/download/handbook-2019/handbook.pdf}{計算機実験ハンドブック}」の1.3節にEmacs以外のエディタの説明(vi (vim)、nano)を追加

@@ -6,7 +6,9 @@
   \item $\alpha_n$は一次元最適化を使って反復法で求める
   \item $\beta_n$は、$A$を知らなくても計算可能
     \begin{align*}
-      \beta_n &= \frac{{\bf r}_{n+1}^T {\bf r}_{n+1}}{{\bf r}_n^T {\bf r}_n}
+      \beta_n &= \frac{{\bf r}_{n+1}^T {\bf r}_{n+1}}{{\bf r}_n^T {\bf r}_n} \qquad \text{(Fletcher-Reeves)} \\
+      \beta_n &= \frac{{\bf r}_{n+1}^T ({\bf r}_{n+1}-{\bf r}_{n})}{{\bf r}_n^T {\bf r}_n} \qquad \text{(Polac-Ribi\`ere)}
     \end{align*}
+    実際の計算では、$\beta \leftarrow \max(0,\beta)$として、直交性が崩れた場合には方向をリセットして、勾配の方向に下るようにする
   \end{itemize}
 \end{frame}

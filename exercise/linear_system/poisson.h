@@ -134,7 +134,7 @@ void generate_sparse(int n, double h, int *n_elem, int **col, double **val) {
 /* ベクトル: b[(n-1)*(n-1)] */
 void generate_rhs(int n, double h, double *b) {
   int dim = matrix_dimension(n);
-  int i, j, x, y, xn, yn;
+  int i, x, y, xn, yn;
   double h2inv = 1.0 / (h*h);
 
   /* ゼロで初期化 */

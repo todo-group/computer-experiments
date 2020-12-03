@@ -1,13 +1,13 @@
 \begin{frame}[t,fragile]{共役勾配法 - 共役な方向の決め方}
   \begin{itemize}
     \setlength{\itemsep}{1em}
-  \item 新たな最適化方向: ${\bf p}_{n+1} = {\bf r}_{n+1} + \beta_n {\bf p}_n$
-  \item $\beta_n=0$とすると最急降下法と等価
-  \item 共役勾配法では、${\bf p}_{n+1}$と${\bf p}_{n}$が共役となるように$\beta_n {\bf p}_n$だけ補正を加える
+  \item 新たな最適化方向: ${\bf p} = {\bf r}_{n+1} + \beta {\bf p}_n$
+  \item $\beta=0$とすると最急降下法と等価
+  \item 共役勾配法では、${\bf p}$と${\bf p}_{n}$が共役となるように$\beta {\bf p}_n$だけ補正を加える
     \begin{align*}
-      {\bf p}_n^T A {\bf p}_{n+1} = {\bf p}_n^T A ({\bf r}_{n+1} + \beta_n {\bf p}_n) = 0
+      {\bf p}_n^T A {\bf p} = {\bf p}_n^T A ({\bf r}_{n+1} + \beta {\bf p}_n) = 0
     \end{align*}
-  \item $\beta_n$について解くと
+  \item $\beta$について解くと
     \begin{align*}
       \beta_n &= - \frac{{\bf p}_{n}^T A {\bf r}_{n+1}}{{\bf p}_n^T A {\bf p}_n}
     \end{align*}
