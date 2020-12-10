@@ -1,0 +1,18 @@
+\begin{frame}[t,fragile]{横磁場イジング模型}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item ハミルトニアン($2^N \times 2^N$行列)
+    \[
+      H = H_z + H_x = - J \sum_{\langle i,j \rangle} \sigma_i^z \sigma_j^z - h \sum_i \sigma_i^z - \Gamma \sum_i \sigma_i^x
+    \]
+  \item $\sigma_i^x$、$\sigma_i^z$: パウリ行列($2 \times 2$行列)
+    \begin{align*}
+      \big(\sigma_i^z\big)^2 &= \big(\sigma_i^x\big)^2 = I \\
+      [ \sigma_i^z, \sigma_i^x ] &\ne 0
+    \end{align*}
+  \item $J$: スピン間の相互作用($J>0$: 強磁性、$J<0$: 反強磁性)
+  \item $h$: 縦磁場(準位間のエネルギー差$=2h$)
+  \item $\Gamma$: 横磁場(トンネリング)
+  \item 以降、$\sigma_i^z$を対角化する基底($|\!\uparrow\rangle_i$, $|\!\downarrow\rangle_i$)で考える
+  \end{itemize}
+\end{frame}

@@ -1,0 +1,25 @@
+\begin{frame}[t,fragile]{量子アニーリング}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 横磁場を導入
+    \[
+    H = -J \sum_{i<j} \epsilon_{ij} \sigma_i^z \sigma_j^z - \Gamma \sum_i \sigma_i^x
+    \]
+  \item 古典極限 ($J=1$, $\Gamma=0$)
+    \begin{itemize}
+    \item 求めたい基底状態
+    \end{itemize}
+  \item 量子極限 ($J=0$, $\Gamma=1$)
+    \begin{itemize}
+    \item $2^N$個の全ての状態の重ね合わせ
+    \end{itemize}
+  \item 量子アニーリング
+    \begin{itemize}
+    \item $J+\Gamma=1$を保ったままで、$\Gamma=1$から$\Gamma=0$まで「ゆっくり」と減少させながら時間発展させる
+      \[
+      J = 1-\Gamma = t/T \qquad (0 \le t \le T)
+      \]
+    \item $T \rightarrow \infty$の極限で確率1で基底状態に収束
+    \end{itemize}
+  \end{itemize}
+\end{frame}

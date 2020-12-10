@@ -1,0 +1,28 @@
+\begin{frame}[t,fragile]{量子コンピュータと量子ゲート}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item (ゲート型)量子コンピュータ
+
+    $N$量子ビットに対して、量子ゲートにより状態を操作
+
+    \begin{itemize}
+    \item 「量子ビット」= 2準位系($S=1/2$スピン) \ $|0\rangle=|\!\uparrow\rangle, |1\rangle=|\!\downarrow\rangle$
+    \item 「量子ゲート」= 少数量子ビットに対するユニタリ変換
+    \end{itemize}
+  \item 1量子ビットゲート
+    \begin{itemize}
+    \item Xゲート(量子NOT)
+      \[
+      X = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix} = \sigma^x
+      \]
+    \item Rzゲート($z$軸まわりの回転)
+      \[
+      Rz(\theta) = \begin{pmatrix} e^{-i\theta/2} & 0 \\ 0 & e^{i\theta/2} \end{pmatrix} = e^{-i\theta\sigma^z}
+      \]
+    \item アダマールゲート
+      \[
+      H = \frac{1}{\sqrt{2}} \begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix} = \frac{1}{\sqrt{2}} (\sigma^x + \sigma^z)
+      \]
+    \end{itemize}
+  \end{itemize}
+\end{frame}

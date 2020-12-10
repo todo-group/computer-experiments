@@ -1,0 +1,22 @@
+\begin{frame}[t,fragile]{横磁場イジング模型の時間発展}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 時間依存シュレディンガー方程式の形式解
+    \[
+    \Psi(t) = e^{-iHt} \Psi(0)
+    \]
+    \begin{itemize}
+    \item 有限差分法、クランク・ニコルソン法
+    \end{itemize}
+  \item 鈴木・トロッター分解 ($\Delta t = t / M$)
+    \begin{align*}
+      e^{-iHt} &= \big[ e^{-iH\Delta t} \big]^M \approx \big[ e^{-iH_z\Delta t} e^{-iH_x\Delta t} \big]^M \\
+      &= \big[ e^{i\Delta t J \sum_{\langle i,j \rangle} \sigma_i^z \sigma_j^z} e^{i\Gamma \sigma_1^x\Delta t} e^{i\Gamma \sigma_2^x\Delta t} \cdots e^{i\Gamma \sigma_N^x\Delta t} \big]^M
+    \end{align*}
+    (さらに$e^{-iH\Delta t} \approx e^{-iH_z\Delta t/2} e^{-iH_x\Delta t} e^{-iH_z\Delta t/2}$と対称に分解すると近似の次数が上がる)
+  \item $[\sigma_i^x]^2 = I$より
+    \[
+    e^{i\Gamma \sigma_i^x\Delta t} = \cos (\Gamma\Delta t) + i \sigma_i^x \sin (\Gamma\Delta t)
+    \]
+  \end{itemize}
+\end{frame}

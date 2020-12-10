@@ -1,0 +1,20 @@
+\begin{frame}[t,fragile]{離散最適化問題への応用}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 微分を必要としないので、離散最適化問題にも適用可
+    \begin{itemize}
+    \item 例: 巡回セールスマン問題、数独、ナップザック問題
+    \end{itemize}
+  \item いかに状態とエネルギーを定義するかが重要
+    \begin{itemize}
+    \item 例: $n \times n$魔法陣 (行・列・ななめの和$M = n(n^2+1)/2$)
+    \item 「状態」C: $1\sim n^2$の自然数をある順序でます目に並べたもの
+    \item 「エネルギー」
+      \[
+      E(C) = \sum_{\rm row} (S_r-M)^2 + \sum_{\rm col} (S_c-M)^2 + \sum_{\rm diag} (S_d-M)^2
+      \]
+    \item 「正しい」魔方陣: $E(C) = 0$
+    \end{itemize}
+  \item 解の数(絶対零度のエントロピー)を求めるのにも利用できる
+  \end{itemize}
+\end{frame}

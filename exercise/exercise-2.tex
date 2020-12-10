@@ -13,7 +13,7 @@
 \begin{document}
 
 \noindent
-{\bf\large 「計算機実験II」実習課題 (2020/12/04更新)}
+{\bf\large 「計算機実験II」実習課題 (2020/12/10更新)}
 \\[-0.5em]
 
 \noindent
@@ -146,8 +146,24 @@
     \resizebox{.4\textwidth}{!}{\includegraphics{optimization/measurement3.pdf}}
   \end{center}
   
-% \item Nelder-Mead法、Rosenbrock関数の最小点を
+\item Nelder-Meadの滑降シンプレクティック法を用いて、課題21のRosenbrock関数の最小点を探索するプログラムを作成せよ
 
+\item $d$次元Rastrigin関数
+  \begin{align*}
+    f(x) = Ad+\sum_{i=1}^d [x_i^2 - A \cos (2 \pi x_i)] \qquad (A=10, -5.12 \le x_{i} \le 5.12)
+  \end{align*}
+  は$x=0$に最小点をもつが、それ以外に多数の極小点が存在する。Gnuplotにより$d=2$の場合の等高線を描き、極小の位置を確認せよ。次に、シミュレーテッドアニーリングにより、Rastrigin関数の最小点を探索するプログラムを作成せよ。「温度」$T$は、アニーリング時間$\tau$をかけて
+  \[
+  T(t) = T_0 (1 - t/\tau)
+  \]
+  のように線形に減少させるとする。初期温度$T_0$はRastrigin関数の最大値よりも十分大きくとる。$d=3$の場合について、最小点$x=0$を見出す確率の$\tau$依存性を調べよ
+
+\item $n \times n$マス目に$1\sim n^2$の自然数を並べた魔法陣をシミュレーテッドアニーリングにより生成しよう。正しい魔法陣では、行・列・対角線の和はすべて$M = n(n^2+1)/2$とならなければならない。状態(=数字の並べ方) $C$に対して、エネルギーを
+  \[
+  E(C) = \sum_{\rm row} (S_r-M)^2 + \sum_{\rm col} (S_c-M)^2 + \sum_{\rm diag} (S_d-M)^2
+  \]
+  (ただし、$S_r, S_c, S_d$はそれぞれ、$r$行目、$c$列目、2方向の対角線の数字の和)と定義すると、「基底状態」$E(C)=0$は正しい魔法陣(の一つ)を与える。モンテカルロによる状態更新は、まず$1\sim n^2-1$の自然数$i$をランダムに選び、数字$i$と$i+1$の位置を入れ替える操作を考えればよい。$n=3,4,5,6$の場合について、正しい魔法陣を見出す確率のアニーリング時間依存性を調べよ。また、最急下降法の結果との比較も行え
+  
 \hspace*{-2em} {\bf [その他]}
 
 \item 「\href{https://github.com/utphys-comp/handbook/releases/download/handbook-2019/handbook.pdf}{計算機実験ハンドブック}」の1.3節にEmacs以外のエディタの説明(vi (vim)、nano)を追加

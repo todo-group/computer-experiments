@@ -1,0 +1,22 @@
+\begin{frame}[t,fragile]{確率過程を用いた最適化}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 最急降下法 (steepest decent)% {\footnotesize \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/optimization/mc_steepest_descent_1d.c}{mc\_steepest\_descent\_1d.c}}
+    \begin{itemize}
+    \item 初期状態をランダムに定める
+    \item 配位を少しだけ変化させる
+    \item エネルギー(コスト関数)が小さくなるなら採択、大きくなるなら棄却 $\Rightarrow$ 絶対零度でのMetropolis法と等価
+    \item 状態が変化しなくなるまでくり返す
+    \item 問題点 : エネルギー極小状態にすぐに捕まってしまう
+    \end{itemize}
+  \item 徐冷法 (simulated annealing)% {\footnotesize \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/optimization/simulated_annealing_1d.c}{simulated\_annealing\_1d.c}}
+    \begin{itemize}
+    \item いきなり温度を零にするのではなく少しずつ下げていく
+    \item どれくらいゆっくり下げれば良いか?
+      \[
+      T(t) \ge cN / \log(t+2)
+      \]
+    \item 実際には適当なスケジューリングで温度を下げ、何回か繰り返して最も良い結果を採択
+    \end{itemize}
+  \end{itemize}
+\end{frame}

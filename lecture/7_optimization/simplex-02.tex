@@ -1,0 +1,26 @@
+\begin{frame}[t,fragile]{Nelder-Meadの滑降シンプレックス法}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item $N+1$個の点$x_0,x_1,\cdots,x_N$は$f(x_0) \le f(x_1) \le \cdots \le f(x_N)$の順に並べられているとする
+  \item 最大値を取る点$x_N$を除く$N$点の重心を$x_g$とする
+  \item Nelder-Mead法では以下のステップを繰り返す
+    \begin{itemize}
+    \item $x_N$を$x_g$に関する対称な点$x_r$に移動(反射)
+      \[
+      x_r = x_g + (x_g - x_N)
+      \]
+    \item $f(x_r)$が$f(x_0)$よりも小さい場合、さらに先に進む(拡大)
+      \[
+      x_e = x_g + 2(x_r - x_g)
+      \]
+    \item $f(x_r)$が$f(x_{N-1})$よりもまだ大きい場合には、$x_N$を$x_g$に近づける(縮小)
+      \[
+      x_c = x_g + (x_N-x_g)/2
+      \]
+    \item $f(x_c)$が$f(x_N)$よりまだ大きい場合には、$x_0$以外の点を$x_0$に一様に近づける(収縮)
+      \[
+      x_i \leftarrow x_0 + (x_i-x_0)/2 \qquad (i=1 \cdots N)
+      \]
+    \end{itemize}
+  \end{itemize}
+\end{frame}
