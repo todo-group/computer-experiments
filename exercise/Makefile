@@ -1,4 +1,4 @@
-ZIP = example-1-8.zip example-2-2.zip
+ZIP = samples-1.zip samples-2.zip
 
 EXAMPLE14 = \
 	monte_carlo/mersenne_twister.h monte_carlo/random.c \
@@ -44,53 +44,21 @@ default: $(PDF) $(ZIP)
 .dvi.pdf:
 	TEXINPUTS=.:./style//: dvipdfmx -I 24 $< > /dev/null
 
-example-1-4.zip : $(EXAMPLE14)
-	rm -rf example-1-4
-	mkdir example-1-4
-	cp -p $(EXAMPLE14) example-1-4
-	echo "CFLAGS = -Wall -O3 -I." > example-1-4/Makefile
-	echo "LDLIBS = -llapack -lblas" >> example-1-4/Makefile
-	zip example-1-4.zip example-1-4/*
+samples-1.zip : $(EXAMPLE18)
+	rm -rf samples-1
+	mkdir samples-1
+	cp -p $(EXAMPLE18) samples-1
+	echo "CFLAGS = -Wall -O3 -I." > samples-1/Makefile
+	echo "LDLIBS = -llapack -lblas" >> samples-1/Makefile
+	zip samples-1.zip samples-1/*
 
-example-1-5.zip : $(EXAMPLE15)
-	rm -rf example-1-5
-	mkdir example-1-5
-	cp -p $(EXAMPLE15) example-1-5
-	echo "CFLAGS = -Wall -O3 -I." > example-1-5/Makefile
-	echo "LDLIBS = -llapack -lblas" >> example-1-5/Makefile
-	zip example-1-5.zip example-1-5/*
-
-example-1-6.zip : $(EXAMPLE16)
-	rm -rf example-1-6
-	mkdir example-1-6
-	cp -p $(EXAMPLE16) example-1-6
-	echo "CFLAGS = -Wall -O3 -I." > example-1-6/Makefile
-	echo "LDLIBS = -llapack -lblas" >> example-1-6/Makefile
-	zip example-1-6.zip example-1-6/*
-
-example-1-8.zip : $(EXAMPLE18)
-	rm -rf example-1-8
-	mkdir example-1-8
-	cp -p $(EXAMPLE18) example-1-8
-	echo "CFLAGS = -Wall -O3 -I." > example-1-8/Makefile
-	echo "LDLIBS = -llapack -lblas" >> example-1-8/Makefile
-	zip example-1-8.zip example-1-8/*
-
-example-2-2.zip : $(EXAMPLE22)
-	rm -rf example-2-2
-	mkdir example-2-2
-	cp -p $(EXAMPLE22) example-2-2
-	echo "CFLAGS = -Wall -O3 -I." > example-2-2/Makefile
-	echo "LDLIBS = -llapack -lblas" >> example-2-2/Makefile
-	zip example-2-2.zip example-2-2/*
-
-example-2-7.zip : $(EXAMPLE27)
-	rm -rf example-2-7
-	mkdir example-2-7
-	cp -p $(EXAMPLE27) example-2-7
-	echo "CFLAGS = -Wall -O3 -I." > example-2-7/Makefile
-	echo "LDLIBS = -llapack -lblas" >> example-2-7/Makefile
-	zip example-2-7.zip example-2-7/*
+samples-2-2.zip : $(EXAMPLE27)
+	rm -rf samples-2
+	mkdir samples-2
+	cp -p $(EXAMPLE27) samples-2
+	echo "CFLAGS = -Wall -O3 -I." > samples-2/Makefile
+	echo "LDLIBS = -llapack -lblas" >> samples-2/Makefile
+	zip samples-2.zip samples-2/*
 
 clean:
 	rm -f *.aux *.dvi *.log *.nav *.out *.snm *.toc *.vrb

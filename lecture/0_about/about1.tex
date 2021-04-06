@@ -1,18 +1,5 @@
 \section{講義・実習の概要}
 
-\begin{frame}[t]{環境整備がすでに終わっている人は…}
-  \begin{itemize}
-    %\setlength{\itemsep}{1em}
-  \item 「\href{https://github.com/utphys-comp/handbook/releases/download/handbook-2019/handbook.pdf}{計算機実験ハンドブック}」の第2章「C言語入門」を自習
-  \item 「\href{https://utphys-comp.github.io}{計算機実験のための環境整備}」({\small \href{https://utphys-comp.github.io}{https://utphys-comp.github.io}})で抜けているところ(特に、Windows環境でのコンパイラの利用、SSHアクセスなど)を作成
-  \item 「\href{https://github.com/utphys-comp/handbook/releases/download/handbook-2019/handbook.pdf}{計算機実験ハンドブック}」の1.3節にEmacs以外のエディタの説明(vi (vim)、nano)を追加
-  \item 「\href{https://github.com/utphys-comp/handbook/releases/download/handbook-2019/handbook.pdf}{計算機実験ハンドブック}」の第2章「C言語入門」のC++言語版を追加
-  \item Slackで困っている人をサポート
-  \item 
-  \item 
-  \end{itemize}
-\end{frame}
-
 \begin{frame}[t]{講義・実習の目的}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
@@ -58,85 +45,102 @@
   \item スタッフ \href{mailto:computer@exa.phys.s.u-tokyo.ac.jp}{computer@exa.phys.s.u-tokyo.ac.jp}
     \begin{itemize}
     \item 講義: 藤堂
-    \item 実習: 鈴木助教、斉藤助教
-    \item 実習TA: 大町(古澤M2)、沓澤(藤堂研M1)
+    \item 実習: 樫山助教、高橋助教
+    \item 実習TA: 沓澤、室田
     \end{itemize}
   \item 講義・実習の進め方
     \begin{itemize}
-    \item 初回〜2,3回目: 環境整備 + 講義(座学)
-    \item それ以降: 講義(座学)と実習の組み合わせ
+    \item 毎回: 講義(座学)と実習の組み合わせ
     \end{itemize}
   \item 評価
     \begin{itemize}
-    \item 出席(講義・実習)
-    \item レポート
+    \item 出席(ITC-LMSでのアンケートに回答)
+
+      講義当日11:00-18:00の間に回答
+      
+    \item レポート(計3回)
     \end{itemize}    
-  \item レポート
-    \begin{itemize}
-    \item 各自が \LaTeX で作成の上提出 (計2,3回)
-    \item 提出方法・締切については、後日指示
-    \item レポート課題(基本課題)以外に独自に取り組んだ場合には加点    \end{itemize}
   \end{itemize}    
 \end{frame}
 
-%% \begin{frame}[t]{講義資料}
-%%   \begin{itemize}
-%%     \setlength{\itemsep}{1em}
-%%   \item 「計算機実験」ハンドブック (配布済)
-%%     \begin{itemize}
-%%     \item UNIX入門
-%%     \item gnuplot入門
-%%     \item C言語入門
-%%     \item \LaTeX 入門
-%%     \end{itemize}
-%%   \item 講義資料、実習資料、追加資料、参考書
-%%     \begin{itemize}
-%%     \item ITC-LMSで配布・提示 \url{https://itc-lms.ecc.u-tokyo.ac.jp/lms/course?idnumber=201905150910F01}
-%%     \item 公開資料については、\url{http://exa.phys.s.u-tokyo.ac.jp/ja/lectures/2019s-computer1}でも配布
-%%     \end{itemize}
-%%   \end{itemize}
-%% \end{frame}
-
-\begin{frame}[t]{質問がある場合には…}
-  \begin{enumerate}
-    %\setlength{\itemsep}{1em}
-  \item オンライン授業(Webex)のチャット
-  \item 計算機実験 Slack
-  \item ITC-LMS「担当教員へのメッセージ」
-  \item メール(\href{mailto:computer@exa.phys.s.u-tokyo.ac.jp}{computer@exa.phys.s.u-tokyo.ac.jp})
-  \end{enumerate}
-  質問するときに注意すべきこと
+\begin{frame}[t]{講義資料}
   \begin{itemize}
-  \item (メールの場合) Subjectをきちんとつける、きちんと名乗る
-  \item 実行環境を明示する
-  \item 問題を再現する手順を明記する
-  \item 関連するファイル(Cや \LaTeX のソースコード等)を添付する
-  \item エラーメッセージを添付する
+    % \setlength{\itemsep}{1em}
+  \item 講義資料置き場: \href{https://github.com/todo-group/ComputerExperiments/releases/tag/2021s-computer1}{https://github.com/todo-group/ComputerExperiments/releases/tag/2021s-computer1}
+
+    短縮URL: \href{https://bit.ly/39MtgVO}{https://bit.ly/39MtgVO}
+    
+  \item 計算機実験ハンドブック
+    \begin{itemize}
+    \item UNIX入門
+    \item gnuplot入門
+    \item C言語入門
+    \item \LaTeX 入門
+    \end{itemize}
+  \item \href{https://utphys-comp.github.io}{計算機実験のための環境整備}({\small \href{https://utphys-comp.github.io}{https://utphys-comp.github.io}})
+  \item 講義資料
+  \item 実習課題・サンプルコード
+
+    \begin{itemize}
+    \item この中から課題を選択してレポートを作成・提出
+    \item 課題は順次追加・修正の可能性あり
+    \end{itemize}
+  \item 昨年度の講義動画
+    \begin{itemize}
+      \item \href{http://www.mi.u-tokyo.ac.jp/teaching_material.html}{http://www.mi.u-tokyo.ac.jp/teaching\_material.html}
+    \end{itemize}
   \end{itemize}
 \end{frame}
 
-%% \begin{frame}[t,fragile]{実習・自習環境}
-%%   \begin{itemize}
-%%     %\setlength{\itemsep}{1em}
-%%   \item 情報基盤センター大演習室 (iMac端末)
-%%   \item 計算機端末室
-%%     \begin{itemize}
-%%     \item 理学部4号館1215室 (iMac 16台)
-%%     \end{itemize}
-%%   \item 知の物理学研究センターワークステーション(準備中)
-%%     \begin{itemize}
-%%     \item SSHでリモートログインして使用する(ハンドブック2.2節)
-%%     \item あらかじめ公開鍵の登録が必要(実習EX0 準備練習4,5)
-%%     \end{itemize}
-%%   \item MateriApps LIVE! (USBメモリで配布)
-%%     \begin{itemize}
-%%     \item Mac, Windows PC上で動作する仮想UNIX環境
-%%     \item Cコンパイラ、gnuplot、エディタなど一式揃っている
-%%     \item インストール方法はUSBメモリ内の\href{https://github.com/cmsi/MateriAppsLive/wiki/MateriAppsLive-ltx}{README.html}、\href{https://github.com/cmsi/MateriAppsLive-setup/blob/master/ova/setup.pdf}{setup.pdf}を参照のこと
-%%     \end{itemize}
-%%   \item C言語・LaTeX・gnuplotのインストールに関する情報
-%%     \begin{itemize}
-%%       \item \href{https://github.com/todo-group/ComputerExperiments/wiki/InstallTeX}{https://github.com/todo-group/\ ComputerExperiments/wiki/InstallTeX}
-%%     \end{itemize}
-%%   \end{itemize}
-%% \end{frame}
+\begin{frame}[t]{質問がある場合には…}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 講義時間外・講義時間中
+    \begin{enumerate}
+    \item 計算機実験Slack
+    \item ITC-LMS「担当教員へのメッセージ」
+    \item メール(\href{mailto:computer@exa.phys.s.u-tokyo.ac.jp}{computer@exa.phys.s.u-tokyo.ac.jp})
+    \end{enumerate}
+  \item 講義時間中
+    \begin{enumerate}
+    \item slido (匿名で質問可)
+    \item オンライン授業(Zoom)のチャット
+    \end{enumerate}
+  \item 質問するときに注意すべきこと
+    \begin{itemize}
+    \item (メールの場合) Subjectをきちんとつける、きちんと名乗る
+    \item 実行環境を明示する
+    \item 問題を再現する手順を明記する
+    \item 関連するファイル(Cや \LaTeX のソースコード等)を添付する
+    \item エラーメッセージを添付する
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{レポート(予定)}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item レポート
+    \begin{itemize}
+    \item 各自が \LaTeX で作成の上提出 (計3回)
+    \item 提出方法: ITC-LMSでPDFを提出
+    \item レポート課題(基本課題)以外に独自に取り組んだ場合には加点
+    \end{itemize}
+  \item レポートNo.1
+    \begin{itemize}
+    \item \mbox{} [数値誤差・アルゴリズム基礎] 2題、[常微分方程式] うちから1題の合計3題を選択
+    \item 締切: 5月19日
+    \end{itemize}
+  \item レポートNo.2
+    \begin{itemize}
+    \item \mbox{} [連立一次方程式]から2題を選択
+    \item 締切: 6月9日
+    \end{itemize}
+  \item レポートNo.3
+    \begin{itemize}
+    \item \mbox{} [対角化]から2題を選択
+    \item 締切: 7月7日
+    \end{itemize}
+  \end{itemize}    
+\end{frame}
+  

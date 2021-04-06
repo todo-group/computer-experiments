@@ -12,17 +12,19 @@
 \begin{document}
 
 \noindent
-{\bf\large 「計算機実験I」実習課題 (2020/06/02更新)}
+{\bf\large 「計算機実験I」実習課題 (2021/04/05更新)}
 \\[-0.5em]
 
 \noindent
-[対角化]以降についてはまだ更新の可能性あり\\[-0.5em]
+課題は順次追加・修正の可能性あり\\[-0.5em]
 
 \noindent
 課題番号のあとに[応用]とあるのは少し高度な課題\\[-0.5em]
 
-{\bf [数値誤差・アルゴリズム基礎]}
+\noindent {\bf [数値誤差・アルゴリズム基礎]}
 \begin{enumerate}
+\renewcommand{\labelenumi}{1-\arabic{enumi})}
+
 \item C言語における倍精度実数({\tt double})、単精度実数({\tt float})の有効桁数、最大値、(正の)最小値を確認するプログラムを作成せよ。また、IEEE規格において、零や無限大がどのように表現されるか調べよ
   
 \item フィボナッチ数列($a_{n+2}=a_{n+1}+a_n$ ($n \ge 0$), $a_0=0$, $a_1=1$)を計算するプログラムを作成し、$a_{20}$, $a_{30}$, $a_{40}$, $a_{50}$, $a_{60}$を求めよ。桁あふれに注意すること。結果をMATLABで計算した値と比較し、\LaTeX の{\tt tabular}環境を使って表にまとめよ
@@ -35,8 +37,12 @@
 
 \item \mbox{} [応用] 代数方程式の解をすべてもとめる方法について調べよ。Durand-Kerner-Aberth法を用いて、代数方程式の全ての解を求めるプログラムを作成せよ。方程式の次数を増やすにつれ、収束までにかかる時間がどのように増えるか調べよ
 
-  \hspace*{-2em} {\bf [常微分方程式]}
+\end{enumerate}
 
+\noindent {\bf [常微分方程式]}
+\begin{enumerate}
+
+\renewcommand{\labelenumi}{2-\arabic{enumi})}
 \item 空気による摩擦のあるバネの問題を考える。壁にバネが繋がれ、バネの先には質量$m$の物体が繋がっている。床との摩擦は考えないものとする。バネの伸びる方向に$x$座標を取り、自然長の位置を原点とすると、物体の運動方程式は以下のように与えられる。
   \[
   m\frac{\mathrm{d} ^2x}{\mathrm{d} t^2} = -kx - \kappa \frac{\mathrm{d} x}{\mathrm{d} t} 
@@ -49,7 +55,11 @@
   
 \item \mbox{} [応用] 方程式によっては、刻み幅を小さくしても、なかなか精度が上がらないものがある．一つの例として、``硬い方程式''知られている。``硬い方程式''とは何か、これを精度良く解くためにはどうすれば良いか調べよ。また、具体的な問題について計算を行ってみよ
 
-  \hspace*{-2em} {\bf [連立一次方程式]}
+\end{enumerate}
+
+\noindent {\bf [連立一次方程式]}
+\begin{enumerate}
+\renewcommand{\labelenumi}{3-\arabic{enumi})}
 
 \item LU分解を用いて行列の行列式を計算するプログラムを作成せよ。$n \times n$のVandermonde行列($v_{ij}=x_j^{i-1}$) ($x_1 \cdots x_n$は実数)の行列式を計算し、厳密な値$\displaystyle \prod_{1 \le i < j \le n} (x_j-x_i)$と比較せよ
   
@@ -68,7 +78,11 @@
 
 \item \mbox{} [応用] 共分散行列$\Sigma$で与えられる$n$次元ガウス分布に従う乱数を生成する方法を考えよ。プログラムを作成して共分散を評価し、正しい乱数が生成されているか確認せよ
 
-  \hspace*{-2em} {\bf [対角化]}
+\end{enumerate}
+
+\noindent {\bf [対角化]}
+\begin{enumerate}
+\renewcommand{\labelenumi}{4-\arabic{enumi})}
     
 \item {\tt cmatrix.h}を利用し、(何らかの意味で)ランダムな実対称行列、複素エルミート行列、実直交行列、複素ユニタリー行列を生成し、さらに、実際に生成された行列がそれらの性質を満たしているかチェックするプログラムを作成・実行せよ
 
@@ -78,7 +92,7 @@
 
 \item ハウスホルダー法による対角化のサンプルプログラム{\tt diag.c}に、得られた固有ベクトルが互いに正規直交していることや得られた固有値の精度を確認するコードを追加し実行せよ。また、複素エルミート行列に対して同様のプログラムを作成・実行せよ
 
-\item 適当なポテンシャルの形を仮定した一次元シュレディンガー方程式の固有エネルギーと固有関数の組をハウスホルダー法により求めよ。同じ方程式を課題9の方法で解き、解を比較せよ
+\item 適当なポテンシャルの形を仮定した一次元シュレディンガー方程式の固有エネルギーと固有関数の組をハウスホルダー法により求めよ。同じ方程式を課題2-3)の方法で解き、解を比較せよ
 
 \item 対角成分は$(n,n)$成分のみが1でそれ以外は全て2、副対角成分$(i, i \pm 1)$は全て-1の$n \times n$三重対角行列を考える。その固有値は、
   \[ \lambda_k = 2 (1 - \cos (\pi (2 k - 1) / (2 n + 1))) \ \ (k=1,\cdots,n)\]
@@ -90,13 +104,15 @@
 
 \item {\tt convert2matrix.py}は、JPEGやPNGなどの形式の画像ファイルをグレイスケールに変換し、行列の形で書き出すPythonスクリプトである。\footnote{実行には、Pillowライブラリが必要である。ceenvでは事前に、{\tt pip install pillow} (Python2)、あるいは{\tt pip3 install pillow} (Python3)する必要がある。} これを用いて画像ファイルを行列形式に変換した後、SVDで圧縮してみよ。どの程度まで圧縮可能か?
 
-  \hspace*{-2em} {\bf [その他]}
+\end{enumerate}
 
-\item \mbox{} [応用] 「\href{https://utphys-comp.github.io}{計算機実験のための環境整備}」({\small \href{https://utphys-comp.github.io}{https://utphys-comp.github.io}})で抜けているところ(特に、Windows環境でのコンパイラの利用、SSHアクセスなど)を作成
+\noindent {\bf [その他]}
+\begin{enumerate}
+\renewcommand{\labelenumi}{5-\arabic{enumi})}
 
 \item \mbox{} [応用] 「\href{https://github.com/utphys-comp/handbook/releases/download/handbook-2019/handbook.pdf}{計算機実験ハンドブック}」の1.3節にEmacs以外のエディタの説明(vi (vim)、nano)を追加
 
-\item \mbox{} [応用] 「\href{https://github.com/utphys-comp/handbook/releases/download/handbook-2019/handbook.pdf}{計算機実験ハンドブック}」の第2章「C言語入門」のC++言語版を追加
+\item \mbox{} [応用] 「\href{https://github.com/utphys-comp/handbook/releases/download/handbook-2021/handbook.pdf}{計算機実験ハンドブック}」の第2章「C言語入門」のC++言語版を追加
 
 \end{enumerate}  
 \end{document}
