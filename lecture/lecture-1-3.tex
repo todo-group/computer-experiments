@@ -4,7 +4,7 @@
 \usepackage{tutorial}
 
 \title{計算機実験I (第3回)}
-\date{2020/05/13}
+\date{2021/04/28}
 
 \begin{document}
 
@@ -13,30 +13,15 @@
   \tableofcontents
 \end{frame}
 
-\begin{frame}[t]{講義のオンライン公開について}
-  \begin{itemize}
-    %\setlength{\itemsep}{1em}
-  \item 本講義「計算機実験I」の講義映像および講義資料が後日、数理・情報教育研究センターWeb \\
-    \hspace*{1em} \url{http://www.mi.u-tokyo.ac.jp/teaching_material.html} \\
-    から公開されます
-  \item プライバシーに配慮し、編集を行った上で公開するため、学生のみなさんの顔や個人情報が公開されることはありません
-
-    \vspace*{4em}
-  \item なお、編集前の講義映像がITC-LMSから閲覧可能となっています。復習に活用してください。閲覧には、ECCSクラウドメールのアカウント・パスワードが必要です
-  \end{itemize}
-\end{frame}
-
 \begin{frame}[t]{本日の課題}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
-  \item まだ完了していない人は「\href{https://utphys-comp.github.io}{計算機実験のための環境整備}」({\small \href{https://utphys-comp.github.io}{https://utphys-comp.github.io}})を参考に、必要な環境を引き続き整備する
-  \item 実習
+  \item (まだ完了していない人は「\href{https://utphys-comp.github.io}{計算機実験のための環境整備}」({\small \href{https://utphys-comp.github.io}{https://utphys-comp.github.io}})を参考に、必要な環境を引き続き整備する)
     
-    \url{https://github.com/todo-group/ComputerExperiments/releases/tag/2020s-computer1}の実習課題一覧の課題1〜10の中から適宜選んで
-    
-  \item 講義終了後(18:00まで)にITC-LMSで「作業レポート(2020/05/13)」を提出
-  \item レポートNo.1: 提出締切2020/5/29(金) 18:00 (レポート内容・提出方法についてはITC-LMSを参照のこと)
-  \item 質問は、Slackの「\#2 数値誤差」あるいは「\#3 常微分方程式」チャンネルで
+  \item 「計算機実験I」実習課題: [数値課題・アルゴリズム基礎] [常微分方程式] に取り組む
+  \item 講義終了後(18:00まで)にITC-LMSで「作業レポート(2021/04/28)」を提出
+  \item レポートNo.1: 提出締切2021/5/19(水) 18:00 (レポート内容・提出方法についてはITC-LMSを参照のこと)
+  \item 質問は、Slackの「\#3 数値誤差」あるいは「\#4 常微分方程式」チャンネルで
   \end{itemize}
 \end{frame}
 
@@ -58,37 +43,25 @@
 
 \input{2_ode/symplectic.tex}
 
-\section{実習: 数値誤差・常微分方程式の解法}
-
-\begin{frame}[t]{本日の課題}
+\begin{frame}[t]{今後の予定}
   \begin{itemize}
-    %\setlength{\itemsep}{1em}
-  \item 実習
-    
-    \url{https://github.com/todo-group/ComputerExperiments/releases/tag/2020s-computer1}の実習課題一覧の課題1〜10の中から適宜選んで
-    
-  \item 講義終了後(18:00まで)にITC-LMSで「作業レポート(2020/05/13)」を提出
-  \item レポートNo.1: 提出締切2020/5/29(金) 18:00 (レポート内容・提出方法についてはITC-LMSを参照のこと)
-  \item 質問は、Slackの「\#2 数値誤差」あるいは「\#3 常微分方程式」チャンネルで
+    % \setlength{\itemsep}{1em}
+  \item 全8回 (水曜2限 10:25-11:55)
+    \begin{itemize}
+    \item {\color{gray} 4月7日 第1回: 環境整備・数値誤差}
+    \item {\color{gray} 4月14日 もくもく会}
+    \item {\color{gray} 4月21日 第2回: ニュートン法・二分法・常微分方程式}
+    \item {\color{gray} 4月28日 第3回: 固有値問題・シンプレクティック積分法}
+    \item 5月12日 もくもく会
+    \item 5月19日 第4回: 行列演算・複素数・ライブラリ [レポートNo.1締切]
+    \item 5月26日 第5回: 連立一次方程式・直接解法・反復解法
+    \item 6月2日 もくもく会
+    \item 6月9日 第6回: 行列の対角化 [レポートNo.2締切]
+    \item 6月16日 第7回: 疎行列に対する反復法・変分法
+    \item 6月23日 第8回: 特異値分解・最小二乗法
+    \item 7月7日 [レポートNo.3締切]
+     \end{itemize}
   \end{itemize}
 \end{frame}
-
-%% \input{3_linear_system/intro.tex}
-%% \input{3_linear_system/direct.tex}
-
-%% \section{LAPACKの利用}
-%% \input{1_basics/lapack-08.tex}
-%% \input{1_basics/lapack-09.tex}
-%% \input{1_basics/lapack-10.tex}
-%% \input{1_basics/lapack-11.tex}
-%% \input{1_basics/lapack-12.tex}
-%% \input{1_basics/lapack-13.tex}
-%% \input{1_basics/lapack-14.tex}
-%% \input{1_basics/lapack-15.tex}
-%% \input{1_basics/lapack-16.tex}
-%% \input{1_basics/lapack-17.tex}
-
-%% \input{3_linear_system/iterative.tex}
-%% \input{7_optimization/cg-07.tex}
 
 \end{document}
