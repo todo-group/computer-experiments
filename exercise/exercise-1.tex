@@ -12,7 +12,7 @@
 \begin{document}
 
 \noindent
-{\bf\large 「計算機実験I」実習課題 (2021/04/05更新)}
+{\bf\large 「計算機実験I」実習課題 (2021/05/17更新)}
 \\[-0.5em]
 
 \noindent
@@ -61,6 +61,12 @@
 \begin{enumerate}
 \renewcommand{\labelenumi}{3-\arabic{enumi})}
 
+\item {\tt cmatrix.h}を利用し、(何らかの意味で)ランダムな実対称行列、複素エルミート行列、実直交行列、複素ユニタリー行列を生成し、さらに、実際に生成された行列がそれらの性質を満たしているかチェックするプログラムを作成・実行せよ
+
+  \item 行列・行列積の計算を行うサンプルプログラム{\tt multiply.c}とBLASライブラリを使ってそれと等価な計算を行う{\tt multiply\_dgemm.c}の速度を比較せよ\footnote{aiでは、OS付属のBLAS、LAPACKではなく、Intel製のMKL (Math Kernel Library)に含ま
+れるBLASやLAPACKを利用するのがよい。MKLを使うには、GNU Cコンパイラ({\tt cc}, {\tt gcc})の代わりにIntel Cコンパイラ({\tt icc})を使い、{\tt -llapack -lblas}の代わりに{\tt -mkl}を指定してリンクする。例: \underline{\tt icc -O3 multiply\_dgemm.c -mkl}}。行列サイズによっては数十倍もの性能差が出ことがあるが、BLASで使われてい
+る最適化手法について調べてみよ
+
 \item LU分解を用いて行列の行列式を計算するプログラムを作成せよ。$n \times n$のVandermonde行列($v_{ij}=x_j^{i-1}$) ($x_1 \cdots x_n$は実数)の行列式を計算し、厳密な値$\displaystyle \prod_{1 \le i < j \le n} (x_j-x_i)$と比較せよ
   
 \item LU分解を用いてDirichlet型の境界条件のもとでの二次元Laplace方程式の解を求めるプログラムを作成せよ。適当な境界条件[例えば$u(0,y) = \sin(2 \pi y)$, $u(1,y) = \sin(\pi y)$, $u(x,0)=u(x,1)=0$]や電荷分布を仮定して解を計算し、gnuplotの{\tt splot}コマンドを用いて解をプロットせよ。また、メッシュ数を増やすと、解の形や計算時間がどのように変化するか調べよ\footnote{計算時間の測り方:ハンドブック1.1.6節}
@@ -84,12 +90,6 @@
 \begin{enumerate}
 \renewcommand{\labelenumi}{4-\arabic{enumi})}
     
-\item {\tt cmatrix.h}を利用し、(何らかの意味で)ランダムな実対称行列、複素エルミート行列、実直交行列、複素ユニタリー行列を生成し、さらに、実際に生成された行列がそれらの性質を満たしているかチェックするプログラムを作成・実行せよ
-
-  \item 行列・行列積の計算を行うサンプルプログラム{\tt multiply.c}とBLASライブラリを使ってそれと等価な計算を行う{\tt multiply\_dgemm.c}の速度を比較せよ\footnote{aiでは、OS付属のBLAS、LAPACKではなく、Intel製のMKL (Math Kernel Library)に含ま
-れるBLASやLAPACKを利用するのがよい。MKLを使うには、GNU Cコンパイラ({\tt cc}, {\tt gcc})の代わりにIntel Cコンパイラ({\tt icc})を使い、{\tt -llapack -lblas}の代わりに{\tt -mkl}を指定してリンクする。例: \underline{\tt icc -O3 multiply\_dgemm.c -mkl}}。行列サイズによっては数十倍もの性能差が出ことがあるが、BLASで使われてい
-る最適化手法について調べてみよ
-
 \item ハウスホルダー法による対角化のサンプルプログラム{\tt diag.c}に、得られた固有ベクトルが互いに正規直交していることや得られた固有値の精度を確認するコードを追加し実行せよ。また、複素エルミート行列に対して同様のプログラムを作成・実行せよ
 
 \item 適当なポテンシャルの形を仮定した一次元シュレディンガー方程式の固有エネルギーと固有関数の組をハウスホルダー法により求めよ。同じ方程式を課題2-3)の方法で解き、解を比較せよ
