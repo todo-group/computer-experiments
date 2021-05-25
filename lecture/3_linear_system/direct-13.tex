@@ -10,7 +10,7 @@ void dgetrf_(int *M, int *N, double *A, int *LDA, int*IPIV,
 \item 行列$A$は、下三角部が$L$、上三角部が$U$で上書きされる。(対角にはは$U$の対角成分が入る。$L$の対角成分は全て1なので保存されない)
 \item 配列IPIVの第$i$要素には、$i$行目を使ってガウス消去する際に何行目と入れ替えられたかが保存される。($i$は1から数えることに注意)
 \end{itemize}
-  \item 前進代入と交代代入: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/linear_system/dgetrs.h}{dgetrs.h}
+  \item 前進代入と後退代入: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/linear_system/dgetrs.h}{dgetrs.h}
 \begin{lstlisting}
 void dgetrs_(char *TRANS, int *N, int *NRHS, double *A,
   int *LDA, int *IPIV, double *B, int *LDB, int *INFO);
