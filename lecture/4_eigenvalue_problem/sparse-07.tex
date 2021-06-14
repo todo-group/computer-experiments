@@ -1,11 +1,14 @@
 \begin{frame}[t,fragile]{Lanczos法}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
-  \item 初期(ランダム)ベクトル$v_1$に加えて
+  \item 初期(ランダム)ベクトル$v_1$に$A$を掛けて生成される
     \[
-    Av_1, Av_1, \cdots A^{m-1}v_1
+    v_1, Av_1, A^2v_1, \cdots A^{m-1}v_1
     \]
     を正規直交化して$v_1,v_2,\cdots,v_m$を作る(Krylov部分空間)
+    \[
+      {\cal K}_m(A,v_1) = \text{span} \{ v_1, Av_1, A^2v_1, \cdots A^{m-1}v_1 \}
+      \]
   \item 部分空間でのRitz値を固有値の近似値とする
   \item $A^kv_1$はどんどん最大固有ベクトルに近づいていくので、$m \ll n$でも良い近似固有値が得られると期待される
   \end{itemize}
