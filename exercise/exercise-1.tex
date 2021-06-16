@@ -12,7 +12,7 @@
 \begin{document}
 
 \noindent
-{\bf\large 「計算機実験I」実習課題 (2021/05/17更新)}
+{\bf\large 「計算機実験I」実習課題 (2021/06/16更新)}
 \\[-0.5em]
 
 \noindent
@@ -103,6 +103,22 @@
 \item Lanczos法により固有値を計算するプログラムを作成せよ。Ritz値が、繰り返しに従ってどのように振る舞うか図示してみよ。収束の速さをべき乗法と比較せよ
 
 \item {\tt convert2matrix.py}は、JPEGやPNGなどの形式の画像ファイルをグレイスケールに変換し、行列の形で書き出すPythonスクリプトである。\footnote{実行には、Pillowライブラリが必要である。ceenvでは事前に、{\tt pip install pillow} (Python2)、あるいは{\tt pip3 install pillow} (Python3)する必要がある。} これを用いて画像ファイルを行列形式に変換した後、SVDで圧縮してみよ。どの程度まで圧縮可能か?
+
+\item 二重井戸ポテンシャル
+  \begin{equation*}
+    V(x) = \begin{cases}
+      \infty & x < 0, \ x > 1 \\
+      0 & 0 < x < \frac{1}{2} - w/2, \ \frac{1}{2} + w/2 < x < 1 \\
+      v & \frac{1}{2} - w/2 < x < \frac{1}{2} + w/2
+    \end{cases}
+  \end{equation*}
+  中の1粒子問題
+  \begin{equation*}
+    {\cal H} \psi(x) = \Big[ -\frac{d^2}{dx^2} + V(x) \Big] \psi(x) = E \psi(x)
+  \end{equation*}
+  を考える($v \ge 0$, $0 < w < 1$)。変分波動関数として、$v=0$の場合の固有状態$\phi_n(x) = \sqrt{2} \sin(n \pi) \ (n=1,2,3\cdots)$の線形結合$\psi(x) = \sum_n C_n \phi_n(x)$を考える(ポテンシャルが左右対称なので実際には対称な波動関数(奇数の$n$)のみを考えれば十分である)。適当な$v$について、固有値問題$HC = EC$をハウスホルダー法を用いて数値的に解き、近似基底状態と近似基底エネルギーを求めよ。基底の数を増やすにつれて、近似基底エネルギーはどのように振る舞うか観察せよ。
+
+さらに、基底関数として$v=\infty$の場合の固有状態[$0<x<(w-1)/2$と$(w+1)/2<x<1$に二つの井戸型ポテンシャルがある場合の固有状態のうち対称なもののみを考慮]も加えて数値的変分計算を行え。基底関数が互いに直交しないので、一般化固有値問題となることに注意せよ。
 
 \end{enumerate}
 
