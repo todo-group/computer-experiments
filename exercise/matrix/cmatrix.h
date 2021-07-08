@@ -53,9 +53,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <complex.h>
-#ifdef I
-# undef I
-#endif
 
 /* useful macros */
 #define vec_ptr(vec) &(vec)[0]
