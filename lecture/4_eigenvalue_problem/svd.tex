@@ -242,7 +242,7 @@ subroutine dgesvd(character JOBU, character JOBVT,
       &= \sum_i^k (\lambda_i - g_{ii})^2 + \sum_i \sum_{j \ne i} g_{ij}^2
     \end{split}
     \]
-    ランク$k$以下で、$||A-X||_\mathrm{F}^2$を最小化するには、$g_{ii}=\lambda_i$ ($i=1 \cdots r$)、それ以外は全て零とすればよい
+    ランク$r$以下で、$||A-X||_\mathrm{F}^2$を最小化するには、$g_{ii}=\lambda_i$ ($i=1 \cdots r$)、それ以外は全て零とすればよい
   \end{itemize}
 \end{frame}
 
