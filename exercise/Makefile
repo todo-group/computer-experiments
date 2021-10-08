@@ -30,8 +30,9 @@ EXAMPLE22 = $(EXAMPLE21) \
 EXAMPLE27 = $(EXAMPLE22) \
 	optimization/golden_section.c optimization/func_1d.h \
 	optimization/measurement3.dat \
-	linear_system/poisson.h linear_system/poisson_dense.c linear_system/poisson_sparse.c linear_system/poisson_lu.c linear_system/dgetrf.h linear_system/dgetrs.h \
-	matrix/cmatrix.h
+	linear_system/poisson.h linear_system/poisson_dense.c linear_system/poisson_sparse.c linear_system/poisson_lu.c linear_system/dgetrf.h linear_system/dgetrs.h
+
+EXAMPLE2 = $(EXAMPLE22)
 
 .SUFFIXES: .pdf .dvi .tex
 
@@ -52,10 +53,10 @@ samples-1.zip : $(EXAMPLE18)
 	echo "LDLIBS = -llapack -lblas" >> samples-1/Makefile
 	zip samples-1.zip samples-1/*
 
-samples-2-2.zip : $(EXAMPLE27)
+samples-2.zip : $(EXAMPLE2)
 	rm -rf samples-2
 	mkdir samples-2
-	cp -p $(EXAMPLE27) samples-2
+	cp -p $(EXAMPLE2) samples-2
 	echo "CFLAGS = -Wall -O3 -I." > samples-2/Makefile
 	echo "LDLIBS = -llapack -lblas" >> samples-2/Makefile
 	zip samples-2.zip samples-2/*
