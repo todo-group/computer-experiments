@@ -4,7 +4,7 @@
 \usepackage{tutorial}
 
 \title{計算機実験II (L1) --- モンテカルロ法}
-\date{2020/9/25}
+\date{2021/10/08}
 
 \begin{document}
 
@@ -14,33 +14,30 @@
 \end{frame}
 
 \input{0_about/about2-1.tex}
-\input{0_about/env.tex}
-
-%% \section{多体系の統計力学}
-
-%% \input{6_monte_carlo/statphys-01.tex}
-%% \input{6_monte_carlo/statphys-02.tex}
-%% \input{6_monte_carlo/statphys-03.tex}
-%% \input{6_monte_carlo/statphys-04.tex}
+% \input{0_about/env.tex}
 
 \section{乱択アルゴリズム}
 \input{6_monte_carlo/randomized-01.tex}
 \input{6_monte_carlo/randomized-02.tex}
 \input{6_monte_carlo/randomized-03.tex}
+\input{6_monte_carlo/randomized-04.tex}
+\input{6_monte_carlo/randomized-05.tex}
 
-\input{6_monte_carlo/process.tex}
+\section{物理過程のシミュレーション}
+\input{6_monte_carlo/process-01.tex}
+\input{6_monte_carlo/process-02.tex}
+\input{6_monte_carlo/process-03.tex}
 
-%\input{6_monte_carlo/rng.tex}
 \section{擬似乱数}
 \input{6_monte_carlo/rng-01.tex}
 \input{6_monte_carlo/rng-02.tex}
 \input{6_monte_carlo/rng-03.tex}
 \input{6_monte_carlo/rng-04.tex}
 \input{6_monte_carlo/rng-05.tex}
+\input{6_monte_carlo/rng-06.tex}
 
 \input{6_monte_carlo/histogram.tex}
 \input{6_monte_carlo/integration.tex}
-%% \input{6_monte_carlo/mcmc.tex}
 
 \begin{frame}[t]{本日の課題}
   \begin{itemize}
@@ -49,91 +46,13 @@
   \item 実習
     \begin{itemize}
     \item 講義資料の中の {\tt random.c}, {\tt histogram.c}をコンパイル・実行。ソースコードの中身を確認 \\
-      サンプルコード一式: \href{https://github.com/todo-group/ComputerExperiments/releases/tag/2020a-computer2}{example-2-1.zip}
-    \item 実習課題一覧\href{https://github.com/todo-group/ComputerExperiments/releases/tag/2020a-computer2}{exercise-2.pdf}の課題1〜3 (あるいはそれ以外)から適宜選び実習
+      サンプルコード一式: \href{https://github.com/todo-group/ComputerExperiments/releases/tag/2021a-computer2}{example-2.zip}
+    \item ヒストグラムのプロットをしてみる
+    \item 実習課題一覧\href{https://github.com/todo-group/ComputerExperiments/releases/tag/2021a-computer2}{exercise-2.pdf}の課題に取り組む
     \end{itemize}
-  \item 質問はSlackの「\# 6\_モンテカルロ法」あるいは他の適当と思われるチャンネルで
-  \item 次回講義(おそらくの10/2)の前日までにITC-LMSのアンケート「作業レポート(2020/09/25)」に回答
+  \item 質問はSlackの「\# 7\_モンテカルロ法」あるいは他の適当と思われるチャンネルで
+  \item 本日24時までにITC-LMSのアンケート「第1回(10/08)作業レポート」に回答(出席のかわり)
   \end{itemize}
 \end{frame}
-
-%% \input{4_eigenvalue_problem/double-well.tex}
-
-%% \section{シューティング}
-
-%% \input{2_ode/ode-01.tex}
-%% \input{2_ode/ode-03.tex}
-%% \input{2_ode/ode-07.tex}
-%% \input{2_ode/ode-08.tex}
-%% \input{2_ode/numerov-02.tex}
-%% \input{2_ode/numerov-03.tex}
-%% \input{2_ode/numerov-04.tex}
-%% \input{4_eigenvalue_problem/intro-02.tex}
-%% \input{1_basics/bisection-01.tex}
-
-%% \section{対角化による解法}
-
-%% \begin{frame}[t,fragile]{対角化}
-%%   \begin{itemize}
-%%     \setlength{\itemsep}{1em}
-%%   \item シュレディンガー方程式の行列表示
-%%   \item ハウスホルダー法(LAPACK)
-%%   \item べき乗法
-%%   \item Lanczos法
-%%   \item ハウスホルダー法によるプログラムの例: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/eigenvalue_problem/double_well.c}{double\_well.c}
-%%   \end{itemize}
-%% \end{frame}
-
-%% \input{4_eigenvalue_problem/intro-03.tex}
-%% \input{4_eigenvalue_problem/intro-07.tex}
-%% \input{4_eigenvalue_problem/dense-01.tex}
-%% \input{4_eigenvalue_problem/dense-07.tex}
-%% %\input{1_basics/lapack-13.tex}
-%% \input{1_basics/lapack-14.tex}
-%% %\input{1_basics/lapack-15.tex}
-%% \input{1_basics/lapack-16.tex}
-%% \input{4_eigenvalue_problem/sparse-01.tex}
-%% \input{4_eigenvalue_problem/sparse-02.tex}
-%% \input{4_eigenvalue_problem/sparse-03.tex}
-%% \input{4_eigenvalue_problem/sparse-05.tex}
-%% \input{4_eigenvalue_problem/sparse-06.tex}
-%% \input{4_eigenvalue_problem/sparse-07.tex}
-
-%% \input{4_eigenvalue_problem/variational-method.tex}
-
-%% \input{4_eigenvalue_problem/dimensional-reduction.tex}
-
-%% \begin{frame}[t,fragile]{行列式の計算}
-%%   \begin{itemize}
-%%     \setlength{\itemsep}{1em}
-%%   \item ガウスの消去法とLU分解
-%%   \item LU分解による行列式の計算
-%%   \item LAPACKによるLU分解
-%%   \item LU分解のプログラムの例: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/linear_system/lu_decomp.c}{lu\_decomp.c}
-%%   \item 行列式計算のプログラムの例: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/linear_system/determinant.c}{determinant.c}
-%%   \end{itemize}
-%% \end{frame}
-
-%% \input{3_linear_system/direct-01.tex}
-%% \input{3_linear_system/direct-02.tex}
-%% \input{3_linear_system/direct-12.tex}
-
-%% \input{1_basics/lapack-12.tex}
-%% \input{1_basics/lapack-17.tex}
-
-%% \begin{frame}[t,fragile]{まとめ}
-%%   \begin{itemize}
-%%     \setlength{\itemsep}{1em}
-%%   \item 一次元(一粒子)シュレディンガー方程式の固有値問題
-%%     \begin{itemize}
-%%     \item シューティングによる方法: 連立微分方程式の積分、二分法
-%%     \item 対角化による方法: 差分化、ハウスホルダー法、べき乗法、Lanczos法
-%%     \item 変分法(線形の場合): 固有値問題、一般化固有値問題
-%%     \item 特別な場合に有効な方法: LU分解
-%%     \end{itemize}
-%%   \item 計算精度は何で決まるか？
-%%   \item それぞれのコスト(=計算時間・メモリ)は？
-%%   \end{itemize}
-%% \end{frame}
 
 \end{document}

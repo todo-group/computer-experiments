@@ -1,24 +1,24 @@
-\begin{frame}[t,fragile]{疑似乱数とは}
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{Box-Muller法}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
-  \item 計算機でプログラムに従って生成する乱数(のようなもの)
-  \item 乱数は何に役立つか？
+  \item 一様分布乱数から正規分布乱数を生成する方法
     \begin{itemize}
-    \item 等式のチェック、例外の発見
-    \item 初期値にランダムネスを入れることで最悪の場合を避ける
-    \item サンプリングを使ったシミュレーション (→計算機実験II)
-    \end{itemize}
-  \item 乱数を使う場合の注意
-    \begin{itemize}
-    \item 計算式に従って生成するため周期は有限であり、必ず何らかの相関がある
-    \item 初期化(種の設定)を正しく行う
-    \item 実際にそれらしい乱数が生成されているか目で見て確認する
-    \end{itemize}
-  \item 代表的な乱数発生器のひとつ: メルセンヌ・ツイスター
-    \begin{itemize}
-    \item 周期 $2^{19937}-1$、高速、日本製!
-    \item ヘッダファイル: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/monte_carlo/mersenne_twister.h}{mersenne\_twister.h}
-    \item サンプルプログラム: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/monte_carlo/random.c}{random.c}
+    \item 2次元の(標準)ガウス分布を考える
+      \[
+      f(x,y)\,dx\,dy= \frac{1}{2\pi} e^{-(x^2+y^2)/2} \,dx\,dy
+      \]
+    \item 極座標$(r,\theta)$に変換 ($x=r\cos\theta$, $y=r\sin\theta$)
+      \[
+      \frac{1}{2\pi} e^{-(x^2+y^2)/2} \,dx\,dy = \frac{1}{2\pi} r \, e^{-r^2/2} \,dr\,d\theta
+      \]
+    \item $\theta$は$(0,2\pi)$の一様分布
+    \item $r$は$f(r) = r \, e^{-r^2/2}$に従う
+      \begin{align*}
+        F(r) = \int_0^r f(r) \, dr = 1 - e^{-r^2/2}, \qquad r = F^{-1}(q) = \sqrt{- 2 \log(1-q)}
+      \end{align*}
+    \item 二つの一様乱数から二つの独立な正規分布乱数が生成される
     \end{itemize}
   \end{itemize}
 \end{frame}

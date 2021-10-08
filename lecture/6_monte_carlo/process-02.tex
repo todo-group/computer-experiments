@@ -1,0 +1,20 @@
+\begin{frame}[t,fragile]{物質中の中性子輸送}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item ある板状の物質(厚さ$D$)に垂直に中性子が入射したときの吸収率・透過率・反射率
+  \item 中性子はある確率で物質の原子核に衝突し、確率$p_{\rm c}$で吸収、$p_{\rm s}=1-p_{\rm c}$で散乱される
+    \begin{itemize}
+    \item 衝突は確率的に起きるので、次の衝突までの距離$\ell$は指数分布にしたがう($\lambda^{-1}$: 平均自由行程)
+      \[
+      p(\ell) = \lambda e^{-\lambda\ell}
+      \]
+    \item 衝突時、ランダムな方向に散乱されるとすると
+      \[
+      p(\theta,\phi) \, d\theta \, d\phi = \frac{d\Omega}{4\pi} = \frac{\sin \theta}{4\pi} \, d\theta \, d\phi
+      \]
+      \[
+      p(\theta) = \frac{\sin \theta}{2} \qquad p(\phi)=\frac{1}{2\pi}
+      \]
+    \end{itemize}
+  \end{itemize}
+\end{frame}

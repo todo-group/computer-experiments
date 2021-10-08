@@ -3,19 +3,29 @@
     %\setlength{\itemsep}{1em}
   \item 自然乱数 (ハードウェア乱数)
     \begin{itemize}
-    \item さいころ, コイン, ルーレット, 核分裂反応, 熱雑音, ショット雑音 ...
+    \item さいころ、コイン、ルーレット、核分裂反応、熱雑音、ショット雑音 ...
     \end{itemize}
-  \item モンテカルロシミュレーションにおける必要条件
+  \item 疑似乱数とは
     \begin{itemize}
-    \item 多数の乱数が必要
-    \item ポータビリティ
-    \item 生成速度
-    \item 再現性
-    \end{itemize}
-  \item 擬似乱数 (pseudo random number)
-    \begin{itemize}
-    \item 計算機でプログラムに従って生成
-    \item 分布の一様性, 相関, 周期に注意する必要あり
+    \item 計算機でプログラムに従って生成する乱数(のようなもの)
+    \item 乱数は何に役立つか？
+      \begin{itemize}
+      \item 等式のチェック、例外の発見
+      \item 初期値にランダムネスを入れることで最悪の場合を避ける
+      \item サンプリングを使ったシミュレーション (→計算機実験II)
+      \end{itemize}
+    \item 疑似乱数に必要な条件
+      \begin{itemize}
+      \item 多数の乱数が生成可能
+      \item ポータビリティ
+      \item 生成速度
+      \item 再現性
+      \item 統計的性質
+      \end{itemize}
+  %% \item 擬似乱数 (pseudo random number)
+  %%   \begin{itemize}
+  %%   \item 計算機でプログラムに従って生成
+  %%   \item 分布の一様性、相関、周期に注意する必要あり
     \end{itemize}
   \end{itemize}
 \end{frame}
