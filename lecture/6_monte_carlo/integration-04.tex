@@ -1,0 +1,19 @@
+\begin{frame}[t,fragile]{中心極限定理(central limiting theorem)}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item $M$回の試行のうち $N$回成功する確率 ($\pi$の見積もり値が $m=2cN/M$ となる確率)
+    \[
+    p(m=2c\frac{N}{M}) = \frac{M!}{N!(M-N)!} q^N (1-q)^{M-N}
+    \]
+  \item 両辺の対数をとってスターリングの公式を使う
+    \[
+    \log p(m) \simeq \frac{M}{2c} (m \log \frac{\pi}{m} + (2c-m)\log \frac{2c-\pi}{2c-m})
+    \]
+  \item $m$ に関して平均値 $\pi$ の周りで二次まで展開
+    \[
+    \log p(m) \simeq -\frac{M}{2s^2}(m-\pi)^2
+    \]
+  \item 分散$s^2/M$の正規分布(中心極限定理)
+  \item 統計誤差は $\sqrt{M}$ に反比例して減少 $\Rightarrow$ 1桁小さくするには100倍の計算が必要
+  \end{itemize}
+\end{frame}

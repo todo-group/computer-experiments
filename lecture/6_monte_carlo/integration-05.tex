@@ -1,0 +1,22 @@
+\begin{frame}[t,fragile]{単純サンプリング(2)}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item $y$ に関してあらかじめ積分
+  \item $[0,c]$の一様乱数 $x$ を用いて
+    \[
+    \int_0^c \frac{f(x)}{p(x)} p(x) \, dx \simeq \frac{1}{M} \sum_i c f(x_i) \ \ \ p(x) = \frac{1}{c}
+    \]
+    \begin{tabular}{|c|c|c|}
+      \hline
+      $M$ & 平均値 & 誤差 \\
+      \hline
+      100 & 3.1 & 0.8 \\
+      10000 & 3.00 & 0.08 \\
+      1000000 & 3.147 & 0.008 \\
+      \hline
+    \end{tabular}
+  \end{itemize}
+  \vspace*{-7em}
+  \hspace*{17em}
+  \resizebox{!}{.45\textheight}{\includegraphics{image/coth-2.pdf}}
+\end{frame}

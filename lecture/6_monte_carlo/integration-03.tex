@@ -1,0 +1,20 @@
+\begin{frame}[t,fragile]{統計誤差の評価}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item このモンテカルロ積分が実際に評価している積分
+    \[
+    \frac{1}{2c} \int_0^c \!\! \int_0^2 \!\! \theta(x,y) \, dx \, dy
+    \ \ \ \theta(x,y) = \begin{cases} 2c & \text{if $y < f(x)$} \\ 0 & \text{otherwise} \end{cases}
+    \]
+  \item 統計誤差の評価
+    \begin{itemize}
+      \item 試行の成功確率(success probability): $q=\frac{\pi}{2c}$
+      \item 一回の試行の平均値(mean): $\mu = 2c \times q = \pi$
+      \item 分散(variance):
+        \[ s^2 = (2c)^2q + 0^2(1-q) - \mu^2 = 2c\pi-\pi^2 = 4c^2 q(1-q) \]
+      \item $c=20$ の時:
+        \[ q \simeq 0.0785 \ \ \ s^2 \simeq 116
+        \]
+    \end{itemize}
+  \end{itemize}
+\end{frame}

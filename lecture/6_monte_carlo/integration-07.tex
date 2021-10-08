@@ -1,0 +1,16 @@
+\begin{frame}[t,fragile]{次元の呪い(curse of dimensionality)}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item $n$次元超立方体(1辺の長さ 2, 体積 $2^n$)に対する$n$次元単位球の体積の割合
+    \[
+    q = \frac{\pi^{n/2} / \Gamma(\frac{n}{2}+1)}{2^n} \sim (\pi/n)^{n/2}
+    \]
+    $n=10$ で 0.2\%, $n=20$ で $10^{-8}$, $n=100$ で $10^{-70}$
+  \item モンテカルロ積分で球の体積を計算しようとすると, 標準偏差に対する平均値の割合は指数関数的に小さい
+    \[
+    \frac{q}{\sqrt{q(1-q)}} \sim \sqrt{q}
+    \]
+  \item 次元が高くなるにつれて指数関数的に大きな $M$ が必要となる
+  \item c.f. 通常の数値積分(台形公式等)でも同様
+  \end{itemize}
+\end{frame}

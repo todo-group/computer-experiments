@@ -1,0 +1,13 @@
+\begin{frame}[t,fragile]{誤差の評価}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 関数 $f(x)/p(x)$ の分散
+    \[
+    s^2 = \int_0^c \Big(\frac{f(x)}{p(x)}\Big)^2 p(x) \, dx - \pi^2 = c \int_0^\infty f^2(x) \, dx - \pi^2 = 4c - \pi^2
+    \]
+  \item $c=20$ のとき $s^2 \simeq 70.1$
+  \item 同じ試行回数 $M$ の時, 誤差は$\sqrt{70.1/116} = 0.77$ 倍
+  \item もしくは $M$ を $116/70.1 = 1.65$ 倍したのと同じ効果
+  \item 積分次元は低ければ低いほど良い
+  \end{itemize}
+\end{frame}

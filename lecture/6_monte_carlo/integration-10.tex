@@ -1,0 +1,17 @@
+\begin{frame}[t,fragile]{誤差のサンプル数依存性}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 関数 $f(x)/p(x)$ の分散
+    \[
+    s^2 = \int_0^c \Big(\frac{f(x)}{p(x)}\Big)^2 p(x) \, dx - \pi^2 \simeq 2(2+\pi) - \pi^2 = 0.414
+    \]
+  \item 同じ試行回数 $M$ の時, 誤差は
+
+    $\sqrt{0.414/116} = 0.06 \mbox{倍}$
+
+  \item もしくは $M$ を 280 倍したのと同じ
+  \vspace*{-5em}
+  \hspace*{15em}
+  \resizebox{!}{.45\textheight}{\includegraphics{image/sech-error.pdf}}
+  \end{itemize}
+\end{frame}

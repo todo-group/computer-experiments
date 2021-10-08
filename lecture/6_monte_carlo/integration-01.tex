@@ -1,0 +1,15 @@
+\begin{frame}[t,fragile]{モンテカルロ積分}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 円周率を与える公式
+    \[
+    \pi = \lim_{c \rightarrow \infty} \int_0^c f(x) \, dx \ \ \ f(x) = \frac{2}{\cosh x}
+    \]
+  \item スタンダードな数値積分法: 台形公式 (一次式補間), シンプソン公式 (二次式補間), etc
+  \item カットオフ $c$ の値
+    \begin{itemize}
+    \item 誤差は $c$ が大きくなると指数関数的に小さくなる
+    \item 例えば $c = 20$ で誤差は $8.3 \times 10^{-9}$ 以下
+    \end{itemize}
+  \end{itemize}
+\end{frame}
