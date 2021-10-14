@@ -50,7 +50,7 @@ samples-1.zip : $(EXAMPLE18)
 	mkdir samples-1
 	cp -p $(EXAMPLE18) samples-1
 	echo "CFLAGS = -Wall -O3 -I." > samples-1/Makefile
-	echo "LDLIBS = -llapack -lblas" >> samples-1/Makefile
+	echo "LDLIBS = -llapack -lblas -lm" >> samples-1/Makefile
 	zip samples-1.zip samples-1/*
 
 samples-2.zip : $(EXAMPLE2)
@@ -58,7 +58,7 @@ samples-2.zip : $(EXAMPLE2)
 	mkdir samples-2
 	cp -p $(EXAMPLE2) samples-2
 	echo "CFLAGS = -Wall -O3 -I." > samples-2/Makefile
-	echo "LDLIBS = -llapack -lblas" >> samples-2/Makefile
+	echo "LDLIBS = -llapack -lblas -lm" >> samples-2/Makefile
 	zip samples-2.zip samples-2/*
 
 clean:

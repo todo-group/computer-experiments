@@ -3,6 +3,11 @@
 \begin{frame}[t,fragile]{マルコフ連鎖モンテカルロ法}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
+  \item 任意の多次元確率分布関数について、その分布したがうサンプルを生成する方法
+    \begin{itemize}
+    \item 分布関数は正規化されている必要はない
+    \item 逆に、正規化定数をマルコフ連鎖モンテカルロで計算するのは難しい
+    \end{itemize}
   \item 統計誤差はサンプルの生の分散$s^2$とサンプル数$M$、自己相関時間$\tau$で決まる
     \[
     \sigma^2 \simeq \frac{s^2 (1+2\tau)}{M}

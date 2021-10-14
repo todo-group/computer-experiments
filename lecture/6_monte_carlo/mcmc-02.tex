@@ -3,17 +3,20 @@
 \begin{frame}[t,fragile]{マルコフ連鎖モンテカルロ}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
-  \item 直接カノニカル分布から独立したサンプリングをおこなうことは難しい
-  \item 直前の状態からある確率にしたがって、次の状態を生成(マルコフ連鎖、Markov chain)
-    \[
-    \begin{split}
-      &{\rm Pr}(X_{n+1}=s_j \,|\, X_0 = s_{i_0}, X_1 = s_{i_1}, \cdots, X_n = s_{i}) \\
-      & \qquad = {\rm Pr}(X_{n+1}=s_j \,|\, X_n = s_{i}) = P_{i,j}
+  \item 任意の多次元確率分布(今の場合はカノニカル分布)について、その分布したがうサンプル(状態)を生成する方法
+    \begin{itemize}
+    \item 直接カノニカル分布から独立したサンプリングをおこなうことは難しい
+    \item 直前の状態からある確率にしたがって、次の状態を生成(マルコフ連鎖、Markov chain)
+      \[
+      \begin{split}
+        &{\rm Pr}(X_{n+1}=s_j \,|\, X_0 = s_{i_0}, X_1 = s_{i_1}, \cdots, X_n = s_{i}) \\
+        & \qquad = {\rm Pr}(X_{n+1}=s_j \,|\, X_n = s_{i}) = P_{i,j}
       \end{split}
-    \]
+      \]
     \item 長時間極限でカノニカル分布が達成されるように遷移確率(行列)$P_{i,j}$を選ぶ
       \[
       \lim_{n\rightarrow\infty}{\rm Pr}(X_n=s_j) \sim \pi_j = \exp[-\beta {\cal H}(s_j)]
       \]
+    \end{itemize}
   \end{itemize}
 \end{frame}
