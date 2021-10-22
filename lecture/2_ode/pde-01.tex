@@ -1,0 +1,19 @@
+\begin{frame}[t]{一次元拡散方程式(放物型)}
+  \begin{itemize}
+  \item 一次元拡散方程式: $u=u(x,t)$, $q=q(x,t)$
+    \[
+    \frac{\partial u}{\partial t} - D \frac{\partial^2 u}{\partial x^2} = q
+    \]
+    \begin{itemize}
+    \item 初期条件: $u(x,0) = f(x)$
+    \item 境界条件: $u(0,t) = u(1,t) = 0$
+    \end{itemize}
+  \item 時間$t$と位置$x$に関して離散化
+    \begin{align*}
+      & u_j^n = u(x_j, t_n) \\
+      & q_j^n = q(x_j, t_n) \\
+      & t_0 = 0, t_1=\Delta t, t_2=2 \Delta t, \cdots, t_n=n \Delta t, \cdots \\
+      & x_0 = 0, x_1=\Delta x, x_2=2 \Delta x, \cdots, x_N=N \Delta x = 1 \qquad (\Delta x = 1/N)
+    \end{align*}
+  \end{itemize}
+\end{frame}

@@ -1,0 +1,17 @@
+\begin{frame}[t]{有限差分法}
+  \begin{itemize}
+  \item $t$に関して前進差分を考える
+    \[
+    \frac{\partial u}{\partial t} \Big|_{(j \Delta x, n \Delta t)} = \frac{u_j^{n+1} - u_j^n}{\Delta t} + {\cal O}(\Delta t)
+    \]
+  \item $x$に関しては中心差分を考える
+    \[
+    \frac{\partial^2 u}{\partial x^2} \Big|_{(j \Delta x, n \Delta t)} = \frac{u_{j+1}^{n} - 2 u_{j}^{n} + u_{j-1}^{n}}{\Delta x^2} + {\cal O}(\Delta x^2)
+    \]
+  \item 拡散方程式に代入して整理すると
+    \[
+    u_{j}^{n+1} = u_{j}^{n} + r (u_{j+1}^{n} - 2 u_{j}^{n} + u_{j-1}^{n}) + \Delta t q_{j}^{n} \qquad (r = D\frac{\Delta t}{\Delta x^2})
+    \]
+  \item FTCS (Forward-Time Centered Space)法
+  \end{itemize}
+\end{frame}

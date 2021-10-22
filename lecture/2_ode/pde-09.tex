@@ -1,0 +1,15 @@
+\begin{frame}[t]{クランク・ニコルソン法}
+  \begin{itemize}
+  \item クランク・ニコルソン法
+    \[
+    \Psi^{n+1} = \frac{1 -  i \frac{\Delta t}{2} H}{1 +  i \frac{\Delta t}{2} H} \Psi^{n}
+    \]
+  \item (数値精度の範囲で)ユニタリー行列であるので、ノルムは保存
+  \item $(1 +  i \frac{\Delta t}{2} H)^{-1}$を掛ける $\Rightarrow$ 連立一次方程式を解く必要がある
+    \begin{itemize}
+    \item まず、$\Psi = (1 - i \frac{\Delta t}{2} H) \Psi^n$ を計算
+    \item 次に、$(1 +  i \frac{\Delta t}{2} H) \Psi^{n+1} = \Psi$ を解く(連立一次方程式)
+    \end{itemize}
+  \item 陰解法の一種
+  \end{itemize}
+\end{frame}

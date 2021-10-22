@@ -1,0 +1,16 @@
+\begin{frame}[t]{一次元波動方程式(双極型)}
+  \begin{itemize}
+  \item 一次元波動方程式
+    \[
+    \frac{\partial^2 u}{\partial t^2} = c^2 \frac{\partial^2 u}{\partial x^2} \qquad u(x,0)=f(x), \frac{\partial u}{\partial t} (x,0) = g(x)
+    \]
+  \item $t$に関する中心差分
+    \[
+    \frac{\partial^2 u}{\partial t^2} \Big|_{(j \Delta x, n \Delta t)} = \frac{u_{j}^{n+1} - 2 u_{j}^{n} + u_{j}^{n-1}}{\Delta t^2} + {\cal O}(\Delta t^2)
+    \]
+  \item 代入して整理すると
+    \[
+    u_{j}^{n+1} = 2u_{j}^{n} - u_{j}^{n-1} + \alpha^2 (u_{j+1}^{n} - 2 u_{j}^{n} + u_{j-1}^{n}) \qquad (\alpha = c\frac{\Delta t}{\Delta x})
+    \]
+  \end{itemize}
+\end{frame}

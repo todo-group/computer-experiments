@@ -1,0 +1,15 @@
+\begin{frame}[t]{有限差分法の安定性}
+  \begin{itemize}
+  \item (陽的)有限差分法においては、$\Delta t$、$\Delta x$は小さければ小さいほどよいというわけではない
+  \item 一次元拡散方程式の場合
+    \begin{align*}
+      \begin{cases}
+        r \le 1/2 & \text{安定} \\
+        r > 1/2 & \text{\color{red}不安定}
+      \end{cases}
+    \end{align*}
+  \item $\Delta x$を半分にしたら、$\Delta t$は1/4にしなければならない
+
+    $\Rightarrow$ 計算量は8倍
+  \end{itemize}
+\end{frame}

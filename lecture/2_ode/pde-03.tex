@@ -1,0 +1,16 @@
+\begin{frame}[t]{FTCS法}
+  \begin{itemize}
+  \item $O(\Delta t) + O(\Delta x^2)$の陽解法
+    \begin{center}
+      \resizebox{0.4\textwidth}{!}{\includegraphics{image/ftcs-1.pdf}}
+    \end{center}
+  \item 初期条件
+    \[
+    u_j^0 = f(j\Delta x) \ \ (j=0,1,\cdots,N)
+    \]
+  \item 境界条件
+    \[
+    u_0^n = u_N^n = 0 \ \ (n=0,1,2,\cdots)
+    \]
+  \end{itemize}
+\end{frame}

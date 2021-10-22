@@ -1,0 +1,15 @@
+\begin{frame}[t]{拡散方程式に対する陰解法}
+  \begin{itemize}
+  \item 時刻$t$関して後退差分を使う
+    \[
+    \frac{\partial u}{\partial t} \Big|_{(j \Delta x, n \Delta t)} = \frac{u_j^{n} - u_j^{n-1}}{\Delta t} + {\cal O}(\Delta t)
+    \]
+  \item $x$に関する中心差分と組み合わせ、$n \rightarrow n+1$と書き直すと
+    \[
+    u_{j}^{n+1} = u_{j}^{n} + r (u_{j+1}^{n+1} - 2 u_{j}^{n+1} + u_{j-1}^{n+1})
+    \]
+    $u^{n+1}$が両辺に現れる $\Rightarrow$ 陰解法
+  \item $O(\Delta t) + O(\Delta x^2)$
+  \item $r$の値によらず{\color{red}常に安定}
+  \end{itemize}
+\end{frame}
