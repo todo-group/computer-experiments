@@ -1,8 +1,8 @@
-OBJ = diag double_well
+OBJ = diag double_well tridiagonal sparse matfree
 default: $(OBJ)
 
 CFLAGS = -O3 -I../matrix
-LDLIBS = -llapack
+LDLIBS = -llapack -lblas
 
 clean:
 	rm -rf $(OBJ)
