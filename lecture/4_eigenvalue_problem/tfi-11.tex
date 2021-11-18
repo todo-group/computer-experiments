@@ -1,0 +1,30 @@
+\begin{frame}[t,fragile]{疎行列ベクトル積}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 密行列ベクトル積
+    \begin{itemize}
+    \item メモリ: $O(N^2)$, 計算量: $O(N^2)$
+    \end{itemize}
+  \item 疎行列の場合
+    \begin{itemize}
+    \item メモリ: $O(N)$ or $O(1)$, 計算量: $O(N)$ まで削減可能
+    \item 三重対角行列
+
+      対角成分・副対角成分をベクトルで記憶
+
+      例) \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/eigenvalue_problem/tridiagonal.c}{tridiagonal.c} (一次元一粒子系)
+
+    \item 一般の疎行列
+
+      各行について、非ゼロの要素の場所(列)と値のみを記憶 (CRS, CCS形式)
+
+      例) \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/eigenvalue_problem/sparse.c}{sparse.c} (一次元横磁場イジング模型)
+
+    \item 非ゼロの要素の場所(列)と値が簡単に計算できる場合
+
+      その場で(行列ベクトル積の実行時に)計算
+
+      例) \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/eigenvalue_problem/matfree.c}{matfree.c} (一次元横磁場イジング模型)
+    \end{itemize}
+  \end{itemize}
+\end{frame}

@@ -1,0 +1,20 @@
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{古典多粒子系}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item ハミルトニアン
+    \[
+    H = \sum_i \frac{p_i^2}{2m} + U(q_1, q_2, \cdots, q_N)
+    \]
+  \item 相互作用・ポテンシャル (化学の分野では「力場」と呼ばれる)
+    \begin{itemize}
+    \item 短距離相互作用: 剛体球ポテンシャル、Lennard-Jonesポテンシャル、3体ポテンシャル、第一原理(量子力学)ポテンシャル、粗視化モデル$\cdots$
+    \item 長距離相互作用: 重力、静電相互作用
+    \end{itemize}
+  \item 運動方程式(常微分方程式)
+    \[
+    \frac{dq_i}{dt} = \frac{\partial H}{\partial p_i} = \frac{p_i}{m}, \ \ \frac{dp_i}{dt} = - \frac{\partial H}{\partial q_i} = - \frac{\partial U}{\partial q_i}
+    \]
+  \end{itemize}
+\end{frame}
