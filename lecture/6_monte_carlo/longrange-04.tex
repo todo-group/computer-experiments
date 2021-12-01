@@ -1,0 +1,31 @@
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{ツリー法}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item ある粒子から見て
+    \begin{itemize}
+    \item 見込み角があるしきい値よりも小さい場合は、その重心を使って計算
+    \item そうでない場合にはまじめに計算
+    \end{itemize}
+  \item 計算量 $O(N \log N)$
+  \item 近似精度を上げるには
+    \begin{itemize}
+    \item 見込み角のしきい値を小さくする→計算量が急速に増える
+    \item 重心だけでなく多重極展開も使う
+
+      原点中心半径$a$の球の中の粒子の作るポテンシャルの多重極展開係数
+      \[
+      \alpha_\ell^m = \sum_{i=1}^{N} m_i \Big( \frac{r_i}{a} \Big)^\ell Y_\ell^{-m}(\theta_i, \phi_i)
+      \]
+      $Y_\ell^m(\theta,\phi)$: $\ell$次の球面調和関数
+
+      位置$(r,\theta,\phi)$におけるポテンシャル($r>a$)
+      \[
+      \Phi(r,\theta,\phi) \approx \sum_\ell \sum_{m=-\ell}^{\ell} \alpha_\ell^m \frac{a^\ell}{r^{\ell+1}} Y_\ell^m(\theta,\phi)
+      \]
+      
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+

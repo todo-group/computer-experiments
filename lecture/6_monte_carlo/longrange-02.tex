@@ -1,0 +1,24 @@
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{エバルト法}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 第2項目(長距離項)の計算
+    \begin{itemize}
+    \item 変数変換($s=t/r$)
+      \[
+      \begin{split}
+        U_2 &= \frac{1}{2} \sum_{i,j} \sum_{\mathbf{n}} \frac{q_i q_j}{r} \frac{2}{\sqrt{\pi}} \int_0^{\alpha r} \exp(-t^2) \, dt \\
+        &= \frac{1}{2} \sum_{i,j} q_i q_j  \frac{2}{\sqrt{\pi}} \int_0^{\alpha} \sum_{\mathbf{n}} \exp(-r^2 s^2) \, ds
+        \end{split}
+      \]
+    \item 被積分関数は$\mathbf{r}_i$に関して周期$L$の周期関数$\rightarrow$フーリエ変換を導入
+      \[
+      U_2 = \frac{2\pi}{L^3} \sum_{\mathbf{h} \ne \mathbf{0}} \frac{e^{-|\mathbf{h}|^2/4\alpha^2}}{|\mathbf{h}|^2} \Big| \sum_i q_i e^{i\mathbf{h} \cdot \mathbf{r}_i} \Big|^2 \qquad \mathbf{h} = \frac{2\pi}{L}(h_x, h_y, h_z)
+      \]
+    \item $|\mathbf{h}|$が大きくなると急速に小さくなる
+    \item $\mathbf{h} = \mathbf{0}$の項は電気的中性条件から消える
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+

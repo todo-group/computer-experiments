@@ -1,0 +1,19 @@
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{エバルト法}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 周期的なクーロンポテンシャル(粒子数$N$)
+    \[
+    U = \frac{1}{2} \sum_{i,j} \sum_{\mathbf{n}} \frac{q_i q_j}{r} \qquad r = |\mathbf{r}| = |\mathbf{r}_i - \mathbf{r}_j + L \mathbf{n}|
+    \]
+  \item 無限個のミラーイメージに関する和をいかに計算するか
+    \begin{itemize}
+    \item 誤差関数(erf)と相補誤差関数(erfc)を用いて、ポテンシャルを２つの部分に分ける($\alpha$はある定数)
+      \[
+      U = \frac{1}{2} \sum_{i,j} \sum_{\mathbf{n}} \frac{q_i q_j \, \mathrm{erfc}(\alpha r)}{r} + \frac{1}{2} \sum_{i,j} \sum_{\mathbf{n}} \frac{q_i q_j \, \mathrm{erf}(\alpha r)}{r}
+      \]
+    \item 第1項目は$r$が大きくなると急速に小さくなる
+    \end{itemize}
+  \end{itemize}
+\end{frame}
