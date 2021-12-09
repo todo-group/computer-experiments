@@ -29,10 +29,11 @@ EXAMPLE21 = matrix/cmatrix.h \
 EXAMPLE22 = monte_carlo/square_lattice.c monte_carlo/harmonic.c
 EXAMPLE24 = eigenvalue_problem/tridiagonal.c eigenvalue_problem/sparse.c eigenvalue_problem/matfree.c
 EXAMPLE27 = optimization/golden_section.c optimization/func_1d.h \
+	optimization/steepest_descent_2d.c optimization/func_2d.h \
 	optimization/measurement3.dat \
 	linear_system/poisson.h linear_system/poisson_dense.c linear_system/poisson_sparse.c linear_system/poisson_lu.c linear_system/dgetrf.h linear_system/dgetrs.h
 
-EXAMPLE2 = $(EXAMPLE21) $(EXAMPLE22) $(EXAMPLE24)
+EXAMPLE2 = $(EXAMPLE21) $(EXAMPLE22) $(EXAMPLE24) $(EXAMPLE27)
 
 .SUFFIXES: .pdf .dvi .tex
 

@@ -1,0 +1,15 @@
+\begin{frame}[t,fragile]{複素差分}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 虚軸方向のテイラー展開を考える
+    \[
+    f(x+ih) = f(x) + ihf'(x) - h^2 f''(x)/2  - ih^3 f'''(x)/6 + \cdots
+    \]
+  \item テイラー展開の虚部を取ることで微分が求まる
+    \[
+    f'(x) = \frac{\mathrm{Im} (f(x+ih))}{h} + O(h^2)
+    \]
+  \item 引き算がないので桁落ちに強い
+  \item 関数の値が複素数に対して正しく計算される必要がある
+  \end{itemize}
+\end{frame}

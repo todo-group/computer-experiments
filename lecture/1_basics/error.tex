@@ -68,39 +68,6 @@ ans =
   \end{itemize}
 \end{frame}
 
-\begin{frame}[t,fragile]{数値微分(差分)}
-  \begin{itemize}
-    \setlength{\itemsep}{1em}
-  \item 関数のテイラー展開
-    \[
-    f(x+h) = f(x) + h f'(x) + h^2 f''(x)/2 + h^3 f'''(x)/6 + \cdots
-    \]
-  \item 数値微分の最低次近似(前進差分)
-    \[
-    f_1(x,h) \equiv \frac{f(x+h)-f(x)}{h} = f'(x) + h f''(x)/2 + O(h^2)
-    \]
-  \item より高次の近似(中心差分)
-    \[
-    f_2(x,h) \equiv \frac{f(x+h)-f(x-h)}{2h} = f'(x) + h^2 f'''(x)/6 + O(h^3)
-    \]
-  \item 刻み$h$を小さくすると打ち切り誤差は減少するが、小さすぎると今度は桁落ちが大きくなる
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[t,fragile]{差分の一般式}
-  \begin{itemize}
-    %\setlength{\itemsep}{1em}
-  \item 関数のテイラー展開: $\displaystyle f(x+h) = \sum_{k} \frac{h^k}{k!} f^{(k)}(x)$
-  \item $f^{(m)}(x)$を$n$個の$f(x+h_j)$の線形結合で表す($n \ge m+1$)
-    \begin{align*}
-      f^{(m)}(x) &\approx \sum_j a_j f(x+h_j) = \sum_j a_j \sum_{k} \frac{h_j^k}{k!} f^{(k)}(x) \\
-      & = \sum_{k} C_k f^{(k)}(x) \qquad (C_k \equiv \sum_j a_j \frac{h_j^k}{k!})
-    \end{align*}
-  \item $C_k = \delta_{k,m}$ ($k = 0 \cdots n-1$)となるように$a_0 \cdots a_{n-1}$を決める
-  \item 行列$\displaystyle G_{kj} = \frac{h_j^k}{k!}$と列ベクトル$a_j$と$b_k = \delta_{k,m}$を導入すると、条件式は$G a = b$と書ける (連立一次方程式)
-  \end{itemize}
-\end{frame}
-
 \begin{frame}[t,fragile]{刻み幅を変えた計算}
   \begin{itemize}
     \setlength{\itemsep}{1em}
