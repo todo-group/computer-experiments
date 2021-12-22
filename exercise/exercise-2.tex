@@ -13,7 +13,7 @@
 \begin{document}
 
 \noindent
-{\bf\large 「計算機実験II」実習課題 (2021/12/09更新)}
+{\bf\large 「計算機実験II」実習課題 (2021/12/10更新)}
 \\[-0.5em]
 
 {\bf [モンテカルロ法]}
@@ -149,7 +149,7 @@
 
 \item 共役勾配法を用いて、Dirichlet型の境界条件のもとでの二次元Poisson方程式(あるいはLaplace方程式)の解を求めるプログラムを作成せよ。実行時間のメッシュ数依存性をLU分解を用いた場合と比較せよ(参考: 計算機実験I 講義資料{\tt lecture-1-5.pdf} p.4)。Poisson方程式を行列形式に書き直すことが難しい場合には、samples-2.zipに含まれている{\tt poisson.h}を参考にしてもよい(行列生成{\tt poisson\_dense.c}、行列ベクトル積{\tt poisson\_sparse.c}、LU分解による求解{\tt poisson\_lu.c}のテストプログラムもあり)
 
-\item 測定データ{\tt measurement3.dat}を関数$y=f(x)=ax+be^{−(x−c)^2}$で最小二乗フィッティングしよう。パラメータ$a, b, c$を、Nelder-Mead法を用いて残差を最小化することにより推定せよ
+\item 測定データ{\tt measurement3.dat} (samples-2.zipに含まれている)を関数$y=f(x)=ax+be^{−(x−c)^2}$で最小二乗フィッティングしよう。パラメータ$a, b, c$を、Nelder-Mead法を用いて残差を最小化することにより推定せよ
   \begin{center}
     \resizebox{.4\textwidth}{!}{\includegraphics{optimization/measurement3.pdf}}
   \end{center}
@@ -169,6 +169,8 @@
   E(C) = \sum_{\rm row} (S_r-M)^2 + \sum_{\rm col} (S_c-M)^2 + \sum_{\rm diag} (S_d-M)^2
   \]
   (ただし、$S_r, S_c, S_d$はそれぞれ、$r$行目、$c$列目、2方向の対角線の数字の和)と定義すると、「基底状態」$E(C)=0$は正しい魔法陣(の一つ)を与える。モンテカルロによる状態更新は、まず$1\sim n^2-1$の自然数$i$をランダムに選び、数字$i$と$i+1$の位置を入れ替える操作を考えればよい。$n=3,4,5,6$の場合について、正しい魔法陣を見出す確率のアニーリング時間依存性を調べよ。また、最急下降法の結果との比較も行え
+
+\item 自分が興味を持っている問題を「最適化問題」として定式化し、最適化手法を用いて解を求めよ。物理の問題でなくてもよい。ただし最適化する変数の数(次元)は4以上であること。使った最適化手法の詳細と、なぜその手法を使ったかについて説明せよ
   
 % \hspace*{-2em} {\bf [その他]}
 

@@ -1,0 +1,24 @@
+\begin{frame}[t,fragile]{勾配の計算}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item $f(x_1,x_2,\cdots,x_n)$ の勾配
+    \[
+      \nabla f = \Large( \frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \cdots, \frac{\partial f}{\partial x_n} \Large)
+    \]
+  \item 差分による計算
+    \begin{itemize}
+      \item 関数$f$の値を最低でも$2n$回評価する必要がある
+      \item 方向によって適切な$h$の値は異なる → 関数評価の回数はさらに増加
+    \end{itemize}
+  \item 数式処理(MATLAB, Mathematica等)による勾配の計算
+    \begin{itemize}
+      \item $f$が複雑になると勾配の表式が長大に
+      \item 勾配の値を評価するコストも大きくなる
+    \end{itemize}
+  \item 自動微分(automatic differentiation; autodiff)
+    \begin{itemize}
+      \item 関数fの値の評価に必要なコストの定数倍の手間で勾配を評価可能
+      \item ハイパーパラメータ$h$が存在しない
+    \end{itemize}
+  \end{itemize}
+\end{frame}

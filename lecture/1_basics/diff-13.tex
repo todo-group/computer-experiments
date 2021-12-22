@@ -1,0 +1,19 @@
+\begin{frame}[t,fragile]{自動微分}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 独立変数の次元が$n$, 関数値の次元が$m$のとき
+    \begin{itemize}
+    \item $n \ll m$: 前進モードが効率的
+    \item $n \gg m$: 後退モードが効率的
+    \end{itemize}
+  \item $m=1$のとき: $f=f(x_1,x_2, \cdots x_n)$
+    \begin{itemize}
+    \item ある方向$\mathbf{p}$に沿った微分 → 前進モードにより効率的に計算可
+    \item ヘッセ行列$\displaystyle H_{ij} = \frac{\partial^2 f}{\partial x_i \partial x_j}$とベクトル$\mathbf{p}$の積 → 後退モードにより効率的に計算可
+    \end{itemize}
+  \item 深層学習(ニューラルネットワーク)における最適化
+    \begin{itemize}
+    \item バックプロパゲーションによる勾配の計算: 自動微分(後退モード)と等価
+    \end{itemize}
+  \end{itemize}
+\end{frame}

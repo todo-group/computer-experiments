@@ -1,0 +1,20 @@
+\begin{frame}[t,fragile]{自動微分}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 前進モード(Forward mode)・ボトムアップ型(Bottom-up)計算
+  \item 計算グラフを下から順番に計算していく
+    \begin{itemize}
+    \item $\displaystyle \frac{\partial x_1}{\partial x_2} = 0$,
+      $\displaystyle \frac{\partial x_2}{\partial x_2} = 1$,
+      $\displaystyle \frac{\partial x_3}{\partial x_2} = 0$,
+      $\displaystyle \frac{\partial 1}{\partial x_2} = 0$
+    \item $\displaystyle \frac{\partial v_1}{\partial x_2} = \frac{\partial}{\partial x_2} \exp(x_2) = \exp(0) = 1$
+    \item $\displaystyle \frac{\partial v_2}{\partial x_2} = \frac{\partial x_1}{\partial x_2} - \frac{\partial v_1}{\partial x_2} = 0-1 = -1$
+    \item $\displaystyle \frac{\partial v_3}{\partial x_2} = \frac{\partial v_1}{\partial x_2} x_3 +  v_1 \frac{\partial x_3}{\partial x_2} = 1 \times 1 + 1 \times 0 = 1$
+    \item $\displaystyle \frac{\partial v_4}{\partial x_2} = \frac{\partial v_2}{\partial x_2} v_3 +  v_2  \frac{\partial v_3}{\partial x_2} = (-1) \times 1 + 1 \times 1 = 0$
+    \item $\displaystyle \frac{\partial v_5}{\partial x_2} = \frac{\partial v_3}{\partial x_2} +   \frac{\partial 1}{\partial x_2} = 1 + 0 = 1$
+    \item $\displaystyle \frac{\partial f}{\partial x_2} = \frac{\partial}{\partial x_2} \frac{v_4}{v_5} = \frac{\frac{\partial v_4}{\partial x_2} v_5 - v_4 \frac{\partial v_5}{\partial x_2}}{(v_5)^2} = \frac{0 \times 2 - 1 \times 1}{2^2} = -1/4$
+    \end{itemize}
+    \vspace*{-16em} \hfill \resizebox{.3\textwidth}{!}{\includegraphics{image/compgraph.pdf}}
+  \end{itemize}
+\end{frame}
