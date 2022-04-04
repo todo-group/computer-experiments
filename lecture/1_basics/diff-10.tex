@@ -1,4 +1,4 @@
-\begin{frame}[t,fragile]{テイラー展開による前進モードの計算}
+\begin{frame}[t,fragile]{テイラー展開によるフォワードモードの計算}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
   \item $x_2 = 0 + \epsilon$, $x_1 = 2$, $x_3 = 1$と表す
@@ -17,7 +17,7 @@
     \item $(a + b \epsilon) \times (c + d \epsilon) \approx ac + (ad + bc) \epsilon$
     \item $\exp(a+b\epsilon) \approx \exp(a) + \exp(a) b \epsilon$
     \end{itemize}
-  \item 1つの独立変数に関する偏導関数の計算は、関数値$f$の計算コストと同じオーダー → 勾配を計算するにはその$n$倍の計算量が必要
+  \item 1つの独立変数に関する偏導関数の計算は、関数値$f$の計算コストと同じオーダー → 勾配を計算するにはその$d$倍の計算量が必要
 
     \vspace*{-17em} \hfill \resizebox{.3\textwidth}{!}{\includegraphics{image/compgraph.pdf}}
   \end{itemize}

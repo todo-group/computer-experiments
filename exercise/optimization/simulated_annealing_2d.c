@@ -15,7 +15,7 @@ int main(int argc, char** argv) {
   double tinit = 10;
   double tfinal = 0.01;
 
-  double t;
+  double t = 0;
   int i;
   double diff;
   

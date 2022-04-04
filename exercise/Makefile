@@ -32,8 +32,9 @@ EXAMPLE27 = optimization/golden_section.c optimization/func_1d.h \
 	optimization/steepest_descent_2d.c optimization/func_2d.h \
 	optimization/measurement3.dat \
 	linear_system/poisson.h linear_system/poisson_dense.c linear_system/poisson_sparse.c linear_system/poisson_lu.c linear_system/dgetrf.h linear_system/dgetrs.h
+EXAMPLE28 = optimization/nelder_mead_2d.c optimization/simulated_annealing_2d.c
 
-EXAMPLE2 = $(EXAMPLE21) $(EXAMPLE22) $(EXAMPLE24) $(EXAMPLE27)
+EXAMPLE2 = $(EXAMPLE21) $(EXAMPLE22) $(EXAMPLE24) $(EXAMPLE27) $(EXAMPLE28)
 
 .SUFFIXES: .pdf .dvi .tex
 

@@ -1,8 +1,8 @@
-\begin{frame}[t,fragile]{自動微分(後退モード)}
+\begin{frame}[t,fragile]{自動微分(リバースモード)}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
-  \item 後退モード(Backward mode)・トップダウン型(Top-down)計算
-  \item まず、下から順に $v_1, v_2, \cdots$ の値、および各基本演算における微分係数をもとめておく
+  \item リバースモード(reverse mode)・トップダウン型(top-down)計算
+  \item まず、計算グラフの下から順に $v_1, v_2, \cdots$ の値、および各基本演算における微分係数をもとめておく
     \begin{itemize}
     \item $v_1 \leftarrow \exp(x_2) = 1$, $d_{v_1,x_2} \leftarrow \frac{\partial v_1}{\partial x_2} = \exp(x_2) = 1$
     \item $v_2 \leftarrow x_1 - v_1 = 1$, $d_{v_2,x_1} \leftarrow \frac{\partial v_2}{\partial x_1} = 1$, $d_{v_2,v_1} \leftarrow \frac{\partial v_2}{\partial v_1} = -v_1 = -1$,
