@@ -13,18 +13,33 @@
 \begin{document}
 
 \noindent
-{\bf\large 「計算機実験I」実習課題(EX1)}
+{\bf\large 「計算機実験I」実習1}
 \\[-0.5em]
 
 \noindent
 \begin{itemize}
-\item 知の物理学研究センターワークステーション(ai)へのSSHログイン
-  \begin{itemize}
-  \item ホスト名: {\tt ai.phys.s.u-tokyo.ac.jp}
-  \item ユーザ名: {\tt ce}+学籍番号(ハイフン無し・8桁): \ 例: {\tt ce05181583}
-  \item 前回作成した公開鍵を登録済
-  \item 学外から直接SSHログインすることは不可。ただし、一旦、ECCS SSHサーバを経由すれば可。(参考: \verb+http://www.ecc.u-tokyo.ac.jp/system/outside.html+)
-\end{itemize}
+\item 計算機実習のための環境整備
+  \begin{enumerate}
+  \item 「計算機実験のための環境整備」(https://utphys-comp.github.io)に従って、実習環境を整備する
+  \item プログラミング: エディタ、コンパイラ (C, C++, Fortran, BLAS/LAPACK, MPI/OpenMP)
+  \item 計算結果のプロット: gnuplot (python/matplotlib, MATLAB でも可)
+  \item 文書 (レポート、論文) の作成: \LaTeX (TeX Live あるいは Overleaf)
+  \item ネットワークの利用 (ECCS などの大学の計算機にリモートアクセス できる環境): ターミナル、SSH
+    \item インタプリタ環境(optional): MATLAB、Python
+  \end{enumerate}
+\item ECCSへのSSHリモートアクセス
+  \begin{enumerate}
+  \item 「計算機実験のための環境整備 - ECCSへのSSHリモートアクセス」に従って、SSH鍵の生成、登録、ログインを行う
+  \item ITC-LMSの「計算機実験 SSH公開鍵登録フォーム」から公開鍵の登録を行う
+  \end{enumerate}
+  
+%% \item 知の物理学研究センターワークステーション(ai)へのSSHログイン
+%%   \begin{itemize}
+%%   \item ホスト名: {\tt ai.phys.s.u-tokyo.ac.jp}
+%%   \item ユーザ名: {\tt ce}+学籍番号(ハイフン無し・8桁): \ 例: {\tt ce05181583}
+%%   \item 前回作成した公開鍵を登録済
+%%   \item 学外から直接SSHログインすることは不可。ただし、一旦、ECCS SSHサーバを経由すれば可。(参考: \verb+http://www.ecc.u-tokyo.ac.jp/system/outside.html+)
+%% \end{itemize}
   
 \item 準備練習
   \begin{enumerate}
