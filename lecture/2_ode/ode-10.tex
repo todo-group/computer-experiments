@@ -1,0 +1,20 @@
+\begin{frame}[t,fragile]{Euler法の安定性}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 方程式$\displaystyle \frac{dy}{dt} = k y(t)$を初期条件$y(0)=1$のもとで解くと$y(t)=e^{kt}$
+    \begin{itemize}
+      \item ${\rm Re}\, k < 0$であれば、$\displaystyle \lim_{t\rightarrow \infty} y(t) = 0$となる
+    \end{itemize}
+  \item (陽的) Euler法
+    \[
+    y_{n+1} = y_n + h f(t_n,y_n) = y_n + h k y_n = (1+hk)y_n
+    \]
+    \begin{itemize}
+    \item $\displaystyle \lim_{t\rightarrow \infty} y(t) = 0$となるための条件
+      \[
+      |  1 + hk | < 1
+      \]
+    \item $k$が負の実数であっても、$h > 2 / |k|$では発散 $\Rightarrow$ 不安定
+    \end{itemize}
+  \end{itemize}
+\end{frame}
