@@ -1,16 +1,21 @@
 \begin{frame}[t,fragile]{ポインタと一次元配列}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
-  \item 一次元配列を表す変数は、(実は)最初の要素を指すポインタ  (ハンドブック2.5.3節)
+  \item 一次元配列を表す変数は、(実は)最初の要素を指すポインタ (ハンドブック2.5.3節)
     \begin{itemize}
     \item \verb+v+ と \verb+&v[0]+ は等価
     \item \verb^(v+2)^ と \verb^&v[2]^ は等価
-    \item \verb+*v+ と \verb+v[0]+ は等価
-    \item \verb^*(v+2)^ と \verb^v[2]^ は等価
-    \item \verb^(v+2)[3]^ は?
+    \item \verb^*v^ と \verb^v[0]^ は等価
+    \item \verb^v[i]^ は \verb^*(v+i)^ の簡略化した書き方(糖衣構文)
     \end{itemize}
   \item C言語では配列の添字は0から始まることに注意
-  \item \verb^double v[10];^ と宣言した場合、\verb^v[0]^ 〜 \verb^v[9]^ の10個の要素を持つ配列が作られる。\verb^v[10]^ は存在しない。値を代入したり参照しようとするとエラーとなる
-  \item ポインタのテストプログラム: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/matrix/pointer.c}{pointer.c}
+  \item \verb^double v[10];^ と宣言した場合、\verb^v[0]^ 〜 \verb^v[9]^ の10個の要素を持つ配列が作られる。\verb^v[10]^ は存在しない。値を代入したり参照しようとするとエラーとなる (\verb^malloc^で動的に作成した場合も同様)
+    \begin{itemize}
+    \item 一次元配列の例: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/basics/array.c}{array.c}
+    \end{itemize}
+  \item 関数に配列を渡すときには、そのサイズ(長さ)と先頭要素のアドレスを渡す
+    \begin{itemize}
+    \item 関数への配列の渡し方: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/basics/array2func.c}{array2func.c}
+    \end{itemize}
   \end{itemize}
 \end{frame}

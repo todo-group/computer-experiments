@@ -1,4 +1,4 @@
-OBJ = bisection complex differential differential_cxx differential_f fibonacci fibonacci_cxx fibonacci_f hello hello_cxx hello_f 
+OBJ = array array2func bisection complex differential differential_cxx differential_f fibonacci fibonacci_cxx fibonacci_f hello hello_cxx hello_f 
 
 .SUFFIXES:
 .SUFFIXES: .c .C .f90
