@@ -3,64 +3,70 @@
 \documentclass[10pt,dvipdfmx]{beamer}
 \usepackage{tutorial}
 
-\title{計算機実験I (第3回)}
-\date{2021/04/28}
+\title{計算機実験I (講義3)}
+\date{2022/05/25}
 
 \begin{document}
 
 \begin{frame}
   \titlepage
   \tableofcontents
+  出席: 本日の18時までにITC-LMSでアンケートに回答
 \end{frame}
 
-\begin{frame}[t]{本日の課題}
-  \begin{itemize}
-    %\setlength{\itemsep}{1em}
-  \item (まだ完了していない人は「\href{https://utphys-comp.github.io}{計算機実験のための環境整備}」({\small \href{https://utphys-comp.github.io}{https://utphys-comp.github.io}})を参考に、必要な環境を引き続き整備する)
-    
-  \item 「計算機実験I」実習課題: [数値課題・アルゴリズム基礎] [常微分方程式] に取り組む
-  \item 講義終了後(18:00まで)にITC-LMSで「作業レポート(2021/04/28)」を提出
-  \item レポートNo.1: 提出締切2021/5/19(水) 18:00 (レポート内容・提出方法についてはITC-LMSを参照のこと)
-  \item 質問は、Slackの「\#3 数値誤差」あるいは「\#4 常微分方程式」チャンネルで
-  \end{itemize}
-\end{frame}
+\input{3_linear_system/intro.tex}
 
-\section{常微分方程式の解法}
+\input{1_basics/matrix.tex}
 
-\input{2_ode/ode-03.tex}
-\input{2_ode/ode-07.tex}
-\input{2_ode/ode-09.tex}
+\section{連立一次方程式の直接解法}
 
-\section{Numerov法}
+\input{3_linear_system/direct-03.tex}
+\input{3_linear_system/direct-04.tex}
+\input{3_linear_system/direct-05.tex}
+\input{3_linear_system/direct-06.tex}
+\input{3_linear_system/direct-07.tex}
+\input{1_basics/lapack-08.tex}
+\input{1_basics/lapack-09.tex}
+\input{1_basics/lapack-14.tex}
+\input{3_linear_system/direct-08.tex}
+\input{3_linear_system/direct-09.tex}
+\input{3_linear_system/direct-10.tex}
+\input{3_linear_system/direct-11.tex}
+\input{3_linear_system/direct-12.tex}
+\input{1_basics/lapack-11.tex}
+\input{1_basics/lapack-13.tex}
+\input{1_basics/lapack-15.tex}
+\input{1_basics/lapack-16.tex}
+\input{3_linear_system/direct-13.tex}
+\input{1_basics/lapack-17.tex}
+\input{3_linear_system/direct-14.tex}
+\input{3_linear_system/direct-01.tex}
+\input{3_linear_system/direct-02.tex}
 
-\input{2_ode/numerov-02.tex}
-\input{2_ode/numerov-03.tex}
-\input{2_ode/numerov-04.tex}
+\input{3_linear_system/iterative.tex}
 
-\section{固有値問題}
-\input{2_ode/numerov-01.tex}
-\input{2_ode/numerov-05.tex}
-
-\input{2_ode/symplectic.tex}
-
-\begin{frame}[t]{今後の予定}
+\begin{frame}[t]{講義日程(予定)}
   \begin{itemize}
     % \setlength{\itemsep}{1em}
   \item 全8回 (水曜2限 10:25-11:55)
     \begin{itemize}
-    \item {\color{gray} 4月7日 第1回: 環境整備・数値誤差}
-    \item {\color{gray} 4月14日 もくもく会}
-    \item {\color{gray} 4月21日 第2回: ニュートン法・二分法・常微分方程式}
-    \item {\color{gray} 4月28日 第3回: 固有値問題・シンプレクティック積分法}
-    \item 5月12日 もくもく会
-    \item 5月19日 第4回: 行列演算・複素数・ライブラリ [レポートNo.1締切]
-    \item 5月26日 第5回: 連立一次方程式・直接解法・反復解法
-    \item 6月2日 もくもく会
-    \item 6月9日 第6回: 行列の対角化 [レポートNo.2締切]
-    \item 6月16日 第7回: 疎行列に対する反復法・変分法
-    \item 6月23日 第8回: 特異値分解・最小二乗法
-    \item 7月7日 [レポートNo.3締切]
-     \end{itemize}
+    \item 4月6日 講義1: 講義の概要・基本的なアルゴリズム
+    \item 4月13日 演習1: 環境整備・C言語プログラミング・図のプロット
+    \item 4月20日 講義2: 常微分方程式
+    \item 4月27日 演習2 (グループ1): 基本的なアルゴリズム・常微分方程式
+    \item 5月11日 演習2 (グループ2): 基本的なアルゴリズム・常微分方程式
+    \item {\color{gray} 5月18日 休講}
+    \item 5月25日 講義3: 連立方程式
+    \item 6月1日 演習3 (グループ1): 連立方程式
+    \item 6月8日 演習3 (グループ2): 連立方程式
+    \item {\color{gray} 6月15日 休講}
+    \item {\color{gray} 6月22日 休講}
+    \item 6月29日 講義4: 行列の対角化
+    \item 7月6日 演習4 (グループ1): 行列の対角化
+    \item 7月13日 演習4 (グループ2): 行列の対角化
+    \end{itemize}
+  \item 2回目以降の演習はクラスを2グループに分けて実施(グループ1: 学生証番号が奇
+数、グループ2: 偶数)
   \end{itemize}
 \end{frame}
 

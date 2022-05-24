@@ -1,9 +1,10 @@
 \begin{frame}[t,fragile]{CからBLAS/LAPACKを呼び出す際の注意事項}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
+  \item (もともとFortran言語で書かれていたことによる制限)
   \item 関数名はすべて小文字、最後に \verb+_+ (下線)を付ける
   \item スカラー、ベクトル、行列は全て「ポインタ渡し」とする
-  \item ベクトルや行列は最初の要素へのポインタを渡す
+  \item ベクトルや行列は最初の要素へのポインタを渡す (サイズは別に渡す)
   \item 行列の要素は(0,0) $\rightarrow$ (1,0) $\rightarrow$ (2,0) $\rightarrow\cdots\rightarrow$ $(m-1,0)$ $\rightarrow$ (0,1) $\rightarrow$ (1,1) $\rightarrow\cdots\rightarrow$ $(m-1,n-1)$の順で連続して並んでいなければならない(column-major)
     \begin{itemize}
     \item C言語の二次元配列では \verb+a[i][j]+ の次には \verb%a[i][j+1]%が入っている(row-major)
