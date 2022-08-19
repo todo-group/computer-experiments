@@ -1,19 +1,22 @@
-#include <stdio.h>
 #include <math.h>
+#include <stdio.h>
 
-double f(double x) {
-  return sin(x);
+double f(double x)
+{
+    return sin(x);
 }
 
-double df(double x) {
-  return cos(x);
+double df(double x)
+{
+    return cos(x);
 }
 
-int main() {
-  double x, h, exact, diff;
-  x = 0.3 * M_PI;
-  h = 0.1;
-  exact = df(x);
-  diff = (f(x+h) - f(x)) / h;
-  printf("%le %le %le\n", h, diff, fabs(diff - exact));
+int main(void)
+{
+    const double x = 0.3 * M_PI;
+    const double h = 0.1;
+    const double exact = df(x);
+    const double diff = (f(x + h) - f(x)) / h;
+    printf("%le %le %le\n", h, diff, fabs(diff - exact));
+    return 0;
 }

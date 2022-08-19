@@ -13,5 +13,6 @@
 
 exercise/*.pdf
 exercise/*.zip
+exercise/build
 lecture/*.pdf
 */*/.vscode
