@@ -40,7 +40,7 @@ int main(void)
 
     for (int j = 0; j < bins; ++j)
     {
-        const double x = (j + 0.5) * dx;
+        const double x = xmin + (j + 0.5) * dx;
         const double ave = hist[j] * dh;
         const double err = sqrt(hist[j]) * dh;
         printf("%d %15.10f %15.10f %15.10f\n", j, x, ave, err);
