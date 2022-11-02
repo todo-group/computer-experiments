@@ -16,3 +16,5 @@ exercise/*.zip
 exercise/build
 lecture/*.pdf
 */*/.vscode
+
+*/a.out

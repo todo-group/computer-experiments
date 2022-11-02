@@ -1,0 +1,24 @@
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{ビット表現}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item スピン状態($\uparrow$ / $\downarrow$)や量子ビット状態($|0\rangle$ / $|1\rangle$を表現するには二進数を考えるのが便利
+    \begin{itemize}
+    \item スピン数(量子ビット数): $N$
+    \item 状態数: $2^N$
+    \item 整数を二進数表現したときの下から$i$番目($i=0,1,\ldots,N-1$)の数字(0 / 1)を$i$番目のスピン状態($\uparrow$ / $\downarrow$)あるいは$i$番目の量子ビット状態($|0\rangle$ / $|1\rangle$)に対応させる
+    \end{itemize}
+  \item $N=3$の例
+    \begin{itemize}
+    \item $0 \rightarrow 000$: $\uparrow\uparrow\uparrow$ \ $|000\rangle$
+    \item $1 \rightarrow 001$: $\uparrow\uparrow\downarrow$ \ $|001\rangle$
+    \item $2 \rightarrow 010$: $\uparrow\downarrow\uparrow$ \ $|010\rangle$
+    \item $3 \rightarrow 011$: $\uparrow\downarrow\downarrow$ \ $|011\rangle$
+    \item $4 \rightarrow 100$: $\downarrow\uparrow\uparrow$ \ $|100\rangle$
+    \item $5 \rightarrow 101$: $\downarrow\uparrow\downarrow$ \ $|101\rangle$
+    \item $6 \rightarrow 110$: $\downarrow\downarrow\uparrow$ \ $|110\rangle$
+    \item $7 \rightarrow 111$: $\downarrow\downarrow\downarrow$ \ $|111\rangle$
+    \end{itemize}
+  \end{itemize}
+\end{frame}

@@ -1,0 +1,34 @@
+\begin{frame}[t,fragile]{疎行列}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 疎行列: 非零の要素の数が非常に少ない行列
+    \begin{itemize}
+    \item 全ての要素($N^2$)を保存しておくのはメモリの無駄
+    \item 行列ベクトル積の計算量(通常$O(N^2)$)も削減の余地あり
+    \end{itemize}
+  \item 疎行列の格納
+    \begin{itemize}
+    \item 三重対角行列(一次元ラプラシアンなど): 例) \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/eigenvalue_problem/tridiagonal.c}{\texttt{tridiagonal.c}}
+
+      対角成分＋副対角成分を3本のベクトルに保存しておけばよい
+
+      対称(エルミート)行列の場合は副対角はどちらか1本だけでよい
+
+      LAPACKの三重対角行列用のソルバー(\href{https://netlib.org/lapack/explore-html/dc/dd2/group__double_o_t_h_e_reigen_gaaa6df51cfd92c4ab08d41a54bf05c3ab.html}{\texttt{DSTEV}}, \href{https://netlib.org/lapack/explore-html/d1/d40/group__double_g_tcomputational_ga8ca64e542924cec56cbe9837b77d25b7.html}{\texttt{DGTTRF}}など)にはこの形式の行列を渡す
+
+    \item 一般の疎行列: 例) \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/eigenvalue_problem/sparse.c}{\texttt{sparse.c}}
+
+      各行で非零の要素の場所(列)とその値をベクトルに保存する
+
+      CRS (Compressed Row Storage)形式とも呼ばれる
+
+    \item matfree形式: 例) \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/eigenvalue_problem/matfree.c}{\texttt{matfree.c}}
+
+      要素は保存せず、その場で非零の場所と要素を計算する
+
+      FTCS法を行列形式を使わずに素直に実装するのと同じ
+
+      横磁場イジング模型のハミルトニアンの掛け算などでも使える
+    \end{itemize}
+  \end{itemize}
+\end{frame}

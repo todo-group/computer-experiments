@@ -7,9 +7,9 @@
 #include <stdlib.h>
 
 /* calculate spin state at j-th site from bit pattern c */
-double spin(int c, int j)
+int spin(int c, int j)
 {
-    return 2.0 * ((c >> j) & 1) - 1;
+    return 1 - 2 * ((c >> j) & 1);
 }
 
 /* flip j-th spin */
@@ -33,8 +33,8 @@ void set_matrix(int n, double J, double h, double g, double* diag, int* od_num,
         for (int i = 0; i < n; ++i)
         {
             const int j = (i + 1) % n; /* periodic boundary condition */
-            const double s0 = spin(c, i);
-            const double s1 = spin(c, j);
+            const int s0 = spin(c, i);
+            const int s1 = spin(c, j);
             diag[c] += -J * s0 * s1 - h * s0;
         }
         for (int i = 0; i < n; ++i)
