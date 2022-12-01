@@ -3,8 +3,8 @@
 \documentclass[10pt,dvipdfmx]{beamer}
 \usepackage{tutorial}
 
-\title{計算機実験II (L3) --- 偏微分方程式}
-\date{2021/10/22}
+\title{計算機実験II (L3) --- 少数多体系・分子動力学}
+\date{2022/12/02}
 
 \begin{document}
 
@@ -15,37 +15,68 @@
 
 \input{0_about/about2-2.tex}
 
-\section{偏微分方程式の境界値問題 (復習)}
+\section{少数多体系・分子動力学}
 
-\input{2_ode/ode-02.tex}
-\input{3_linear_system/intro-02.tex}
-\input{3_linear_system/direct-12.tex}
+\input{6_monte_carlo/molecular_dynamics-15.tex}
+\input{6_monte_carlo/molecular_dynamics-01.tex}
+%\input{6_monte_carlo/molecular_dynamics-02.tex}
+%\input{6_monte_carlo/molecular_dynamics-03.tex}
 
-\section{偏微分方程式の初期値問題}
+% \section{常微分方程式の初期値問題(復習)}
+\input{2_ode/ode-01.tex}
+\input{2_ode/ode-03.tex}
+\input{2_ode/ode-07.tex}
+\input{2_ode/ode-08.tex}
 
-\input{2_ode/pde-01.tex}
-\input{2_ode/pde-02.tex}
-\input{2_ode/pde-03.tex}
-\input{2_ode/pde-04.tex}
-\input{2_ode/pde-05.tex}
-\input{2_ode/pde-06.tex}
-\input{2_ode/pde-07.tex}
-\input{2_ode/pde-08.tex}
-\input{2_ode/pde-09.tex}
-\input{2_ode/pde-10.tex}
-\input{2_ode/pde-11.tex}
+\section{シンプレクティック積分法}
+\input{2_ode/symplectic-01.tex}
+\input{2_ode/symplectic-02.tex}
+\input{2_ode/symplectic-03.tex}
+\input{2_ode/symplectic-04.tex}
 
-\section{}
-\begin{frame}[t]{本日の課題}
-  \begin{itemize}
-    %\setlength{\itemsep}{1em}
-  \item 実習
-    \begin{itemize}
-    \item 実習課題一覧\href{https://github.com/todo-group/ComputerExperiments/releases/tag/2021a-computer2}{exercise-2.pdf}の課題に取り組む
-    \end{itemize}
-  \item 質問はSlackの「\# 8\_偏微分方程式」あるいは他の適当と思われるチャンネルで
-  \item 本日24時までにITC-LMSのアンケート「第3回(10/22)作業レポート」に回答(出席のかわり)
-  \end{itemize}
-\end{frame}
+%\section{ベルレ法}
+\input{2_ode/symplectic-06.tex}
+\input{2_ode/symplectic-07.tex}
+\input{2_ode/symplectic-08.tex}
+
+%\section{シンプレクティック積分法の一般論}
+\input{2_ode/symplectic-09.tex}
+\input{2_ode/symplectic-10.tex}
+\input{2_ode/symplectic-11.tex}
+\input{2_ode/symplectic-12.tex}
+\input{2_ode/symplectic-05.tex}
+
+%\section{分子動力学法}
+
+%\input{6_monte_carlo/molecular_dynamics-01.tex}
+%\input{6_monte_carlo/molecular_dynamics-02.tex}
+
+\section{長距離ポテンシャルの計算}
+
+\input{6_monte_carlo/molecular_dynamics-03.tex}
+\input{6_monte_carlo/longrange-01.tex}
+\input{6_monte_carlo/longrange-02.tex}
+\input{6_monte_carlo/longrange-03.tex}
+\input{6_monte_carlo/longrange-04.tex}
+
+\section{ビリアル定理}
+
+\input{6_monte_carlo/virial-01.tex}
+\input{6_monte_carlo/virial-02.tex}
+\input{6_monte_carlo/virial-03.tex}
+
+\section{温度の制御}
+
+\input{6_monte_carlo/molecular_dynamics-04.tex}
+\input{6_monte_carlo/molecular_dynamics-05.tex}
+\input{6_monte_carlo/molecular_dynamics-06.tex}
+\input{6_monte_carlo/molecular_dynamics-07.tex}
+\input{6_monte_carlo/molecular_dynamics-08.tex}
+\input{6_monte_carlo/molecular_dynamics-09.tex}
+\input{6_monte_carlo/molecular_dynamics-10.tex}
+%\input{6_monte_carlo/molecular_dynamics-11.tex}
+\input{6_monte_carlo/molecular_dynamics-12.tex}
+\input{6_monte_carlo/molecular_dynamics-13.tex}
+\input{6_monte_carlo/molecular_dynamics-14.tex}
 
 \end{document}
