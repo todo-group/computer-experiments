@@ -1,7 +1,7 @@
 \begin{frame}[t,fragile]{反復計算}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
-  \item {\tt while}による反復 (ハンドブック2.2.3節)
+  \item {\tt while}による反復 (ハンドブック2.2.5節)
 \begin{lstlisting}
 double residual = 1;    /* 残差: 適当に大きな値 */
 double error = 1;       /* 誤差: 適当に大きな値 */
@@ -12,7 +12,7 @@ while (residual > delta && error > delta) {
 }
 \end{lstlisting}
 残差と誤差のどちらかが欲しい精度に達したら計算を終了
-\item {\tt break}を使う例 (ハンドブック2.2.4節)
+\item {\tt break}を使う例 (ハンドブック2.2.6節)
 \begin{lstlisting}
 for (;;) {
   /* ニュートン法の漸化式 */

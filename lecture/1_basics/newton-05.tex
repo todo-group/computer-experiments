@@ -1,17 +1,23 @@
 \begin{frame}[t,fragile]{準ニュートン法}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
-  \item ニュートン法では、ヘッセ行列の計算・保存が必要
-  \item 準ニュートン法: それまでの反復で計算した勾配ベクトルから、ヘッセ行列を近似($B_n$)
-  \item BFGS法(Broyden-Fletcher-Goldfarb-Shanno)
-    \[
-    B_{n+1} = B_{n} + \frac{y_n y_n^T}{y_n^T s_n} - \frac{B_{n} s_n (B_{n} s_n)^T}{s_n^T B_n s_n}
-    \]
-  \item $s_n = x_{n+1} - x_n$、$y_n = \nabla g(x_{n+1}) - \nabla g(x_n)$
-  \item 直接$B_{n}$の逆行列$C_{n}$を更新することも可能
-    \[
-    C_{n+1} = B_{n+1}^{-1} = C_n + \Big( 1 + \frac{y_n^T C_n y_n}{y_n^T s_n} \Big)
-    \frac{s_n s_n^T}{y_n^T s_n} - \frac{C_n y_n s_n^T + s_n y_n^T C_n^T}{y_n^T s_n} \]
-  \item 他にも、SR1法、BHHH法、記憶制限BFGS法
+  % \item ニュートン法では、ヘッセ行列の計算・保存が必要
+  \item 準ニュートン法: それまでの反復で計算した勾配ベクトルから、ヘッセ行列の逆行列を近似($C_n \approx H^{-1}$)
+  \begin{itemize}
+    \item 極小点の近傍では
+      \begin{align*}
+          x-x_n &= -H^{-1} \cdot \nabla f(x_n) \\
+          x-x_{n+1} &= -H^{-1} \cdot \nabla f(x_{n+1})
+      \end{align*}
+    \item 差をとると($s_n = x_{n+1} - x_n$, $y_n = \nabla f(x_{n+1}) - \nabla f(x_n)$)
+      \begin{align*}
+        s_n &= H^{-1} \cdot y_n
+      \end{align*}
+    \item この式が満たされるように、$C_{n+1}$を$C_{n}+(\text{補正})$の形で構成(DFP法: Davidon-Fletcher-Powell)
+      \[
+        C_{n+1} = C_{n} + \frac{s_n s_n^T}{s_n^T y_n} - \frac{C_{n} y_n (C_{n} y_n)^T}{y_n^T C_n y_n}
+      \]
+    \item 他にも、BFGS法など
+    \end{itemize}
   \end{itemize}
 \end{frame}

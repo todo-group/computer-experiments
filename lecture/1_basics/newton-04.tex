@@ -1,11 +1,11 @@
 \begin{frame}[t,fragile]{ニュートン法による最適化}
   \begin{itemize}
     \setlength{\itemsep}{1em}
-  \item $x$は$d$次元のベクトル: $x = {}^t(x_1,x_2,\cdots,x_d)$、目的関数$g(x)$はスカラー
-  \item 勾配ベクトル: $\displaystyle [\nabla g(x)]_i = \frac{\partial g(x)}{\partial x_i}$
-  \item 極小値(最小値)となる条件: $\nabla g(x)=0$
-  \item ニュートン法で$f(x)$を$\nabla g(x)$で置き換えればよい
-  \item 次の解の候補: $\displaystyle x_{n+1} = x_n - H^{-1}(x_n) \nabla g(x_n)$
-  \item ヘッセ行列(Hessian): $\displaystyle H_{ij}(x) = \frac{\partial^2 g}{\partial x_i \partial x_j}(x)$
+  \item $x$は$d$次元のベクトル: $x = {}^t(x_1,x_2,\cdots,x_d)$、目的関数$f(x)$はスカラー
+  \item 勾配ベクトル: $\displaystyle [\nabla f(x)]_i = \frac{\partial f(x)}{\partial x_i}$
+  \item 極小値(最小値)となる条件: $\nabla f(x)=0$
+  \item ニュートン法で$f(x)$を$\nabla f(x)$で置き換えればよい
+  \item 次の解の候補: $\displaystyle x_{n+1} = x_n - H^{-1}(x_n) \nabla f(x_n)$
+  \item ヘッセ行列(Hessian): $\displaystyle H_{ij}(x) = \frac{\partial^2 f}{\partial x_i \partial x_j}(x)$
   \end{itemize}
 \end{frame}
