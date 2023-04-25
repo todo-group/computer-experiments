@@ -5,9 +5,8 @@
 \begin{lstlisting}
 #include <stdio.h>
 int main() {
-  int *p;
   int q;
-  p = &q;
+  int* p = &q;
   *p = 300;
   printf("q is %d and *p is %d.\n", q, *p);
   return 0;
