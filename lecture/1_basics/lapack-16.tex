@@ -3,7 +3,7 @@
     % \setlength{\itemsep}{1em}
   \item 行列の(i,j)成分を\verb+a[j][i]+に格納することにする(column-major)
     \begin{itemize}
-      \item \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/matrix/cmatrix.h}{cmatrix.h}ではマクロ(\verb+mat_elem+)を準備
+      \item \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/include/cmatrix.h}{cmatrix.h}ではマクロ(\verb+mat_elem+)を準備
 \begin{lstlisting}
 #define mat_elem(mat, i, j) (mat)[j][i]
 \end{lstlisting}
@@ -16,7 +16,7 @@ mat_elem(a, i, j) = 1;
     \begin{itemize}
       \item ベクトルの最初の要素(0)へのポインタ: \verb+&v[0]+ (あるいは\verb+v+)
       \item 行列の最初の要素(0,0)へのポインタ: \verb+&a[0][0]+ (あるいは\verb+a[0]+)
-      \item \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/matrix/cmatrix.h}{cmatrix.h}にマクロ({\tt vec\_ptr}、{\tt mat\_ptr})が準備されているのでそれぞれ、{\tt vec\_ptr(v)}、{\tt mat\_ptr(a)}と書ける
+      \item \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/include/cmatrix.h}{cmatrix.h}にマクロ({\tt vec\_ptr}、{\tt mat\_ptr})が準備されているのでそれぞれ、{\tt vec\_ptr(v)}、{\tt mat\_ptr(a)}と書ける
     \end{itemize}
   \end{itemize}
 \end{frame}
