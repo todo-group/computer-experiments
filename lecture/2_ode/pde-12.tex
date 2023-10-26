@@ -1,0 +1,17 @@
+\begin{frame}[t]{Von Neumannの安定性解析}
+  \begin{itemize}
+  \item $u(x,t)$のフーリエ変換を導入する
+    \begin{align*}
+    u(x,t) &= \sum_k v(k,t) e^{ikx} \\
+    u_j^n &= \sum_k v_k^n e^{ik\Delta x \cdot j}
+    \end{align*}
+  \item FTCS法の式に代入し、$k$の項を取り出すと
+    \[
+    v_{k}^{n+1} =  (1 + 2r(\cos k \Delta x - 1)) v_{k}^{n}
+    \]
+  \item 全ての$k$に対し発散しない(=係数の絶対値が1未満になる)ためには
+    \[
+      | 1 - 4r | < 0 \qquad \text{すなわち} \ r < \frac{1}{2}
+    \]
+  \end{itemize}
+\end{frame}
