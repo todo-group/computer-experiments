@@ -1,0 +1,21 @@
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{ハミルトニアン・モンテカルロ法が有効な例}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 状態変数が連続変数の場合のみ使用可能
+  \begin{itemize}
+    \item 結合した調和振動子系
+      \begin{align*}
+        E(x_1,x_2,\cdots,x_N) = \sum x_i^2 + \sum_{i,j} C_{i,j} (x_i - x_j)^2
+      \end{align*}
+    \item 連続古典スピン系 (ハイゼンベルグ模型)
+      \begin{align*}
+        E(\vec{S}_1, \vec{S}_2, \cdots, \vec{S}_N) = \sum_{i,j} J_{i,j} \vec{S}_i \cdot \vec{S}_j
+      \end{align*}
+  \end{itemize}
+
+  \item エネルギーの状態変数に関する微分の情報(=力)を利用する
+  \item 現実の系の時間発展と同一である必要はない - 仮想的な時間発展
+\end{itemize}
+\end{frame}

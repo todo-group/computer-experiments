@@ -1,0 +1,24 @@
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{ハミルトン力学系}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item もともとの状態変数: \(\vec{q} = (q_1,q_2,\cdots,q_N)\)
+  \item ボルツマン重み(逆温度\(\beta\)は\(E\)に含む): \(P(\vec{q}) = e^{-E(\vec{q})}\)
+  \item 状態変数の「時間発展」を考える
+  \item 「運動量」「運動エネルギー」「ハミルトニアン」を導入
+    \begin{align*}
+      \vec{p} &= \frac{d\vec{q}}{dt} = (\vec{p}_1(t),\vec{p}_2(t),\cdots,\vec{p}_N(t)) \\
+      H(\vec{q}, \vec{p}) &= K(\vec{p}) + E(\vec{q}) = \frac{1}{2}\sum_i p_i^2 + E(\vec{q})
+    \end{align*}
+  \item 「ハミルトン力学系」の「時間発展」
+    \begin{align*}
+      \begin{cases}
+        \displaystyle
+        \frac{dq_i}{dt} = \frac{\partial H}{\partial p_i} \\
+        \displaystyle
+        \frac{dp_i}{dt} = -\frac{\partial H}{\partial q_i}
+      \end{cases}
+    \end{align*}
+\end{itemize}
+\end{frame}

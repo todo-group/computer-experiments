@@ -1,0 +1,27 @@
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{ハミルトニアン・モンテカルロ法}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 通常のマルコフ連鎖モンテカルロ法
+  \begin{itemize}
+    \item 配位を局所的に変化させる ⇒ 配位空間上でランダムウォーク(拡散)
+    \item 配位をむやみに大きく変化させようとしてもかえって状況は悪化
+    \begin{itemize}
+      \item cf. クラスターアルゴリズム, 拡張アンサンブル法
+    \end{itemize}
+  \end{itemize}
+
+  \item ハミルトニアン・モンテカルロ法(HMC: Hamiltonian Monte Carlo)
+  \begin{itemize}
+    \item 別名: ハイブリッド・モンテカルロ法(Hybrid Monte Carlo)
+    \item 分子動力学法 + メトロポリス法
+    \item 仮想的な運動量を導入し、拡張した位相空間上でのマルコフ連鎖を考える
+    \begin{itemize}
+      \item 分子動力学法による仮想的な時間発展を用いて次の候補配位を生成
+      \item 高い acceptance rate を保ちながら、大域的な配位変化を実現
+    \end{itemize}
+    \item 物性物理ではあまり使われていない。Lattice QCD, ベイズ推定ではよく使われている全ての状態についてボルツマン重みを計算し足し合わせる
+    \end{itemize}
+\end{itemize}
+\end{frame}

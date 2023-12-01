@@ -1,0 +1,18 @@
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{ハミルトニアン・モンテカルロ法}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+    \item 分子動力学法 + メトロポリス法
+    \item 仮想的な運動量を導入し、拡張した位相空間上でのマルコフ連鎖を考える
+    \item 分子動力学法による仮想的な時間発展を用いて次の候補配位を生成
+    \begin{itemize}
+      \item 位相空間の体積を保存する差分法を用いることにより、提案確率が対称になる
+    \end{itemize}
+    \item 高い acceptance rate を保ちながら、大域的な配位変化を実現
+    \begin{itemize}
+      \item エネルギーをさらに良く保存する高い次数の差分法を用いれば、より acceptance rate が高くなる
+    \end{itemize}
+    \item すばやくかき混ぜるというアルゴリズム的な目標を達成するために、仮想的に「物理」を導入
+\end{itemize}
+\end{frame}

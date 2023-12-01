@@ -1,0 +1,25 @@
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{ハミルトン力学系}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 「時間発展」の特徴
+  \begin{itemize}
+    \item 「全エネルギー」が保存
+    \[
+      \frac{dH}{dt} = \frac{\partial H}{\partial q} \frac{dq}{dt} + \frac{\partial H}{\partial p} \frac{dp}{dt} = 0
+    \]
+    \item 位相空間の体積が保存(Liouvilleの定理)
+
+          位相空間上の流れの場\(\bm{v} = (\frac{dq}{dt},\frac{dp}{dt})\)について
+          \[
+          \text{div} \, \bm{v} = \frac{\partial}{\partial q} \frac{dq}{dt} + \frac{\partial}{\partial p} \frac{dp}{dt} = 0
+          \]
+          \end{itemize}
+  \item 位相空間上の同時分布が\(P(\vec{q},\vec{p}) \sim \exp(-H(\vec{q},\vec{p}))\)形の時
+  \begin{itemize}
+    \item \(P(\vec{q},\vec{p})\)は時間発展の下で不変
+    \item 我々の欲しいボルツマン分布は\(P(\vec{q},\vec{p})\)の周辺分布
+  \end{itemize}
+\end{itemize}
+\end{frame}

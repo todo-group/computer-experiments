@@ -1,0 +1,28 @@
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{位相空間での状態更新}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item ハミルトン方程式に従って適当な時間\(\tau\)だけ時間発展を行う
+  \item 位置\(\vec{q}\)を固定して運動量\(\vec{p}\)だけを確率的に更新 (「全エネルギー」を変更 )
+  \begin{itemize}
+    \item \(p_i\)の条件付き確率 (正規分布 \(\mathcal{N}(0,1)\))
+    \begin{align*}
+      p(p_i|\vec{q},p_1,\cdots,p_{i-1},p_{i+1},\cdots,p_N) &\sim \exp (-\frac{1}{2}\sum p_j^2+E(\vec{q})) \\ &\sim \exp(-\frac{1}{2}p_i^2)
+    \end{align*}
+  \end{itemize}
+
+  \item 実際には差分法を用いて運動方程式を積分するので有限の離散誤差
+  \begin{itemize}
+    \item Liouvilleの定理を厳密に満たす差分法(リープフロッグ)を用いる
+    \item 分子動力学法 + メトロポリス法
+    \item 「全エネルギー」の値がずれた分をメトロポリス法で修正
+  \end{itemize}
+
+  \item 詳細ついあい条件
+  \begin{align*}
+    &\exp(-E(\vec{q})) \exp(-K(\vec{p})) P((\vec{q},\vec{p})\rightarrow(\vec{q'},\vec{p'})) \min (1, \exp(H-H')) \\
+    & = \exp(-E(\vec{q'})) \exp(-K(\vec{p'})) P((\vec{q'},\vec{p'})\rightarrow(\vec{q},\vec{p})) \min (1, \exp(H'-H))
+  \end{align*}
+\end{itemize}
+\end{frame}
