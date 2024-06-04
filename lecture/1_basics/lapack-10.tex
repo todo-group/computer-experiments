@@ -6,7 +6,8 @@
     \url{http://www.netlib.org/lapack/explore-html/d7/d2b/dgemm_8f.html}
     \begin{itemize}
     \item $C = \alpha A \times B + \beta C$ を計算
-    \item BLASはFortran言語で書かれている
+    \item BLAS(の参照実装)自体はFortran言語で書かれているが、C言語からでも呼び出せる
+    \item (PythonのNumpyなどの多くの数値計算ライブラリも、内部でBLASを利用している)
     \end{itemize}
   \item 例: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/matrix/multiply.c}{multiply.c}, \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/matrix/multiply_dgemm.c}{multiply\_dgemm.c}
   \end{itemize}
