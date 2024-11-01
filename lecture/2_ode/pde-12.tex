@@ -1,15 +1,14 @@
 \begin{frame}[t]{Von Neumannの安定性解析}
   \begin{itemize}
-  \item $u(x,t)$のフーリエ変換を導入する
+  \item 空間方向にフーリエ変換し、空間方向には指数関数型の解を仮定する
     \begin{align*}
-    u(x,t) &= \sum_k v(k,t) e^{ikx} \\
-    u_j^n &= \sum_k v_k^n e^{ik\Delta x \cdot j}
+    u_j^n &= \sum_k (\mu_k)^n e^{ik\Delta x \cdot j}
     \end{align*}
-  \item FTCS法の式に代入し、$k$の項を取り出すと
+  \item FTCS法の式に代入し、波数$k$の項を取り出すと
     \[
-    v_{k}^{n+1} =  (1 + 2r(\cos k \Delta x - 1)) v_{k}^{n}
+    \mu_k =  (1 + 2r(\cos k \Delta x - 1))
     \]
-  \item 全ての$k$に対し発散しない(=係数の絶対値が1以下になる)ためには
+  \item 全ての$k$に対し発散しない(\(=\mu_k\)が1以下になる)ためには
     \[
       | 1 - 4r | \le 1 \qquad \text{すなわち} \ 0 < r \le \frac{1}{2}
     \]

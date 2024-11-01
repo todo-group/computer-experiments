@@ -1,0 +1,18 @@
+\begin{frame}[t]{波動方程式の安定性解析}
+  \begin{itemize}
+  \item 空間方向にフーリエ変換し、空間方向には指数関数型の解を仮定する
+    \begin{align*}
+    u_j^n &= \sum_k (\mu_k)^n e^{ik\Delta x \cdot j}
+    \end{align*}
+  \item FTCS法の式に代入し、波数$k$の項を取り出すと
+    \begin{align*}
+    \mu_k^2 =  2\mu_k - 1 + 2\alpha^2(\cos k \Delta x - 1) \mu_k \\
+    \mu_k^2 - 2 [1 + \alpha^2(\cos k \Delta x - 1)] \mu_k + 1 = 0
+    \end{align*}
+  \item 二つの解の積は1なので、互いに異なる2つの実数解が存在する場合、解の一つは必ず1より大きくなり、波動方程式の解は発散する
+  \item 全ての波数\(k\)について重解あるいは複素解となるためには
+    \[
+      | 1 - 2 \alpha^2 | \le 1 \qquad \text{すなわち} \ 0 < \alpha \le 1
+    \]
+  \end{itemize}
+\end{frame}

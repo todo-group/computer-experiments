@@ -1,0 +1,30 @@
+\begin{frame}[t,fragile]{疎行列ベクトル積による実装}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+    \item 状態ベクトル
+      \begin{itemize}
+        \item 長さ\(2^N\)の複素ベクトル (\(N\): スピン数、量子ビット数)
+      \end{itemize}
+    \item 1量子ビット演算(例: \(\sigma^x_2\))
+      \begin{itemize}
+        \item \(\sigma^x_2\)自体は\(2\times2\)行列
+        \item \(2^N\)次元のベクトルに作用するのは、\(2^N\times2^N\)行列
+          \[
+            {I}_2 \otimes \sigma^x \otimes {I}_2 \otimes \cdots \otimes {I}_2
+          \]
+        \item 次元は大きいが、非ゼロ要素は各行各列に1個だけ
+        \item CXやCCXゲートも同様
+      \end{itemize}
+    \item 疎行列ベクトル積
+      \begin{itemize}
+        \item \(2^N\times2^N\)行列を陽に構成するのは非効率
+        
+          メモリ、計算時間\(\sim 2^{2N}\)
+        \item 非ゼロ要素の場所も値も規則的なので、その場で簡単に計算できる
+        \item 要素の移る先を計算し、値を入れ替えるだけでよい
+        
+          メモリ\(=O(1)\)、計算時間\(\sim 2^{N}\)
+      \end{itemize}
+  
+  \end{itemize}
+\end{frame}
