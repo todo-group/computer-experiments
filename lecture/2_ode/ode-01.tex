@@ -3,20 +3,20 @@
     %\setlength{\itemsep}{1em}
   \item 2階の常微分方程式の一般形
     \[
-    \frac{d^2y}{dx^2} + p(x)\frac{dy}{dx} + q(x)y = r(x)
+    \frac{d^2y}{dt^2} + p(t)\frac{dy}{dt} + q(t)y = r(t)
     \]
-  \item $y_1 \equiv y$, $y_2 \equiv \frac{dy}{dx}$とおくと
+  \item $y_1 \equiv y$, $y_2 \equiv \frac{dy}{dt}$とおくと
     \[
     \left\{
     \begin{array}{ccl}
-      \frac{dy_1}{dx} & = & y_2 \\
-      \frac{dy_2}{dx} & = & r(x) - p(x) y_2 - q(x) y_1
+      \frac{dy_1}{dt} & = & y_2 \\
+      \frac{dy_2}{dt} & = & r(t) - p(t) y_2 - q(t) y_1
     \end{array}
     \right.
     \]
-  \item さらに$\bm{y}\equiv(y_1, y_2)$, $\bm{f}(x, \bm{y})\equiv \left(y_2, r(x)-p(x)y_2 - q(x)y_1\right)$
+  \item さらに$\bm{y}\equiv(y_1, y_2)$, $\bm{f}(t, \bm{y})\equiv \left(y_2, r(t)-p(t)y_2 - q(t)y_1\right)$とおくと
     \[
-    \frac{d\bm{y}}{dx} = \bm{f}(x, \bm{y})
+    \frac{d\bm{y}}{dt} = \bm{f}(t, \bm{y})
     \]
   \item $n$階常微分方程式 $\Rightarrow$ $n$次元の1階常微分方程式
   \end{itemize}
