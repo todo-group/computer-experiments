@@ -1,7 +1,9 @@
-# about: converts an image to matrix data (cmatrix.h format)
-# usage: python convert2matrix.py imagefile > matrix.dat
+#!/usr/bin/python
 
-# requires PIL or Pillow library
+# about: converts an image to matrix data (cmatrix.h format)
+# usage: python convert2matrix.py <input_file> > <output_file>
+
+# requires Pillow library
 
 import sys
 
@@ -12,8 +14,8 @@ image_gray = ImageOps.grayscale(image)
 
 w, h = image.size
 # prints "height width" to the 1st line
-sys.stdout.write('{} {}\n'.format(h, w))
+sys.stdout.write("{} {}\n".format(h, w))
 for y in range(h):
     for x in range(w):
-        sys.stdout.write('{} '.format(image_gray.getpixel((x, y))))
-    sys.stdout.write('\n')
+        sys.stdout.write("{} ".format(image_gray.getpixel((x, y))))
+    sys.stdout.write("\n")
