@@ -2,17 +2,17 @@
   \begin{itemize}
   \item シュレディンガー方程式の形式解 ($V$が時間に依存しない場合)
     \[
-    \Psi(x,t) = e^{-i H t} \Psi(x,0)
+    \Psi(x,t) = e^{-i t H} \Psi(x,0)
     \]
   \item $t$に関して前進差分
     \begin{align*}
-      e^{-i H t} &= [e^{-i H \Delta t}]^M \approx [1 - i H \Delta t]^M \qquad (\Delta t = t / M) \\
+      e^{-i t H} &= [e^{-i \Delta t H}]^M \approx [1 - i \Delta t H]^M \qquad (\Delta t = t / M) \\
       \Psi^{n+1} &= (1 -  i \Delta t H) \Psi^{n}
     \end{align*}
-  \item $H$は対称(エルミート)行列 $\Rightarrow$ 時間発展演算子$e^{-i H \Delta t}$はユニタリー行列
+  \item $H$は対称(エルミート)行列 $\Rightarrow$ 時間発展演算子$e^{-i \Delta t H}$はユニタリー行列
   \item 差分近似$(1 -  i \Delta t H)$はユニタリーではない
     \begin{align*}
-      & (e^{-i H \Delta t})^\dagger e^{-i H \Delta t} = e^{i H \Delta t} e^{-i H \Delta t} = 1 \\
+      & (e^{-i \Delta t H})^\dagger e^{-i \Delta t H} = e^{i \Delta t H} e^{-i \Delta t H} = 1 \\
       & (1 -  i \Delta t H)^\dagger (1 -  i \Delta t H) = (1 +  i \Delta t H) (1 -  i \Delta t H) = 1 + {\color{red} \Delta t^2 H^2}
     \end{align*}
   \end{itemize}
