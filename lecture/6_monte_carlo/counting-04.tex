@@ -7,12 +7,11 @@
     \begin{itemize}
     \item シフト演算(\verb+>>+)とAND演算(\verb+&+)を利用 \ 例)
 
-      3番目($i=3$)のビット(0 / 1)を取り出す: \verb+(s>>3)&1+
+      3番目($i=3$)のビット(0 / 1)を取り出す: \verb+((s >> 3) & 1)+
 
-      3番目($i=3$)のスピン状態($\sigma_3 = \pm 1$)を取り出す: \verb+1-2*((s>>3)&1)+
+      3番目($i=3$)のスピン状態($\sigma_3 = \pm 1$)を取り出す: \verb+(1-2*((s >> 3) & 1))+
 
-      $\sigma_i \sigma_j$の計算: \verb+(1-2*((s>>i)&1)) * (1-2*((s>>j)&1))+
-
+      $\sigma_i \sigma_j$の計算: \verb+(1-2*((s >> i) & 1)) * (1-2*((s >> j) & 1))+
     \item {\color{red} $i$は0から数える}ことに注意($i=0,1,\ldots,N-1$)
     \item ビットAND (\verb+&+)と論理AND (\verb+&&+)との違いに注意
     \end{itemize}
@@ -24,7 +23,7 @@
     \end{itemize}
   \item $N$ビット全てが1の状態を作る
     \begin{itemize}
-    \item \verb+(1<<N)-1+
+    \item \verb+(1 << N)-1+
     \end{itemize}
   \item $N$重のforループを書く代わりに、状態を1つの$N$ビットの整数($s=0,\cdots,2^N-1$)で表し、ひとつのループに
   \end{itemize}
