@@ -14,6 +14,23 @@
   \end{itemize}
 \end{frame}
 
+\begin{frame}[t,fragile]{機械イプシロン}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item 倍精度浮動小数点数の場合: 機械イプシロン = $2^{-52} \approx 2.22 \times 10^{-16}$
+  \item 1に機械イプシロンを足しても、1と区別できない (情報落ち)
+      \begin{lstlisting}
+#include <stdio.h>
+int main(void) {
+  const double epsilon = 1e-16;
+  const double x = 1.0;
+  const double y = 1.0 + epsilon;
+  printf("epsilon       = %le\n", epsilon);
+  printf("(1+epsilon)-1 = %le\n", (y - x));
+}      \end{lstlisting}
+  \end{itemize}
+\end{frame}
+
 \begin{frame}[t,fragile]{桁落ち}
   \begin{itemize}
     \setlength{\itemsep}{1em}

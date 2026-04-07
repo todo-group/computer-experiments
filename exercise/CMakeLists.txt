@@ -1,7 +1,5 @@
 cmake_minimum_required(VERSION 3.14)
 
-enable_language(Fortran)
-
 project(compexp C CXX Fortran)
 
 find_package(BLAS)
@@ -14,7 +12,7 @@ else()
 endif()
 
 
-set(FLAGS -O3 -flto -Wall -Wextra -Wcast-qual -Winit-self -Wlogical-op
+set(FLAGS -O3 -flto -Wall -Wextra -Wcast-qual -Winit-self
     -Wmissing-include-dirs -Wredundant-decls -Wshadow -Wfloat-equal -Wno-unused-result)
 set(FFLAGS -O3 -flto -Wall -Wextra -Wmissing-include-dirs -Wshadow)
 

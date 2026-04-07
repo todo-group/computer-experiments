@@ -3,12 +3,14 @@
 \begin{frame}[t]{講義・実習の目的}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
-  \item 理論・実験を問わず、学部〜大学院〜で必要となる現代的かつ普遍的な計算機の素養を身につける
-  \item UNIX環境に慣れる(シェル、ファイル操作、エディタ)
-  \item ネットワークの活用 (リモートログイン、共同作業)
-  \item プログラムの作成(C言語、コンパイラ、プログラム実行)
-  \item 基本的な数値計算アルゴリズム・数値計算の常識を学ぶ
-  \item 科学技術文書作成に慣れる(\LaTeX, グラフ作成)
+    \item この講義で何ができるようになるか
+    \begin{itemize}
+      \item 計算機を数値実験に活用できるようになる
+    	\item 方程式を数値的に解ける
+      \item 精度の良い計算と悪い計算の違いが分かる
+	    \item 自分でアルゴリズムを実装できる \\[2em]
+    \end{itemize}
+    \item 理論・実験を問わず、学部〜大学院〜で必要となる現代的かつ普遍的な計算機の素養を身につける
   \end{itemize}
 \end{frame}
 
@@ -45,8 +47,8 @@
   \item スタッフ \href{mailto:computer@.phys.s.u-tokyo.ac.jp}{computer@phys.s.u-tokyo.ac.jp}
     \begin{itemize}
     \item 講義: 藤堂
-    \item 実習: 石河特任助教(常行研)、諏訪助教(藤堂研)
-    \item 実習TA: 久保(常行研)、齊藤(藤堂研)
+    \item 実習: 諏訪助教(藤堂研)、高橋助教(樺島研)
+    \item 実習TA: 東(樺島研)、田中(藤堂研)
     \end{itemize}
   \item 講義・実習の進め方
     \begin{itemize}
@@ -55,11 +57,9 @@
     \end{itemize}
   \item 評価
     \begin{itemize}
-    \item 出席(UTOLでのアンケートに回答)
-
-      講義・実習当日10:30-15:00の間に回答
-      
     \item レポート(計3回)
+    \item グループ内プレゼンテーション(実習3,4の回に実施予定)
+    \item 出席（実習の回）
     \end{itemize}    
   \end{itemize}    
 \end{frame}
@@ -69,20 +69,20 @@
     % \setlength{\itemsep}{1em}
   \item 全8回 (水曜2限 10:25-12:10)
     \begin{itemize}
-    \item 4月9日 講義1: 講義の概要・基本的なアルゴリズム
-    \item 4月16日 実習1 (グループ1): 環境整備・C言語プログラミング
-    \item 4月23日 実習1 (グループ2): 環境整備・C言語プログラミング
-    \item 5月7日 講義2: 常微分方程式
-    \item 5月14日 実習2 (グループ1): 基本的なアルゴリズム・常微分方程式
-    \item 5月21日 実習2 (グループ2): 基本的なアルゴリズム・常微分方程式
-    \item 5月28日 講義3: 連立方程式
-    \item 6月4日 実習3 (グループ1): 連立方程式
-    \item 6月11日 実習3 (グループ2): 連立方程式
-    \item 6月18日 講義4: 行列の対角化
-    \item 6月25日 実習4 (グループ1): 行列の対角化
-    \item 7月2日 実習4 (グループ2): 行列の対角化
-    \item {\color{gray} 7月9日 休講}
-    \item {\color{gray} 7月16日 休講}
+    \item 4月8日 講義1: 講義の概要・基本的なアルゴリズム
+    \item 4月15日 実習1 (全体): 環境整備・C言語プログラミング
+    \item 4月22日 実習1 (予備日)
+    \item 5月13日 講義2: 常微分方程式
+    \item 5月20日 実習2 (全体): 基本的なアルゴリズム・常微分方程式
+    \item 5月27日 実習2 (予備日)
+    \item 6月1日(月) 講義3: 連立方程式
+    \item 6月10日 実習3 (グループ1): グループ内プレゼン・連立方程式
+    \item 6月17日 実習3 (グループ2): グループ内プレゼン・連立方程式
+    \item {\color{gray} 6月24日 休講}
+    \item 7月1日 講義4: 行列の対角化
+    \item 7月8日 実習4 (グループ1): グループ内プレゼン・行列の対角化
+    \item 7月15日 実習4 (グループ2): グループ内プレゼン・行列の対角化
+    \item {\color{gray} 7月22日 休講}
     \end{itemize}
   \item 実習はクラスを2グループに分けて実施(グループ1: 学生証番号が奇数、グループ2: 偶数)
   \end{itemize}
@@ -99,19 +99,20 @@
   \item レポートNo.1
     \begin{itemize}
     \item \mbox{} [数値誤差・アルゴリズム基礎] 2題、[常微分方程式] うちから1題の合計3題を選択
-    \item 締切: 6月4日(予定)
+    \item 締切: 6月1日(予定)
     \end{itemize}
   \item レポートNo.2
     \begin{itemize}
     \item \mbox{} [連立一次方程式]から2題を選択
-    \item 締切: 6月25日(予定)
+    \item 締切: 6月29日(予定)
     \end{itemize}
   \item レポートNo.3
     \begin{itemize}
     \item \mbox{} [対角化]から2題を選択
-    \item 締切: 7月16日(予定)
+    \item 締切: 7月27日(予定)
     \end{itemize}
   \item 詳細はUTOLに掲示予定
+  \item グループ内プレゼンの詳細については、後日お知らせします
   \end{itemize}    
 \end{frame}
 
@@ -120,7 +121,7 @@
     % \setlength{\itemsep}{1em}
   \item 講義資料置き場:
   
-    {\footnotesize \href{https://github.com/todo-group/ComputerExperiments/tree/2025s-computer1}{https://github.com/todo-group/ComputerExperiments/tree/2025s-computer1}}
+    {\footnotesize \href{https://github.com/todo-group/ComputerExperiments/tree/2026s-computer1}{https://github.com/todo-group/ComputerExperiments/tree/2026s-computer1}}
     \begin{itemize}
     \item 計算機実験ハンドブック
       \begin{itemize}
@@ -149,10 +150,8 @@
     \begin{itemize}
     \item 計算機実験Slack
       \begin{enumerate}
-        \item 情報セキュリティ教育の受講を完了していることを確認
-        \item UTokyo Accountの多要素認証を有効化していることを確認
         \item \href{https://utokyo.enterprise.slack.com/}{https://utokyo.enterprise.slack.com} にアクセス・ログイン
-        \item ワークスペース「理学部物理学科: 計算機実験2025」を検索し、「詳細を表示」→「参加をリクエストする」
+        \item ワークスペース「理学部物理学科: 計算機実験2026」を検索し、「詳細を表示」→「参加をリクエストする」
       \end{enumerate}
     \item UTOL「担当教員へのメッセージ」
     \item メール(\href{mailto:computer@phys.s.u-tokyo.ac.jp}{computer@phys.s.u-tokyo.ac.jp})
