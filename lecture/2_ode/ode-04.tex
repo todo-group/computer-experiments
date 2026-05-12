@@ -7,9 +7,14 @@
     \]
   \item Euler法は、被積分関数を定数で近似することに対応
     \[
-    f(t_n+h\tau, y(t_n+h\tau)) = f(t_n, y(t_n)) + {\color{red} O(h)}
+    f(t_n+h\tau, y(t_n+h\tau)) = f(t_n, y(t_n)) + {\color{red} O(h)} \qquad (0 \leq \tau \leq 1)
     \]
   \item $t=0$からある$t_f$まで積分すると、反復回数${\color{red} N = t_f / h}$
-  \item $t=t_f$における誤差 $\sim N \times h \times O(h) = {\color{red} O(h)}$
+  \item $t=t_f$における誤差
+    \begin{itemize}
+    \item 各ステップでの誤差は$h \times O(h) = O(h^2)$
+    \item 反復回数は$N \sim 1 / h$
+    \item 全体の誤差は、反復回数$\times$各ステップの誤差 $= O(h^{-1}) \times O(h^2) = {\color{red} O(h)}$
+    \end{itemize}
   \end{itemize}
 \end{frame}

@@ -3,6 +3,11 @@
     %\setlength{\itemsep}{1em}
   \item 陽解法: 右辺が既知の変数のみで書かれる(例: Euler法)
     \begin{itemize}
+    \item 次の値が既知の値から直接計算できる
+      \[
+         y_{n+1} = y_n + h f(t_n, y_n)
+      \]
+    \item 数値的に不安定な場合がある
     \item プログラムがシンプル
     \end{itemize}
   \item 陰解法: 右辺にも未知変数が含まれる

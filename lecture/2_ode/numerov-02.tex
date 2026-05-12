@@ -7,12 +7,13 @@
     \item 連立微分方程式に直さずに直接二階微分方程式を解く
     \item 4次の陰解法
     \item 方程式が線形の場合は陽解法に書き直せる
+    \item 一次元のシュレディンガー方程式の数値解法として有名
     \end{itemize}
   \item 微分方程式
     \[
     \frac{d^2y}{dt^2} = f(t,y)
     \]
-  $y=y(t)$を$t=t_n$のまわりでテイラー展開する。$t_{n \pm 1} = t_n \pm h$での表式は
+  \item $y=y(t)$を$t=t_n$のまわりでテイラー展開する。$t_{n \pm 1} = t_n \pm h$での表式は
       \[
       y(t_{n \pm 1}) = y(t_n) \pm h y'(t_n) + \frac{h^2}{2} y''(t_n) \pm \frac{h^3}{6} y'''(t_n) + \frac{h^4}{24} y''''(t_n)  + O(h^5)
       \]
