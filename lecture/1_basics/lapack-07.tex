@@ -9,7 +9,7 @@
     \item \verb^v[i]^ は \verb^*(v+i)^ の簡略化した書き方(糖衣構文)
     \end{itemize}
   \item C言語では配列の添字は0から始まることに注意
-  \item \verb^double v[10];^ と宣言した場合、\verb^v[0]^ 〜 \verb^v[9]^ の10個の要素を持つ配列が作られる。\verb^v[10]^ は存在しない。値を代入したり参照しようとするとエラーとなる (\verb^malloc^で動的に作成した場合も同様)
+  \item \verb^double v[10];^ と宣言した場合、\verb^v[0]^ 〜 \verb^v[9]^ の10個の要素を持つ配列が作られる。\verb^v[10]^ は存在しない。値を代入したり参照しようとすると未定義動作となる (\verb^malloc^で動的に作成した場合も同様)
     \begin{itemize}
     \item 一次元配列の例: \href{https://github.com/todo-group/computer-experiments/blob/master/exercise/basics/array.c}{array.c}
     \end{itemize}
