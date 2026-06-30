@@ -8,13 +8,13 @@ v[0] = 1.0;
 v[1] = 2.0;
 ...
 \end{lstlisting}
-    要素数はコンパイル時にすでに決まっている定数でなければならない
+    本講義で想定する静的配列では、要素数はコンパイル時に決まる定数としておくのが安全である
   \item (動的)一次元配列 (ハンドブック2.12節)
 \begin{lstlisting}
 double *v; /* ポインタ */
-v = (double*)malloc((size_t)(10 * sizeof(double));
+v = (double*)malloc((size_t)(10 * sizeof(double)));
 ...
-free(v); /* 確保した領域を開放 */
+free(v); /* 確保した領域を解放 */
 \end{lstlisting}
 実行時に要素数を指定可能
   \end{itemize}

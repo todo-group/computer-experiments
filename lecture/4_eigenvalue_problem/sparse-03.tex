@@ -1,15 +1,22 @@
 \begin{frame}[t,fragile]{べき乗法の収束}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
-  \item べき乗法による固有値
+  \item 実装上の注意
+  \begin{itemize}
+    \item 反復の途中でベクトルの大きさが大きくなりすぎるとオーバーフローするので、各ステップで正規化する
+      \[
+      v_{k+1} = \frac{A v_k}{|A v_k|}
+      \]
+  \end{itemize}
+  \item べき乗法による絶対値最大の固有値の近似値(Rayleigh商)
     \[
-    \frac{v_{k+1}^T v_{k+1}}{v_{k+1}^T v_k} = \lambda_1 + O\Big( \big(\frac{\lambda_2}{\lambda_1} \big)^{2k}\Big)
+    \mu_k = \frac{v_{k}^T A v_{k}}{v_{k}^T v_k} = \lambda_1 \Big[ 1 + O\Big( \big|\frac{\lambda_2}{\lambda_1} \big|^{2k} \Big) \Big]
     \]
   \item 誤差の収束
     \[
-    \frac{v_{k+1}^T v_{k+1}}{v_{k+1}^T v_k} \approx \lambda_1 + e^{-2k \ln (\lambda_1/\lambda_2)}
+    \mu_k  \approx \lambda_1 + e^{-2k \ln (|\lambda_1/\lambda_2|)}
     \]
-  \item $1 / \ln (\lambda_1/\lambda_2)$ 程度の反復が必要
-  \item $\lambda_1$と$\lambda_2$が近い場合には、反復回数が非常に多くなる
+  \item $1 / \ln (|\lambda_1/\lambda_2|)$ 程度の反復が必要
+  \item $|\lambda_1|$と$|\lambda_2|$が近い場合には、反復回数が非常に多くなる
   \end{itemize}
 \end{frame}

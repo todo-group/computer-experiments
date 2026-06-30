@@ -16,7 +16,7 @@
 \begin{frame}[t,fragile]{反復法}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
-  \item 行列$A$を対角行列$D$、左下三角行列$E$、右上三角行列$F$の和に分解
+  \item 行列$A$を対角行列$D$、狭義左下三角行列$E$、狭義右上三角行列$F$の和に分解
     \[
     A{\bf x} = (D + E + F){\bf x} = {\bf b}
     \]
@@ -35,7 +35,7 @@
 \begin{frame}[t,fragile]{反復法}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
-  \item SOR (Successive Over-Relaxation)法: ガウスザイデル法における修正量に1より大きな値($\omega$)を掛け、補正を加速
+  \item SOR (Successive Over-Relaxation)法: ガウスザイデル法の修正量に緩和係数 $\omega$ を掛ける。特に $1<\omega<2$ の場合を過緩和と呼び、収束の加速を狙う
     \begin{align*}
       {\bf \xi}^{(k+1)} &= D^{-1} ({\bf b} - E{\bf x}^{(k+1)} - F{\bf x}^{(k)}) \\
       {\bf x}^{(k+1)} &= {\bf x}^{(k)} + \omega({\bf \xi}^{(k+1)} - {\bf x}^{(k)})
@@ -44,7 +44,6 @@
     \begin{align*}
       {\bf x}^{(k+1)} = &(I+\omega D^{-1}E)^{-1} \{(1-\omega)I - \omega D^{-1} F\}{\bf x}^{(k)} \\ &+ \omega(D+\omega E)^{-1}{\bf b}
     \end{align*}
-    \item 反復法は常に収束するとは限らない
-    \item 行列$A$が対角優位、あるいは正定値対称行列の場合には収束が保証される
+    \item 反復法は常に収束するとは限らない。ヤコビ法・ガウスザイデル法は、$A$ が狭義対角優位であれば収束が保証される。ガウスザイデル法は、$A$ が正定値対称行列の場合にも収束する。SOR 法は、$A$ が正定値対称行列で $0<\omega<2$ のとき収束が保証される
   \end{itemize}
 \end{frame}

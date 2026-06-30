@@ -3,11 +3,11 @@
     %\setlength{\itemsep}{1em}
   \item 偏微分方程式の境界値問題の差分法による求解
   \item 非線形連立方程式に対するニュートン法
-    \[ {\bf x}' = {\bf x} - \Big( \frac{\partial {\bf f}({\bf x})}{\partial {\bf x}} \Big)^{-1} {\bf f}({\bf x}) \]
+    \[ {\bf x}^{(k+1)} = {\bf x}^{(k)} - J({\bf x}^{(k)})^{-1} f({\bf x}^{(k)}) \]
     \begin{itemize}
     \item 微分方程式の初期値問題の陰解法など
     \item 逆行列を求めベクトルに掛ける代わりに連立一次方程式を解く
-      \[ {\bf x} = A^{-1} {\bf b} \ \ \Rightarrow \ \ A {\bf x} = {\bf b} \]
+      \[ J({\bf x}^{(k)}){\bf \Delta x}=f({\bf x}^{(k)}) \qquad {\bf x}^{(k+1)}={\bf x}^{(k)}-{\bf \Delta x} \]
     \end{itemize}
   \end{itemize}
 \end{frame}
