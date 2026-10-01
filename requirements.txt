@@ -1,0 +1,3 @@
+# The converter itself uses only the Python 3.10+ standard library.
+# pytest is required for its regression test suite.
+pytest>=8.0,<10.0
