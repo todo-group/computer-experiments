@@ -12,6 +12,7 @@ import hashlib
 import json
 import re
 import shutil
+import subprocess
 import sys
 import tempfile
 from dataclasses import asdict, dataclass
@@ -148,6 +149,10 @@ class Converter:
         event = re.compile(r"\\section\s*\{|\\begin\s*\{frame\}")
         cursor = 0
         while match := event.search(text, cursor):
+            line_start = text.rfind("\n", 0, match.start()) + 1
+            if re.search(r"(?<!\\)%", text[line_start:match.start()]):
+                cursor = match.end()
+                continue
             if match.group(0).startswith("\\section"):
                 try:
                     title, cursor = read_group(text, match.end() - 1)
@@ -192,8 +197,17 @@ class Converter:
                 body_end, env_end = find_environment_end(text, name, match.end())
             except ValueError:
                 break
-            body = self.convert_lists(text[match.end() : body_end])
-            items = re.split(r"\\item(?:\s*\[[^]]*\])?\s*", body)[1:]
+            body = text[match.end() : body_end]
+            item_events = re.compile(r"\\(begin|end)\{(?:itemize|enumerate)\}|\\item\b(?:\s*\[[^]]*\])?\s*")
+            depth = 0
+            item_starts = []
+            for event in item_events.finditer(body):
+                if event.group(1):
+                    depth += 1 if event.group(1) == "begin" else -1
+                elif depth == 0:
+                    item_starts.append((event.start(), event.end()))
+            items = [body[end : item_starts[index + 1][0] if index + 1 < len(item_starts) else len(body)]
+                     for index, (_, end) in enumerate(item_starts)]
             marker = "1." if name == "enumerate" else "-"
             rendered = []
             for item in items:
@@ -208,6 +222,18 @@ class Converter:
     @staticmethod
     def inline(text: str) -> str:
         text = text.strip()
+        color_group = re.compile(r"(?<!\\)\{\s*\\color\s*\{(gray|red)\}\s*")
+        cursor = 0
+        while match := color_group.search(text, cursor):
+            try:
+                _, end = read_group(text, match.start())
+            except ValueError:
+                cursor = match.end()
+                continue
+            content = Converter.inline(text[match.end() : end - 1])
+            replacement = f"[{content}]{{.{match.group(1)}}}"
+            text = text[:match.start()] + replacement + text[end:]
+            cursor = match.start() + len(replacement)
         text = re.sub(r"\\(?:textbf|bfseries)\s*\{([^{}]*)\}", r"**\1**", text)
         text = re.sub(r"\\(?:texttt|ttfamily)\s*\{([^{}]*)\}", r"`\1`", text)
         text = re.sub(r"\\emph\s*\{([^{}]*)\}", r"*\1*", text)
@@ -231,10 +257,28 @@ class Converter:
         except ValueError:
             source_relative = Path(source.name)
         relative = Path("assets") / source_relative
+        convert_pdf = source.suffix.lower() == ".pdf"
+        if convert_pdf:
+            relative = relative.with_suffix(".svg")
         destination = self.output_root / relative
         if self.write_assets:
             destination.parent.mkdir(parents=True, exist_ok=True)
-            if self.assets_mode == "symlink":
+            if convert_pdf:
+                executable = shutil.which("pdftocairo")
+                if executable is None:
+                    self.diagnose("error", "image-converter-missing", "PDF conversion requires pdftocairo (Poppler)", source)
+                    return raw_path
+                if destination.is_symlink():
+                    destination.unlink()
+                try:
+                    subprocess.run(
+                        [executable, "-svg", "-f", "1", "-l", "1", str(source), str(destination)],
+                        check=True, capture_output=True, text=True,
+                    )
+                except subprocess.CalledProcessError as exc:
+                    self.diagnose("error", "image-conversion", exc.stderr.strip(), source)
+                    return raw_path
+            elif self.assets_mode == "symlink":
                 if destination.exists() or destination.is_symlink():
                     destination.unlink()
                 destination.symlink_to(source)
@@ -242,54 +286,182 @@ class Converter:
                 shutil.copy2(source, destination)
         digest = hashlib.sha256(source.read_bytes()).hexdigest()
         self.asset_manifest[relative.as_posix()] = {"source": source.as_posix(), "sha256": digest}
-        if source.suffix.lower() in {".pdf", ".eps"}:
+        if source.suffix.lower() == ".eps":
             self.diagnose("warning", "image-browser-format", f"copied {source.suffix} image; convert to SVG for browsers", source)
         return relative.as_posix()
 
     def convert_body(self, body: str) -> str:
         listings: list[str] = []
+        protected: list[str] = []
 
-        def listing(match: re.Match[str]) -> str:
-            option = match.group(1) or ""
-            language_match = re.search(r"language\s*=\s*([^,\]]+)", option)
-            language = (language_match.group(1).strip().lower() if language_match else "c")
-            language = {"bash": "bash", "python": "python", "c++": "cpp"}.get(language, language)
-            token = f"@@LISTING{len(listings)}@@"
-            listings.append(f"```{language}\n{match.group(2).strip()}\n```")
+        def protect(value: str) -> str:
+            token = f"@@PROTECTED{len(protected)}@@"
+            protected.append(value)
             return token
 
+        def listing(match: re.Match[str]) -> str:
+            environment = match.group("environment")
+            content = match.group("content")
+            option = ""
+            if environment == "lstlisting" and content.startswith("["):
+                option, end = read_group(content, 0, "[", "]")
+                content = content[end:]
+            language_match = re.search(r"language\s*=\s*([^,\]]+)", option)
+            language = (language_match.group(1).strip().lower() if language_match else
+                        "c" if environment == "lstlisting" else "")
+            language = {"bash": "bash", "python": "python", "c++": "cpp"}.get(language, language)
+            # Remove only the newlines separating the environment delimiters from code.
+            content = re.sub(r"^[ \t]*\r?\n", "", content, count=1)
+            content = re.sub(r"\r?\n[ \t]*$", "", content, count=1)
+            fence = "`" * max(3, max((len(run) + 1 for run in re.findall(r"`+", content)), default=0))
+            token = f"@@LISTING{len(listings)}@@"
+            attributes = language if environment == "lstlisting" else "{.verbatim}"
+            listings.append(f"{fence}{attributes}\n{content}\n{fence}")
+            return "\n\n" + token + "\n\n"
+
         body = re.sub(
-            r"\\begin\{lstlisting\}(?:\[([^]]*)\])?(.*?)\\end\{lstlisting\}",
+            r"\\begin\{(?P<environment>lstlisting|verbatim\*?)\}(?P<content>.*?)\\end\{(?P=environment)\}",
             listing, body, flags=re.DOTALL,
         )
         body = strip_comments(body)
-        body = re.sub(r"\\setlength\s*\{[^{}]*\}\s*\{[^{}]*\}", "", body)
         body = re.sub(r"\\(?:vspace|hspace)\*?\s*\{[^{}]*\}", "", body)
-        body = body.replace("\\titlepage", "").replace("\\tableofcontents", "")
-        body = self.convert_lists(body)
-        body = re.sub(r"\\\[(.*?)\\\]", lambda m: f"\n$$\n{m.group(1).strip()}\n$$\n", body, flags=re.DOTALL)
-        body = re.sub(
-            r"\\begin\{(align\*?|equation\*?|split|cases)\}(.*?)\\end\{\1\}",
-            lambda m: f"\n$$\n\\begin{{{m.group(1)}}}{m.group(2)}\\end{{{m.group(1)}}}\n$$\n",
-            body, flags=re.DOTALL,
+        # Protect complete math expressions before processing lists or inline text.
+        # Nested cases/split/align environments inside display math stay untouched.
+        math_pattern = re.compile(
+            r"(?<!\\)\\\[(.*?)\\\]|(?<!\\)\\\((.*?)\\\)|(?<!\\)\$\$(.*?)\$\$"
+            r"|(?<!\\)\$(?!\$)(.*?)(?<!\\)\$"
+            r"|\\begin\{(align\*?|equation\*?|split|cases)\}(.*?)\\end\{\5\}",
+            re.DOTALL,
         )
 
+        def math(match: re.Match[str]) -> str:
+            inline = match.group(2) if match.group(2) is not None else match.group(4)
+            if inline is not None:
+                return protect(f"${inline.strip()}$")
+            content = next((match.group(i) for i in (1, 3) if match.group(i) is not None), None)
+            if content is None:
+                name = match.group(5).rstrip("*")
+                # aligned is valid inside $$; align/equation are outer environments.
+                content = match.group(6).strip()
+                if name == "align":
+                    content = f"\\begin{{aligned}}\n{content}\n\\end{{aligned}}"
+                elif name != "equation":
+                    content = f"\\begin{{{name}}}\n{content}\n\\end{{{name}}}"
+            content = "\n".join(line.strip() for line in content.strip().splitlines())
+            return "\n\n" + protect(f"$$\n{content}\n$$") + "\n\n"
+
+        body = math_pattern.sub(math, body)
+
+        def table(match: re.Match[str]) -> str:
+            columns = re.findall(r"[lcr]", match.group(1))
+            rows = []
+            content = re.sub(r"\\hline\b", "", match.group(2))
+            for row in re.split(r"\\\\(?:\s*\[[^]]*\])?", content):
+                if row.strip():
+                    cells = [self.inline(cell.strip()).replace("|", r"\|") for cell in re.split(r"(?<!\\)&", row)]
+                    if len(cells) != len(columns):
+                        return match.group(0)
+                    rows.append(cells)
+            if not rows or not re.fullmatch(r"[|lcr\s]+", match.group(1)):
+                return match.group(0)
+            separators = {"l": ":---", "c": ":---:", "r": "---:"}
+            rendered = ["| " + " | ".join(rows[0]) + " |",
+                        "| " + " | ".join(separators[col] for col in columns) + " |"]
+            rendered.extend("| " + " | ".join(row) + " |" for row in rows[1:])
+            return "\n\n" + protect("\n".join(rendered)) + "\n\n"
+
+        body = re.sub(r"\\begin\{tabular\}\{([^{}]*)\}(.*?)\\end\{tabular\}", table, body, flags=re.DOTALL)
+        # TeX source indentation has no layout meaning; retaining it creates code blocks.
+        body = "\n".join(line.lstrip() for line in body.splitlines())
+        body = re.sub(r"\\\\\*?(?:\s*\[[^]]*\])?", "\n", body)
+        body = re.sub(r"\\setlength\s*\{[^{}]*\}\s*\{[^{}]*\}", "", body)
+        body = re.sub(r"\\(?:noindent|hfill)\b", "", body)
+        body = body.replace("\\titlepage", "").replace("\\tableofcontents", "")
+        body = self.convert_lists(body)
         image_pattern = re.compile(r"\\includegraphics(?:\[([^]]*)\])?\{([^}]+)\}")
+        cursor = 0
+        resize_pattern = re.compile(r"\\resizebox\*?\s*\{")
+        while match := resize_pattern.search(body, cursor):
+            try:
+                width, pos = read_group(body, match.end() - 1)
+                while body[pos:pos + 1].isspace():
+                    pos += 1
+                height, pos = read_group(body, pos)
+                while body[pos:pos + 1].isspace():
+                    pos += 1
+                content, end = read_group(body, pos)
+            except ValueError:
+                cursor = match.end()
+                continue
+            if image_pattern.sub("", content).strip():
+                cursor = end
+                continue
+            dimensions = []
+            if width.strip() != "!":
+                dimensions.append(f"width={width.strip()}")
+            if height.strip() != "!":
+                dimensions.append(f"height={height.strip()}")
+            def resized_image(image_match: re.Match[str]) -> str:
+                options = ",".join(filter(None, [image_match.group(1), *dimensions]))
+                return f"\\includegraphics[{options}]{{{image_match.group(2)}}}"
+            replacement = image_pattern.sub(resized_image, content)
+            body = body[:match.start()] + replacement + body[end:]
+            cursor = match.start() + len(replacement)
+
         def image(match: re.Match[str]) -> str:
             path = self.copy_image(match.group(2))
-            width = ""
+            attributes = []
             if match.group(1):
                 found = re.search(r"width\s*=\s*([0-9.]+)\\textwidth", match.group(1))
                 if found:
-                    width = f'{{width="{float(found.group(1)) * 100:g}%"}}'
-            return f"![]({path}){width}"
+                    attributes.append(f'width="{float(found.group(1)) * 100:g}%"')
+                found = re.search(r"height\s*=\s*([0-9.]+)\\textheight", match.group(1))
+                if found:
+                    attributes.append(f'height="{float(found.group(1)) * 700:g}"')
+            suffix = "{" + " ".join(attributes) + "}" if attributes else ""
+            return f"![]({path}){suffix}"
         body = image_pattern.sub(image, body)
         body = re.sub(r"\\(?:begin|end)\{(?:center|small)\}", "", body)
         body = self.inline(body)
-        for index, value in enumerate(listings):
-            body = body.replace(f"@@LISTING{index}@@", value)
+        for index in reversed(range(len(protected))):
+            value = protected[index]
+            token = f"@@PROTECTED{index}@@"
+            # Keep Markdown blocks at the indentation of their enclosing list.
+            body = re.sub(
+                rf"(?m)^([ \t]*){re.escape(token)}$",
+                lambda match: "\n".join(match.group(1) + line if line else "" for line in value.splitlines()),
+                body,
+            )
+            body = body.replace(token, value)
         body = re.sub(r"[ \t]+\n", "\n", body)
         body = re.sub(r"\n{3,}", "\n\n", body)
+        # Beamer places these figures beside the table with negative spacing.
+        # Use columns so the figure stays within the slide after removing that spacing.
+        standalone_images = list(re.finditer(r"(?m)^!\[\]\([^)]+\)(?:\{[^}]*\})?[ \t]*$", body))
+        if re.search(r"(?m)^\s*\| .* \|$", body) and len(standalone_images) == 1:
+            figure = standalone_images[0]
+            if not body[figure.end():].strip():
+                text_column = body[:figure.start()].strip()
+                body = (
+                    '::: {.columns}\n\n::: {.column width="60%"}\n\n'
+                    + text_column
+                    + '\n\n:::\n\n::: {.column width="40%"}\n\n'
+                    + figure.group().strip()
+                    + '\n\n:::\n\n:::'
+                )
+        # Restore code last so whitespace, comments, and TeX-like strings stay literal.
+        for index, value in enumerate(listings):
+            token = f"@@LISTING{index}@@"
+
+            def restore_code(match: re.Match[str]) -> str:
+                indent = match.group(1)
+                marker = match.group(2) or ""
+                continuation = indent + (" " * max(3, len(marker)) if marker else "")
+                lines = value.split("\n")
+                return indent + marker + lines[0] + "\n" + "\n".join(continuation + line for line in lines[1:])
+
+            body = re.sub(rf"(?m)^([ \t]*)([-] |[0-9]+\. )?{re.escape(token)}[ \t]*$", restore_code, body)
+            body = body.replace(token, value)
         return body.strip()
 
     def convert(self, source: Path) -> tuple[str, dict[str, int]]:
@@ -302,14 +474,21 @@ class Converter:
             lines.append(f'author: "{self.inline(metadata["author"]).replace(chr(34), chr(39))}"')
         if metadata.get("date"):
             lines.append(f'date: "{metadata["date"]}"')
-        lines += ["lang: ja", "format:", "  revealjs:", "    slide-number: c/t", "    hash: true", "    transition: none", "---", ""]
+        lines += ["lang: ja", "format:", "  revealjs:", "    slide-number: c/t", "    hash: true", "    transition: none"]
+        if any(re.search(r"\\tableofcontents\b", strip_comments(body)) for kind, _, body in nodes if kind == "frame"):
+            lines += ["    toc: true", "    toc-depth: 1", '    toc-title: "目次"']
+        lines += ["---", ""]
         for kind, title, body in nodes:
             if kind == "section":
                 if title:
                     lines.extend((f"# {title}", ""))
             else:
-                lines.extend((f"## {title}", "", self.convert_body(body), ""))
-        return "\n".join(lines).rstrip() + "\n", {"frames_in": frames, "slides_out": frames}
+                converted_body = self.convert_body(body)
+                if "\\titlepage" in strip_comments(body) and not converted_body:
+                    continue
+                lines.extend((f"## {title}", "", converted_body, ""))
+        slides = sum(line.startswith("## ") for line in lines)
+        return "\n".join(lines).rstrip() + "\n", {"frames_in": frames, "slides_out": slides}
 
 
 def find_masters(input_path: Path, all_masters: bool) -> list[Path]:

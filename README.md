@@ -17,6 +17,11 @@ python3 -m pip install -r requirements.txt
 python3 tools/beamer_to_quarto.py lecture/lecture-1-1.tex --output-dir quarto
 ```
 
+PDF figures are converted to SVG using `pdftocairo` (Poppler), which must be
+available on `PATH`. Image dimensions from `\resizebox` are carried into the
+Markdown image attributes. The Quarto title slide replaces a Beamer frame
+containing only `\titlepage` and `\tableofcontents`.
+
 To audit all master documents without writing output, run:
 
 ```sh

@@ -1,0 +1,54 @@
+{
+  "assets/image/quicksort.svg": {
+    "source": "/Users/wistaria/Library/CloudStorage/Dropbox/development/computer-experiments/lecture/image/quicksort.pdf",
+    "sha256": "8aaf4daf1e3ce7828db85a65faa982a05cb6c16547792843b32d0b24abd6b8e7"
+  },
+  "assets/image/min-cut.svg": {
+    "source": "/Users/wistaria/Library/CloudStorage/Dropbox/development/computer-experiments/lecture/image/min-cut.pdf",
+    "sha256": "24c58da535cc4f5578bba10f0e1bbcb7b6bb88df8d32b5294e6a96968b7fe7fe"
+  },
+  "assets/image/scattering.svg": {
+    "source": "/Users/wistaria/Library/CloudStorage/Dropbox/development/computer-experiments/lecture/image/scattering.pdf",
+    "sha256": "a135aef40511ae18792f54a36e9f44e78daa4559629b91967b137a6042eed628"
+  },
+  "assets/image/coth-1.svg": {
+    "source": "/Users/wistaria/Library/CloudStorage/Dropbox/development/computer-experiments/lecture/image/coth-1.pdf",
+    "sha256": "4900a507174247dfcba5cd5ff04f786196f746d7fe25d34ca0107f111e5a4508"
+  },
+  "assets/image/coth-2.svg": {
+    "source": "/Users/wistaria/Library/CloudStorage/Dropbox/development/computer-experiments/lecture/image/coth-2.pdf",
+    "sha256": "d4462494627f6d521fd8879948e6165f3f5981d4259769f3cc0f8fb42c052f8b"
+  },
+  "assets/image/coth-3.svg": {
+    "source": "/Users/wistaria/Library/CloudStorage/Dropbox/development/computer-experiments/lecture/image/coth-3.pdf",
+    "sha256": "c972303540e9b6aa1602eb31b34ba0365daf99e631843605f0c87b8849a8094c"
+  },
+  "assets/image/sech-error.svg": {
+    "source": "/Users/wistaria/Library/CloudStorage/Dropbox/development/computer-experiments/lecture/image/sech-error.pdf",
+    "sha256": "d1b0ca96b695b01f9112058693786a44b0877b79bba458c3d60a72156a4cbf21"
+  },
+  "assets/image/harmonic.svg": {
+    "source": "/Users/wistaria/Library/CloudStorage/Dropbox/development/computer-experiments/lecture/image/harmonic.pdf",
+    "sha256": "563c8cd46ded6aa108b8acec6334d333536cf9059e0fc68c2b776f1adeb6a3ed"
+  },
+  "assets/image/series-001.svg": {
+    "source": "/Users/wistaria/Library/CloudStorage/Dropbox/development/computer-experiments/lecture/image/series-001.pdf",
+    "sha256": "b0130e63303749764184c874207b5c6f8221bb672491b3d29b8126ec511cddc3"
+  },
+  "assets/image/series-010.svg": {
+    "source": "/Users/wistaria/Library/CloudStorage/Dropbox/development/computer-experiments/lecture/image/series-010.pdf",
+    "sha256": "35337e6a7920d10b3e7e9f81413f72033772749e14bfd3af3ed2a1bc9444411a"
+  },
+  "assets/image/series-100.svg": {
+    "source": "/Users/wistaria/Library/CloudStorage/Dropbox/development/computer-experiments/lecture/image/series-100.pdf",
+    "sha256": "fd3ff24c4b4d6c0aab76ff5e781ed92d2cfe728c05807fc1b2554a69c6e01936"
+  },
+  "assets/image/autocorr.svg": {
+    "source": "/Users/wistaria/Library/CloudStorage/Dropbox/development/computer-experiments/lecture/image/autocorr.pdf",
+    "sha256": "613fcf5272e023c4eb2657c83fd3150088b041936440e98f0571115b933f26c9"
+  },
+  "assets/image/error.svg": {
+    "source": "/Users/wistaria/Library/CloudStorage/Dropbox/development/computer-experiments/lecture/image/error.pdf",
+    "sha256": "cd874e29c87d5a6076d2ea6a74457549d14537ff4d233a6b49e987f1711191bc"
+  }
+}
