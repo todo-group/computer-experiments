@@ -1,20 +1,41 @@
 format:
   revealjs:
+    slide-number: c/t
+    hash: true
+    transition: none
     toc: true
     toc-depth: 1
     toc-title: "目次"
-    fontsize: 24px
+    fontsize: 26px
     # Use MathJax 4 for MathML and TeX fallbacks, bypassing Reveal.js's MathJax 2 plugin.
-    html-math-method: mathml
+    html-math-method:
+      method: mathjax
+      url: "https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"    
     include-in-header:
       text: |
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&display=swap" rel="stylesheet">
         <style>
+          .reveal .slides img {
+            margin-block: 0;
+          }
+          .reveal .slides div.quarto-figure,
+          .reveal .slides p:has(> img) {
+            margin-block: 0px;
+          }
+          .reveal .slides .quarto-figure > figure,
+          .reveal .slides figure > p:has(> img) {
+            margin-block: 0;
+          }
           .reveal pre.verbatim,
           .reveal .verbatim pre {
-            font-size: 18px;
+            font-size: 26px;
+          }
+          .reveal .slides section.compact,
+          .reveal .slides section.compact p {
+            line-height: 1.15;
+          }
+          .reveal .slides section.compact p {
+            margin-block: 6px;
           }
           .reveal .gray {
             color: gray;
@@ -23,21 +44,14 @@ format:
             color: red;
           }
           :root {
-            --r-main-font: "Noto Sans JP", sans-serif;
-            --r-heading-font: "Noto Sans JP", sans-serif;
+            --r-main-font: "BIZ UDPGothic", sans-serif;
+            --r-heading-font: "BIZ UDPGothic", sans-serif;
+            --r-heading-font-weight: 400;
+          }
+          .reveal #title-slide .subtitle {
+            font-size: 36px;
+          }
+          .reveal #TOC li {
+             margin-block: var(--r-block-margin);
           }
         </style>
-        <script>
-          window.MathJax = {
-            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
-            output: { font: 'mathjax-stix2' },
-            startup: {
-              pageReady() {
-                return MathJax.startup.defaultPageReady().then(() => {
-                  if (window.Reveal) window.Reveal.layout();
-                });
-              }
-            }
-          };
-        </script>
-        <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0/tex-mml-chtml.js"></script>
