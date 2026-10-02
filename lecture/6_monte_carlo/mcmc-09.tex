@@ -1,18 +1,40 @@
 %-*- coding:utf-8 -*-
 
-\begin{frame}[t,fragile]{自己相関関数(autocorrelation function)}
+\begin{frame}[t,fragile]{自己相関と有効サンプル数}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
-  \item エルゴード性 + つりあい条件 ⇒ 原理的に正しいマルコフ連鎖モンテカルロ
-  \item 実際には自己相関を考慮する必要あり
-  \item 自己相関関数
+    \item 測定値の平均と母分散
     \[
-    C(t) = \frac{\langle A_{i+t}A_i \rangle - \langle A \rangle^2}{\langle A^2 \rangle - \langle A \rangle^2} \sim \exp(-\frac{t}{\tau})
+    \overline A=\frac{1}{M}\sum_{i=1}^{M}A_i,
+    \qquad
+    \sigma^2=\langle A^2\rangle-\langle A\rangle^2
     \]
-  \item $\tau$: 自己相関時間(autocorrelation time)
-  \item 自己相関の影響により、統計的な「有効サンプル数」が減少
+    MCMCで得られた測定値には、時間方向の相関がある
+  \item 自己相関関数と積分自己相関時間 (物理量 \(A\) ごとに異なる)
     \[
-    M \rightarrow \frac{M}{1+2\tau}
+    C(t)=
+    \frac{\langle A_iA_{i+t}\rangle-\langle A\rangle^2}
+         {\langle A^2\rangle-\langle A\rangle^2},
+    \qquad
+    \tau_{\mathrm{int}}=\sum_{t=1}^{\infty}C(t)
     \]
+  \item 自己相関を考慮した平均値の分散と有効サンプル数
+    \[
+    %\boxed{
+    \left\langle(\overline A-\langle A\rangle)^2\right\rangle
+    \simeq
+    \frac{\sigma^2}{M}\left(1+2\tau_{\mathrm{int}}\right)
+    \qquad M_{\mathrm{eff}}=\frac{M}{1+2\tau_{\mathrm{int}}}
+    %}
+    \]
+  % 平均値の標準誤差は、この分散の平方根である
+  %\item 有効サンプル数
+    %\[
+%    \boxed{
+%    M_{\mathrm{eff}}=\frac{M}{1+2\tau_{\mathrm{int}}}
+%    }
+%    \]
+    独立な標本では \(C(t)=\delta_{t,0}\)、\(\tau_{\mathrm{int}}=0\)、\(M_{\mathrm{eff}}=M\)。
+    積分自己相関時間が長いほど、同じ測定回数でも平均値の統計誤差は大きくなる
   \end{itemize}
 \end{frame}
