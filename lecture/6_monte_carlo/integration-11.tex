@@ -1,12 +1,14 @@
 \begin{frame}[t,fragile]{理想的な重点的サンプリング?}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
+    %\setlength{\itemsep}{1em}
   \item 理想的には $p(x)$ を $f(x)$ に比例するように取れば良い
-  \item このとき $f(x) / p(x)$ は定数(分散 0) → 1回のサンプリングで厳密な結果が得られる???
+  \item このとき $f(x) / p(x)$ は定数(分散ゼロ) → 1回のサンプリングで厳密な結果が得られる???
   \item 実際には $p(x)$ が確率密度となるように規格化条件から定数 $c$ を決めておく必要あり
     \[
     \int p(x) \, dx = c \int f(x) \, dx = 1
     \]
-  \item $c$ は今欲しい答そのもの!
+  \item $c$ は今欲しい答の逆数! \\[2em]
+  \item $p(x) \sim f(x)$で分散はゼロになるが、重みを評価するには求めたい積分値を先に知る必要がある
+  \item 正規化定数を知らずに、分布から標本を生成することはできるか？
   \end{itemize}
 \end{frame}

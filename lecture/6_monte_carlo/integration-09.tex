@@ -14,8 +14,14 @@
       1000000 & 3.1412 & 0.0006 \\
       \hline
     \end{tabular}
+  \item 実際のサンプリングの方法
+    \begin{itemize}
+      \item \(u\)を \(0<u<1\) の一様乱数として、
+      \[ x = -\log u, \qquad \frac{f(x)}{p(x)} = \frac{4}{1+e^{-2x}} = \frac{4}{1+u^2}
+      \]
+    \end{itemize}
   \end{itemize}
-  \vspace*{-7em}
+  \vspace*{-15em}
   \hspace*{17em}
   \resizebox{!}{.45\textheight}{\includegraphics{image/coth-3.pdf}}
 \end{frame}

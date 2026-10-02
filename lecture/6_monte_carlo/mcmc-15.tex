@@ -1,0 +1,33 @@
+%-*- coding:utf-8 -*-
+
+\begin{frame}[t,fragile]{ビニングによる誤差評価}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 連続する \(n\) 個の測定値を、一つのビンにまとめる
+  \item 測定値 \(M\) 個を \(m=M/n\) 個のビンに分け、ビンごとの平均を計算
+    \[
+    \overline A_k^{(n)}
+    =\frac{1}{n}\sum_{i=n(k-1)+1}^{nk}A_i
+    \qquad(k=1,\ldots,m)
+    \]
+    ビン平均の平均は、元のデータ全体の平均 \(\overline A\) に等しい
+
+  \item ビン平均の分散を求める
+    \[
+    \left(s^{(n)}\right)^2
+    =\frac{1}{m-1}\sum_{k=1}^{m}
+    \left(\overline A_k^{(n)}-\overline A\right)^2
+    \]
+
+  \item 全体の平均値\(\overline{A}\)の分散の推定値を求める。ビン平均の分散を、さらにビン数 \(m\) で割る
+    \[
+    \boxed{
+    \left(\sigma^{(n)}\right)^2
+    =\frac{1}{m}\left(s^{(n)}\right)^2
+    =\frac{n}{M}\left(s^{(n)}\right)^2
+    }
+    \]
+
+  \item ビン幅を変えて、誤差の推定値が安定することを確認する
+  \end{itemize}
+\end{frame}

@@ -2,6 +2,12 @@
   \begin{itemize}
     %\setlength{\itemsep}{1em}
   \item 疎行列の場合、行列ベクトル積は高速に行える
+  \item 疎行列の格納形式
+  \begin{itemize}
+  \item COO: (行番号, 列番号, 値) のリスト。作りやすい
+  \item CSR: 行ごとに非零要素を圧縮。行列ベクトル積が速い
+  \item matrix-free: 行列を保存せず、関数 $y=Ax$ だけを実装する
+  \end{itemize}
   \item Givens変換、Householder変換などを行うと疎行列性が失われる
   \item 行列ベクトル積のみを用いる反復法が効果的
     \begin{itemize}

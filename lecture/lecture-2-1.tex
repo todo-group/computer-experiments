@@ -3,8 +3,8 @@
 \documentclass[10pt,dvipdfmx]{beamer}
 \usepackage{tutorial}
 
-\title{計算機実験II (L1) --- モンテカルロ法}
-\date{2025/10/10}
+\title{計算機実験II (L1) --- モンテカルロ法と統計力学}
+\date{2026/10/02}
 
 \begin{document}
 
@@ -17,31 +17,31 @@
 \input{0_about/about2-2.tex}
 % \input{0_about/env.tex}
 
-\section{乱択アルゴリズム}
+\section{モンテカルロ積分と統計誤差}
 \input{6_monte_carlo/randomized-01.tex}
 \input{6_monte_carlo/randomized-02.tex}
 \input{6_monte_carlo/randomized-03.tex}
 \input{6_monte_carlo/randomized-04.tex}
 \input{6_monte_carlo/randomized-05.tex}
 
-\section{物理過程のシミュレーション}
+% \section{物理過程のシミュレーション}
 \input{6_monte_carlo/process-01.tex}
 \input{6_monte_carlo/process-02.tex}
 \input{6_monte_carlo/process-03.tex}
 
 %% \section{擬似乱数}
-%% \input{6_monte_carlo/rng-01.tex}
-%% \input{6_monte_carlo/rng-02.tex}
-%% \input{6_monte_carlo/rng-03.tex}
-%% \input{6_monte_carlo/rng-04.tex}
-%% \input{6_monte_carlo/rng-05.tex}
-%% \input{6_monte_carlo/rng-06.tex}
+%\input{6_monte_carlo/rng-01.tex}
+%\input{6_monte_carlo/rng-02.tex}
+%\input{6_monte_carlo/rng-03.tex}
+\input{6_monte_carlo/rng-04.tex}
+\input{6_monte_carlo/rng-05.tex}
+\input{6_monte_carlo/rng-06.tex}
 
-%% \section{ヒストグラム}
+% \section{ヒストグラム}
 %% \input{6_monte_carlo/histogram-01.tex}
 %% \input{6_monte_carlo/histogram-02.tex}
 
-\section{モンテカルロ積分}
+\section{重点的サンプリング}
 \input{6_monte_carlo/integration-01.tex}
 \input{6_monte_carlo/integration-02.tex}
 \input{6_monte_carlo/integration-03.tex}
@@ -54,12 +54,12 @@
 \input{6_monte_carlo/integration-10.tex}
 \input{6_monte_carlo/integration-11.tex}
 
-\section{多体系の統計力学}
+\section{体系の統計力学とイジング模型}
 
 \input{6_monte_carlo/statphys-01.tex}
 \input{6_monte_carlo/statphys-02.tex}
 \input{6_monte_carlo/statphys-03.tex}
-\input{6_monte_carlo/statphys-04.tex}
+%\input{6_monte_carlo/statphys-04.tex}
 
 %\section{数え上げ}
 
@@ -75,15 +75,18 @@
 \input{6_monte_carlo/mcmc-05.tex}
 \input{6_monte_carlo/mcmc-06.tex}
 \input{6_monte_carlo/mcmc-07.tex}
-\input{6_monte_carlo/mcmc-08.tex}
-\input{6_monte_carlo/mcmc-09.tex}
-\input{6_monte_carlo/mcmc-10.tex}
-\input{6_monte_carlo/mcmc-11.tex}
 \input{6_monte_carlo/mcmc-12.tex}
 \input{6_monte_carlo/mcmc-13.tex}
-\input{6_monte_carlo/mcmc-14.tex}
 
-\section{}
-\input{0_about/about2-2.tex}
+\section{平衡化・自己相関・誤差評価}
+\input{6_monte_carlo/mcmc-14.tex}
+\input{6_monte_carlo/mcmc-08.tex}
+\input{6_monte_carlo/mcmc-09.tex}
+\input{6_monte_carlo/mcmc-15.tex}
+\input{6_monte_carlo/mcmc-10.tex}
+\input{6_monte_carlo/mcmc-11.tex}
+
+%\section{}
+%\input{0_about/about2-2.tex}
 
 \end{document}

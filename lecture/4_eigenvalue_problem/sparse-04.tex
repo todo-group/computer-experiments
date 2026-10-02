@@ -3,13 +3,13 @@
     %\setlength{\itemsep}{1em}
   \item 第1固有ベクトル$\xi_1$の成分を行列から差し引く(減次)
     \[
-    A_1 = A - \lambda_1 \xi_1 \xi_1^T
+    A_1 v = (A - \lambda_1 \xi_1 \xi_1^T) v = A v - \lambda_1 \xi_1 (\xi_1^T v)
     \]
-    この行列は、固有値 $0,\lambda_2,\lambda_3,\cdots,\lambda_n$を持つ
+    行列 $A_1$ は、固有値 $0,\lambda_2,\lambda_3,\cdots,\lambda_n$を持つ
   \item 行列$A_1$に対してべき乗法を使うと、第2固有値$\lambda_2$と対応する固有ベクトル$\xi_2$が得られる
   \item 第$k$固有値まで求まっている場合
     \[
-    A_k = A - \sum_{i=1}^k \lambda_i \xi_i \xi_i^T
+    A_k v = (A - \sum_{i=1}^k \lambda_i \xi_i \xi_i^T)v = A v - \sum_{i=1}^k \lambda_i \xi_i (\xi_i^T v)
     \]
   \item 実際には数値誤差のため、ベクトルの直交性は厳密ではない
   \item 大きい方から数個程度を求めるのが限界

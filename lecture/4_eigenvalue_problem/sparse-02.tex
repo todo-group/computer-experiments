@@ -1,8 +1,11 @@
 \begin{frame}[t,fragile]{べき乗法(Power Method)}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
-  \item 適当なベクトル$v_1$から出発する
-  \item $v_1$が最大固有ベクトル$\xi_1$と直交していないとすると
+  \item 固有値を絶対値の大きい順に並べる
+    \[
+    |\lambda_1| > |\lambda_2| \ge |\lambda_3| \ge \cdots \ge |\lambda_n|
+    \]
+  \item 初期ベクトル$v_1$が絶対値最大の固有ベクトル$\xi_1$と直交していないとすると
     \[
     v_1 = c_1 \xi_1 + c_2 \xi_2 + c_3 \xi_3 + \cdots + c_n \xi_n
     \]

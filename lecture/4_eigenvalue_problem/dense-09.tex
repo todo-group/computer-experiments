@@ -5,13 +5,14 @@
     \begin{itemize}
     \item 行列$A$を直交(ユニタリー)行列$Q$と上三角行列$R$の積に分解: $A=QR$
     \item Gram-Schmidtの直交化と等価
+    \item 実際の数値計算では、安定性のため Householder 変換や Givens 変換により QR 分解を行うことが多い
     \end{itemize}
   \item QR法による固有値と固有ベクトルの計算
     \begin{itemize}
     \item 行列$A_1$をQR分解($A_1=Q_1R_1$) → $A_2 = R_1Q_1$ 
     \item 行列$A_2$をQR分解($A_2=Q_2R_2$) → $A_3 = R_2Q_2$ 
     \item 行列$A_k$をQR分解($A_k=Q_kR_k$) → $A_{k+1} = R_kQ_k$
-    \item 繰り返していくと対角より下の全ての成分は零に収束し、対角成分は固有値に収束する(証明略)
+    \item 一般行列では上三角の Schur 形、実対称行列では対角行列へ収束
     \end{itemize}
   \item 連続した直交変換: $A_{k+1} = R_kQ_k = Q_k^{-1}Q_kR_kQ_k = Q_k^{-1}A_kQ_k$
     \begin{itemize}
