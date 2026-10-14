@@ -23,7 +23,6 @@ int main(void)
 
     /* prepare vector for histogram */
     const double dx = (xmax - xmin) / bins;
-    const double dh = 1.0 / (samples * dx);
     double* hist = alloc_dvector(bins);
     for (int j = 0; j < bins; ++j)
     {
@@ -31,20 +30,31 @@ int main(void)
     }
 
     /* generate histogram */
+    int n_outside = 0;
     for (int i = 0; i < samples; ++i)
     {
         const double x = ran();
         const int j = (x - xmin) / dx;
-        hist[j] += 1.0;
+        if (x >= xmin && x < xmax && j >= 0 && j < bins)
+        {
+            hist[j] += 1.0;
+        }
+        else
+        {
+            ++n_outside;
+        }
     }
 
     for (int j = 0; j < bins; ++j)
     {
         const double x = xmin + (j + 0.5) * dx;
-        const double ave = hist[j] * dh;
-        const double err = sqrt(hist[j]) * dh;
-        printf("%d %15.10f %15.10f %15.10f\n", j, x, ave, err);
+        const double p = hist[j] / samples;
+        const double density = p / dx;
+        const double stderr_density = sqrt(p * (1.0 - p) / (samples - 1)) / dx;
+        printf("%d %15.10f %15.10f %15.10f\n", j, x, density, stderr_density);
     }
+
+    fprintf(stderr, "outside: %d / %d (%.6f)\n", n_outside, samples, (double)n_outside / samples);
 
     free_dvector(hist);
     return 0;
