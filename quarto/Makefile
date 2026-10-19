@@ -20,6 +20,8 @@ all: html pdf
 
 html: $(HTML)
 
+lecture-2-2.html: lecture-2-2-math.html
+
 %.html: %.qmd _quarto.yml $(ASSETS) Makefile
 	$(QUARTO) render "$<" --to revealjs
 
