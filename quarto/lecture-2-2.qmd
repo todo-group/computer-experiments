@@ -1,0 +1,902 @@
+---
+title: "計算機実験II (L2)"
+subtitle: "分子動力学と統計的サンプリング"
+date: "2026/10/23"
+lang: ja
+---
+
+# 少数多体系・分子動力学
+
+## 古典多粒子系
+
+- ハミルトニアン
+
+   $$
+   H = \sum_i \frac{p_i^2}{2m} + U(q_1, q_2, \cdots, q_{3N})
+   $$
+- 相互作用・ポテンシャル (化学の分野では「力場」と呼ばれる)
+
+   - 短距離相互作用: 剛体球ポテンシャル、Lennard-Jonesポテンシャル、3体ポテンシャル、第一原理(量子力学)ポテンシャル、粗視化モデル$\cdots$
+   - 長距離相互作用: 重力、静電相互作用
+- 運動方程式(常微分方程式)
+
+   $$
+   \frac{dq_i}{dt} = \frac{\partial H}{\partial p_i} = \frac{p_i}{m}, \ \ \frac{dp_i}{dt} = - \frac{\partial H}{\partial q_i} = - \frac{\partial U}{\partial q_i}
+   $$
+
+## 分子動力学法
+
+- 適当な初期条件から、運動方程式に従って位置と運動量を時間発展させる
+
+   - Euler法、Runge-Kutta法、リープ・フロッグ法、速度ベルレ法など
+   - $6N$ 次元の連立微分方程式
+- 時間発展に関する物理量の時間平均から平均を評価
+
+   $$
+   \begin{aligned}
+   \langle A(p,x) \rangle &= \frac{1}{Z(E)} \int A(p,x) \, \delta(H(p,x)-E) \, dp \, dx \\
+   &\simeq \frac{1}{t_{\rm max}} \int_0^{t_{\rm max}} A(p(t),x(t)) \, dt
+   \end{aligned}
+   $$
+
+   - ハミルトニアンが時間依存しない場合は全エネルギーが保存する→ミクロカノニカル分布
+- 平衡状態における平均値だけでなく、熱や電荷の輸送などの動的現象、非平衡状態からの緩和現象などもシミュレーションできる
+
+## フローチャート
+
+![](assets/image/md-flowchart.svg){height="520"}
+
+## 境界条件と力の計算
+
+- 気体・液体・固体などの熱力学的極限を調べたい場合
+
+   - 端の効果を取り除くために周期境界条件を採用
+   - 周期的に同じパターンが続く
+- ポテンシャルの計算
+
+   $$
+   \begin{aligned}
+   U = \frac{1}{2} \sum_i \sum_{j \ne i} \sum_{n_x=-\infty}^{\infty} \sum_{n_y=-\infty}^{\infty} \sum_{n_z=-\infty}^{\infty} U[\mathbf{r}_i - \mathbf{r}_j + L(n_x,n_y,n_z)]
+   \end{aligned}
+   $$
+- 短距離力
+
+   - カットオフを入れる
+   - 最も近いイメージだけ考慮(minimum image convention)
+- 長距離力
+
+   - カットオフを入れると物理が変わる
+   - エバルト法、ツリー法、高速多重極展開
+
+## エバルト法 {.compact}
+
+- 周期的なクーロンポテンシャル(粒子数 $N$)
+
+   $$
+   U = \frac{1}{2} \sum_{i,j} \sum_{\mathbf{n}} \frac{q_i q_j}{r} \qquad r = |\mathbf{r}| = |\mathbf{r}_i - \mathbf{r}_j + L \mathbf{n}|
+   $$
+
+:::: {.columns}
+
+::: {.column width="62%"}
+
+- 無限個のミラーイメージに関する和をいかに計算するか
+
+   - 誤差関数(erf)と相補誤差関数(erfc)を用いて、ポテンシャルを２つの部分に分ける( $\alpha$ はある定数)
+
+      $\displaystyle
+            U = \frac{1}{2} \sum_{i,j} \sum_{\mathbf{n}} \frac{q_i q_j \, \mathrm{erfc}(\alpha r)}{r}$
+
+      $\displaystyle
+            \qquad \mbox{} + \frac{1}{2} \sum_{i,j} \sum_{\mathbf{n}} \frac{q_i q_j \, \mathrm{erf}(\alpha r)}{r}$
+
+- 第1項目は $r$ が大きくなると急速に小さくなる
+
+:::
+
+::: {.column width="28%"}
+
+![](assets/image/ewald.svg){height="400"}
+
+:::
+
+::::
+
+## エバルト法
+
+- 第2項目(長距離項)の計算
+
+   - 変数変換( $s=t/r$ )
+
+      $$
+      \begin{split}
+      U_2 &= \frac{1}{2} \sum_{i,j} \sum_{\mathbf{n}} \frac{q_i q_j}{r} \frac{2}{\sqrt{\pi}} \int_0^{\alpha r} \exp(-t^2) \, dt \\
+      &= \frac{1}{2} \sum_{i,j} q_i q_j  \frac{2}{\sqrt{\pi}} \int_0^{\alpha} \sum_{\mathbf{n}} \exp(-r^2 s^2) \, ds
+      \end{split}
+      $$
+   - 被積分関数は $\mathbf{r}_i$ に関して周期 $L$ の周期関数 $\rightarrow$ フーリエ変換を導入
+
+      $$
+      U_2 = \frac{2\pi}{L^3} \sum_{\mathbf{h} \ne \mathbf{0}} \frac{e^{-|\mathbf{h}|^2/4\alpha^2}}{|\mathbf{h}|^2} \Big| \sum_i q_i e^{i\mathbf{h} \cdot \mathbf{r}_i} \Big|^2 \qquad \mathbf{h} = \frac{2\pi}{L}(h_x, h_y, h_z)
+      $$
+   - $|\mathbf{h}|$ が大きくなると急速に小さくなる
+   - $\mathbf{h} = \mathbf{0}$ の項は電気的中性条件から消える
+
+## ツリー法
+
+- 遠くのものをまとめて扱う
+- 空間をメッシュで8等分(2次元の場合は4等分)していく
+
+   ![](assets/image/tree-1.svg){height="280"}
+   ![](assets/image/tree-2.svg){height="280"}
+
+   - それぞれのメッシュに粒子が1個あるいは0個となるまで
+   - 全体が8分木(2次元の場合は4分木)で表現される
+   - ツリー構造の下から順番に重心と総質量を計算しておく
+
+## ツリー法 {.compact}
+
+- ある粒子から見て
+
+   - 見込み角があるしきい値よりも小さい場合は、その重心を使って計算
+   - そうでない場合にはまじめに計算
+- 計算量 $O(N \log N)$
+- 近似精度を上げるために
+
+   - 重心だけでなく多重極展開も使う
+
+      原点中心半径 $a$ の球の中の粒子の作るポテンシャルの多重極展開係数
+
+      $$
+      \alpha_\ell^m = \sum_{i=1}^{N} m_i \Big( \frac{r_i}{a} \Big)^\ell Y_\ell^{-m}(\theta_i, \phi_i)
+      $$
+
+      $Y_\ell^m(\theta,\phi)$: $\ell$ 次の球面調和関数
+
+      位置 $(r,\theta,\phi)$ におけるポテンシャル($r>a$)
+
+      $$
+      \Phi(r,\theta,\phi) \approx \sum_\ell \sum_{m=-\ell}^{\ell} \alpha_\ell^m \frac{a^\ell}{r^{\ell+1}} Y_\ell^m(\theta,\phi)
+      $$
+
+## 初期値問題の解法 (Euler法)
+
+- $h$ を微小量として微分を差分で近似する(前進差分)
+
+   $$
+   \frac{dy}{dt} \approx \frac{y(t+h) - y(t)}{h} = f(t, y)
+   $$
+- $t=0$ における $y(t)$ の初期値を $y_0$、$t_n \equiv nh$、$y_n$ を $y(t_n)$ の近似値とおくと、
+
+   $$
+   y_{n+1}-y_n = h f( t_n, y_n)
+   $$
+- Euler法
+
+   - $y_0$ からはじめて、$y_1,y_2,\cdots$ を順次求めていく
+
+## 高次のRunge-Kutta法 {.compact}
+
+- 3次Runge-Kutta法
+
+   $$
+   \begin{array}{rcl}
+   k_1 & = & h f(t_n, y_n) \\
+   k_2 & = & h f(t_n + \frac{2}{3}h, y_n + \frac{2}{3}k_1) \\
+   k_3 & = & h f(t_n + \frac{2}{3}h, y_n + \frac{2}{3}k_2) \\
+   y_{n+1} & = & y_n + \frac{1}{4}k_1 + \frac{3}{8}k_2
+   + \frac{3}{8}k_3
+   \end{array}
+   $$
+- 4次Runge-Kutta法
+
+   $$
+   \begin{array}{rcl}
+   k_1 & = & h f(t_n, y_n) \\
+   k_2 & = & h f(t_n + \frac{1}{2}h, y_n + \frac{1}{2}k_1) \\
+   k_3 & = & h f(t_n + \frac{1}{2}h, y_n + \frac{1}{2}k_2) \\
+   k_4 & = & h f(t_n + h, y_n + k_3) \\
+   y_{n+1} & = & y_n + \frac{1}{6}k_1 + \frac{1}{3}k_2
+   + \frac{1}{3}k_3 + \frac{1}{6}k_4
+   \end{array}
+   $$
+
+## 計算コストと精度
+
+- 実際の計算では $f(t,y)$ の計算にほとんどのコストがかかる
+- 計算回数と計算精度の関係
+
+   |  | 1次(Euler法) | 2次(中点法) | 3次 | 4次 |
+   | :---: | :---: | :---: | :---: | :---: |
+   | 計算精度 | $O(h)$ | $O(h^2)$ | $O(h^3)$ | $O(h^4)$ |
+   | 計算回数 | $N$ | $2N$ | $3N$ | $4N$ |
+- 高次のRunge-Kuttaを使う方が効率的
+- どれくらい小さな$h$が必要となるか、前もっては分からない
+- 刻み幅を変えて($h,h/2,h/4,\dots$)計算してみることが大事
+
+   - 誤差の評価
+   - 公式の間違いの発見
+
+# シンプレクティック積分法
+
+## ハミルトン力学系
+
+- 時間をあらわに含まない場合のハミルトン方程式
+
+   $$
+   \frac{dq}{dt} = \frac{\partial H}{\partial p}, \ \frac{dp}{dt} = -\frac{\partial H}{\partial q}
+   $$
+
+   - エネルギー保存則
+
+      $$
+      \frac{dH}{dt} = \frac{\partial H}{\partial q} \frac{dq}{dt} + \frac{\partial H}{\partial p} \frac{dp}{dt} = 0
+      $$
+   - 位相空間の体積が保存(Liouvilleの定理)
+
+      位相空間上の流れの場${v} = (\frac{dq}{dt},\frac{dp}{dt})$について
+
+      $$
+      \text{div} \, {v} = \frac{\partial}{\partial q} \frac{dq}{dt} + \frac{\partial}{\partial p} \frac{dp}{dt} = 0
+      $$
+- Euler法、Runge-Kutta法などはいずれの性質も満たさない
+
+## シンプレクティック数値積分法
+
+- シンプレクティック数値積分法(Symplectic Integrator)
+- 位相空間の体積保存を満たす解法
+- 例: 調和振動子$H=\frac{1}{2}(p^2+q^2)$の運動方程式
+
+   $$
+   \frac{dq}{dt} = p, \ \frac{dp}{dt} = -q
+   $$
+
+   の一方をEuler法で、他方を逆Euler法で解く
+
+   $$
+   \begin{aligned}
+   q_{n+1} &= q_n + h p_n \\
+   p_{n+1} &= p_n - h q_{n+1} = (1-h^2) p_n - h q_n \\
+   \begin{pmatrix} q_{n+1} \\ p_{n+1} \end{pmatrix} &= \begin{pmatrix} 1 & h \\ -h & 1-h^2 \end{pmatrix} \begin{pmatrix} q_{n} \\ p_{n} \end{pmatrix}
+   \end{aligned}
+   $$
+
+## 体積・エネルギーの保存
+
+- 体積保存
+
+   $$
+   \begin{aligned}
+   \det \begin{pmatrix} 1 & h \\ -h & 1-h^2 \end{pmatrix} = 1
+   \end{aligned}
+   $$
+- 「修正ハミルトニアン」の保存
+
+   $$
+   \begin{aligned}
+   \frac{1}{2}(p_{n+1}^2+q_{n+1}^2) + \textcolor{red}{\frac{h}{2} p_{n+1} q_{n+1}} = \frac{1}{2}(p_{n}^2+q_{n}^2) + \textcolor{red}{\frac{h}{2} p_{n} q_{n}}
+   \end{aligned}
+   $$
+- 位相空間の体積は厳密に保存
+- エネルギーは$O(h)$の範囲で保存し続ける
+
+## 2次のシンプレクティック積分法
+
+- ハミルトニアンが$H(p,q) = T(p) + V(q)$の形で書けるとする
+- リープ・フロッグ法
+
+   $$
+   \begin{aligned}
+   \textcolor{red}{ p(t+h/2)} &= p(t) - \frac{h}{2} \frac{\partial V(q)}{\partial q}|_{q=q(t)} \\
+   \textcolor{blue}{ q(t+h)} &= q(t) + h \textcolor{red}{p(t+h/2)} \\
+   p(t+h) &= \textcolor{red}{p(t+h/2)} - \frac{h}{2} \frac{\partial V(q)}{\partial q}|_{q=q(t+h)}
+   \end{aligned}
+   $$
+
+## ベルレ(Verlet)法 {.compact}
+
+- 微分方程式が$\ddot{q}(t) = f[t,q(t)]$の形で書かれる場合を考える
+- $q(t)$のテイラー展開
+
+   $$
+   q(t \pm h) = q(t) \pm h \dot{q}(t) + \frac{h^2}{2} \ddot{q}(t) \pm \cdots
+   $$
+
+   から、$q(t + h)$と$q(t - h)$の表式を足し合わせて整理
+
+   $$
+   q(t+h) = 2q(t) - q(t-h)+h^2 f[t,q(t)] + O(h^4)
+   $$
+- 初期条件: $q(0)$と$q(0)-q(-1) \simeq hp(0)$から$q(h)$を求める
+
+   $$
+   q(h) = q(0) + h p(0) + \frac{h^2}{2} f[0, q(0)]
+   $$
+- 運動量は中心差分で計算
+
+   $$
+   p(t) = \frac{q(t+h) - q(t-h)}{2h}
+   $$
+
+## ベルレ法の変形
+
+- 半整数ステップにおける運動量
+
+   $$
+   p(t + h/2) = \frac{q(t+h)-q(t)}{h}
+   $$
+
+   を導入すると
+
+   $$
+   \begin{aligned}
+   \begin{split}
+   p(t + h/2) &= p(t - h/2) + \frac{q(t+h)-2q(t)+q(t-h)}{h} \\
+   &= p(t - h/2) + h f[t,q(t)]
+   \end{split}
+   \end{aligned}
+   $$
+
+   一方
+
+   $$
+   q(t+h) = q(t) + hp(t+h/2)
+   $$
+- $\Rightarrow$ リープ・フロッグ法
+
+   座標についてはベルレ法と数学的に等価だが、丸め誤差に強い
+
+## 速度ベルレ法(Velocity Verlet)
+
+- 運動量に対する中心差分
+
+   $$
+   p(t) = \frac{q(t+h)-q(t-h)}{2h}
+   $$
+
+   から
+
+   $$
+   q(t+h) = 2hp(t) + q(t-h)
+   $$
+
+   ベルレ法の式と和をとると
+
+   $$
+   \begin{aligned}
+   q(t + h) &= q(t) + hp(t) + h^2 f[t,q(t)] / 2 \\
+   p(t + h) &= p(t) + h \Big( f[t+h,q(t+h)]  + f[t,q(t)] \Big) / 2
+   \end{aligned}
+   $$
+- $\Rightarrow$ 速度ベルレ法
+
+   2次のシンプレクティック積分法、丸め誤差にも安定
+
+## シンプレクティック法の一般論
+
+- $z=\begin{bmatrix} q \\ p \end{bmatrix}$と書き、$f(z)$に作用する演算子$\hat{D}(h)$をポアソン括弧を用いて定義($h=h(z)$はパラメータ)
+
+   $$
+   \hat{D}(h)f = \{ f, h \} = \frac{\partial f}{\partial q} \frac{\partial h}{\partial p} - \frac{\partial h}{\partial q} \frac{\partial f}{\partial p}
+   $$
+- ハミルトニアン$H=T(p)+V(q)$に対する正準方程式
+
+   $$
+   \dot{z} = \hat{D}(H) z
+   $$
+
+   に対する形式解
+
+   $$
+   z(t+h) = e^{h \hat{D}(H)} z(t)
+   $$
+- $e^{h \hat{D}(H)}$: 時間発展演算子 (正準変換)
+
+## シンプレクティック法の一般論
+
+- $H=T(p)$の時
+
+   $$
+   \begin{aligned}
+   \hat{D}(T)z &= \frac{\partial z}{\partial q} \frac{\partial T}{\partial p} - \frac{\partial T}{\partial q} \frac{\partial z}{\partial p} = \begin{bmatrix} \frac{dT}{dp} \\ 0 \end{bmatrix} \\
+   \hat{D}(T)^n z &= 0 \qquad n \ge 2 \\
+   \therefore e^{h\hat{D}(T)} z &= [ 1+h\hat{D}(T) ] z = \begin{bmatrix} q + h \frac{dT}{dp} \\ p \end{bmatrix}
+   \end{aligned}
+   $$
+- $H=V(q)$の時も同様に
+
+   $$
+   \begin{aligned}
+   e^{h\hat{D}(V)} z &= [ 1+h\hat{D}(V) ] z = \begin{bmatrix} q \\ p - h \frac{dV}{dq} \end{bmatrix}
+   \end{aligned}
+   $$
+- $e^{h\hat{D}(T)}$, $e^{h\hat{D}(V)}$とも正準変換
+- 一般的には、$e^{h\hat{D}(T+V)} z$は厳密には計算できない
+
+## シンプレクティック法の一般論
+
+- $e^{h\hat{D}(T+V)}$を$e^{a_i h\hat{D}(T)}$, $e^{b_i h\hat{D}(V)}$の積で近似する
+- 演算子(行列) $A,B$について
+
+   $$
+   e^{h (A+B)} = e^{hA} e^{hB} + O(h^2)
+   $$
+- 一次のシンプレクティック法
+
+   $$
+   \begin{aligned}
+   \hat{S}_1 &= e^{h\hat{D}(V)} e^{h\hat{D}(T)} \\
+   q(t+h) &= q(t) + h \frac{dT(p(t))}{dp} \\
+   p(t+h) &= p(t) - h \frac{dV(q(\textcolor{red}{t+h}))}{dq}
+   \end{aligned}
+   $$
+
+   $\Rightarrow$ オイラー法+逆オイラー法
+
+## シンプレクティック法の一般論
+
+- 二次のシンプレクティック法
+
+   $$
+   e^{h (A+B)} = e^{\frac{h}{2}B} e^{hA} e^{\frac{h}{2}B} + O(h^3)
+   $$
+
+   から
+
+   $$
+   \begin{aligned}
+   \hat{S}_2 &= e^{\frac{h}{2}\hat{D}(T)} e^{h\hat{D}(V)} e^{\frac{h}{2}\hat{D}(T)}
+   \end{aligned}
+   $$
+
+   $\Rightarrow$ リープ・フロッグ法
+- 四次のシンプレクティック法 (吉田の方法)
+
+   $$
+   \begin{aligned}
+   \hat{S}_4 &= e^{c_1h\hat{D}(T)} e^{d_1 h\hat{D}(V)} e^{c_2 h\hat{D}(T)} e^{d_2 h\hat{D}(V)} e^{c_3h\hat{D}(T)} e^{d_3 h\hat{D}(V)} e^{c_4h\hat{D}(T)} \\
+   & c_1 = c_4 = \frac{1}{2(2-2^{1/3})}, \ c_2 = c_3 = \frac{1-2^{1/3}}{2(2-2^{1/3})}, \\
+   & d_1 = d_3 = \frac{1}{2-2^{1/3}}, \ d_2 = -\frac{2^{1/3}}{2-2^{1/3}}
+   \end{aligned}
+   $$
+
+## シンプレクティック積分法
+
+- ハミルトン力学系の満たすべき特性(位相空間の体積保存)を満たす
+- 一般的には陰解法
+- ハミルトニアンが$H(p,q) = T(p) + V(q)$の形で書ける場合は陽的なシンプレクティック積分法が存在する
+- エネルギーは近似的に保存する
+- $n$次のシンプレクティック積分法では、エネルギーは$O(h^n)$の範囲で振動(発散しない)
+- より高次のシンプレクティック積分法についても、システマティックに構成できる(ただし係数を解析的に求められるのは4次まで)
+   参考文献: H. Yoshida, Phys. Lett. A **150**, 262 (1990)
+
+- 系の満たすべき保存則を満たすように差分法を構成することが重要
+- 参考: 計算科学フォーラムでの河合宗司先生(東北大)の講演 <https://hpcic-kkf.com/forum/2024/kkf_01/>
+
+# ビリアル定理
+
+## ビリアル定理
+
+- ビリアル定理
+
+   $$
+   \langle T \rangle = -\frac{1}{2} \sum_i^N \langle \mathbf{f}_i \cdot \mathbf{r}_i \rangle
+   $$
+
+   $T$: 運動エネルギー、$\mathbf{f}_i$: 粒子$i$に働く力、$\mathbf{r}_i$: 粒子$i$の位置
+- ビリアル
+
+   $$
+   G = \sum_i^N \mathbf{p}_i \cdot \mathbf{r}_i
+   $$
+
+   - $G$の時間微分
+
+      $$
+      \frac{dG}{dt} = \sum_i \mathbf{p}_i \cdot \frac{d\mathbf{r}_i}{dt} + \sum_i \frac{d\mathbf{p}_i}{dt} \cdot \mathbf{r}_i = 2 T + \sum_i \mathbf{f}_i \cdot \mathbf{r}_i
+      $$
+   - 長時間平均をとると左辺は0 $\Rightarrow$ ビリアル定理
+
+## ビリアル定理
+
+- ベキ的な相互作用の場合: $U = \sum_{i<j} a_{ij} | \mathbf{r}_i - \mathbf{r}_j |^{n+1}$
+
+   $$
+   \mathbf{f}_i = -\nabla_i U = - \sum_{j \ne i} a_{ij} (n+1) (\mathbf{r}_i - \mathbf{r}_j) | \mathbf{r}_i - \mathbf{r}_j |^{n-1} \equiv \sum_{j \ne i} \mathbf{f}_{ij}
+   $$
+
+   $$
+   \begin{aligned}
+   -\frac{1}{2} \sum_i \mathbf{f}_i \cdot \mathbf{r}_i &= -\frac{1}{2} \sum_i \sum_{j \ne i} \mathbf{f}_{ij} \cdot \mathbf{r}_i = -\frac{1}{2} \sum_{i < j} (\mathbf{f}_{ij} \cdot \mathbf{r}_i + \mathbf{f}_{ji} \cdot \mathbf{r}_j) \\
+   &= -\frac{1}{2} \sum_{i < j} \mathbf{f}_{ij} \cdot (\mathbf{r}_i - \mathbf{r}_j) = \frac{1}{2} (n+1) U
+   \end{aligned}
+   $$
+
+   $\Rightarrow$ $\displaystyle \langle T \rangle = \frac{n+1}{2} \langle U \rangle$
+- 特に重力、静電気力の場合($n=-2$)
+
+   $$
+   \langle T \rangle = -\frac{1}{2} \langle U \rangle \qquad \text{ビリアル比: }\displaystyle r_{\rm v} \equiv \frac{\langle T \rangle}{| \langle U \rangle |} = \frac{1}{2}
+   $$
+
+## 圧力・温度の計算
+
+- 壁から受ける力を考えると
+
+   $$
+   \begin{aligned}
+   \mathbf{f}_i &= \mathbf{f}_i^\text{int} + \mathbf{f}_i^\text{ext} = -\nabla_i U + \mathbf{f}_i^\text{ext} \\
+   \sum_i \mathbf{f}_i^\text{ext} \cdot \mathbf{r}_i &= - \int_{\partial V} (P \mathbf{n}) \cdot \mathbf{r} \, dS = - P \int \nabla \cdot \mathbf{r} \, dV = -3PV
+   \end{aligned}
+   $$
+- ビリアル定理と組み合わせて
+
+   $$
+   PV = \frac{2}{3} \langle T \rangle -\frac{1}{3} \langle \sum_i \nabla_i U \cdot \mathbf{r}_i \rangle
+   $$
+- 温度の計算: エネルギー等分配則より
+
+   $$
+   \langle T \rangle = \frac{3}{2} k_B T N
+   $$
+
+   (全運動量を0に固定している場合は$\langle T \rangle = \frac{3}{2} k_B T (N-1)$)
+
+# 温度の制御
+
+## 温度の制御
+
+- カノニカル分布を実現するには?
+
+   - 巨大な環境(熱浴)を付ける必要がある?
+   - シミュレーションで巨大な環境を用意するのは非現実的
+- 速度スケーリング(Velocity Scaling)法
+
+   - 平均の運動エネルギーが対応する温度に一致するように毎回速度(運動量)をスケールしなおす
+
+      $$
+      \begin{aligned}
+      p_i \Rightarrow &p'_i = \sqrt{ \frac{3mNk_BT}{\sum_i p_i^2} } p_i \\
+      & \sum_i \frac{p_i^{'2}}{2m} = \frac{3mNk_BT}{\sum_i p_i^2} \sum_i \frac{p_i^2}{2m} = \frac{3}{2} N k_B T
+      \end{aligned}
+      $$
+   - 位置エネルギーも運動エネルギーに引きずられてカノニカル分布に収束? $\Rightarrow$ 理論的根拠なし
+
+## 温度の制御
+
+- ランジュバン(Langevin)法
+
+   - 乱数を使う方法
+   - 摩擦項と揺動項(ランダム力)を付け加える
+
+      $$
+      \begin{aligned}
+      \frac{dp_i}{dt} = - \frac{\partial H}{\partial q_i} - \gamma_i p_i + R_i(t)
+      \end{aligned}
+      $$
+   - $\gamma_i$: 摩擦係数
+   - $R_i(T)$: 平均零の白色ノイズ
+
+      $$
+      \begin{aligned}
+      \langle R_i(t) R_i(t') \rangle = 2 m \gamma_i k_B T \delta(t-t')
+      \end{aligned}
+      $$
+   - 摩擦項と揺動項がつりあうところで、温度$T$のカノニカル分布が実現する
+- Andersen法
+
+   - 各粒子と熱浴の結合係数: $\nu$
+   - 時間幅$h$の時間後、各粒子に対して確率$\nu h$でボルツマン分布から速度を再設定する
+
+## Nose-Hoover熱浴
+
+- Nose (能勢)-Hoover法
+
+   - 熱浴をたった1つの自由度($s$)だけで実現する
+   - 現実系のハミルトニアン
+
+      $$
+      \begin{aligned}
+      H(\mathbf{p},\mathbf{x}) &= \sum_i \frac{p_i^2}{2m} + U(\mathbf{x})
+      \end{aligned}
+      $$
+   - 仮想系のハミルトニアン (温度$T$をパラメータとして含む)
+
+      $$
+      \begin{aligned}
+      H'(\mathbf{p}',\mathbf{x}',\textcolor{red}{p_s},\textcolor{red}{s}) &= \sum_i \frac{{p'_i}^2}{2m\textcolor{red}{s^2}} + U(\mathbf{x}') + \textcolor{red}{\frac{p_s^2}{2Q} + g k_B T\log s}
+      \end{aligned}
+      $$
+
+      $s$: 熱浴の自由度、$p_s$: $s$に共役な運動量、$Q$: 熱浴の「質量」、$g$: 系の自由度($3N+1$または$3N$)
+
+## Nose-Hoover熱浴
+
+- 仮想系の運動方程式
+
+   $$
+   \begin{aligned}
+   \frac{dx_i'}{dt'} &= \frac{\partial H'}{\partial p_i'} = \frac{p_i'}{ms^2} \\
+   \frac{dp_i'}{dt'} &= -\frac{\partial H'}{\partial x_i'} = -\frac{\partial U}{\partial x_i'} \\
+   \frac{ds}{dt'} &= \frac{\partial H'}{\partial p_s} = \frac{p_s}{Q} \\
+   \frac{dp_s}{dt'} &= -\frac{\partial H'}{\partial s} = \sum_i \frac{{p'_i}^2}{ms^3} - \frac{g k_B T}{s}
+   \end{aligned}
+   $$
+- 現実系と仮想系との間に以下の関係を仮定する
+
+   $x_i=x_i'$、$p_i=p_i'/\textcolor{red}{s}$、$t=\int^t s^{-1} dt'$、$dt=dt'/\textcolor{red}{s}$
+
+## Nose-Hoover熱浴
+
+- 現実系の変数による書き換え
+
+   $$
+   \begin{aligned}
+   \frac{dx_i}{dt} &= \frac{\partial H}{\partial p_i} \\
+   \frac{dp_i}{dt} &= -\frac{\partial U}{\partial x_i} -\frac{p_s}{Q} p_i \\
+   \frac{dp_s}{dt} &= 2 \big[ \sum_i \frac{{p_i}^2}{2m} - \frac{g k_B T}{2} \big]
+   \end{aligned}
+   $$
+- あるいは、$x_s = \log s$を導入すると、最後の2つの式は
+
+   $$
+   \begin{aligned}
+   \frac{dp_i}{dt} &= -\frac{\partial U}{\partial x_i} -\frac{dx_s}{dt} p_i \\
+   \frac{d^2x_s}{dt^2} &= \frac{2}{Q} \big[ \sum_i \frac{{p_i}^2}{2m} - \frac{g k_B T}{2} \big]
+   \end{aligned}
+   $$
+
+## カノニカル分布の実現
+
+- $H'(\mathbf{p}',\mathbf{x}',p_s,s)$による仮想時間発展によりエネルギー$E'$のミクロカノニカルアンサンブルが実現しているとする
+
+   $\Leftrightarrow$ 仮想時間$t'$でサンプルすると$2(3N+1)$次元の位相空間上で$H'=E'$の曲面上に均等に分布(エルゴード性)
+
+   $\Leftrightarrow$ 分布関数: $\delta [ H'(\mathbf{p}',\mathbf{x}',p_s,s) - E']$
+
+   $\Rightarrow$ 現実系の変数$(p,x)$に関する周辺分布を考える
+- 仮想系のミクロカノニカル分配関数
+
+   $$
+   \begin{aligned}
+   Z'&=\int d\mathbf{p}' d\mathbf{x}' dp_s ds \, \delta [ H'(\mathbf{p}',\mathbf{x}',p_s,s) - E'] \\
+   &=\int d\mathbf{\textcolor{red}{p}} d\mathbf{\textcolor{red}{x}} dp_s ds \, \textcolor{red}{s^{3N}} \delta [ \textcolor{red}{H(\mathbf{p},\mathbf{x})} + \frac{p_s^2}{2Q} + g k_B T \log s - E']
+   \end{aligned}
+   $$
+
+## カノニカル分布の実現
+
+- $s$について積分(*)
+
+   $$
+   \begin{aligned}
+   \int ds \, s^{3N} \delta[f(s)] = s_0^{3N} / | f'(s_0) | = s_0^{3N+1} / g k_B T
+   \end{aligned}
+   $$
+
+   $f(s) \equiv H(\mathbf{p},\mathbf{x}) + \frac{p_s^2}{2Q} + g k_B T \log s - E'$、$s_0$は$f(s)=0$の解
+
+   $$
+   \begin{aligned}
+   s_0 = \exp \Big[ -\frac{1}{gk_BT} \Big( H(p,x) + \frac{p_s^2}{2Q} - E' \Big) \Big]
+   \end{aligned}
+   $$
+- さらに$p_s$についてガウス積分を行い、$g=3N+1$とすると
+
+   $$
+   \begin{aligned}
+   Z' = \frac{1}{3N+1} \sqrt{\frac{2Q\pi}{k_BT}} e^{E'/k_BT} \int d\mathbf{p}d\mathbf{x} \, \textcolor{red}{\exp [- H(p,x)/k_BT ]}
+   \end{aligned}
+   $$
+
+## 補足(*)
+
+- $f(s)=0$の解を$s_0$とすると、$\displaystyle \delta [f(s)] = \frac{\delta(s-s_0)}{|f'(s_0)|}$が成り立つ
+
+   証明: $u=f(s)$とおくと、$du = f'(s)ds$から
+
+   $$
+   \begin{aligned}
+   \int h(s) \textcolor{red}{\delta [f(s)]} \, ds= \int h(f^{-1}(u)) \delta(u) \frac{du}{|f'(f^{-1}(u))|}
+   \end{aligned}
+   $$
+
+   $f^{-1}(0)=s_0$なので
+
+   $$
+   \begin{aligned}
+   = \frac{h(s_0)}{|f'(s_0)|} = \int h(s) \textcolor{red}{\frac{\delta(s-s_0)}{|f'(s_0)|}} ds
+   \end{aligned}
+   $$
+
+## 実時間発展の場合
+
+- 実時間に直した方程式の時間発展を計算した場合、物理量$A(\mathbf{p},\mathbf{x})$の実時間平均は
+
+   $$
+   \begin{aligned}
+   \langle A \rangle_t &= \lim_{\tau\rightarrow\infty} \frac{1}{\tau} \int_0^\tau dt \, A(\mathbf{p}(t),\mathbf{x}(t)) \\
+   &= \lim_{\tau\rightarrow\infty} \frac{\tau'}{\tau} \frac{1}{\tau'} \int_0^{\tau'} dt' \, A(\mathbf{p}'(t')/s(t'),\mathbf{x}'(t')) / s(t')
+   \end{aligned}
+   $$
+- $\tau = \int_0^{\tau} dt = \int_0^{\tau'} dt'/s(t')$なので
+
+   $$
+   \begin{aligned}
+   \langle A \rangle_t &= \frac{\lim_{\tau'\rightarrow\infty} \frac{1}{\tau'} \int_0^{\tau'} dt' \, A(\mathbf{p}'(t')/s(t'),\mathbf{x}'(t')) / s(t')}{\lim_{\tau'\rightarrow\infty} \frac{1}{\tau'} \int_0^{\tau'} dt' \, 1/ s(t')} \\
+   &= \langle A(\mathbf{p},\mathbf{x}) / s \rangle_{t'} / \langle 1 / s \rangle_{t'}
+   \end{aligned}
+   $$
+
+## 実時間発展の場合
+
+- 分子・分母の$t'$に関する期待値を計算すると、$s_0$が1つキャンセルするので
+
+   $$
+   \begin{aligned}
+   \langle A \rangle_t &= \frac{\int d\mathbf{p} d\mathbf{x} \, A(\mathbf{p},\mathbf{x}) \exp [ -\frac{3N}{gk_BT} H(\mathbf{p}, \mathbf{x})]}{\int d\mathbf{p} d\mathbf{x} \, \exp [ -\frac{3N}{gk_BT} H(\mathbf{p}, \mathbf{x})]}
+   \end{aligned}
+   $$
+- [$g=3N$]{.red}とすると、実時間発展の長時間平均とカノニカル分布における位相平均が一致
+
+## 温度の制御
+
+- Nose-Hoover熱浴
+
+   - 運動方程式(実時間発展の場合)
+
+      $$
+      \begin{aligned}
+      \frac{dx_i}{dt} &= \frac{\partial H}{\partial p_i} \\
+      \frac{dp_i}{dt} &= -\frac{\partial U}{\partial x_i} -\frac{p_s}{Q} p_i \\
+      \frac{dp_s}{dt} &= 2 \big[ \sum_i \frac{{p_i}^2}{2m} - \frac{g k_B T}{2} \big]
+      \end{aligned}
+      $$
+   - 「摩擦係数」$p_s$にネガティブフィードバックがかかる
+   - $g=3N$ととれば、$(p,x)$の周辺分布はカノニカル分布になる
+- 調和振動子系など簡単な系では保存量が生じてエルゴード性が破れる場合も $\Rightarrow$ 自由度$s$の温度を制御するもう一つの自由度$r$を追加(Nose-Hoover Chain法)
+- 温度圧力一定(NPTアンサンブル)も体積を表すもう1つの自由度を追加することで実現可
+
+# ハミルトニアン・モンテカルロ法
+
+## ハミルトニアン・モンテカルロ法
+
+- 通常のマルコフ連鎖モンテカルロ法
+
+   - 配位を局所的に変化させる ⇒ 配位空間上でランダムウォーク(拡散)
+   - 配位をむやみに大きく変化させようとしてもかえって状況は悪化
+
+      - cf. クラスターアルゴリズム, 拡張アンサンブル法
+- ハミルトニアン・モンテカルロ法(HMC: Hamiltonian Monte Carlo)
+
+   - 別名: ハイブリッド・モンテカルロ法(Hybrid Monte Carlo)
+   - 分子動力学法 + メトロポリス法
+   - 仮想的な運動量を導入し、拡張した位相空間上でのマルコフ連鎖を考える
+
+      - 分子動力学法による仮想的な時間発展を用いて次の候補配位を生成
+      - 高い acceptance rate を保ちながら、大域的な配位変化を実現
+   - 物性物理ではあまり使われていないが、Lattice QCDやベイズ推定ではよく使われている
+
+## ハミルトニアン・モンテカルロ法が有効な例
+
+- 状態変数が連続変数の場合のみ使用可能
+
+   - 結合した調和振動子系
+
+      $$
+      \begin{aligned}
+      E(x_1,x_2,\cdots,x_N) = \sum x_i^2 + \sum_{i,j} C_{i,j} (x_i - x_j)^2
+      \end{aligned}
+      $$
+   - 連続古典スピン系 (ハイゼンベルグ模型)
+
+      $$
+      \begin{aligned}
+      E(\vec{S}_1, \vec{S}_2, \cdots, \vec{S}_N) = \sum_{i,j} J_{i,j} \vec{S}_i \cdot \vec{S}_j
+      \end{aligned}
+      $$
+- エネルギーの状態変数に関する微分の情報(=力)を利用する
+- 現実の系の時間発展と同一である必要はない - 仮想的な時間発展
+
+## ハミルトン力学系
+
+- もともとの状態変数: $\vec{q} = (q_1,q_2,\cdots,q_N)$
+- ボルツマン重み(逆温度$\beta$は$E$に含む): $P(\vec{q}) = e^{-E(\vec{q})}$
+- 状態変数の「時間発展」を考える
+- 「運動量」「運動エネルギー」「ハミルトニアン」を導入
+
+   $$
+   \begin{aligned}
+   \vec{p} &= \frac{d\vec{q}}{dt} = (\vec{p}_1(t),\vec{p}_2(t),\cdots,\vec{p}_N(t)) \\
+   H(\vec{q}, \vec{p}) &= K(\vec{p}) + E(\vec{q}) = \frac{1}{2}\sum_i p_i^2 + E(\vec{q})
+   \end{aligned}
+   $$
+- 「ハミルトン力学系」の「時間発展」
+
+   $$
+   \begin{aligned}
+   \begin{cases}
+   \displaystyle
+   \frac{dq_i}{dt} = \frac{\partial H}{\partial p_i} \\
+   \displaystyle
+   \frac{dp_i}{dt} = -\frac{\partial H}{\partial q_i}
+   \end{cases}
+   \end{aligned}
+   $$
+
+## ハミルトン力学系
+
+- 「時間発展」の特徴
+
+   - 「全エネルギー」が保存
+
+      $$
+      \frac{dH}{dt} = \frac{\partial H}{\partial q} \frac{dq}{dt} + \frac{\partial H}{\partial p} \frac{dp}{dt} = 0
+      $$
+   - 位相空間の体積が保存(Liouvilleの定理)
+
+      位相空間上の流れの場 ${v} = (\frac{dq}{dt},\frac{dp}{dt})$ について
+
+      $$
+      \text{div} \, {v} = \frac{\partial}{\partial q} \frac{dq}{dt} + \frac{\partial}{\partial p} \frac{dp}{dt} = 0
+      $$
+- 位相空間上の同時分布が $P(\vec{q},\vec{p}) \sim \exp(-H(\vec{q},\vec{p}))$ 形の時
+
+   - $P(\vec{q},\vec{p})$ は時間発展の下で不変
+   - 我々の欲しいボルツマン分布は $P(\vec{q},\vec{p})$ の周辺分布
+
+## 位相空間での状態更新 {.compact}
+
+- ハミルトン方程式に従って適当な時間 $\tau$ だけ時間発展を行う
+- 位置 $\vec{q}$ を固定して運動量 $\vec{p}$ だけを確率的に更新 (「全エネルギー」を変更 )
+
+   - $p_i$ の条件付き確率 (正規分布 $\mathcal{N}(0,1)$)
+
+      $$
+      \begin{aligned}
+      p(p_i|\vec{q},p_1,\cdots,p_{i-1},p_{i+1},\cdots,p_N) &\sim \exp (-\frac{1}{2}\sum p_j^2+E(\vec{q})) \sim \exp(-\frac{1}{2}p_i^2)
+      \end{aligned}
+      $$
+- 実際には差分法を用いて運動方程式を積分するので有限の離散誤差
+
+   - Liouvilleの定理を厳密に満たす差分法(リープフロッグ)を用いる
+   - 分子動力学法 + メトロポリス法
+   - 「全エネルギー」の値がずれた分をメトロポリス法で修正
+- 詳細ついあい条件
+
+   $$
+   \begin{aligned}
+   &\exp(-E(\vec{q})) \exp(-K(\vec{p})) P((\vec{q},\vec{p})\rightarrow(\vec{q'},\vec{p'})) \min (1, \exp(H-H')) \\
+   & = \exp(-E(\vec{q'})) \exp(-K(\vec{p'})) P((\vec{q'},\vec{p'})\rightarrow(\vec{q},\vec{p})) \min (1, \exp(H'-H))
+   \end{aligned}
+   $$
+
+## ハミルトニアン・モンテカルロ法
+
+- 分子動力学法 + メトロポリス法
+- 仮想的な運動量を導入し、拡張した位相空間上でのマルコフ連鎖を考える
+- 分子動力学法による仮想的な時間発展を用いて次の候補配位を生成
+
+   - 位相空間の体積を保存する差分法を用いることにより、提案確率が対称になる
+- 高い acceptance rate を保ちながら、大域的な配位変化を実現
+
+   - エネルギーをさらに良く保存する高い次数の差分法を用いれば、より acceptance rate が高くなる
+- すばやくかき混ぜるというアルゴリズム的な目標を達成するために、仮想的に「物理」を導入
+
+## 講義日程 (予定)
+
+- 全8回 (金曜5限 16:50-18:35)
+
+   - 10月2日(金) 講義1: モンテカルロ法と統計力学
+   - [10月9日 休講]{.gray}
+   - 10月16日(金) 実習1
+   - 10月23日(金) 講義2: 分子動力学と統計的サンプリング
+   - 10月30日(金) 実習2
+   - [11月6日 休講]{.gray}
+   - 11月13日(金) 講義3: 偏微分方程式と量子系の時間発展
+   - 12月4日(金) 実習3
+   - [12月11日 休講]{.gray}
+   - 12月18日(金) 講義4: 自動微分・共役勾配法と最適化の応用
+   - [12月25日 休講]{.gray}
+   - 1月8日(金) 実習4
+   - [1月22日・29日 休講]{.gray}
