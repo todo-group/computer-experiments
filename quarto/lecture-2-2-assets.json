@@ -1,0 +1,18 @@
+{
+  "assets/image/md-flowchart.svg": {
+    "source": "lecture/image/md-flowchart.pdf",
+    "sha256": "b7d39c8854cc5308af299b87ddbd40e5e449e38d5f6ebd1232df3811f4f03c12"
+  },
+  "assets/image/ewald.svg": {
+    "source": "lecture/image/ewald.pdf",
+    "sha256": "427361916362be6019357ac3089eb3cc9831ede70115bcdeac59500f34c45a12"
+  },
+  "assets/image/tree-1.svg": {
+    "source": "lecture/image/tree-1.pdf",
+    "sha256": "130e3e1ddc812739342e50ea8cf10a1f6e148500bba029589c85ffa9c61e8600"
+  },
+  "assets/image/tree-2.svg": {
+    "source": "lecture/image/tree-2.pdf",
+    "sha256": "47f2d0bcaf22f6ccca0ddb1c428a2a402767e780df051cc81aefb4d1c69ac8a9"
+  }
+}
