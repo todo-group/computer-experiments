@@ -6,7 +6,6 @@
 ## Documentation
 
 * [Beamer to Quarto/Reveal.js conversion design](docs/beamer-to-quarto-design.md)
-* [2026 Lecture 2: molecular dynamics and statistical sampling](docs/lecture-2-2-2026.md)
 
 ## Beamer to Quarto conversion
 

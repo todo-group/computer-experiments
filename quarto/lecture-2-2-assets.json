@@ -3,14 +3,6 @@
     "source": "lecture/image/md-flowchart.pdf",
     "sha256": "b7d39c8854cc5308af299b87ddbd40e5e449e38d5f6ebd1232df3811f4f03c12"
   },
-  "assets/image/md-2026-energy.svg": {
-    "source": "lecture/image/md-2026-energy.pdf",
-    "sha256": "80f50a7b8c425b08596c49e1e491c1b4536cee6b88cc747addf156222e351f62"
-  },
-  "assets/image/md-2026-sampling.svg": {
-    "source": "lecture/image/md-2026-sampling.pdf",
-    "sha256": "7bdc7c100e2cb1bfeff8f352f47b46912eb0af6168e48abf5a632ec8f849edd4"
-  },
   "assets/image/ewald.svg": {
     "source": "lecture/image/ewald.pdf",
     "sha256": "427361916362be6019357ac3089eb3cc9831ede70115bcdeac59500f34c45a12"
