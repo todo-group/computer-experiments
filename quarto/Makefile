@@ -20,7 +20,7 @@ all: html pdf
 
 html: $(HTML)
 
-%.html: %.qmd _quarto.yml $(ASSETS) Makefile
+%.html: %.qmd _quarto.yml ../tools/mathjax-tex.lua $(ASSETS) Makefile
 	$(QUARTO) render "$<" --to revealjs
 
 # --------------------------------

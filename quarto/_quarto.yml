@@ -1,22 +1,38 @@
 format:
   revealjs:
-    slide-number: c/t
+    slide-number: true
     hash: true
     transition: none
     toc: true
     toc-depth: 1
     toc-title: "目次"
     fontsize: 26px
-    # Use MathJax 4 for MathML and TeX fallbacks, bypassing Reveal.js's MathJax 2 plugin.
-    html-math-method:
-      method: mathjax
-      url: "https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"    
+    # Preserve TeX for MathJax 4; do not invoke Pandoc's MathML conversion or
+    # Reveal.js's legacy MathJax 2 plugin. The filter handles every Math node.
+    html-math-method: plain
+    filters:
+      - ../tools/mathjax-tex.lua
     include-in-header:
       text: |
+        <script>
+          window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+            output: {
+              fontPath: 'https://cdn.jsdelivr.net/npm/@mathjax/%%FONT%%-font@4.1.3',
+              linebreaks: { inline: false }
+            }
+          };
+        </script>
+        <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-mml-chtml.js"></script>
         <link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&display=swap" rel="stylesheet">
         <style>
           .reveal .slides img {
             margin-block: 0;
+          }
+          /* Allow lists to split in the browser's manual print view, too. */
+          html.reveal-print .reveal .slides ul,
+          html.reveal-print .reveal .slides ol {
+            display: block;
           }
           .reveal .slides div.quarto-figure,
           .reveal .slides p:has(> img) {
